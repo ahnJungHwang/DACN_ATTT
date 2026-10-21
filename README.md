@@ -9,11 +9,12 @@
 
 ```text
 Demo/
-├── Code Chinh/   # Mã nguồn chính thức đã hoàn thiện và chạy ổn định
-├── Lam Code/     # Khu vực phát triển và viết mã nguồn của Lâm
-├── Thang Code/   # Khu vực phát triển và viết mã nguồn của Thắng
-├── NhatKyTuan/   # Nhật ký làm việc hàng tuần (Cả 2 cùng cập nhật)
-└── README.md     # Tài liệu và quy định làm việc của nhóm
+├── Code Chinh/     # Mã nguồn chính thức đã hoàn thiện và chạy ổn định
+├── CodeThuNghiem/  # Khu vực chứa code thử nghiệm chung
+├── Lam Code/       # Khu vực phát triển và viết mã nguồn của Lâm
+├── Thang Code/     # Khu vực phát triển và viết mã nguồn của Thắng
+├── NhatKyTuan/     # Nhật ký làm việc hàng tuần (Cả 2 cùng cập nhật)
+└── README.md       # Tài liệu và quy định làm việc của nhóm
 ```
 
 ---
