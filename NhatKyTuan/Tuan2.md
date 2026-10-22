@@ -1,6 +1,6 @@
 ﻿# Nhật Ký Tuần 2
 
-- **Thời gian thực hiện**: [Từ ngày ... đến ngày ...]
+- **Thời gian thực hiện**: [Từ ngày 19/10/2026 đến ngày 25/10/2026]
 - **Thành viên tham gia**: Lâm, Thắng
 
 ---
