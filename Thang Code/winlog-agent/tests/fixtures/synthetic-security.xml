@@ -1,0 +1,2 @@
+<!-- Synthetic fixture, not experimental evidence. -->
+<Events><Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event"><System><EventID>4624</EventID><Version>2</Version><TimeCreated SystemTime="2026-01-01T00:00:00Z"/><EventRecordID>1</EventRecordID><Computer>synthetic-vm</Computer><Channel>Security</Channel></System><EventData><Data Name="TargetUserName">demo</Data><Data Name="TargetDomainName">synthetic-vm</Data><Data Name="TargetLogonId">0x123</Data><Data Name="LogonType">2</Data></EventData></Event></Events>

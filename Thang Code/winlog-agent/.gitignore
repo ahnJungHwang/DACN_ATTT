@@ -1,6 +1,8 @@
 /.venv/
 /.venv-verify/
 /data/
+/data-*/
+/backups/
 /logs/
 /secrets/
 /config.local.toml

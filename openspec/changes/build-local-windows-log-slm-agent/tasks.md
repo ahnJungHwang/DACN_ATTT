@@ -10,31 +10,31 @@ Thứ tự phụ thuộc: 1 → 2; 3 và 4 dựa trên 1–2; 5 sau 4; 6 sau 5; 
 
 - [x] 1.1 Ghi nhận Python/Ollama, RAM/CPU/GPU, Windows VM edition/build và n8n version/image digest bằng kiểm tra chỉ đọc hoặc thông tin người dùng; xác minh docs/environment.md phân biệt giá trị đo được và chưa xác nhận, không tự đổi policy hay cài lại môi trường.
 - [x] 1.2 Tạo cấu trúc Thang Code/winlog-agent theo design và cấu hình ignore cho data, logs, secrets, .venv; kiểm tra git status không đưa log thật/bí mật vào thay đổi và log-test giữ nguyên.
-- [ ] 1.3 Khai báo dependencies và cài thử trong môi trường Python 3.11 riêng, chốt phiên bản đã kiểm chứng; xác minh cài lại từ lock/requirements và import các package thành công.
-- [ ] 1.4 Tạo cấu hình mẫu cho data root, allowlist model, windows/threshold, timeout, upload limit và bind mode; kiểm tra cấu hình sai bị từ chối, mặc định khớp design, viết hướng dẫn chạy một worker.
+- [x] 1.3 Khai báo dependencies và cài thử trong môi trường Python 3.11 riêng, chốt phiên bản đã kiểm chứng; xác minh cài lại từ lock/requirements và import các package thành công.
+- [x] 1.4 Tạo cấu hình mẫu cho data root, allowlist model, windows/threshold, timeout, upload limit và bind mode; kiểm tra cấu hình sai bị từ chối, mặc định khớp design, viết hướng dẫn chạy một worker.
 
 ## 2. Lưu trữ và nguồn gốc dữ liệu
 
-- [ ] 2.1 Tạo schema SQLite có version cho Import, Event, Case, Request, Result và Evaluation; kiểm tra tạo database mới, ràng buộc unique và transaction rollback bằng integration test.
-- [ ] 2.2 Triển khai file staging, hash, đổi tên nguyên tử và trạng thái nguồn; kiểm tra crash mô phỏng không công bố file ghi dở và phát hiện file mồ côi không tự xóa.
-- [ ] 2.3 Tạo event_ref theo import/file/ordinal và case snapshot bất biến; kiểm tra trùng EventRecordID khác máy/channel, import lại file và thay cấu hình ghép không làm sai bằng chứng cũ.
-- [ ] 2.4 Viết tài liệu cấu trúc lưu trữ, backup và phục hồi database/file tương thích; kiểm tra backup/restore trên thư mục dữ liệu thử giữ đúng hash và refs.
+- [x] 2.1 Tạo schema SQLite có version cho Import, Event, Case, Request, Result và Evaluation; kiểm tra tạo database mới, ràng buộc unique và transaction rollback bằng integration test.
+- [x] 2.2 Triển khai file staging, hash, đổi tên nguyên tử và trạng thái nguồn; kiểm tra crash mô phỏng không công bố file ghi dở và phát hiện file mồ côi không tự xóa.
+- [x] 2.3 Tạo event_ref theo import/file/ordinal và case snapshot bất biến; kiểm tra trùng EventRecordID khác máy/channel, import lại file và thay cấu hình ghép không làm sai bằng chứng cũ.
+- [x] 2.4 Viết tài liệu cấu trúc lưu trữ, backup và phục hồi database/file tương thích; kiểm tra backup/restore trên thư mục dữ liệu thử giữ đúng hash và refs.
 
 ## 3. Thu log trên Windows 10
 
-- [ ] 3.1 Viết hướng dẫn tiếng Việt bật bốn nguồn sự kiện, kiểm tra edition, policy, phiên PowerShell mới và khóa tài khoản; đối chiếu các bước với windows-log-collection/spec.md, phân biệt máy ảo/máy thật.
-- [ ] 3.2 Viết script PowerShell 5.1 xuất XML theo StartTime/EndTime có múi giờ và manifest trong thư mục riêng; kiểm tra cú pháp bằng parser 5.1 và test dữ liệu biên thời gian, không MaxEvents ngầm hoặc ghi đè lần thu trước.
-- [ ] 3.3 Xử lý no-events, thiếu quyền, khoảng thời gian sai và lỗi một nguồn/ghi file; kiểm tra từng trường hợp có trạng thái đúng và không báo đầy đủ khi partial.
+- [x] 3.1 Viết hướng dẫn tiếng Việt bật bốn nguồn sự kiện, kiểm tra edition, policy, phiên PowerShell mới và khóa tài khoản; đối chiếu các bước với windows-log-collection/spec.md, phân biệt máy ảo/máy thật.
+- [x] 3.2 Viết script PowerShell 5.1 xuất XML theo StartTime/EndTime có múi giờ và manifest trong thư mục riêng; kiểm tra cú pháp bằng parser 5.1 và test dữ liệu biên thời gian, không MaxEvents ngầm hoặc ghi đè lần thu trước.
+- [x] 3.3 Xử lý no-events, thiếu quyền, khoảng thời gian sai và lỗi một nguồn/ghi file; kiểm tra từng trường hợp có trạng thái đúng và không báo đầy đủ khi partial.
 - [ ] 3.4 Chạy một lần thu trên VM được phép, kiểm tra XML đọc được và manifest khớp số bản ghi/thời gian; lưu bằng chứng kiểm chứng và hướng dẫn chép file, để task chưa xong nếu chưa truy cập VM.
 
 ## 4. Nhập XML và chuẩn hóa
 
-- [ ] 4.1 Triển khai parser namespace/UTF-8/UTF-16 và giới hạn file 50 MiB, 100.000 sự kiện, depth 32 cấu hình được; kiểm tra fixture BOM, XML hỏng, entity/DTD và vượt từng giới hạn bị xử lý đúng.
-- [ ] 4.2 Chuẩn hóa đủ trường JSONL, UTC/null và lỗi chất lượng; kiểm tra timestamp thiếu timezone không tự gán, Message khác ngôn ngữ không làm thay đổi trường.
-- [ ] 4.3 Ánh xạ Subject/Target của 4624/4625/4688, NewProcessId/creator PID và Execution PID của 4104; kiểm tra tài khoản khác vai trò, PID hex/decimal và trường thiếu.
-- [ ] 4.4 Ghép mảnh 4104 theo ngữ cảnh và thứ tự, giữ refs; kiểm tra đủ/thiếu/trùng/xung đột mảnh không tạo script hoàn chỉnh sai.
-- [ ] 4.5 Triển khai nhập file với hash, trạng thái từng nguồn, báo cáo thống kê và xuất JSONL; kiểm tra nhập lại không âm thầm nhân đôi và event_ref mở đúng XML gốc.
-- [ ] 4.6 Viết hướng dẫn nhập, lỗi dữ liệu và schema; chạy lệnh mẫu trên fixture có nhãn dữ liệu tổng hợp, đối chiếu một bản sao log-test nếu có mà không sửa bản gốc.
+- [x] 4.1 Triển khai parser namespace/UTF-8/UTF-16 và giới hạn file 50 MiB, 100.000 sự kiện, depth 32 cấu hình được; kiểm tra fixture BOM, XML hỏng, entity/DTD và vượt từng giới hạn bị xử lý đúng.
+- [x] 4.2 Chuẩn hóa đủ trường JSONL, UTC/null và lỗi chất lượng; kiểm tra timestamp thiếu timezone không tự gán, Message khác ngôn ngữ không làm thay đổi trường.
+- [x] 4.3 Ánh xạ Subject/Target của 4624/4625/4688, NewProcessId/creator PID và Execution PID của 4104; kiểm tra tài khoản khác vai trò, PID hex/decimal và trường thiếu.
+- [x] 4.4 Ghép mảnh 4104 theo ngữ cảnh và thứ tự, giữ refs; kiểm tra đủ/thiếu/trùng/xung đột mảnh không tạo script hoàn chỉnh sai.
+- [x] 4.5 Triển khai nhập file với hash, trạng thái từng nguồn, báo cáo thống kê và xuất JSONL; kiểm tra nhập lại không âm thầm nhân đôi và event_ref mở đúng XML gốc.
+- [x] 4.6 Viết hướng dẫn nhập, lỗi dữ liệu và schema; chạy lệnh mẫu trên fixture có nhãn dữ liệu tổng hợp, đối chiếu một bản sao log-test nếu có mà không sửa bản gốc.
 
 ## 5. Ghép sự kiện và tạo ca
 
