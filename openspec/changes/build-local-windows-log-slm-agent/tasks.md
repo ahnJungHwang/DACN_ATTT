@@ -38,22 +38,22 @@ Thứ tự phụ thuộc: 1 → 2; 3 và 4 dựa trên 1–2; 5 sau 4; 6 sau 5; 
 
 ## 5. Ghép sự kiện và tạo ca
 
-- [ ] 5.1 Gom 4625 theo khóa tài khoản/máy/loại/nguồn, cửa sổ neo 60 giây và ngưỡng 5 cấu hình được; kiểm tra mốc đúng biên, chuỗi kéo dài, khác nguồn và thiếu nguồn không bị hợp nhất sai.
-- [ ] 5.2 Tìm 4624 trong 300 giây sau thất bại cuối, đóng nhóm và lưu quan hệ; kiểm tra ngoài cửa sổ, nhiều ứng viên và SubjectLogonId của 4625 không được dùng làm phiên thành công.
-- [ ] 5.3 Liên kết 4688 theo tài khoản chạy/mã phiên và 4104 theo host/PID/thời gian; kiểm tra PID tái sử dụng, thiếu dữ kiện, khác tài khoản/phiên và giới hạn 300 giây sau đăng nhập.
-- [ ] 5.4 Tạo snapshot ca bình thường, nhóm thất bại nhỏ, sự kiện chưa gán và lô trộn có group_id; kiểm tra giữ thứ tự ổn định, không gán nhãn chuẩn hoặc gộp quan hệ khác phiên.
-- [ ] 5.5 Viết hướng dẫn lọc khoảng thu/tài khoản, tạo ca và giải thích ambiguous links; kiểm tra ví dụ normal, mixed và missing-data tái tạo được từ fixture.
+- [x] 5.1 Gom 4625 theo khóa tài khoản/máy/loại/nguồn, cửa sổ neo 60 giây và ngưỡng 5 cấu hình được; kiểm tra mốc đúng biên, chuỗi kéo dài, khác nguồn và thiếu nguồn không bị hợp nhất sai.
+- [x] 5.2 Tìm 4624 trong 300 giây sau thất bại cuối, đóng nhóm và lưu quan hệ; kiểm tra ngoài cửa sổ, nhiều ứng viên và SubjectLogonId của 4625 không được dùng làm phiên thành công.
+- [x] 5.3 Liên kết 4688 theo tài khoản chạy/mã phiên và 4104 theo host/PID/thời gian; kiểm tra PID tái sử dụng, thiếu dữ kiện, khác tài khoản/phiên và giới hạn 300 giây sau đăng nhập.
+- [x] 5.4 Tạo snapshot ca bình thường, nhóm thất bại nhỏ, sự kiện chưa gán và lô trộn có group_id; kiểm tra giữ thứ tự ổn định, không gán nhãn chuẩn hoặc gộp quan hệ khác phiên.
+- [x] 5.5 Viết hướng dẫn lọc khoảng thu/tài khoản, tạo ca và giải thích ambiguous links; kiểm tra ví dụ normal, mixed và missing-data tái tạo được từ fixture.
 
 ## 6. Adapter SLM và kiểm tra ngữ cảnh
 
-- [ ] 6.1 Triển khai adapter Ollama local, allowlist hai tag, kiểm tra version/digest/template và model có sẵn; mock test model thiếu, lỗi kết nối, URL ngoài local bị từ chối và không fallback cloud.
-- [ ] 6.2 Tạo prompt/schema cố định và payload builder với refs trung tính; test payload không chứa nhãn chuẩn, tên file/kịch bản hoặc kết quả model kia và script injection không được thực thi.
-- [ ] 6.3 Chuẩn bị tokenizer/template offline cho cả hai model, ghi nguồn, hash và liên hệ digest; kiểm chứng đếm token toàn prompt trên fixture với prompt_eval_count Ollama, không đánh dấu hoàn thành nếu chưa xác minh khớp.
-- [ ] 6.4 Triển khai context preflight với 512 token đầu ra và 256 dự phòng, CONTEXT_UNVERIFIED/INPUT_TOO_LARGE; test biên và xác minh không lời gọi suy luận thật hoặc cắt log khi kiểm tra thất bại.
-- [ ] 6.5 Gọi chat với stream=false và JSON schema; kiểm tra strict label/reason/refs, ALERT thiếu bằng chứng, trường thừa, JSON cắt ngắn; mọi đầu ra sai lưu UNKNOWN cùng raw output/error.
-- [ ] 6.6 Lưu payload/options/prompt/model metadata và số đo cùng kết quả; test mở kết quả cũ sau thay cấu hình vẫn truy đúng đầu vào.
-- [ ] 6.7 Triển khai load/unload xác nhận và giữ model cho warm-up; kiểm tra không nạp model thứ hai trước khi model thứ nhất giải phóng, không tự dừng model do ứng dụng ngoài chạy.
-- [ ] 6.8 Chạy smoke test riêng Qwen và Llama trên ca tổng hợp, gồm sát giới hạn context; lưu response/metadata thực tế và hướng dẫn xử lý lỗi, không coi smoke test là đánh giá độ chính xác.
+- [x] 6.1 Triển khai adapter Ollama local, allowlist hai tag, kiểm tra version/digest/template và model có sẵn; mock test model thiếu, lỗi kết nối, URL ngoài local bị từ chối và không fallback cloud.
+- [x] 6.2 Tạo prompt/schema cố định và payload builder với refs trung tính; test payload không chứa nhãn chuẩn, tên file/kịch bản hoặc kết quả model kia và script injection không được thực thi.
+- [x] 6.3 Chuẩn bị tokenizer/template offline cho cả hai model, ghi nguồn, hash và liên hệ digest; kiểm chứng đếm token toàn prompt trên fixture với prompt_eval_count Ollama, không đánh dấu hoàn thành nếu chưa xác minh khớp.
+- [x] 6.4 Triển khai context preflight với 512 token đầu ra và 256 dự phòng, CONTEXT_UNVERIFIED/INPUT_TOO_LARGE; test biên và xác minh không lời gọi suy luận thật hoặc cắt log khi kiểm tra thất bại.
+- [x] 6.5 Gọi chat với stream=false và JSON schema; kiểm tra strict label/reason/refs, ALERT thiếu bằng chứng, trường thừa, JSON cắt ngắn; mọi đầu ra sai lưu UNKNOWN cùng raw output/error.
+- [x] 6.6 Lưu payload/options/prompt/model metadata và số đo cùng kết quả; test mở kết quả cũ sau thay cấu hình vẫn truy đúng đầu vào.
+- [x] 6.7 Triển khai load/unload xác nhận và giữ model cho warm-up; kiểm tra không nạp model thứ hai trước khi model thứ nhất giải phóng, không tự dừng model do ứng dụng ngoài chạy.
+- [x] 6.8 Chạy smoke test riêng Qwen và Llama trên ca tổng hợp, gồm sát giới hạn context; lưu response/metadata thực tế và hướng dẫn xử lý lỗi, không coi smoke test là đánh giá độ chính xác.
 
 ## 7. Hàng chờ và API phân tích
 

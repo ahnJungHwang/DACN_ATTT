@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phân tích log Windows</title><link rel="stylesheet" href="/static/app.css"><script src="/static/app.js" defer></script></head>
+<body><header><span class="badge">LOCAL · WINDOWS 10</span><h1>Phân tích log Windows</h1><p>Nhập bằng chứng, ghép ca và phân tích bằng SLM trên máy của bạn.</p></header>
+<main><section id="login-panel"><h2>Kết nối phiên làm việc</h2><p>Dùng token trong thư mục dữ liệu: secrets/api-token.txt. Token chỉ gửi tới dịch vụ local này.</p>
+<form id="login-form"><label>Token truy cập<input id="token" type="password" required autocomplete="off"></label><button>Đăng nhập</button></form></section>
+<div id="workspace" hidden>
+<section><h2>1. Nhập log</h2><p>Chọn XML từ lần thu Windows 10. Tối đa 50 MiB mỗi file theo cấu hình mặc định.</p>
+<form id="import-form"><div class="columns"><label>Security (4624, 4625, 4688)<input name="security" type="file" accept=".xml"></label><label>PowerShell (4104)<input name="powershell" type="file" accept=".xml"></label></div>
+<label class="check"><input name="synthetic" type="checkbox"> Đây là dữ liệu mẫu tổng hợp</label><button>Nhập và kiểm tra</button></form>
+<button id="reuse" hidden>Dùng lại lần nhập chứa file này</button><div id="import-summary" class="output"></div></section>
+<section><h2>2. Tạo và chọn ca</h2><form id="cases-form"><div class="columns"><label>Tài khoản (không bắt buộc)<input name="user" placeholder="TEN_VM\lab_demo"></label><label>Bắt đầu, có múi giờ<input name="start" placeholder="2026-10-25T09:00:00+07:00"></label><label>Kết thúc, có múi giờ<input name="end" placeholder="2026-10-25T09:05:00+07:00"></label></div>
+<p>Bộ lọc chọn nguyên nhóm có sự kiện khớp, giữ đầy đủ bằng chứng liên quan.</p><label class="check"><input name="mixed" type="checkbox"> Tạo một ca trộn, giữ riêng các nhóm tài khoản/phiên</label><button>Tạo ca từ lần nhập</button></form>
+<label>Ca đã lưu<select id="case-select"><option value="">Chọn một ca</option></select></label><button id="refresh-cases">Làm mới danh sách</button><div id="case-summary" class="output"></div></section>
+<section><h2>3. Phân tích bằng SLM local</h2><div id="model-options"></div><button id="analyze">Phân tích ca đã chọn</button><button id="retry" hidden>Tra lại / gửi lại cùng mã yêu cầu</button><p>Hai model chạy lần lượt. Kết quả khác nhau không đủ để kết luận model nào tốt hơn.</p><div id="results" aria-live="polite"></div></section>
+<section><h2>Bằng chứng XML</h2><p>Nội dung dưới đây chỉ được hiển thị, không thực thi.</p><pre id="evidence">Chọn một sự kiện trong ca hoặc kết quả để xem XML gốc.</pre></section>
+<section><h2>Báo cáo đánh giá</h2><p>Chưa có bộ đánh giá thực nghiệm được khóa và chấm. Chưa có cơ sở đề xuất model tốt nhất. Các ca mẫu không phải kết quả thực nghiệm.</p></section>
+</div><p id="notice" role="status" aria-live="polite"></p></main><footer>Không tự phản ứng lên máy. Đối chiếu kết luận với bằng chứng trước khi sử dụng.</footer></body></html>

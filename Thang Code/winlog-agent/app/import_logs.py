@@ -14,7 +14,7 @@ SOURCES = {'Security': ('Security', {4624, 4625, 4688}),
            'PowerShell': ('Microsoft-Windows-PowerShell/Operational', {4104})}
 
 
-def import_files(store, files, settings, *, synthetic=False):
+def import_files(store, files, settings, *, synthetic=False, original_names=None):
     """files maps source names to Paths; source failure never invents events."""
     if set(files) - SOURCES.keys():
         raise ValueError('Unknown source')
@@ -23,6 +23,7 @@ def import_files(store, files, settings, *, synthetic=False):
     hashes = set()
     for source_name, path in files.items():
         path = Path(path)
+        original_name = (original_names or {}).get(source_name, path.name)
         try:
             with path.open('rb') as handle:
                 content = handle.read(settings.upload_max_bytes + 1)
@@ -41,9 +42,9 @@ def import_files(store, files, settings, *, synthetic=False):
                 raise LogFormatError('SOURCE_CHANNEL_OR_EVENT_ID_MISMATCH')
             total += len(events)
             prepared[source_name] = {'content': content, 'encoding': encoding, 'events': events,
-                                     'original_name': path.name}
+                                     'original_name': original_name}
         except (OSError, LogFormatError) as exc:
-            prepared[source_name] = {'error': str(exc), 'original_name': path.name}
+            prepared[source_name] = {'error': str(exc), 'original_name': original_name}
     if total > settings.import_max_events:
         raise LogFormatError('TOO_MANY_EVENTS_IN_IMPORT')
     import_id = store.create_import({'synthetic': synthetic, 'normalizer_version': 1})

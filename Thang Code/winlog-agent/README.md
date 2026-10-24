@@ -7,8 +7,11 @@
 - [Thu log trong máy ảo Windows 10](docs/windows10-collection.md)
 - [Lưu trữ và sao lưu](docs/storage.md)
 - [Nhập XML và schema chuẩn hóa](docs/importing.md)
+- [Ghép sự kiện và tạo ca](docs/cases.md)
 
-Kiểm thử hiện tại: 48 test Python đạt; bộ kiểm thử PowerShell 5.1 bằng sự kiện tổng hợp đạt. Đã nhập bản sao log-test và truy lại 182 sự kiện. Chưa chạy thu mới trên VM hoặc đo độ chính xác model.
+Kiểm thử hiện tại: 59 test Python đạt; bộ kiểm thử PowerShell 5.1 bằng sự kiện tổng hợp đạt. Đã nhập bản sao log-test và truy lại 182 sự kiện; có lệnh tạo ca và lô trộn, adapter metadata Ollama và payload cố định. Chưa chạy thu mới trên VM hoặc đo độ chính xác model.
+- [Tích hợp Ollama và phần chưa xác minh](docs/ollama.md)
+- [Chuẩn bị tokenizer và chạy thử model](docs/tokenizers.md)
 
 app/: ứng dụng; scripts/: PowerShell/CLI; templates/ và static/: giao diện; workflows/: n8n; prompts/: prompt; tests/: kiểm thử; docs/: tài liệu.
 

@@ -23,6 +23,7 @@ pydantic_core==2.50.1
 Pygments==2.21.0
 pytest==9.1.1
 python-multipart==0.0.32
+regex==2026.9.29
 starlette==1.9.0
 typing-inspection==0.4.4
 typing_extensions==4.16.0
