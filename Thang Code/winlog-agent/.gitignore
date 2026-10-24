@@ -1,0 +1,11 @@
+/.venv/
+/.venv-verify/
+/data/
+/logs/
+/secrets/
+/config.local.toml
+/.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
