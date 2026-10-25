@@ -49,6 +49,8 @@ Sau nhận job, lỗi kỹ thuật được lưu như kết quả UNKNOWN có te
 
 ## Docker/n8n
 
-Chỉ khi cần Docker truy cập: đặt bind_mode="docker", host="0.0.0.0" trong config.local.toml và khởi động lại. n8n dùng http://host.docker.internal:8000 với credential header token. Trước khi bật, kiểm tra adapter/subnet Docker thực tế trong Windows Network settings/Get-NetIPConfiguration. Windows Firewall chỉ cho TCP cổng cấu hình từ địa chỉ/phạm vi Docker đã xác định; giới hạn đúng chương trình Python và profile cần thiết. Không dùng Any remote address hoặc mở toàn bộ mạng. Địa chỉ Docker thay đổi cần kiểm tra lại rule; tài liệu không tự đoán subnet.
+Trước tiên giữ API bind loopback mặc định và thử từ container bằng http://host.docker.internal:8000. Ngày 2026-10-25 trên máy này, /health và /cases có token đều trả 200 khi API vẫn bind 127.0.0.1; không cần đổi firewall. n8n dùng credential Header Auth với tên Authorization, giá trị Bearer theo sau bởi token local, không nhúng token vào workflow JSON.
 
-Kiểm thử API hiện dùng fixture/mock, không phải kiểm chứng mạng Docker hoặc n8n. Token local không thay thế phạm vi firewall.
+Chỉ nếu cấu hình Docker khác không truy cập được loopback: cân nhắc bind_mode="docker", host="0.0.0.0" trong config.local.toml. Trước khi bật, kiểm tra adapter/subnet Docker thực tế trong Windows Network settings/Get-NetIPConfiguration. Windows Firewall chỉ cho TCP cổng cấu hình từ địa chỉ/phạm vi Docker đã xác định; giới hạn đúng chương trình Python và profile cần thiết. Không dùng Any remote address hoặc mở toàn bộ mạng. Địa chỉ Docker thay đổi cần kiểm tra lại rule; tài liệu không tự đoán subnet.
+
+Đã xác minh kết nối Docker, nhưng chưa chạy workflow n8n. API đã có kiểm thử fixture/mock và một lượt Qwen thật trên fixture tổng hợp. Import `d5dd2182-b722-4f51-84f1-7a5b22bef5a5` của lượt API thử cũ được tạo trước khi có ô synthetic: dù metadata cũ thiếu cờ mẫu, đây vẫn là fixture, tuyệt đối không đưa vào bộ đánh giá thật. Bằng chứng thử lưu data/api-verification.json. Token local không thay thế phạm vi firewall.

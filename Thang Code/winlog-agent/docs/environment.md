@@ -10,13 +10,15 @@ Kiểm tra chỉ đọc ngày 2026-10-24 (Asia/Saigon). Chưa phải bằng ch�
 - Ollama CLI/API: 0.40.9, API local truy cập được ngoài sandbox.
 - qwen2.5:3b-instruct-q4_K_M: ID ngắn 357c53fb659c, 1.9 GB.
 - llama3.2:3b-instruct-q4_K_M: ID ngắn a80c4f17acd5, 2.0 GB.
-- Chưa ghi full digest/tokenizer hoặc chạy suy luận.
-- Docker CLI 29.9.2 build a82e528; docker ps không kết nối được pipe dockerDesktopLinuxEngine.
+- Full digest và tokenizer đã được kiểm chứng; xem tokenizers.md và dữ liệu kiểm chứng local. Cả hai model đã qua smoke test, chưa phải đo độ chính xác.
+- Ngày 2026-10-25 đã khởi động lại Docker Desktop, engine 29.9.2 hoạt động.
+- n8n thực tế 2.44.6, container `n8n`, image `n8nio/n8n:stable`, repo digest `sha256:d02752c6ab446ae9db8deec2f9cc887c378f77cdcad31650814df936b7386dfb`. Port chỉ publish 127.0.0.1:5678; volume hiện có n8n_data được giữ nguyên.
+- Từ container: GET http://host.docker.internal:8000/health trả 200; GET /cases với Bearer token trả 200. API vẫn bind 127.0.0.1:8000 trên cấu hình Docker Desktop này; chưa cần đổi firewall hoặc bind mọi interface.
 
 ## Chưa xác nhận
-- n8n version/image digest vì Docker Engine chưa truy cập được.
+- Workflow n8n đã chạy với backend tổng hợp (docs/n8n.md); chưa chạy tích hợp log VM thật. Workflow đã import vào n8n local, còn cần người vận hành gán credential và ca thực tế.
 - Người dùng xác nhận VM Windows 10; edition/build, audit và thời gian thực nghiệm chưa kiểm tra.
-- Tokenizer offline và số đo tài nguyên chưa kiểm chứng.
+- Chưa có số đo tài nguyên thực nghiệm đầy đủ.
 
 ## Log được giữ nguyên
 - ../log-test/powershell.xml: 46338 byte; SHA256 AFE90E8DE494B96E466DA8EBAAC7E785FAD94D3A5037E1A11846629CFC4C8A07.
@@ -24,5 +26,5 @@ Kiểm tra chỉ đọc ngày 2026-10-24 (Asia/Saigon). Chưa phải bằng ch�
 - Chỉ kiểm kê/hash, chưa xác nhận nội dung đầy đủ hoặc nhãn.
 
 ## Điều kiện tiếp theo
-Đã chốt thư viện trong requirements.txt, cài lại vào `.venv-verify` sạch: import đủ các package, pip check không phát hiện xung đột, 15 kiểm thử cấu hình đạt. Đây chưa phải kiểm chứng dịch vụ/model. Mở Docker Engine trước khi kiểm chứng n8n.
+Đã chốt thư viện trong requirements.txt. Bộ kiểm thử ngày 2026-10-25 đạt 84 test. Dịch vụ/API, mock UI và workflow n8n với backend tổng hợp đã chạy; vẫn cần lần thu log mới từ VMware Win10 và thực nghiệm toàn hệ thống.
 

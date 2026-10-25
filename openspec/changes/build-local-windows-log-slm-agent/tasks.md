@@ -57,31 +57,31 @@ Thứ tự phụ thuộc: 1 → 2; 3 và 4 dựa trên 1–2; 5 sau 4; 6 sau 5; 
 
 ## 7. Hàng chờ và API phân tích
 
-- [ ] 7.1 Triển khai singleton service, hàng chờ 20 yêu cầu và worker suy luận duy nhất; integration test nhiều client vẫn chỉ một tác vụ chạy và queue đầy trả 429.
-- [ ] 7.2 Triển khai Idempotency-Key, payload hash và transaction nhận job; test gửi đồng thời cùng key chạy một lần, khác payload trả 409 và retry không tạo kết quả trùng.
-- [ ] 7.3 Triển khai state queued/running/completed, timeout 300 giây và phục hồi INTERRUPTED; test restart không phát lại job running, timeout không mở khóa chạy model kế trước khi xác nhận Ollama dừng.
-- [ ] 7.4 Cung cấp GET /health, /models, /cases, /cases/{case_id}, POST /analyze và GET /results/{result_id}; API tests phân biệt 404/422/503, UNKNOWN kỹ thuật và UNKNOWN thiếu bằng chứng.
-- [ ] 7.5 Triển khai phản hồi 200/202 sau tối đa 10 giây, status_url và GET /requests/{request_id}; test client mất response tra lại được, queued/running không có nhãn mặc định.
-- [ ] 7.6 Cung cấp POST /imports, GET /imports/{id}, POST /cases, GET /events/{event_ref} và export kết quả; test lookup ID không cho đọc đường dẫn tùy ý/traversal.
-- [ ] 7.7 Triển khai token local cho API n8n, session UI và CSRF, bind loopback mặc định; test thiếu/sai token, CSRF và không bật CORS wildcard, viết hướng dẫn firewall chế độ Docker.
-- [ ] 7.8 Viết tài liệu hợp đồng HTTP và ví dụ PowerShell đúng cú pháp, gồm polling/idempotency/lỗi; chạy ví dụ trên fixture và đối chiếu response với schema.
+- [x] 7.1 Triển khai singleton service, hàng chờ 20 yêu cầu và worker suy luận duy nhất; integration test nhiều client vẫn chỉ một tác vụ chạy và queue đầy trả 429.
+- [x] 7.2 Triển khai Idempotency-Key, payload hash và transaction nhận job; test gửi đồng thời cùng key chạy một lần, khác payload trả 409 và retry không tạo kết quả trùng.
+- [x] 7.3 Triển khai state queued/running/completed, timeout 300 giây và phục hồi INTERRUPTED; test restart không phát lại job running, timeout không mở khóa chạy model kế trước khi xác nhận Ollama dừng.
+- [x] 7.4 Cung cấp GET /health, /models, /cases, /cases/{case_id}, POST /analyze và GET /results/{result_id}; API tests phân biệt 404/422/503, UNKNOWN kỹ thuật và UNKNOWN thiếu bằng chứng.
+- [x] 7.5 Triển khai phản hồi 200/202 sau tối đa 10 giây, status_url và GET /requests/{request_id}; test client mất response tra lại được, queued/running không có nhãn mặc định.
+- [x] 7.6 Cung cấp POST /imports, GET /imports/{id}, POST /cases, GET /events/{event_ref} và export kết quả; test lookup ID không cho đọc đường dẫn tùy ý/traversal.
+- [x] 7.7 Triển khai token local cho API n8n, session UI và CSRF, bind loopback mặc định; test thiếu/sai token, CSRF và không bật CORS wildcard, viết hướng dẫn firewall chế độ Docker.
+- [x] 7.8 Viết tài liệu hợp đồng HTTP và ví dụ PowerShell đúng cú pháp, gồm polling/idempotency/lỗi; chạy ví dụ trên fixture và đối chiếu response với schema.
 
 ## 8. Giao diện và xuất kết quả
 
-- [ ] 8.1 Tạo layout Jinja2/static local và luồng xác thực session; kiểm tra mở trang không tải CDN, log/script/reason được escape thay vì thực thi.
-- [ ] 8.2 Tạo màn hình nhập XML, thống kê, dữ liệu thiếu/partial và lựa chọn tái sử dụng file trùng; kiểm tra file lỗi không tạo ca giả và thiếu PowerShell hiện rõ.
-- [ ] 8.3 Tạo danh sách/chi tiết ca, quan hệ và bộ lọc; kiểm tra mở đúng refs và ca chưa chạy hiển thị chưa phân tích thay vì NORMAL.
-- [ ] 8.4 Tạo chọn một/hai model, submit có key và polling; kiểm tra queued/running/completed/error, hai kết quả không trộn và gửi lặp không tạo job trùng.
-- [ ] 8.5 Tạo trang kết quả, XML bằng chứng và xuất JSONL/CSV; kiểm tra công thức CSV kể cả sau whitespace được neutralize, JSONL giữ nguyên và dữ liệu mẫu gắn nhãn.
-- [ ] 8.6 Viết hướng dẫn sử dụng giao diện; kiểm tra bằng trình duyệt toàn luồng upload → tạo ca → chạy mock → mở bằng chứng → export, ghi rõ mock không là đo model thật.
+- [x] 8.1 Tạo layout Jinja2/static local và luồng xác thực session; kiểm tra mở trang không tải CDN, log/script/reason được escape thay vì thực thi.
+- [x] 8.2 Tạo màn hình nhập XML, thống kê, dữ liệu thiếu/partial và lựa chọn tái sử dụng file trùng; kiểm tra file lỗi không tạo ca giả và thiếu PowerShell hiện rõ.
+- [x] 8.3 Tạo danh sách/chi tiết ca, quan hệ và bộ lọc; kiểm tra mở đúng refs và ca chưa chạy hiển thị chưa phân tích thay vì NORMAL.
+- [x] 8.4 Tạo chọn một/hai model, submit có key và polling; kiểm tra queued/running/completed/error, hai kết quả không trộn và gửi lặp không tạo job trùng.
+- [x] 8.5 Tạo trang kết quả, XML bằng chứng và xuất JSONL/CSV; kiểm tra công thức CSV kể cả sau whitespace được neutralize, JSONL giữ nguyên và dữ liệu mẫu gắn nhãn.
+- [x] 8.6 Viết hướng dẫn sử dụng giao diện; kiểm tra bằng trình duyệt toàn luồng upload → tạo ca → chạy mock → mở bằng chứng → export, ghi rõ mock không là đo model thật.
 
 ## 9. Workflow n8n
 
-- [ ] 9.1 Xác nhận n8n version/image digest thực tế và Docker truy cập API có token; kiểm tra health từ container và ghi cách cấu hình host.docker.internal, không mở dịch vụ công khai.
-- [ ] 9.2 Tạo JSON workflow Manual Trigger/Edit Fields/HTTP Request, giữ request_id và phân loại HTTP 200/202; import thử đúng n8n version và kiểm tra payload/header không chứa bí mật nhúng.
-- [ ] 9.3 Thêm Wait/poll có giới hạn 600 giây/120 lần, giữ ID khi hết hạn; kiểm thử 202 đến hoàn tất, timeout và gửi lại cùng key không tạo job mới.
-- [ ] 9.4 Thêm Switch ba nhãn, nhánh lỗi HTTP/schema và output summary/result_id; thử NORMAL/ALERT/UNKNOWN, label thiếu và 5xx bằng backend kiểm thử.
-- [ ] 9.5 Xuất workflow đã kiểm chứng và hướng dẫn import/credential/chạy/khôi phục, cấu hình lưu execution local; kiểm tra JSON không có token hoặc node gửi ra ngoài, ghi trạng thái chưa kiểm chứng nếu môi trường không cho thử.
+- [x] 9.1 Xác nhận n8n version/image digest thực tế và Docker truy cập API có token; kiểm tra health từ container và ghi cách cấu hình host.docker.internal, không mở dịch vụ công khai.
+- [x] 9.2 Tạo JSON workflow Manual Trigger/Edit Fields/HTTP Request, giữ request_id và phân loại HTTP 200/202; import thử đúng n8n version và kiểm tra payload/header không chứa bí mật nhúng.
+- [x] 9.3 Thêm Wait/poll có giới hạn 600 giây/120 lần, giữ ID khi hết hạn; kiểm thử 202 đến hoàn tất, timeout và gửi lại cùng key không tạo job mới.
+- [x] 9.4 Thêm Switch ba nhãn, nhánh lỗi HTTP/schema và output summary/result_id; thử NORMAL/ALERT/UNKNOWN, label thiếu và 5xx bằng backend kiểm thử.
+- [x] 9.5 Xuất workflow đã kiểm chứng và hướng dẫn import/credential/chạy/khôi phục, cấu hình lưu execution local; kiểm tra JSON không có token hoặc node gửi ra ngoài, ghi trạng thái chưa kiểm chứng nếu môi trường không cho thử.
 
 ## 10. Công cụ đánh giá hai SLM
 
