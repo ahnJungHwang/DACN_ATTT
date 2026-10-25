@@ -26,5 +26,5 @@ Kiểm tra chỉ đọc ngày 2026-10-24 (Asia/Saigon). Chưa phải bằng ch�
 - Chỉ kiểm kê/hash, chưa xác nhận nội dung đầy đủ hoặc nhãn.
 
 ## Điều kiện tiếp theo
-Đã chốt thư viện trong requirements.txt. Bộ kiểm thử ngày 2026-10-25 đạt 84 test. Dịch vụ/API, mock UI và workflow n8n với backend tổng hợp đã chạy; vẫn cần lần thu log mới từ VMware Win10 và thực nghiệm toàn hệ thống.
+Đã chốt thư viện trong requirements.txt. Bộ kiểm thử ngày 2026-10-25 đạt 95 test. Dịch vụ/API, mock UI, workflow n8n và công cụ đánh giá với backend tổng hợp đã chạy; vẫn cần lần thu log mới từ VMware Win10 và thực nghiệm toàn hệ thống.
 

@@ -83,17 +83,22 @@ class Inference:
         preflight = self.guard.check(metadata,payload['messages'],settings)
         base = {'metadata':metadata,'payload':payload,'options':{'temperature':settings.temperature,
                 'num_ctx':settings.num_ctx,'num_predict':settings.num_predict},'preflight':preflight,
-                'raw_output':None,'response':None,'technical_error':None}
+                'raw_output':None,'response':None,'technical_error':None,
+                'model_load_wall_seconds':None,'wall_after_load_seconds':None}
         def failure(code):
             base.update(label='UNKNOWN',reason='Analysis unavailable: '+code,evidence_refs=[],technical_error=code)
         if not preflight['allowed']:
             failure(preflight['error'])
         else:
             try:
+                load_started = time.perf_counter()
                 self.load(metadata['model'])
+                base['model_load_wall_seconds'] = time.perf_counter()-load_started
+                chat_started = time.perf_counter()
                 response = self.client.request('POST','/api/chat',timeout=settings.inference_timeout_seconds,
                     json={'model':metadata['model'],'messages':payload['messages'],'format':payload['format'],
                           'stream':False,'keep_alive':'5m','options':base['options']})
+                base['wall_after_load_seconds'] = time.perf_counter()-chat_started
                 base['response'] = response
                 base['raw_output'] = response.get('message',{}).get('content')
                 if response.get('done') is not True or response.get('done_reason') == 'length':

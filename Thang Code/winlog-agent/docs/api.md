@@ -46,6 +46,9 @@ Sau nhận job, lỗi kỹ thuật được lưu như kết quả UNKNOWN có te
 - GET /events/{event_ref}: bằng chứng qua ID đã đăng ký, không nhận đường dẫn.
 - GET /results/{id}/export?format=jsonl hoặc csv: chưa hoàn tất trả 409. CSV neutralize ký tự công thức kể cả sau whitespace; JSONL giữ nguyên.
 - GET /models: model có sẵn/metadata. Không tự tải model thiếu.
+- GET /evaluations, /evaluations/{id}: danh sách và chi tiết đánh giá; GET /reports: trang báo cáo cùng session UI.
+- GET /evaluations/{id}/export?format=jsonl hoặc csv: xuất chi tiết hoặc comparison.csv.
+- POST /evaluations/{id}/reviews: chấm thủ công tài khoản/phiên, có người chấm, rationale và evidence_refs; xem evaluation.md. Áp dụng cùng token/session+CSRF như các tuyến ghi khác.
 
 ## Docker/n8n
 

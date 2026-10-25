@@ -22,6 +22,7 @@ from .inference import Inference
 from .ollama import Ollama
 from .service import Service, ServiceError
 from .storage import Store, DuplicateSource, canonical
+from .evaluation_reports import read_evaluation, record_review, export_evaluation
 
 
 class AnalysisBody(BaseModel):
@@ -42,6 +43,18 @@ class CaseBody(BaseModel):
 
 class LoginBody(BaseModel):
     token:str
+
+
+class ReviewBody(BaseModel):
+    model_config=ConfigDict(extra='forbid',strict=True)
+    case_id:str
+    model:str
+    mode:str
+    repeat:int
+    annotator:str
+    incorrect:bool
+    rationale:str
+    evidence_refs:list[str]
 
 
 def secret_file(path):
@@ -100,6 +113,32 @@ def create_app(settings=None,service=None,token=None):
     @app.get('/')
     def home(request:Request):
         return templates.TemplateResponse(request=request,name='index.html',context={})
+
+    @app.get('/evaluations')
+    def evaluations():
+        with store.connect() as db:
+            rows=db.execute('SELECT evaluation_id,created_at,manifest,report FROM evaluations ORDER BY created_at DESC').fetchall()
+        return {'evaluations':[{'evaluation_id':r['evaluation_id'],'created_at':r['created_at'],
+            'name':json.loads(r['manifest'])['name'],'synthetic':json.loads(r['manifest'])['synthetic'],
+            'state':json.loads(r['report'])['state'] if r['report'] else 'pending'} for r in rows]}
+
+    @app.get('/evaluations/{evaluation_id}')
+    def evaluation(evaluation_id:str): return read_evaluation(store,evaluation_id)
+
+    @app.post('/evaluations/{evaluation_id}/reviews')
+    def review(evaluation_id:str,body:ReviewBody):
+        return record_review(store,evaluation_id,**body.model_dump())
+
+    @app.get('/evaluations/{evaluation_id}/export')
+    def evaluation_export(evaluation_id:str,format:str='jsonl'):
+        content,media=export_evaluation(read_evaluation(store,evaluation_id),format)
+        return Response(content,media_type=media)
+
+    @app.get('/reports')
+    def reports(request:Request,evaluation_id:str|None=None):
+        selected=read_evaluation(store,evaluation_id) if evaluation_id else None
+        return templates.TemplateResponse(request=request,name='evaluation.html',context={
+            'evaluations':evaluations()['evaluations'],'selected':selected})
 
     @app.post('/login')
     def login(body:LoginBody):

@@ -85,15 +85,15 @@ Thứ tự phụ thuộc: 1 → 2; 3 và 4 dựa trên 1–2; 5 sau 4; 6 sau 5; 
 
 ## 10. Công cụ đánh giá hai SLM
 
-- [ ] 10.1 Tạo manifest dataset với run/session provenance, split, nhóm, nhãn, rubric và hash; test kiểm tra leakage giữa split gồm ca trộn dùng chung nguồn/ref/hash.
-- [ ] 10.2 Tạo runner qua dịch vụ hàng chờ theo model/mode/case/repeat, khóa prompt/options/digest; test thay digest/cấu hình làm dừng đối chứng và không chạy song song ngoài khóa.
-- [ ] 10.3 Triển khai single-event và grouped modes, tổng hợp ALERT → UNKNOWN → NORMAL, lô rỗng UNKNOWN; unit tests phủ log trộn và lỗi một sự kiện.
-- [ ] 10.4 Triển khai warm-up ngoài tập chấm và ba repeat, thời gian load/wall/prompt/eval riêng; test single mode cộng thời gian theo ca và repeat thiếu không báo đủ ba mẫu.
-- [ ] 10.5 Đo RSS API/cây Ollama theo 200 ms và VRAM theo PID khi có công cụ; test metric thiếu là null/lý do, không thay bằng RAM toàn máy hoặc số 0 giả.
-- [ ] 10.6 Tính TP/FP/FN, Precision/Recall/F1, coverage, UNKNOWN/lỗi, JSON valid/response và response/attempt; test mẫu số 0, UNKNOWN trên ca ALERT tính FN và trên ca NORMAL không tính đúng.
-- [ ] 10.7 Thêm rubric chấm tài khoản/phiên thủ công có người chấm, xuất JSONL/comparison.csv theo model/mode/repeat; test chưa chấm là null, bảng chính repeat 1 và không biến repeat thành ca độc lập.
-- [ ] 10.8 Viết hướng dẫn thu/gán nhãn/split, chạy và đọc chỉ số; kiểm tra runner với dataset nhỏ có nhãn tổng hợp, báo thiếu so với mục tiêu 10+40 thay vì tạo số liệu giả.
-- [ ] 10.9 Tạo trang báo cáo local dùng dữ liệu đánh giá đã lưu; kiểm tra báo cáo chưa đủ dữ liệu không tuyên bố model tốt nhất và dữ liệu mẫu không lẫn số liệu thật.
+- [x] 10.1 Tạo manifest dataset với run/session provenance, split, nhóm, nhãn, rubric và hash; test kiểm tra leakage giữa split gồm ca trộn dùng chung nguồn/ref/hash.
+- [x] 10.2 Tạo runner qua dịch vụ hàng chờ theo model/mode/case/repeat, khóa prompt/options/digest; test thay digest/cấu hình làm dừng đối chứng và không chạy song song ngoài khóa.
+- [x] 10.3 Triển khai single-event và grouped modes, tổng hợp ALERT → UNKNOWN → NORMAL, lô rỗng UNKNOWN; unit tests phủ log trộn và lỗi một sự kiện.
+- [x] 10.4 Triển khai warm-up ngoài tập chấm và ba repeat, thời gian load/wall/prompt/eval riêng; test single mode cộng thời gian theo ca và repeat thiếu không báo đủ ba mẫu.
+- [x] 10.5 Đo RSS API/cây Ollama theo 200 ms và VRAM theo PID khi có công cụ; test metric thiếu là null/lý do, không thay bằng RAM toàn máy hoặc số 0 giả.
+- [x] 10.6 Tính TP/FP/FN, Precision/Recall/F1, coverage, UNKNOWN/lỗi, JSON valid/response và response/attempt; test mẫu số 0, UNKNOWN trên ca ALERT tính FN và trên ca NORMAL không tính đúng.
+- [x] 10.7 Thêm rubric chấm tài khoản/phiên thủ công có người chấm, xuất JSONL/comparison.csv theo model/mode/repeat; test chưa chấm là null, bảng chính repeat 1 và không biến repeat thành ca độc lập.
+- [x] 10.8 Viết hướng dẫn thu/gán nhãn/split, chạy và đọc chỉ số; kiểm tra runner với dataset nhỏ có nhãn tổng hợp, báo thiếu so với mục tiêu 10+40 thay vì tạo số liệu giả.
+- [x] 10.9 Tạo trang báo cáo local dùng dữ liệu đánh giá đã lưu; kiểm tra báo cáo chưa đủ dữ liệu không tuyên bố model tốt nhất và dữ liệu mẫu không lẫn số liệu thật.
 
 ## 11. Xác minh tích hợp và thực nghiệm bàn giao
 

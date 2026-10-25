@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Báo cáo đánh giá SLM</title><link rel="stylesheet" href="/static/app.css"></head>
+<body><header><span class="badge">LOCAL · ĐÁNH GIÁ</span><h1>Báo cáo hai SLM</h1><a href="/">Về giao diện phân tích</a></header><main>
+<section><h2>Các lượt đánh giá</h2>{% if not evaluations %}<p>Chưa có dữ liệu đánh giá. Chưa có cơ sở đề xuất model tốt nhất.</p>{% endif %}
+{% for item in evaluations %}<p><a href="/reports?evaluation_id={{ item.evaluation_id }}">{{ item.name }}</a> · {{ 'MẪU TỔNG HỢP — không phải thực nghiệm thật' if item.synthetic else 'Dữ liệu thật theo manifest' }} · {{ item.state }} · {{ item.created_at }}</p>{% endfor %}</section>
+{% if selected %}{% set m=selected.manifest %}{% set r=selected.report %}
+<section><h2>{{ m.name }}</h2><p>{{ 'DỮ LIỆU MẪU TỔNG HỢP — không dùng chọn model' if m.synthetic else 'Đối chiếu nguồn gốc và rubric trước khi kết luận' }}</p>
+<p>Trạng thái: {{ r.state }}. Manifest SHA256: {{ selected.manifest_hash }}</p><p>Đã có {{ m.counts.get('development',0) }} ca phát triển, {{ m.counts.get('evaluation',0) }} ca đánh giá và {{ m.counts.get('warmup',0) }} ca warm-up riêng.</p><p>Còn thiếu so với mục tiêu: {{ m.missing_targets.development }} ca phát triển và {{ m.missing_targets.evaluation }} ca đánh giá.</p>
+<ul>{% for key,label in [('normal','Bình thường'),('password_guessing','Dò mật khẩu'),('mixed_same_session','Trộn cùng phiên'),('mixed_different_session','Trộn khác phiên/tài khoản')] %}<li>{{ label }}: còn thiếu {{ m.missing_targets.evaluation_groups[key] }}/10 ca đánh giá.</li>{% endfor %}</ul>
+<p>Chưa có kết luận tự động về model tốt nhất. Bảng chính là repeat 1; repeat 2–3 không được tính thành ca độc lập. JSON hợp lệ không chứng minh suy luận đúng.</p>
+{% if r.error %}<p class="error">{{ r.error }}</p>{% endif %}
+<a href="/evaluations/{{ selected.evaluation_id }}/export?format=jsonl" download="evaluation.jsonl">Tải JSONL chi tiết</a> · <a href="/evaluations/{{ selected.evaluation_id }}/export?format=csv" download="comparison.csv">Tải comparison.csv</a></section>
+{% for row in r.comparison %}<section><h2>{{ row.model }} · {{ row.mode }} · Repeat {{ row.repeat }}{{ ' (bảng chính)' if row.primary else '' }}</h2>
+<p>{{ row.cases }} ca · TP {{ row.tp }} · FP {{ row.fp }} · FN {{ row.fn }} · TN {{ row.tn }} · UNKNOWN {{ row.unknown }} · Ca có lỗi kỹ thuật {{ row.technical_error_cases }}</p>
+{% for label,key in [('Precision','precision'),('Recall','recall'),('F1','f1'),('Coverage','coverage'),('JSON hợp lệ / response','json_valid_response'),('Response / attempt','response_attempt'),('Gán sai tài khoản/phiên','account_session_error')] %}{% set value=row[key] %}<p>{{ label }}: {{ value.numerator }}/{{ value.denominator }} — {{ 'chưa xác định / chưa chấm' if value.value is none else value.value|round(4) }}</p>{% endfor %}</section>{% endfor %}
+<section><h2>Thời gian sau nạp theo ca</h2>{% for t in r.timings %}<p>{{ t.model }} · {{ t.mode }} · {{ t.case_id }}: {{ t.successful_repeats }}/3 lượt thành công; trung vị {{ t.median_wall_seconds if t.complete_three_repeats else 'chưa đủ ba lượt' }} giây.</p>{% endfor %}<p>RSS/VRAM, thời gian nạp và số đo từng lời gọi nằm trong JSONL. Số đo thiếu giữ null kèm lý do.</p></section>
+{% endif %}</main></body></html>
