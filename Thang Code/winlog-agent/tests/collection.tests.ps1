@@ -16,6 +16,12 @@ $testRoot = Join-Path ([IO.Path]::GetTempPath()) ('winlog-collection-test-' + [G
     function Read-LabEvents {
         param($Filter)
         Assert (-not $Filter.ContainsKey('MaxEvents')) 'No implicit limit allowed'
+        # Get-WinEvent re-parses these as machine-local text, so they must be local and cover the interval.
+        Assert ($Filter.StartTime.Kind -eq [DateTimeKind]::Local) 'StartTime must be machine-local'
+        Assert ($Filter.EndTime.Kind -eq [DateTimeKind]::Local) 'EndTime must be machine-local'
+        $script:startUtc = [DateTimeOffset]::Parse('2026-10-24T10:00:00+07:00').UtcDateTime
+        Assert ($Filter.StartTime.ToUniversalTime() -le $script:startUtc) 'filter must not start after interval'
+        Assert ($Filter.EndTime.ToUniversalTime() -ge $script:startUtc.AddSeconds(60)) 'filter must not end before interval'
         if ($script:mode -eq 'empty') { return }
         if ($script:mode -eq 'noMatching') {
             $record = New-Object Management.Automation.ErrorRecord ([Exception]::new('no match')), 'NoMatchingEventsFound', 'ObjectNotFound', $null
@@ -24,7 +30,7 @@ $testRoot = Join-Path ([IO.Path]::GetTempPath()) ('winlog-collection-test-' + [G
         if ($Filter.LogName -ne 'Security' -and $script:mode -eq 'denied') { throw [UnauthorizedAccessException]::new('denied') }
         if ($Filter.LogName -ne 'Security' -and $script:mode -eq 'readError') { throw 'channel failed' }
         foreach ($seconds in @(-1,0,30,60,61)) {
-            $event = [pscustomobject]@{ TimeCreated=$Filter.StartTime.AddSeconds($seconds); RecordId=$seconds+2; Id=$Filter.Id[0] }
+            $event = [pscustomobject]@{ TimeCreated=$script:startUtc.ToLocalTime().AddSeconds($seconds); RecordId=$seconds+2; Id=$Filter.Id[0] }
             $event | Add-Member ScriptMethod ToXml { '<Event><System><EventID>' + $this.Id + '</EventID></System></Event>' }
             $event
         }

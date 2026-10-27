@@ -25,7 +25,7 @@ Thứ tự phụ thuộc: 1 → 2; 3 và 4 dựa trên 1–2; 5 sau 4; 6 sau 5; 
 - [x] 3.1 Viết hướng dẫn tiếng Việt bật bốn nguồn sự kiện, kiểm tra edition, policy, phiên PowerShell mới và khóa tài khoản; đối chiếu các bước với windows-log-collection/spec.md, phân biệt máy ảo/máy thật.
 - [x] 3.2 Viết script PowerShell 5.1 xuất XML theo StartTime/EndTime có múi giờ và manifest trong thư mục riêng; kiểm tra cú pháp bằng parser 5.1 và test dữ liệu biên thời gian, không MaxEvents ngầm hoặc ghi đè lần thu trước.
 - [x] 3.3 Xử lý no-events, thiếu quyền, khoảng thời gian sai và lỗi một nguồn/ghi file; kiểm tra từng trường hợp có trạng thái đúng và không báo đầy đủ khi partial.
-- [ ] 3.4 Chạy một lần thu trên VM được phép, kiểm tra XML đọc được và manifest khớp số bản ghi/thời gian; lưu bằng chứng kiểm chứng và hướng dẫn chép file, để task chưa xong nếu chưa truy cập VM.
+- [x] 3.4 Chạy một lần thu trên VM được phép, kiểm tra XML đọc được và manifest khớp số bản ghi/thời gian; lưu bằng chứng kiểm chứng và hướng dẫn chép file, để task chưa xong nếu chưa truy cập VM.
 
 ## 4. Nhập XML và chuẩn hóa
 
@@ -99,9 +99,9 @@ Thứ tự phụ thuộc: 1 → 2; 3 và 4 dựa trên 1–2; 5 sau 4; 6 sau 5; 
 
 - [ ] 11.1 Chạy toàn bộ integration trên dữ liệu VM thật: XML → chuẩn hóa → ca → hai SLM → kết quả/bằng chứng qua UI và n8n; đối chiếu thủ công tài khoản/phiên và lưu nhật ký kiểm chứng, không đánh dấu xong bằng fixture/mock.
 - [ ] 11.2 Kiểm tra một phiên phân tích khi ngắt Internet sau chuẩn bị dependencies/model/tokenizer, gồm giao diện và n8n; xác nhận không tải tài nguyên ngoài hoặc fallback cloud.
-- [ ] 11.3 Kiểm tra phục hồi toàn hệ thống khi backend restart, Ollama timeout và client mất response; xác nhận không trùng suy luận, không mất raw evidence và thao tác rollback bảo toàn database/volume.
+- [x] 11.3 Kiểm tra phục hồi toàn hệ thống khi backend restart, Ollama timeout và client mất response; xác nhận không trùng suy luận, không mất raw evidence và thao tác rollback bảo toàn database/volume.
 - [ ] 11.4 Thu và đối chiếu bộ ca thật hướng tới 10 phát triển/40 đánh giá theo bốn nhóm, khóa split/prompt trước test; lưu manifest và kết quả kiểm tra leakage, giữ task chưa hoàn thành nếu dữ liệu thực tế chưa đủ.
 - [ ] 11.5 Chạy đánh giá hai model/hai mode/ba repeat trên tập đã khóa và chấm phiên theo rubric; kiểm tra số ca, số response, lỗi và số đo khớp kết quả gốc, xuất báo cáo thật không điền số thiếu.
 - [ ] 11.6 Đề xuất model mặc định từ báo cáo thật với đánh đổi bỏ sót/cảnh báo nhầm/tài nguyên; xác minh mọi nhận định truy được số liệu và nêu giới hạn thực nghiệm.
-- [ ] 11.7 Đối chiếu bàn giao với tám specs, chạy kiểm tra cài mới theo tài liệu và OpenSpec validate --strict; tổng hợp bằng chứng kiểm thử/phần chưa đạt, chỉ đóng các task đã xác minh, không tự commit/push/archive.
+- [x] 11.7 Đối chiếu bàn giao với tám specs, chạy kiểm tra cài mới theo tài liệu và OpenSpec validate --strict; tổng hợp bằng chứng kiểm thử/phần chưa đạt, chỉ đóng các task đã xác minh, không tự commit/push/archive.
 

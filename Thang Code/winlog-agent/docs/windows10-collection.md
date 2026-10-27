@@ -65,6 +65,8 @@ $end = [DateTimeOffset]::Now.ToString('o')
 
 Chép **cả** `Export-WindowsLogs.ps1` và `Collection.psm1` từ thư mục scripts trên máy thật vào cùng thư mục `C:\LabTools` trong VM. Đọc script trước khi chạy; script không thay audit policy và không xóa event log.
 
+Bản `Collection.psm1` trước ngày 2026-10-27 đưa mốc UTC vào Get-WinEvent; PowerShell 5.1 đọc lại mốc này như giờ máy nên khoảng lọc lệch theo múi giờ (máy +07 lùi 7 giờ) và có thể trả `no_events` sai. Lần thu bằng bản cũ không dùng làm bằng chứng; chép lại bản mới và xuất lại, log trong VM vẫn còn nếu chưa bị ghi đè.
+
 Từ cửa sổ admin đang giữ `$start` và `$end`:
 
 ```powershell
@@ -98,4 +100,12 @@ Get-FileHash -LiteralPath 'C:\Lab\THU_MUC_LAN_THU\security.xml' -Algorithm SHA25
 Get-FileHash -LiteralPath 'C:\Lab\THU_MUC_LAN_THU\powershell.xml' -Algorithm SHA256
 ```
 
-Hash hai phía phải bằng nhau và khớp manifest. Kiểm tra số bản ghi XML bằng parser của ứng dụng khi phần nhập hoàn thành; trước đó đối chiếu XML/manifest và Event Viewer. Lưu cùng nhật ký: edition/build, policy thực tế, múi giờ, start/end, từng thao tác, số bản ghi, lỗi từng nguồn, hash trước/sau chép. Không đánh dấu task 3.4 hoàn thành chỉ bằng log cũ thiếu manifest hoặc kiểm thử tổng hợp.
+Hash hai phía phải bằng nhau và khớp manifest. Trên máy thật, từ thư mục winlog-agent, chạy kiểm tra chỉ đọc:
+
+```powershell
+.\.venv\Scripts\python.exe -m app.verify_collection .\data\incoming\THU_MUC_LAN_THU
+```
+
+Lệnh kiểm hash file, số lượng/từng Event ID, máy/channel, khoảng thu đóng, thời điểm đầu/cuối và trạng thái nguồn; không sửa/nhập log. Mã thoát 0 khi ready_for_manual_review=true; mã 2 khi có lỗi hoặc lần thu partial. Nguồn no_events có thể khớp manifest nhưng không chứng minh có đủ bốn ID; đọc warnings. Nếu lỗi, giữ nguyên file để đối chiếu, không sửa manifest cho khớp số liệu mong muốn.
+
+Lưu cùng nhật ký: edition/build, policy thực tế, múi giờ, start/end, từng thao tác, số bản ghi, lỗi từng nguồn, hash trước/sau chép. Kiểm hash/manifest không chứng minh nhãn hoặc nguồn VM; vẫn đối chiếu Event Viewer và thao tác. Không đánh dấu task 3.4 hoàn thành chỉ bằng log cũ thiếu manifest hoặc kiểm thử tổng hợp.

@@ -1,5 +1,6 @@
 /.venv/
 /.venv-verify/
+/.venv-handoff/
 /data/
 /data-*/
 /backups/

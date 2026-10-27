@@ -56,7 +56,11 @@ function Export-LabLogs {
         }
         $phase = 'read'
         try {
-            $filter = @{LogName=$definition.log; Id=$definition.ids; StartTime=$start.UtcDateTime; EndTime=$end.UtcDateTime}
+            # PS 5.1 Get-WinEvent turns StartTime/EndTime into text and re-reads it as machine-local time,
+            # dropping Kind and milliseconds. Pass local times widened by one second; the filter below
+            # then enforces the exact closed interval.
+            $filter = @{LogName=$definition.log; Id=$definition.ids
+                        StartTime=$start.LocalDateTime.AddSeconds(-1); EndTime=$end.LocalDateTime.AddSeconds(1)}
             $events = @()
             try {
                 $events = @(Read-LabEvents $filter)

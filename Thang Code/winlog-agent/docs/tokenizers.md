@@ -18,6 +18,8 @@ ContextGuard chỉ chấp nhận artifact đã kiểm chứng đúng model diges
 
 10/10 phép đếm khớp prompt_eval_count Ollama 0.40.9 sau sửa quy tắc ignore_merges riêng của Llama. Qwen: 180, 203, 792, 192, 3324 token. Llama: 191, 208, 702, 205, 3321 token. Các mẫu gồm lời chào, tiếng Việt/Trung/emoji, dòng lệnh Windows, dấu phân cách đặc biệt và văn bản gần giới hạn. Đây là phạm vi kiểm chứng thực tế, không phải chứng minh bằng thử nghiệm cho mọi chuỗi Unicode có thể có.
 
+Ngày 2026-10-26 API Ollama báo 0.40.11; model digest và template hash không đổi. ContextGuard từ chối artifact 0.40.9 bằng CONTEXT_UNVERIFIED đúng thiết kế. Đã giữ bản cũ tại data/tokenizers/verification-0.40.9-before-20261026.json, chạy lại verify_tokenizers và xác nhận 10/10 mẫu khớp, với cùng số token nêu trên. verification.json hiện ghi kết quả đo trên 0.40.11. Không sửa version trong artifact để bỏ qua kiểm chứng.
+
 Smoke test dùng cùng hai payload tổng hợp cho cả hai model, gồm Get-Date thiếu ngữ cảnh phiên và script lặp gần giới hạn. Cả bốn response hợp lệ theo schema, không có technical_error: Qwen UNKNOWN/UNKNOWN, Llama NORMAL/UNKNOWN. Kết quả khác nhau không đủ để chọn model tốt nhất hoặc suy ra độ chính xác. Toàn bộ response/đầu vào/options/thời gian lưu data/model-smoke.json. UNKNOWN không lỗi kỹ thuật nghĩa model chưa đủ bằng chứng; UNKNOWN với technical_error nghĩa xử lý thất bại.
 
 Kết quả JSON sai, ref không tồn tại, ALERT không bằng chứng hoặc response cắt ngắn được giữ raw_output và chuyển UNKNOWN/INVALID_MODEL_OUTPUT. Mất kết nối có thể để Ollama còn xử lý, nên runtime chuyển degraded và chặn model tiếp theo. Không tự retry vô hạn hoặc nạp model khác để sửa đầu ra.

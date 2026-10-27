@@ -42,4 +42,4 @@ tests/verify_n8n.py dùng HTTP backend tổng hợp 127.0.0.1:18082 và credenti
 
 Ngày 2026-10-25 đã đạt 9 lượt: ba nhãn, UNKNOWN có lỗi kỹ thuật, 202 → Wait → poll → ALERT, thiếu label, HTTP 503, giới hạn polling và chạy lại cùng key giữ nguyên job/result. Test giới hạn đặt bộ đếm ban đầu 119 rồi thực hiện lượt poll 120 để kiểm tra nhanh; không tuyên bố đã chờ 600 giây thực. Biên thời gian 599999/600000 ms và lỗi transport được test riêng bằng JavaScript trong tests/test_workflow.py. Test JavaScript cần Node.js; máy kiểm chứng dùng Node 24.12.0. n8n dùng runtime riêng trong image đã chốt.
 
-Kiểm thử này chứng minh điều phối và phân nhánh, không chứng minh model phát hiện đúng hành vi nguy hiểm. Kiểm chứng log VM thật và phiên offline toàn hệ thống vẫn còn trong nhóm 11.
+Kiểm thử này chứng minh điều phối và phân nhánh, không chứng minh model phát hiện đúng hành vi nguy hiểm. Ngày 2026-10-26 đã kiểm tra thêm workflow gọi hai model thật trên bản sao log-test, polling, gửi lại sau restart và backup/restore kết quả; xem [biên bản tích hợp thật](real-n8n-verification.md). Phiên offline, giao diện trên log thật và đối chiếu nhật ký VM vẫn còn trong nhóm 11.
