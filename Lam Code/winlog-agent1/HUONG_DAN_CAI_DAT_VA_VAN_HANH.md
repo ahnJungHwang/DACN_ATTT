@@ -48,11 +48,11 @@ Máy Server cần cài đặt môi trường AI và ứng dụng phân tích tru
 
 ### 2. Cài đặt Python & Thư viện dự án
 1. Cài đặt Python 3.10 trở lên (nhớ tích chọn **"Add python.exe to PATH"** khi cài).
-2. Mở PowerShell tại thư mục dự án `winlog-agent` (ví dụ `H:\Nam 4\DACN\Demo\Lam Code\winlog-agent` — thay bằng đường dẫn thực tế trên máy bạn) và tạo môi trường ảo:
+2. Mở PowerShell tại thư mục dự án `D:\Freelancer\AI_agent_ollama\winlog-agent` và tạo môi trường ảo:
    ```powershell
-   cd "H:\Nam 4\DACN\Demo\Lam Code\winlog-agent"
+   cd D:\Freelancer\AI_agent_ollama\winlog-agent
    python -m venv .venv
-   .\.venv\Scripts\pip install -r requirements.txt
+   .\.venv\Scripts\pip install fastapi uvicorn requests pydantic
    ```
 
 ---
@@ -110,21 +110,20 @@ Telegram có chính sách bảo mật chống spam: **Bot không được phép 
 ---
 
 #### Bước 4.4 — Cấu hình Token và Chat ID vào hệ thống
-> ⚠️ **KHÔNG ghi token trực tiếp vào code** (`app.py`, `realtime_monitor.py`). Nếu đẩy code lên GitHub, bất kỳ ai cũng có thể dùng token để điều khiển bot của bạn. Code chỉ đọc token từ **biến môi trường**; nếu chưa cấu hình, hệ thống vẫn phân tích bình thường nhưng bỏ qua bước gửi Telegram.
+Trên máy Server, bạn có 2 cách để cấu hình thông số vừa lấy được:
 
-* **Cách 1 (Lưu cố định - Khuyên dùng, phù hợp khi chạy bằng file `.bat`)**:
-  Chạy 1 lần trong PowerShell trên máy Server, sau đó **đóng và mở lại** cửa sổ / file `.bat`:
-  ```powershell
-  setx TELEGRAM_BOT_TOKEN "ĐIỀN_TOKEN_BOT_VỪA_LẤY_Ở_BƯỚC_4.1_VÀO_ĐÂY"
-  setx TELEGRAM_CHAT_ID "ĐIỀN_CHAT_ID_VỪA_LẤY_Ở_BƯỚC_4.2_VÀO_ĐÂY"
+* **Cách 1 (Sửa trực tiếp trong code - Nhanh nhất)**:
+  Mở file `app.py` bằng Notepad hoặc VSCode, tìm đến dòng cấu hình Telegram và thay thế giá trị của bạn vào:
+  ```python
+  TELEGRAM_BOT_TOKEN = "ĐIỀN_TOKEN_BOT_VỪA_LẤY_Ở_BƯỚC_4.1_VÀO_ĐÂY"
+  TELEGRAM_CHAT_ID = "ĐIỀN_CHAT_ID_VỪA_LẤY_Ở_BƯỚC_4.2_VÀO_ĐÂY"
   ```
-  *(Lưu ý: nếu chạy `run_monitor.bat` bằng "Run as administrator", hãy chạy lệnh `setx` trong PowerShell cũng mở bằng quyền Administrator của cùng tài khoản.)*
 
-* **Cách 2 (Tạm thời - chỉ có hiệu lực trong cửa sổ PowerShell hiện tại)**:
+* **Cách 2 (Dùng biến môi trường - Khuyên dùng trong sản xuất)**:
+  Thiết lập biến môi trường trên Windows PowerShell trước khi chạy server:
   ```powershell
   $env:TELEGRAM_BOT_TOKEN = "ĐIỀN_TOKEN_BOT_VÀO_ĐÂY"
   $env:TELEGRAM_CHAT_ID = "ĐIỀN_CHAT_ID_VÀO_ĐÂY"
-  .\.venv\Scripts\python.exe -m uvicorn app:app --host 0.0.0.0 --port 8000
   ```
 
 ---
@@ -240,7 +239,6 @@ Server tiếp nhận log, kích hoạt AI Qwen suy luận và phân tích tươn
 | **Client báo: `[!] CANH BAO: Chua ket noi duoc toi AI Server`** | Tường lửa trên Server chặn cổng 8000 hoặc Server chưa bật. | 1. Đảm bảo file `run_server.bat` đang chạy trên Server.<br>2. Chạy lệnh mở cổng 8000 trong PowerShell Admin trên Server (xem Bước 1.3). |
 | **Cửa sổ CMD trên Client đứng yên, không quét tiếp** | Người dùng click chuột vào cửa sổ CMD gây ra chế độ **Select/QuickEdit** (Windows đóng băng tiến trình). | Bấm vào cửa sổ CMD và ấn phím **`ENTER`** (hoặc click chuột phải) để thoát trạng thái bôi đen. |
 | **Telegram không nhận được tin nhắn** | Tài khoản Telegram chưa bấm `START` với bot. | Mở cuộc trò chuyện với con Bot của bạn và bấm nút **START** (hoặc gửi tin nhắn bất kỳ cho bot). |
-| **Server báo: `Chua cau hinh TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID`** | Chưa đặt biến môi trường, hoặc đặt bằng `setx` nhưng chưa mở lại cửa sổ. | Làm lại Bước 4.4, sau đó đóng hẳn và chạy lại `run_server.bat`. |
 | **Client không bắt được sự kiện sau khi chạy lệnh tấn công** | Chưa chạy `setup_client.bat` bằng quyền Administrator. | Click chuột phải `setup_client.bat` chọn **Run as administrator** để Windows bật tính năng ghi log. |
 
 ---
@@ -252,8 +250,6 @@ Server tiếp nhận log, kích hoạt AI Qwen suy luận và phân tích tươn
 | **`app.py`** | Server | API nhận log, tích hợp Qwen AI và Telegram Alert. |
 | **`analyze.py`** | Server | Lõi phân tích tương quan sự kiện, tiền lọc nhiễu, prompt AI. |
 | **`run_server.bat`** | Server | File 1-click khởi động Server API cổng 8000. |
-| **`requirements.txt`** | Server | Danh sách thư viện Python cần cài (`pip install -r requirements.txt`). |
-| **`.gitignore`** | — | Loại `.venv/`, `data/`, `results/`, `.env` khỏi Git. |
 | **`setup_client.bat`** | Client | File 1-click bật chính sách Windows Audit (Process Creation, PowerShell). |
 | **`run_client.bat`** | Client | File 1-click khởi chạy Agent thu gom log. |
 | **`client_agent.ps1`** | Client | Script quét Windows Event Log mỗi 15s và đẩy sang Server. |

@@ -32,7 +32,6 @@ from analyze import (
 SCAN_INTERVAL_SECONDS = int(os.getenv("SCAN_INTERVAL", "15"))
 MODEL_KEY = os.getenv("MODEL", "qwen")
 
-# Không ghi token vào code; cấu hình qua biến môi trường (xem HUONG_DAN_CAI_DAT_VA_VAN_HANH.md).
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 

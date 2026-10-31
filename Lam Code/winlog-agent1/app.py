@@ -83,19 +83,18 @@ class IngestRequest(BaseModel):
 
 import os
 
-# Không ghi token vào code; cấu hình qua biến môi trường (xem HUONG_DAN_CAI_DAT_VA_VAN_HANH.md).
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 
 
-def send_server_telegram_alert(verdict: dict, client_id: str, hostname: str, elapsed: float) -> bool:
-    """Gửi cảnh báo phát hiện tấn công từ Client về Telegram. Trả về True nếu gửi thành công."""
+def send_server_telegram_alert(verdict: dict, client_id: str, hostname: str, elapsed: float):
+    """Gửi cảnh báo phát hiện tấn công từ Client về Telegram."""
     import requests
+    from datetime import datetime
 
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
-        print("[!] Chua cau hinh TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID, bo qua gui canh bao.", flush=True)
-        return False
-    from datetime import datetime
+        print("[!] Chưa cấu hình TELEGRAM_BOT_TOKEN hoặc TELEGRAM_CHAT_ID. Bỏ qua gửi Telegram.", flush=True)
+        return
 
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     reason = verdict.get("reason", "Phát hiện hành vi tấn công.")
@@ -117,18 +116,13 @@ def send_server_telegram_alert(verdict: dict, client_id: str, hostname: str, ela
 
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     try:
-        resp = requests.post(
+        requests.post(
             url,
             json={"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "Markdown"},
             timeout=10,
         )
     except Exception as exc:
         print(f"[!] Lỗi gửi Telegram: {exc}", flush=True)
-        return False
-    if resp.status_code != 200:
-        print(f"[!] Telegram tra ve loi {resp.status_code}: {resp.text}", flush=True)
-        return False
-    return True
 
 
 @app.post("/ingest")
@@ -173,9 +167,6 @@ def ingest_logs(req: IngestRequest):
                 "message": "Không có sự kiện nằm trong diện theo dõi.",
                 "verdict": {"label": "NORMAL", "reason": "Không có sự kiện mục tiêu."},
             }
-        # Lỗi dữ liệu khác (XML hỏng, thiếu timestamp...) -> báo lỗi rõ ràng cho Client
-        print(f"[!] Log tu Client {req.hostname} ({req.client_id}) khong hop le: {exc}", flush=True)
-        raise HTTPException(status_code=400, detail=f"Log không hợp lệ: {exc}")
 
     started = time.perf_counter()
     print(f"\n[+] Nhan log tu Client {req.hostname} ({req.client_id}) gom {len(events)} su kien.", flush=True)
@@ -194,8 +185,8 @@ def ingest_logs(req: IngestRequest):
 
     if label == "ALERT":
         print(f"[!] PHAT HIEN TAN CONG! Dang ban canh bao ve Telegram...", flush=True)
-        if send_server_telegram_alert(verdict, req.client_id, req.hostname, elapsed):
-            print(f"[✓] Da gui canh bao Telegram thanh cong!", flush=True)
+        send_server_telegram_alert(verdict, req.client_id, req.hostname, elapsed)
+        print(f"[✓] Da gui canh bao Telegram thanh cong!", flush=True)
 
     return {
         "client_id": req.client_id,
