@@ -1,0 +1,534 @@
+{
+  "name": "Windows Log SLM - Local analysis",
+  "nodes": [
+    {
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "edit-fields",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "base_url",
+              "value": "http://host.docker.internal:8000"
+            },
+            {
+              "name": "case_id",
+              "value": "REPLACE_WITH_CASE_ID"
+            },
+            {
+              "name": "model",
+              "value": "qwen2.5:3b-instruct-q4_K_M"
+            },
+            {
+              "name": "request_id",
+              "value": "REPLACE_WITH_UUID_KEEP_FOR_RETRY"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "prepare",
+      "name": "Prepare",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const c=$input.first().json;\nif(!/^http:\\/\\/(host\\.docker\\.internal|127\\.0\\.0\\.1|localhost):[0-9]+$/.test(c.base_url)) throw new Error('Only local API URLs allowed');\nif(!/^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(c.request_id)) throw new Error('Set request_id to a UUID and keep it when retrying');\nif(!c.case_id || c.case_id.startsWith('REPLACE_')) throw new Error('Set case_id from the local app');\nif(!['qwen2.5:3b-instruct-q4_K_M','llama3.2:3b-instruct-q4_K_M'].includes(c.model)) throw new Error('Unsupported model');\nreturn [{json:{...c,poll_count:0,deadline_ms:Date.now()+600000,result_id:null}}];"
+      }
+    },
+    {
+      "id": "submit",
+      "name": "Submit",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "requestMethod": "POST",
+        "url": "={{ $json.base_url + \"/analyze\" }}",
+        "responseFormat": "json",
+        "jsonParameters": true,
+        "options": {
+          "fullResponse": true,
+          "ignoreResponseCode": true,
+          "timeout": 30000,
+          "followRedirect": false,
+          "followAllRedirects": false
+        },
+        "bodyParametersJson": "={{ JSON.stringify({case_id:$json.case_id, model:$json.model}) }}",
+        "headerParametersJson": "={{ JSON.stringify({\"Idempotency-Key\":$json.request_id}) }}"
+      },
+      "continueOnFail": true,
+      "retryOnFail": false
+    },
+    {
+      "id": "check-submit",
+      "name": "Check Submit",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// Pure response validation shared by the n8n Code nodes and regression tests.\nfunction classifyResponse(response, context, now = Date.now()) {\n  const out = {...context, route: 'ERROR', error_kind: null, summary: null};\n  const fail = (kind, detail) => ({...out, error_kind: kind, summary: detail});\n  if (response.error || !Number.isInteger(response.statusCode))\n    return fail('HTTP_ERROR', 'Response unknown. Keep request_id and query /requests/{request_id}; do not create a new key.');\n  if (![200, 202].includes(response.statusCode))\n    return fail('HTTP_ERROR', `HTTP ${response.statusCode}; keep request_id for recovery.`);\n  const b = response.body;\n  const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;\n  if (!b || b.request_id !== context.request_id || !uuid.test(b.result_id || '') ||\n      !['queued', 'running', 'completed'].includes(b.state) ||\n      (context.result_id && b.result_id !== context.result_id))\n    return fail('SCHEMA_ERROR', 'Invalid request/result identity or state.');\n  out.result_id = b.result_id;\n  out.state = b.state;\n  if (b.state !== 'completed') {\n    if (b.result !== undefined || b.label !== undefined)\n      return fail('SCHEMA_ERROR', 'Pending response must not contain a verdict.');\n    if (context.poll_count >= 120 || now >= context.deadline_ms)\n      return {...out, route: 'ERROR', error_kind: 'POLL_LIMIT', summary: 'Polling limit reached; request may still run. Keep both IDs and query again.'};\n    return {...out, route: 'POLL'};\n  }\n  const r = b.result;\n  if (!r || !['NORMAL', 'ALERT', 'UNKNOWN'].includes(r.label) ||\n      typeof r.reason !== 'string' || !r.reason.trim() || !Array.isArray(r.evidence_refs) ||\n      !r.evidence_refs.every(ref => typeof ref === 'string' && ref.length > 0) ||\n      (r.label === 'ALERT' && !r.evidence_refs.length) ||\n      !(r.technical_error === null || typeof r.technical_error === 'string') ||\n      (r.technical_error !== null && r.label !== 'UNKNOWN'))\n    return fail('SCHEMA_ERROR', 'Missing/invalid label, reason, evidence_refs or technical_error.');\n  if (response.statusCode !== 200)\n    return fail('SCHEMA_ERROR', 'Completed result requires HTTP 200.');\n  return {...out, route: r.label, label: r.label, reason: r.reason,\n    evidence_refs: r.evidence_refs, technical_error: r.technical_error,\n    summary: `${r.label}${r.technical_error ? ' / '+r.technical_error : ''}: ${r.reason}`};\n}\n\nreturn [{json:classifyResponse($input.first().json,$('Prepare').first().json)}];"
+      }
+    },
+    {
+      "id": "route-state",
+      "name": "Route State",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        0
+      ],
+      "parameters": {
+        "mode": "expression",
+        "output": "={{ $json.route === \"POLL\" ? 0 : ($json.route === \"ERROR\" ? 1 : 2) }}"
+      }
+    },
+    {
+      "id": "wait",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1100,
+        300
+      ],
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "webhookId": "winlog-local-poll"
+    },
+    {
+      "id": "poll-context",
+      "name": "Poll Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        300
+      ],
+      "parameters": {
+        "jsCode": "const c=$input.first().json; return [{json:{...c,poll_count:c.poll_count+1,expired:Date.now()>=c.deadline_ms}}];"
+      }
+    },
+    {
+      "id": "check-deadline",
+      "name": "Check Deadline",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        660,
+        300
+      ],
+      "parameters": {
+        "mode": "expression",
+        "output": "={{ $json.expired ? 1 : 0 }}"
+      }
+    },
+    {
+      "id": "poll",
+      "name": "Poll",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "requestMethod": "GET",
+        "url": "={{ $json.base_url + \"/results/\" + $json.result_id }}",
+        "responseFormat": "json",
+        "jsonParameters": true,
+        "options": {
+          "fullResponse": true,
+          "ignoreResponseCode": true,
+          "timeout": 30000,
+          "followRedirect": false,
+          "followAllRedirects": false
+        }
+      },
+      "continueOnFail": true,
+      "retryOnFail": false
+    },
+    {
+      "id": "check-poll",
+      "name": "Check Poll",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        520
+      ],
+      "parameters": {
+        "jsCode": "// Pure response validation shared by the n8n Code nodes and regression tests.\nfunction classifyResponse(response, context, now = Date.now()) {\n  const out = {...context, route: 'ERROR', error_kind: null, summary: null};\n  const fail = (kind, detail) => ({...out, error_kind: kind, summary: detail});\n  if (response.error || !Number.isInteger(response.statusCode))\n    return fail('HTTP_ERROR', 'Response unknown. Keep request_id and query /requests/{request_id}; do not create a new key.');\n  if (![200, 202].includes(response.statusCode))\n    return fail('HTTP_ERROR', `HTTP ${response.statusCode}; keep request_id for recovery.`);\n  const b = response.body;\n  const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;\n  if (!b || b.request_id !== context.request_id || !uuid.test(b.result_id || '') ||\n      !['queued', 'running', 'completed'].includes(b.state) ||\n      (context.result_id && b.result_id !== context.result_id))\n    return fail('SCHEMA_ERROR', 'Invalid request/result identity or state.');\n  out.result_id = b.result_id;\n  out.state = b.state;\n  if (b.state !== 'completed') {\n    if (b.result !== undefined || b.label !== undefined)\n      return fail('SCHEMA_ERROR', 'Pending response must not contain a verdict.');\n    if (context.poll_count >= 120 || now >= context.deadline_ms)\n      return {...out, route: 'ERROR', error_kind: 'POLL_LIMIT', summary: 'Polling limit reached; request may still run. Keep both IDs and query again.'};\n    return {...out, route: 'POLL'};\n  }\n  const r = b.result;\n  if (!r || !['NORMAL', 'ALERT', 'UNKNOWN'].includes(r.label) ||\n      typeof r.reason !== 'string' || !r.reason.trim() || !Array.isArray(r.evidence_refs) ||\n      !r.evidence_refs.every(ref => typeof ref === 'string' && ref.length > 0) ||\n      (r.label === 'ALERT' && !r.evidence_refs.length) ||\n      !(r.technical_error === null || typeof r.technical_error === 'string') ||\n      (r.technical_error !== null && r.label !== 'UNKNOWN'))\n    return fail('SCHEMA_ERROR', 'Missing/invalid label, reason, evidence_refs or technical_error.');\n  if (response.statusCode !== 200)\n    return fail('SCHEMA_ERROR', 'Completed result requires HTTP 200.');\n  return {...out, route: r.label, label: r.label, reason: r.reason,\n    evidence_refs: r.evidence_refs, technical_error: r.technical_error,\n    summary: `${r.label}${r.technical_error ? ' / '+r.technical_error : ''}: ${r.reason}`};\n}\n\nreturn [{json:classifyResponse($input.first().json,$('Poll Context').item.json)}];"
+      }
+    },
+    {
+      "id": "polling-expired",
+      "name": "Polling Expired",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        550
+      ],
+      "parameters": {
+        "jsCode": "return [{json:{...$input.first().json,route:'ERROR',error_kind:'POLL_LIMIT',summary:'600 seconds elapsed. Keep IDs and query again; no new job was submitted.'}}];"
+      }
+    },
+    {
+      "id": "switch-label",
+      "name": "Switch Label",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        0
+      ],
+      "parameters": {
+        "mode": "expression",
+        "output": "={{ [\"NORMAL\",\"ALERT\",\"UNKNOWN\"].indexOf($json.label) }}"
+      }
+    },
+    {
+      "id": "normal",
+      "name": "NORMAL",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        -180
+      ],
+      "parameters": {
+        "jsCode": "return $input.all();"
+      }
+    },
+    {
+      "id": "alert",
+      "name": "ALERT",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        0
+      ],
+      "parameters": {
+        "jsCode": "return $input.all();"
+      }
+    },
+    {
+      "id": "unknown",
+      "name": "UNKNOWN",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        180
+      ],
+      "parameters": {
+        "jsCode": "return $input.all();"
+      }
+    },
+    {
+      "id": "switch-error",
+      "name": "Switch Error",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 1,
+      "position": [
+        1320,
+        480
+      ],
+      "parameters": {
+        "mode": "expression",
+        "output": "={{ $json.error_kind === \"SCHEMA_ERROR\" ? 1 : ($json.error_kind === \"POLL_LIMIT\" ? 2 : 0) }}"
+      }
+    },
+    {
+      "id": "http-error",
+      "name": "HTTP Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        360
+      ],
+      "parameters": {
+        "jsCode": "return $input.all();"
+      }
+    },
+    {
+      "id": "schema-error",
+      "name": "Schema Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        520
+      ],
+      "parameters": {
+        "jsCode": "return $input.all();"
+      }
+    },
+    {
+      "id": "polling-limit",
+      "name": "Polling Limit",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1540,
+        680
+      ],
+      "parameters": {
+        "jsCode": "return $input.all();"
+      }
+    }
+  ],
+  "connections": {
+    "Switch Label": {
+      "main": [
+        [
+          {
+            "node": "NORMAL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "ALERT",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "UNKNOWN",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Error": {
+      "main": [
+        [
+          {
+            "node": "HTTP Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Schema Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Polling Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Prepare",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare": {
+      "main": [
+        [
+          {
+            "node": "Submit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Submit": {
+      "main": [
+        [
+          {
+            "node": "Check Submit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Submit": {
+      "main": [
+        [
+          {
+            "node": "Route State",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Poll Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Poll Context": {
+      "main": [
+        [
+          {
+            "node": "Check Deadline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Deadline": {
+      "main": [
+        [
+          {
+            "node": "Poll",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Polling Expired",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Poll": {
+      "main": [
+        [
+          {
+            "node": "Check Poll",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Poll": {
+      "main": [
+        [
+          {
+            "node": "Route State",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Polling Expired": {
+      "main": [
+        [
+          {
+            "node": "Switch Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route State": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch Label",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveDataSuccessExecution": "all",
+    "saveDataErrorExecution": "all",
+    "executionTimeout": 660
+  },
+  "pinData": {}
+}
