@@ -70,6 +70,20 @@ VRAM lấy theo PID bằng nvidia-smi nếu có và đọc được. WDDM, GPU k
 
 TP: chuẩn ALERT, dự đoán ALERT. FP: chuẩn NORMAL, dự đoán ALERT. FN: chuẩn ALERT, dự đoán khác ALERT, kể cả UNKNOWN. UNKNOWN trên NORMAL không tính TN/đúng. Coverage là số ca có nhãn NORMAL/ALERT chia tổng ca. Báo riêng ca có lỗi kỹ thuật, JSON hợp lệ/response nhận được và response/attempt. Mẫu số 0 cho null, luôn giữ tử/mẫu số.
 
+### AI Performance Metrics (phiên bản 2)
+
+- Accuracy = (TP + TN) / tổng ca, bao gồm UNKNOWN trong mẫu số.
+- Precision = TP / (TP + FP): tỷ lệ cảnh báo đúng trong các cảnh báo đã đưa ra.
+- Recall = TP / (TP + FN): tỷ lệ ca ALERT được phát hiện; UNKNOWN trên ALERT là bỏ sót.
+- F1-Score = 2TP / (2TP + FP + FN): trung bình điều hòa Precision và Recall khi xác định được.
+- Ma trận 2 × 3 có hàng là nhãn chuẩn NORMAL/ALERT, cột là dự đoán NORMAL/ALERT/UNKNOWN. Giữ riêng UNKNOWN trên NORMAL; không ép thành TN hoặc FP.
+
+Trang `/reports` hiển thị phần trăm, tử/mẫu số và ma trận riêng cho mỗi model/mode/repeat. Accuracy không thay thế Recall/F1/Coverage, đặc biệt khi số ca bình thường áp đảo. Với báo cáo đang chạy hoặc thất bại, số liệu chỉ tính trên các hàng đã lưu; không so sánh hai model nếu tập ca chưa đồng nhất hoặc chưa hoàn tất.
+
+mAP chưa áp dụng: đầu ra không có điểm tin cậy để xếp hạng tính Average Precision; hệ thống không có tác vụ phát hiện hộp vật thể. MAE/MSE/RMSE chưa áp dụng vì không dự đoán đại lượng số. Không biến nhãn thành số để tạo các chỉ số hồi quy giả. Các chỉ số không áp dụng được giải thích trên UI, không xuất điểm 0.
+
+API đọc báo cáo và export JSONL/CSV tính lại chỉ số từ các hàng kết quả đã lưu, nên báo cáo cũ cũng có Accuracy và ma trận mà không phải chạy model lại hoặc sửa bằng chứng trong database. CSV giữ tỷ số dạng JSON (numerator, denominator, value); API/JSONL giữ cùng cấu trúc. `metrics_version=2`, `positive_label=ALERT` xác định quy ước chấm. Chỉ dùng ca thuộc tập evaluation; warmup/development không đưa vào điểm chính.
+
 Rubric account-session-v1: đọc reason và XML mà model viện dẫn, đối chiếu expected_accounts/expected_sessions và quan hệ trong ca. incorrect=true nếu lý do gán một hoạt động/phiên cho sai tài khoản, gộp hai phiên độc lập hoặc khẳng định quan hệ không được bằng chứng hỗ trợ. incorrect=false khi không có các lỗi đó; đây không thay thế chấm nhãn ALERT. Ghi người chấm, diễn giải và refs đã kiểm tra. Chưa chấm giữ null, không coi là đúng. Các lần sửa lưu review_history.
 
 Chấm qua POST /evaluations/{evaluation_id}/reviews với token theo api.md, body:

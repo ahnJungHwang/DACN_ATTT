@@ -1,0 +1,3 @@
+data_root = "store"
+port = 8000
+response_wait_seconds = 1

@@ -1,0 +1,55 @@
+{
+    "schema_version":  1,
+    "run_id":  "a36f29e9-3c80-40fe-8e9a-4fdb144da2b8",
+    "computer":  "WIN10",
+    "created_utc":  "2026-10-27T01:01:46.9955263+00:00",
+    "start_input":  "2026-10-27T07:21:09.0984461+07:00",
+    "end_input":  "2026-10-27T07:39:22.7923166+07:00",
+    "start_utc":  "2026-10-27T00:21:09.0984461+00:00",
+    "end_utc":  "2026-10-27T00:39:22.7923166+00:00",
+    "start_machine_local":  "2026-10-27T07:21:09.0984461+07:00",
+    "end_machine_local":  "2026-10-27T07:39:22.7923166+07:00",
+    "machine_timezone":  "SE Asia Standard Time",
+    "interval":  "inclusive",
+    "status":  "complete",
+    "sources":  [
+                    {
+                        "source":  "Security",
+                        "channel":  "Security",
+                        "event_ids":  [
+                                          4624,
+                                          4625,
+                                          4688
+                                      ],
+                        "status":  "success",
+                        "count":  73,
+                        "counts_by_id":  {
+                                             "4625":  6,
+                                             "4624":  3,
+                                             "4688":  64
+                                         },
+                        "file":  "security.xml",
+                        "sha256":  "82CE6AF65C5D66F8DF892BD90B6142AC3620E057203461264E1C481CF3A5EB6E",
+                        "first_event_utc":  "2026-10-27T00:22:07.1768362Z",
+                        "last_event_utc":  "2026-10-27T00:37:36.6125433Z",
+                        "error":  null
+                    },
+                    {
+                        "source":  "PowerShell",
+                        "channel":  "Microsoft-Windows-PowerShell/Operational",
+                        "event_ids":  [
+                                          4104
+                                      ],
+                        "status":  "success",
+                        "count":  84,
+                        "counts_by_id":  {
+                                             "4104":  84
+                                         },
+                        "file":  "powershell.xml",
+                        "sha256":  "29D2A22312C0A3717763327034688A67F1E48CB370A22D4E42F5ECE40C6751DF",
+                        "first_event_utc":  "2026-10-27T00:22:07.1714434Z",
+                        "last_event_utc":  "2026-10-27T00:39:13.0097318Z",
+                        "error":  null
+                    }
+                ]
+}

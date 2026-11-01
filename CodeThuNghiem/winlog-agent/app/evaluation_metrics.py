@@ -19,6 +19,10 @@ def sum_measure(results,key):
 
 
 def metrics(rows):
+    if any(r['ground_truth'] not in ('NORMAL','ALERT') or r['label'] not in ('NORMAL','ALERT','UNKNOWN') for r in rows):
+        raise ValueError('Metrics require NORMAL/ALERT truth and NORMAL/ALERT/UNKNOWN predictions')
+    matrix={truth:{label:sum(r['ground_truth']==truth and r['label']==label for r in rows)
+                   for label in ('NORMAL','ALERT','UNKNOWN')} for truth in ('NORMAL','ALERT')}
     tp=sum(r['ground_truth']=='ALERT' and r['label']=='ALERT' for r in rows)
     fp=sum(r['ground_truth']=='NORMAL' and r['label']=='ALERT' for r in rows)
     fn=sum(r['ground_truth']=='ALERT' and r['label']!='ALERT' for r in rows)
@@ -28,7 +32,8 @@ def metrics(rows):
     responses=sum(a.get('response') is not None for r in rows for a in r['attempts'])
     valid=sum(a.get('response') is not None and not a.get('technical_error') for r in rows for a in r['attempts'])
     reviews=[r['review'] for r in rows if r.get('review') is not None]
-    return {'cases':len(rows),'tp':tp,'fp':fp,'fn':fn,'tn':tn,'unknown':unknown,
+    return {'metrics_version':2,'positive_label':'ALERT','cases':len(rows),'tp':tp,'fp':fp,'fn':fn,'tn':tn,'unknown':unknown,
+            'confusion_matrix':matrix,'accuracy':ratio(tp+tn,len(rows)),
             'technical_error_cases':sum(any(a.get('technical_error') for a in r['attempts']) for r in rows),
             'precision':ratio(tp,tp+fp),'recall':ratio(tp,tp+fn),'f1':ratio(2*tp,2*tp+fp+fn),
             'coverage':ratio(len(rows)-unknown,len(rows)),'false_positive_rate':ratio(fp,fp+tn+sum(r['ground_truth']=='NORMAL' and r['label']=='UNKNOWN' for r in rows)),

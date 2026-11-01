@@ -1,0 +1,28 @@
+INFO:     Started server process [28064]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:28629 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51826 - "GET /requests/82876262-94d9-40b5-9057-63a8565b44d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51826 - "POST /analyze HTTP/1.1" 200 OK
+INFO:     Started server process [13224]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:51829 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51829 - "GET /requests/08ecf428-148d-4a30-bae5-23c9879fd158 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51829 - "POST /analyze HTTP/1.1" 200 OK
+INFO:     Started server process [32152]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:51835 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51835 - "GET /requests/11476a8c-9ccb-44c9-b96c-356cd8074926 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51835 - "POST /analyze HTTP/1.1" 200 OK
+INFO:     Started server process [1348]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:51855 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51855 - "GET /requests/11476a8c-9ccb-44c9-b96c-356cd8074926 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51855 - "POST /analyze HTTP/1.1" 409 Conflict

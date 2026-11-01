@@ -1,0 +1,98 @@
+{
+  "name": "SYNTHETIC pipeline verification",
+  "synthetic": true,
+  "entries": [
+    {
+      "case_id": "5531f142-d356-41ec-b619-69789de546ad",
+      "split": "warmup",
+      "group": "normal",
+      "label": "NORMAL",
+      "run_ids": [
+        "run-0"
+      ],
+      "session_keys": [
+        "host-0/boot-1/0x123"
+      ],
+      "annotator": "Synthetic fixture author",
+      "rationale": "Test only; not a real attack label",
+      "expected_accounts": [
+        "demo"
+      ],
+      "expected_sessions": [
+        "0x123"
+      ],
+      "evidence_refs": [
+        "33bc26fc-b5e1-4255-b447-066d56c1919d:35ead7fea1a1e0300fd3b15c2446794464fae9a46031cad880bf970fd1b70d29:1"
+      ]
+    },
+    {
+      "case_id": "3cdc2bdd-924b-456c-a067-9092d7fe0509",
+      "split": "development",
+      "group": "normal",
+      "label": "NORMAL",
+      "run_ids": [
+        "run-1"
+      ],
+      "session_keys": [
+        "host-1/boot-1/0x123"
+      ],
+      "annotator": "Synthetic fixture author",
+      "rationale": "Test only; not a real attack label",
+      "expected_accounts": [
+        "demo"
+      ],
+      "expected_sessions": [
+        "0x123"
+      ],
+      "evidence_refs": [
+        "c99410ae-de7e-4641-b829-036f411fc0c3:164fe516ea29f99009ba05a7f0f1a6b2be0c2bbf6040868448893045d25e37ba:1"
+      ]
+    },
+    {
+      "case_id": "0e726163-6a49-4dbc-b80b-3ce2031764cf",
+      "split": "evaluation",
+      "group": "normal",
+      "label": "NORMAL",
+      "run_ids": [
+        "run-2"
+      ],
+      "session_keys": [
+        "host-2/boot-1/0x123"
+      ],
+      "annotator": "Synthetic fixture author",
+      "rationale": "Test only; not a real attack label",
+      "expected_accounts": [
+        "demo"
+      ],
+      "expected_sessions": [
+        "0x123"
+      ],
+      "evidence_refs": [
+        "f1888cbe-8172-4738-b373-9c80bb67ce11:a7938dfd68268714477f39da1f6105c8a4442c41765f6bb5e4e24fd1d6c3ee35:1"
+      ]
+    },
+    {
+      "case_id": "2ed15b9c-9d20-47a2-ba64-c4e36bbea27b",
+      "split": "evaluation",
+      "group": "password_guessing",
+      "label": "ALERT",
+      "run_ids": [
+        "run-3"
+      ],
+      "session_keys": [
+        "host-3/boot-1/0x123"
+      ],
+      "annotator": "Synthetic fixture author",
+      "rationale": "Test only; not a real attack label",
+      "expected_accounts": [
+        "demo"
+      ],
+      "expected_sessions": [
+        "0x123"
+      ],
+      "evidence_refs": [
+        "9be4eece-d0fb-4535-a774-95e24c4a68ac:8cdab548ffab083cf3ff59c4279a0a66bfc22b17108b548722b911cd7eb92f3a:1"
+      ]
+    }
+  ]
+}

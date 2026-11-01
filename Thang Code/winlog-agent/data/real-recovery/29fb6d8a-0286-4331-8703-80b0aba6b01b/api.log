@@ -1,0 +1,35 @@
+INFO:     Started server process [31732]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:18635 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:18656 - "GET /requests/fde384ae-0c39-434e-9eec-b667b751c99f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:18656 - "POST /analyze HTTP/1.1" 200 OK
+INFO:     Started server process [22948]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:18659 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:18659 - "GET /requests/2970bfa0-ff22-4d7d-b591-e0f72a72b90f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:18659 - "POST /analyze HTTP/1.1" 200 OK
+INFO:     Started server process [23884]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:18662 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:18662 - "GET /requests/29f0ddcb-08c3-4fd7-9067-66f927b4d598 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:18662 - "POST /analyze HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:18662 - "POST /analyze HTTP/1.1" 200 OK
+INFO:     Started server process [29820]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:18674 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:18674 - "GET /requests/29f0ddcb-08c3-4fd7-9067-66f927b4d598 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:18674 - "POST /analyze HTTP/1.1" 409 Conflict
+INFO:     Started server process [30140]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:18677 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:18677 - "POST /analyze HTTP/1.1" 200 OK

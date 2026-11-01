@@ -9,7 +9,11 @@ from .storage import canonical, now
 def read_evaluation(store,evaluation_id):
     with store.connect() as db: row=db.execute('SELECT * FROM evaluations WHERE evaluation_id=?',(evaluation_id,)).fetchone()
     if row is None: raise KeyError(evaluation_id)
-    return dict(row,manifest=json.loads(row['manifest']),report=json.loads(row['report']) if row['report'] else None)
+    report=json.loads(row['report']) if row['report'] else None
+    if report is not None:
+        # Recompute derived metrics for historical reports without changing evidence.
+        report['comparison']=comparison(report.get('rows',[]))
+    return dict(row,manifest=json.loads(row['manifest']),report=report)
 
 
 def record_review(store,evaluation_id,*,case_id,model,mode,repeat,annotator,incorrect,rationale,evidence_refs):
@@ -39,7 +43,8 @@ def safe_cell(value):
 
 
 def export_evaluation(document,format):
-    report=document['report'] or {}; manifest=document['manifest']
+    report=dict(document['report'] or {}); manifest=document['manifest']
+    report['comparison']=comparison(report.get('rows',[]))
     common={'evaluation_id':document['evaluation_id'],'manifest_hash':document['manifest_hash'],'synthetic':manifest['synthetic']}
     if format=='jsonl':
         records=[{**common,'type':'manifest','manifest':manifest,'lock':report.get('lock'),'state':report.get('state'),
@@ -50,7 +55,7 @@ def export_evaluation(document,format):
     if format!='csv': raise ValueError('Unsupported export format')
     buffer=io.StringIO(newline=''); writer=csv.writer(buffer)
     fields=['evaluation_id','manifest_hash','synthetic','model','mode','repeat','primary','cases','tp','fp','fn','tn','unknown',
-            'technical_error_cases','precision','recall','f1','coverage','false_positive_rate','json_valid_response','response_attempt','account_session_error']
+            'technical_error_cases','metrics_version','positive_label','confusion_matrix','accuracy','precision','recall','f1','coverage','false_positive_rate','json_valid_response','response_attempt','account_session_error']
     writer.writerow(fields)
     for row in report.get('comparison',[]): writer.writerow([safe_cell({**common,**row}.get(field)) for field in fields])
     return buffer.getvalue(),'text/csv'

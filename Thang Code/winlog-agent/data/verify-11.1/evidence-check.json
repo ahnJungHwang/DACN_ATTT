@@ -1,0 +1,89 @@
+{
+ "analyze-71586e3d-llama3.2": {
+  "result_id": "d06d7b70-a84e-4611-a489-b4ecc12e8c36",
+  "label": "ALERT",
+  "technical_error": null,
+  "refs": [
+   {
+    "ordinal": "28",
+    "record_id": "7706",
+    "in_source_file": true,
+    "sha256_matches_ref": true
+   },
+   {
+    "ordinal": "29",
+    "record_id": "7707",
+    "in_source_file": true,
+    "sha256_matches_ref": true
+   },
+   {
+    "ordinal": "30",
+    "record_id": "7708",
+    "in_source_file": true,
+    "sha256_matches_ref": true
+   },
+   {
+    "ordinal": "32",
+    "record_id": "341",
+    "in_source_file": true,
+    "sha256_matches_ref": true
+   }
+  ],
+  "jsonl_equals_result": true,
+  "csv_bytes": 1171,
+  "request_lookup_same_result": true
+ },
+ "analyze-71586e3d-qwen2.5": {
+  "result_id": "0bd2ed94-68c0-45dd-89d5-851bf34c8a03",
+  "label": "ALERT",
+  "technical_error": null,
+  "refs": [
+   {
+    "ordinal": "28",
+    "record_id": "7706",
+    "in_source_file": true,
+    "sha256_matches_ref": true
+   },
+   {
+    "ordinal": "29",
+    "record_id": "7707",
+    "in_source_file": true,
+    "sha256_matches_ref": true
+   },
+   {
+    "ordinal": "30",
+    "record_id": "7708",
+    "in_source_file": true,
+    "sha256_matches_ref": true
+   },
+   {
+    "ordinal": "32",
+    "record_id": "341",
+    "in_source_file": true,
+    "sha256_matches_ref": true
+   }
+  ],
+  "jsonl_equals_result": true,
+  "csv_bytes": 995,
+  "request_lookup_same_result": true
+ },
+ "analyze-d216366b-llama3.2": {
+  "result_id": "b9b2cdae-fcec-4d98-b985-8f6a76e961c1",
+  "label": "UNKNOWN",
+  "technical_error": "INPUT_TOO_LARGE",
+  "refs": [],
+  "jsonl_equals_result": true,
+  "csv_bytes": 110,
+  "request_lookup_same_result": true
+ },
+ "analyze-d216366b-qwen2.5": {
+  "result_id": "9ec55ccd-841e-4b93-aa22-675beed300dc",
+  "label": "UNKNOWN",
+  "technical_error": "INPUT_TOO_LARGE",
+  "refs": [],
+  "jsonl_equals_result": true,
+  "csv_bytes": 110,
+  "request_lookup_same_result": true
+ },
+ "traversal_lookup_status": 404
+}

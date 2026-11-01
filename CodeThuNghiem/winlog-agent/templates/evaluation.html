@@ -1,6 +1,17 @@
 <!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Báo cáo đánh giá SLM</title><link rel="stylesheet" href="/static/app.css"></head>
 <body><header><span class="badge">LOCAL · ĐÁNH GIÁ</span><h1>Báo cáo hai SLM</h1><a href="/">Về giao diện phân tích</a></header><main>
+<section><h2>AI Performance Metrics</h2>
+<p>So sánh Qwen và Llama với nhãn chuẩn do người đánh giá đối chiếu từ log và kịch bản. Lớp cần phát hiện là <strong>ALERT</strong>; NORMAL là bình thường. Các chỉ số dưới đây đo phân loại, không chứng minh phần giải thích của AI là đúng.</p>
+<dl class="metric-guide">
+<dt>Accuracy — tỷ lệ dự đoán đúng</dt><dd>(TP + TN) / tổng ca. UNKNOWN vẫn nằm trong tổng ca và không được tính đúng.</dd>
+<dt>Precision — độ chính xác của cảnh báo</dt><dd>TP / (TP + FP). Trong những ca AI cảnh báo, có bao nhiêu ca thực sự là ALERT?</dd>
+<dt>Recall — khả năng phát hiện</dt><dd>TP / (TP + FN). Trong những ca thực sự là ALERT, AI phát hiện được bao nhiêu? UNKNOWN trên ca ALERT tính là bỏ sót.</dd>
+<dt>F1-Score</dt><dd>2 × TP / (2 × TP + FP + FN). Cân bằng Precision và Recall; nên đọc cùng Coverage và tỷ lệ lớp khi dữ liệu lệch.</dd>
+<dt>Coverage — tỷ lệ có kết luận</dt><dd>Số ca dự đoán NORMAL hoặc ALERT / tổng ca. UNKNOWN bao gồm trường hợp chưa kết luận hoặc lỗi phân tích.</dd>
+<dt>mAP — chưa áp dụng</dt><dd>Đầu ra hiện tại chỉ có nhãn và bằng chứng, không có điểm tin cậy để xếp hạng cho Average Precision. Hệ thống cũng không nhận diện vật thể hay dự đoán hộp giới hạn.</dd>
+<dt>MAE / MSE / RMSE — chưa áp dụng</dt><dd>Cần giá trị số dự đoán và giá trị số thực tế. Không mã hóa NORMAL/ALERT thành số để coi đây là bài toán hồi quy.</dd>
+</dl><p>Mẫu số bằng 0 hiển thị “Chưa xác định”, không thay bằng 0%. So sánh trên cùng bộ ca, cùng mode và cùng repeat; repeat 1 là kết quả chính.</p></section>
 <section><h2>Các lượt đánh giá</h2>{% if not evaluations %}<p>Chưa có dữ liệu đánh giá. Chưa có cơ sở đề xuất model tốt nhất.</p>{% endif %}
 {% for item in evaluations %}<p><a href="/reports?evaluation_id={{ item.evaluation_id }}">{{ item.name }}</a> · {{ 'MẪU TỔNG HỢP — không phải thực nghiệm thật' if item.synthetic else 'Dữ liệu thật theo manifest' }} · {{ item.state }} · {{ item.created_at }}</p>{% endfor %}</section>
 {% if selected %}{% set m=selected.manifest %}{% set r=selected.report %}
@@ -8,10 +19,14 @@
 <p>Trạng thái: {{ r.state }}. Manifest SHA256: {{ selected.manifest_hash }}</p><p>Đã có {{ m.counts.get('development',0) }} ca phát triển, {{ m.counts.get('evaluation',0) }} ca đánh giá và {{ m.counts.get('warmup',0) }} ca warm-up riêng.</p><p>Còn thiếu so với mục tiêu: {{ m.missing_targets.development }} ca phát triển và {{ m.missing_targets.evaluation }} ca đánh giá.</p>
 <ul>{% for key,label in [('normal','Bình thường'),('password_guessing','Dò mật khẩu'),('mixed_same_session','Trộn cùng phiên'),('mixed_different_session','Trộn khác phiên/tài khoản')] %}<li>{{ label }}: còn thiếu {{ m.missing_targets.evaluation_groups[key] }}/10 ca đánh giá.</li>{% endfor %}</ul>
 <p>Chưa có kết luận tự động về model tốt nhất. Bảng chính là repeat 1; repeat 2–3 không được tính thành ca độc lập. JSON hợp lệ không chứng minh suy luận đúng.</p>
+{% if r.state != 'completed' %}<p class="error">Báo cáo chưa hoàn tất: chỉ số chỉ tính trên các ca đã lưu. Chưa dùng để xếp hạng hai model vì tập ca có thể chưa đồng nhất.</p>{% endif %}
 {% if r.error %}<p class="error">{{ r.error }}</p>{% endif %}
 <a href="/evaluations/{{ selected.evaluation_id }}/export?format=jsonl" download="evaluation.jsonl">Tải JSONL chi tiết</a> · <a href="/evaluations/{{ selected.evaluation_id }}/export?format=csv" download="comparison.csv">Tải comparison.csv</a></section>
 {% for row in r.comparison %}<section><h2>{{ row.model }} · {{ row.mode }} · Repeat {{ row.repeat }}{{ ' (bảng chính)' if row.primary else '' }}</h2>
 <p>{{ row.cases }} ca · TP {{ row.tp }} · FP {{ row.fp }} · FN {{ row.fn }} · TN {{ row.tn }} · UNKNOWN {{ row.unknown }} · Ca có lỗi kỹ thuật {{ row.technical_error_cases }}</p>
-{% for label,key in [('Precision','precision'),('Recall','recall'),('F1','f1'),('Coverage','coverage'),('JSON hợp lệ / response','json_valid_response'),('Response / attempt','response_attempt'),('Gán sai tài khoản/phiên','account_session_error')] %}{% set value=row[key] %}<p>{{ label }}: {{ value.numerator }}/{{ value.denominator }} — {{ 'chưa xác định / chưa chấm' if value.value is none else value.value|round(4) }}</p>{% endfor %}</section>{% endfor %}
+<div class="metric-grid">{% for label,key in [('Accuracy','accuracy'),('Precision','precision'),('Recall','recall'),('F1-Score','f1'),('Coverage','coverage')] %}{% set value=row[key] %}<div class="metric"><span>{{ label }}</span><strong>{{ 'Chưa xác định' if value.value is none else ('%.2f'|format(value.value * 100)) ~ '%' }}</strong><small>{{ value.numerator }} / {{ value.denominator }}</small></div>{% endfor %}</div>
+<div class="table-scroll"><table class="confusion"><caption>Ma trận nhãn chuẩn × dự đoán — {{ row.model }}, {{ row.mode }}, repeat {{ row.repeat }} (đơn vị: ca)</caption><thead><tr><th scope="col">Nhãn chuẩn</th><th scope="col">Dự đoán NORMAL</th><th scope="col">Dự đoán ALERT</th><th scope="col">Dự đoán UNKNOWN</th></tr></thead><tbody>{% for truth in ['NORMAL','ALERT'] %}<tr><th scope="row">{{ truth }}</th>{% for prediction in ['NORMAL','ALERT','UNKNOWN'] %}<td>{{ row.confusion_matrix[truth][prediction] }}</td>{% endfor %}</tr>{% endfor %}</tbody></table></div>
+<p>FN gồm cả ALERT → NORMAL và ALERT → UNKNOWN. UNKNOWN trên NORMAL không phải TN.</p>
+{% for label,key in [('Tỷ lệ cảnh báo nhầm','false_positive_rate'),('JSON hợp lệ / response','json_valid_response'),('Response / attempt','response_attempt'),('Gán sai tài khoản/phiên','account_session_error')] %}{% set value=row[key] %}<p>{{ label }}: {{ value.numerator }}/{{ value.denominator }} — {{ 'chưa xác định / chưa chấm' if value.value is none else ('%.2f'|format(value.value * 100)) ~ '%' }}</p>{% endfor %}</section>{% endfor %}
 <section><h2>Thời gian sau nạp theo ca</h2>{% for t in r.timings %}<p>{{ t.model }} · {{ t.mode }} · {{ t.case_id }}: {{ t.successful_repeats }}/3 lượt thành công; trung vị {{ t.median_wall_seconds if t.complete_three_repeats else 'chưa đủ ba lượt' }} giây.</p>{% endfor %}<p>RSS/VRAM, thời gian nạp và số đo từng lời gọi nằm trong JSONL. Số đo thiếu giữ null kèm lý do.</p></section>
 {% endif %}</main></body></html>

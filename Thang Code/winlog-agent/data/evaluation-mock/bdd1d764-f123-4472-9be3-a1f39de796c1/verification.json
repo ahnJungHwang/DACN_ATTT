@@ -1,0 +1,16 @@
+{
+  "evaluation_id": "235f3633-82e3-4ffa-b982-dd10034ddc1d",
+  "synthetic": true,
+  "state": "completed",
+  "rows": 24,
+  "missing_targets": {
+    "development": 9,
+    "evaluation": 38,
+    "evaluation_groups": {
+      "mixed_different_session": 10,
+      "mixed_same_session": 10,
+      "normal": 9,
+      "password_guessing": 9
+    }
+  }
+}
