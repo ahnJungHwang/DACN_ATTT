@@ -12,7 +12,7 @@ def read_evaluation(store,evaluation_id):
     report=json.loads(row['report']) if row['report'] else None
     if report is not None:
         # Recompute derived metrics for historical reports without changing evidence.
-        report['comparison']=comparison(report.get('rows',[]))
+        report['comparison']=comparison(report.get('rows',[])+report.get('baseline_rows',[]))
     return dict(row,manifest=json.loads(row['manifest']),report=report)
 
 
@@ -26,13 +26,13 @@ def record_review(store,evaluation_id,*,case_id,model,mode,repeat,annotator,inco
         report=json.loads(row['report']); manifest=json.loads(row['manifest'])
         if report['state']=='running': raise ValueError('Wait for evaluation to stop before manual review')
         entry=next((e for e in manifest['entries'] if e['case_id']==case_id),None)
-        target=next((r for r in report['rows'] if (r['case_id'],r['model'],r['mode'],r['repeat'])==(case_id,model,mode,repeat)),None)
+        target=next((r for r in report['rows']+report.get('baseline_rows',[]) if (r['case_id'],r['model'],r['mode'],r['repeat'])==(case_id,model,mode,repeat)),None)
         if entry is None or target is None: raise KeyError('Evaluation row not found')
         if not evidence_refs or not set(evidence_refs)<=set(entry['event_refs']): raise ValueError('Review evidence must belong to the case')
         review={'annotator':annotator,'incorrect':incorrect,'rationale':rationale,'evidence_refs':evidence_refs,
                 'reviewed_at':now(),'rubric_version':manifest['rubric_version']}
         target.setdefault('review_history',[]).append(review); target['review']=review
-        report['comparison']=comparison(report['rows'])
+        report['comparison']=comparison(report['rows']+report.get('baseline_rows',[]))
         db.execute('UPDATE evaluations SET report=? WHERE evaluation_id=?',(canonical(report),evaluation_id))
     return review
 
@@ -44,13 +44,14 @@ def safe_cell(value):
 
 def export_evaluation(document,format):
     report=dict(document['report'] or {}); manifest=document['manifest']
-    report['comparison']=comparison(report.get('rows',[]))
+    report['comparison']=comparison(report.get('rows',[])+report.get('baseline_rows',[]))
     common={'evaluation_id':document['evaluation_id'],'manifest_hash':document['manifest_hash'],'synthetic':manifest['synthetic']}
     if format=='jsonl':
         records=[{**common,'type':'manifest','manifest':manifest,'lock':report.get('lock'),'state':report.get('state'),
                   'environment':report.get('environment'),'error':report.get('error'),'warmup':report.get('warmup'),
                   'comparison':report.get('comparison'),'timings':report.get('timings')}]
         records += [{**common,'type':'case_result',**row} for row in report.get('rows',[])]
+        records += [{**common,'type':'baseline_result',**row} for row in report.get('baseline_rows',[])]
         return ''.join(canonical(row)+'\n' for row in records),'application/x-ndjson'
     if format!='csv': raise ValueError('Unsupported export format')
     buffer=io.StringIO(newline=''); writer=csv.writer(buffer)

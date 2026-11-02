@@ -13,8 +13,10 @@ from .config import MODELS
 from .evaluation_data import lock_dataset, verify_locked
 from .evaluation_metrics import aggregate, comparison, timings, sum_measure
 from .evaluation_resources import ResourceMonitor
-from .payload import build_payload, PROMPT, SCHEMA
+from .payload import build_payload, load_prompt, SCHEMA
 from .storage import canonical, digest, now
+from .baseline_rules import classify
+from .correlation import correlate
 
 META=('model','digest','template_sha256','ollama_version')
 
@@ -22,16 +24,20 @@ META=('model','digest','template_sha256','ollama_version')
 class EvaluationRunner:
     def __init__(self,service,monitor=ResourceMonitor):
         self.service=service; self.store=service.store; self.monitor=monitor
-    def payload(self,case_id):
+    def payload(self,case_id,model=None):
         with self.store.connect() as db: row=db.execute('SELECT snapshot FROM cases WHERE case_id=?',(case_id,)).fetchone()
         snapshot=json.loads(row[0]); events=[]
         for ref in snapshot['event_refs']:
             events.append(dict(json.loads(self.store.event(ref)['normalized']),event_ref=ref))
-        return build_payload(events,[g for g in snapshot['links'] if g.get('relation')=='group'])
+        version=self.service.settings.llama_prompt_version if model==MODELS[1] else self.service.settings.prompt_version
+        return build_payload(events,[g for g in snapshot['links'] if g.get('relation')=='group'],version)
     def check_lock(self):
+        if digest(Path(__file__).with_name('baseline_rules.py').read_bytes())!=self.lock['baseline_sha256']:
+            raise ValueError('EVALUATION_BASELINE_CHANGED')
         if self.service.settings.model_dump()!=self.lock['settings']: raise ValueError('EVALUATION_CONFIG_CHANGED')
-        prompt_path=Path(__file__).resolve().parents[1]/'prompts/windows-log-v1.txt'
-        if digest(prompt_path.read_text(encoding='utf-8').encode())!=self.lock['prompt_sha256']:
+        if digest(load_prompt(self.service.settings.prompt_version).encode())!=self.lock['prompt_sha256']:
+            raise ValueError('EVALUATION_PROMPT_CHANGED')
+        if digest(load_prompt(self.service.settings.llama_prompt_version).encode())!=self.lock['llama_prompt_sha256']:
             raise ValueError('EVALUATION_PROMPT_CHANGED')
         if digest(canonical(SCHEMA).encode())!=self.lock['schema_sha256']: raise ValueError('EVALUATION_SCHEMA_CHANGED')
         for model in MODELS:
@@ -39,7 +45,7 @@ class EvaluationRunner:
             if {k:current.get(k) for k in META}!=self.lock['models'][model]: raise ValueError('EVALUATION_MODEL_CHANGED')
     def run_case(self,case_id,model):
         self.check_lock()
-        payload=self.payload(case_id)
+        payload=self.payload(case_id,model)
         checks={m:self.service.runtime.guard.check(self.lock['models'][m],payload['messages'],self.service.settings) for m in MODELS}
         if not all(c['allowed'] for c in checks.values()):
             return {'label':'UNKNOWN','reason':'Both models must pass context preflight','technical_error':'COMPARISON_PREFLIGHT_FAILED',
@@ -60,6 +66,17 @@ class EvaluationRunner:
     def persist(self):
         with self.store.connect() as db:
             db.execute('UPDATE evaluations SET report=? WHERE evaluation_id=?',(canonical(self.report),self.evaluation_id))
+    def baseline_case(self, case_id):
+        with self.store.connect() as db:
+            snapshot=json.loads(db.execute('SELECT snapshot FROM cases WHERE case_id=?',(case_id,)).fetchone()[0])
+        events=[dict(json.loads(self.store.event(ref)['normalized']),event_ref=ref) for ref in snapshot['event_refs']]
+        # Preserve stored group boundaries. Single-event snapshots have no links.
+        groups=[g for g in snapshot['links'] if g.get('relation')=='group']
+        if not groups: groups=correlate(events,self.service.settings)
+        started=time.perf_counter()
+        result=classify(events,groups)
+        return {**result,'wall_seconds':time.perf_counter()-started,'technical_error':None,
+                'response':None,'engine':'rules','case_id':case_id}
     def run(self,document):
         locked=lock_dataset(self.store,document); verify_locked(self.store,locked)
         warmups=[e for e in locked['entries'] if e['split']=='warmup']
@@ -68,7 +85,9 @@ class EvaluationRunner:
         with self.store.connect() as db:
             if db.execute("SELECT count(*) FROM requests WHERE state!='completed'").fetchone()[0]:
                 raise ValueError('Finish existing jobs before evaluation')
-        self.lock={'settings':self.service.settings.model_dump(),'prompt_sha256':digest(PROMPT.encode()),
+        self.lock={'settings':self.service.settings.model_dump(),'prompt_sha256':digest(load_prompt(self.service.settings.prompt_version).encode()),
+                   'llama_prompt_sha256':digest(load_prompt(self.service.settings.llama_prompt_version).encode()),
+                   'baseline_sha256':digest(Path(__file__).with_name('baseline_rules.py').read_bytes()),
                    'schema_sha256':digest(canonical(SCHEMA).encode()),'models':{}}
         for model in MODELS:
             metadata=self.service.runtime.client.inspect(model)
@@ -79,7 +98,7 @@ class EvaluationRunner:
                      'processor':platform.processor() or None,'logical_cpu_count':psutil.cpu_count(),
                      'machine_ram_bytes':psutil.virtual_memory().total,
                      'resource_scope':'Current singleton service process includes evaluation coordinator; Ollama process tree sampled separately'},
-                     'started_at':now(),'rows':[],'warmup':[],'comparison':[],'timings':[],
+                     'started_at':now(),'rows':[],'baseline_rows':[],'warmup':[],'comparison':[],'timings':[],
                      'recommendation':None,'limitation':'No automatic best-model claim; inspect coverage, labels and manual session review.'}
         with self.store.connect() as db:
             db.execute('INSERT INTO evaluations VALUES(?,?,?,?,?)',(self.evaluation_id,now(),canonical(locked),locked['manifest_hash'],canonical(self.report)))
@@ -87,6 +106,15 @@ class EvaluationRunner:
             single={}
             for entry in evaluation:
                 single[entry['case_id']]=[self.store.create_case([ref],config={'evaluation_mode':'single','synthetic':locked['synthetic']}) for ref in entry['event_refs']]
+            for mode in ('single','grouped'):
+                for entry in evaluation:
+                    ids=single[entry['case_id']] if mode=='single' else [entry['case_id']]
+                    attempts=[self.baseline_case(cid) for cid in ids]
+                    self.report['baseline_rows'].append({'case_id':entry['case_id'],'model':'rules-only',
+                        'mode':mode,'repeat':1,'engine':'rules','ground_truth':entry['label'],
+                        'label':aggregate(attempts),'attempts':attempts,'review':None,
+                        'wall_seconds':sum_measure(attempts,'wall_seconds')})
+            self.persist()
             for model in MODELS:
                 self.service.runtime.unload()
                 warmup=self.run_case(warmups[0]['case_id'],model)
@@ -111,7 +139,7 @@ class EvaluationRunner:
             raise
         finally:
             self.report['finished_at']=now()
-            self.report['comparison']=comparison(self.report['rows'])
+            self.report['comparison']=comparison(self.report['rows']+self.report['baseline_rows'])
             self.report['timings']=timings(self.report['rows'])
             self.persist()
         return self.evaluation_id

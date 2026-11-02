@@ -21,7 +21,37 @@ $('cases-form').onsubmit=async e=>{e.preventDefault();if(!importId){note('Hãy n
 $('case-select').onchange=()=>showCase().catch(e=>note(e.message,true));$('refresh-cases').onclick=()=>refreshCases().catch(e=>note(e.message,true));
 function saveJobs(){sessionStorage.setItem('winlog-jobs',JSON.stringify(jobs));$('retry').hidden=!jobs.length;}
 async function runJob(job){const box=document.createElement('div');box.className='result';$('results').append(box);text(box,'h3',job.model);const status=text(box,'p','Đang gửi yêu cầu…');try{let envelope=await post('/analyze',{case_id:job.case_id,model:job.model},{'Idempotency-Key':job.key});job.result_id=envelope.result_id;saveJobs();let polls=0;const until=Date.now()+600000;while(envelope.state!=='completed'&&polls<120&&Date.now()<until){status.textContent=envelope.state==='queued'?'Đang chờ':'Đang phân tích';await new Promise(r=>setTimeout(r,2000));envelope=await api('/results/'+envelope.result_id);polls++;}if(envelope.state!=='completed'){status.textContent=`Chưa hoàn tất. Giữ mã yêu cầu: ${job.key}`;return;}const result=envelope.result;status.textContent=`${result.label} · ${result.technical_error||'Không có lỗi kỹ thuật'}`;text(box,'p',result.reason);text(box,'p',`Ca: ${job.case_id} · Kết quả: ${envelope.result_id}`);if(result.wall_seconds!==null)text(box,'p',`Thời gian: ${result.wall_seconds?.toFixed(2)} giây`);for(const ref of result.evidence_refs)refButton(box,ref);for(const format of ['jsonl','csv']){const a=text(box,'a','Tải '+format.toUpperCase());a.href=`/results/${envelope.result_id}/export?format=${format}`;a.download=`${envelope.result_id}.${format}`;}jobs=jobs.filter(j=>j.key!==job.key);saveJobs();}catch(e){status.textContent=`Lỗi: ${e.message}. Mã yêu cầu giữ lại: ${job.key}`;status.classList.add('error');}}
-async function runJobs(list){$('analyze').disabled=true;$('retry').disabled=true;try{for(const job of list)await runJob(job);}finally{$('analyze').disabled=false;$('retry').disabled=false;}}
+async function runJobs(list){$('analyze').disabled=true;$('retry').disabled=true;try{await Promise.all(list.map(runJob));}finally{$('analyze').disabled=false;$('retry').disabled=false;}}
 $('analyze').onclick=async()=>{if(!selectedCase){note('Chọn một ca trước.',true);return;}const models=[...$('model-options').querySelectorAll('input:checked')].map(e=>e.value);if(!models.length){note('Chọn ít nhất một model sẵn sàng.',true);return;}if(jobs.some(j=>j.case_id===selectedCase)){note('Ca này có yêu cầu chưa hoàn tất. Dùng nút tra lại để tránh tạo lượt mới.',true);return;}const list=models.map(model=>({model,case_id:selectedCase,key:crypto.randomUUID()}));jobs.push(...list);saveJobs();await runJobs(list);};
 $('retry').onclick=()=>runJobs([...jobs]);
 api('/session').then(session=>{csrf=session.csrf_token;return ready();}).catch(()=>{});
+
+let activityTimer;
+async function refreshActivity(){
+ clearTimeout(activityTimer);
+ try{
+  const data=await api('/activity');
+  $('activity-status').textContent=(data.degraded?'Dịch vụ đang tạm ngừng xử lý · ':'Đã đồng bộ · ')+new Date().toLocaleTimeString('vi-VN')+' · '+(location.protocol==='https:'?'HTTPS':'HTTP — chưa mã hóa');
+  const area=$('activity-models');area.replaceChildren();
+  for(const model of data.models){
+   const card=document.createElement('article');card.className='station';area.append(card);
+   text(card,'h3',model.model.startsWith('qwen')?'Qwen · Phân tích 01':'Llama · Phân tích 02');
+   const current=model.tasks.find(t=>t.state==='running');const queued=model.tasks.filter(t=>t.state==='queued');
+   text(card,'p',data.degraded?'Tạm ngừng':current?'Đang phân tích':queued.length?'Đang chờ lượt':'Sẵn sàng').className='station-state';
+   text(card,'small',model.model);
+   for(const task of model.tasks){
+    const detail=document.createElement('details');detail.open=task.state!=='completed';card.append(detail);
+    text(detail,'summary',({running:'Đang phân tích',queued:'Chờ xử lý',completed:'Đã kết thúc'})[task.state]+' · '+task.event_count+' sự kiện');
+    text(detail,'p','Ca: '+task.case_id);text(detail,'p','Yêu cầu: '+task.request_id);
+    text(detail,'p','Nhận lúc: '+new Date(task.created_at).toLocaleString('vi-VN'));
+    for(const source of task.sources)text(detail,'p',source.source_name+' · '+source.original_name+' · '+source.count+' sự kiện');
+    const button=text(detail,'button','Mở ca và bằng chứng');button.onclick=async()=>{await refreshCases();$('case-select').value=task.case_id;await showCase();$('case-summary').scrollIntoView({behavior:'smooth'});};
+   }
+   if(!model.tasks.length)text(card,'p','Chưa có yêu cầu phân tích. Chọn ca ở bên dưới để bắt đầu.');
+  }
+ }catch(e){$('activity-status').textContent='Mất kết nối trạng thái — dữ liệu trước đó có thể đã cũ. '+e.message;}
+ finally{if(!$('workspace').hidden)activityTimer=setTimeout(refreshActivity,2000);}
+}
+const originalReady=ready;
+ready=async function(){await originalReady();await refreshActivity();};
+

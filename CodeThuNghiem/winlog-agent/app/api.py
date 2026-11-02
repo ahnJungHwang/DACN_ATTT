@@ -107,6 +107,22 @@ def create_app(settings=None,service=None,token=None):
     @app.get('/health')
     def health(): return {'status':'degraded' if service.degraded or service.runtime.degraded else 'ok'}
 
+    @app.get('/activity')
+    def activity():
+        items=[]
+        with store.connect() as db:
+            for model in settings.allowed_models:
+                rows=db.execute("SELECT request_id,case_id,state,result_id,created_at,started_at FROM requests WHERE model=? ORDER BY CASE state WHEN 'running' THEN 0 WHEN 'queued' THEN 1 ELSE 2 END, created_at DESC LIMIT 8",(model,)).fetchall()
+                tasks=[]
+                for row in rows:
+                    task=dict(row)
+                    snapshot=json.loads(db.execute('SELECT snapshot FROM cases WHERE case_id=?',(row['case_id'],)).fetchone()[0])
+                    task['event_count']=len(snapshot['event_refs']); task['sources']=[]
+                    task['sources']=[dict(s) for s in db.execute('SELECT s.source_id,s.source_name,s.original_name,count(*) AS count FROM events e JOIN sources s USING(source_id) WHERE e.event_ref IN (SELECT value FROM json_each(?)) GROUP BY s.source_id',(json.dumps(snapshot['event_refs']),))]
+                    tasks.append(task)
+                items.append({'model':model,'tasks':tasks})
+        return {'models':items,'degraded':service.degraded or service.runtime.degraded}
+
     assets=Path(__file__).resolve().parent.parent
     app.mount('/static',StaticFiles(directory=assets/'static'),name='static')
     templates=Jinja2Templates(directory=assets/'templates')
@@ -145,7 +161,7 @@ def create_app(settings=None,service=None,token=None):
         if not hmac.compare_digest(body.token,token): raise HTTPException(401,'Invalid token')
         csrf=secrets.token_urlsafe(32)
         response=JSONResponse({'csrf_token':csrf})
-        response.set_cookie('winlog_session',signer.dumps({'csrf':csrf}),httponly=True,samesite='strict',max_age=3600)
+        response.set_cookie('winlog_session',signer.dumps({'csrf':csrf}),httponly=True,samesite='strict',max_age=3600,secure=settings.tls_certfile is not None)
         return response
 
     @app.get('/session')
@@ -246,4 +262,5 @@ if __name__=='__main__':
     parser.add_argument('--config',type=Path,default=Path('config.local.toml'))
     args=parser.parse_args()
     settings=load_settings(args.config)
-    uvicorn.run(create_app(settings),host=settings.host,port=settings.port,workers=1)
+    uvicorn.run(create_app(settings),host=settings.host,port=settings.port,workers=1,
+                ssl_certfile=settings.tls_certfile,ssl_keyfile=settings.tls_keyfile,proxy_headers=False)

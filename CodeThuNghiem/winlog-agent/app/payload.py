@@ -3,6 +3,10 @@ from pathlib import Path
 from .storage import canonical, digest
 
 PROMPT = (Path(__file__).resolve().parent.parent / 'prompts' / 'windows-log-v1.txt').read_text(encoding='utf-8')
+def load_prompt(version='v1'):
+    if version not in ('v1','v4'):
+        raise ValueError('Unsupported prompt version')
+    return (Path(__file__).resolve().parent.parent/'prompts'/f'windows-log-{version}.txt').read_text(encoding='utf-8')
 SCHEMA = {'type': 'object', 'additionalProperties': False, 'required': ['label','reason','evidence_refs'],
           'properties': {'label': {'type':'string','enum':['NORMAL','ALERT','UNKNOWN']},
                          'reason': {'type':'string','minLength':1},
@@ -11,7 +15,8 @@ FIELDS = ('time','host','channel','event_id','user','subject','target','logon_ty
           'logon_id','process_id','creator_process_id','command_line','script_text','quality_errors')
 
 
-def build_payload(events, groups):
+def build_payload(events, groups, prompt_version='v1'):
+    prompt=load_prompt(prompt_version)
     refs = {e['event_ref']: f'E{i:03d}' for i, e in enumerate(events, 1)}
     if len(refs) != len(events):
         raise ValueError('Duplicate evidence')
@@ -36,6 +41,6 @@ def build_payload(events, groups):
                                   'subject':'creator/requester context', 'target':'target context',
                                   'process_id':'new PID for 4688; execution PID for 4104',
                                   'logon_id':'successful target session or process account session; null if unknown'}}
-    return {'messages': [{'role':'system','content':PROMPT}, {'role':'user','content':canonical(payload)}],
+    return {'messages': [{'role':'system','content':prompt}, {'role':'user','content':canonical(payload)}],
             'format': SCHEMA, 'reference_map': {v:k for k,v in refs.items()},
-            'prompt_sha256': digest(PROMPT.encode()), 'payload_sha256': digest(canonical(payload).encode())}
+            'prompt_version':prompt_version,'prompt_sha256': digest(prompt.encode()), 'payload_sha256': digest(canonical(payload).encode())}

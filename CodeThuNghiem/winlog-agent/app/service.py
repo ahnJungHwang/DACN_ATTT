@@ -87,7 +87,8 @@ class Service:
             row=self.store.event(ref)
             events.append(dict(json.loads(row['normalized']),event_ref=ref))
         groups=[link for link in snapshot['links'] if link.get('relation')=='group']
-        payload=build_payload(events,groups)
+        version=self.settings.llama_prompt_version if model==MODELS[1] else self.settings.prompt_version
+        payload=build_payload(events,groups,version)
         job={'metadata':metadata,'payload':payload,'settings':settings}
         request_id=key or str(uuid4()); result_id=str(uuid4())
         with self.store.connect() as db:

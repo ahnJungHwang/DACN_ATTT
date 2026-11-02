@@ -60,6 +60,16 @@ Lỗi sau nhận job vẫn giữ result trong database. Nếu runner thất bạ
 
 ## 3. Tài nguyên
 
+### Đối chứng chỉ luật (rules-only)
+
+Runner tự chạy `baseline_rules` trên cùng tập evaluation, theo cả hai mode `single` và `grouped`. Single dùng cùng snapshot một sự kiện như SLM rồi tổng hợp nhãn bằng cùng quy tắc; grouped dùng nguyên refs và nhóm đã lưu trong snapshot ca. Không lấy nhãn chuẩn để tạo dự đoán, không đưa nhãn luật vào payload SLM và không gọi Ollama cho baseline.
+
+Bộ luật xác định chạy một lần mỗi mode, đánh dấu repeat 1; không nhân bản thành ba repeat. Các hàng nằm trong `baseline_rows`, tách khỏi `rows` của hai SLM. Báo cáo/API/CSV gộp các chỉ số theo tên `rules-only`; JSONL có bản ghi `baseline_result`, gồm nhãn, luật khớp, evidence_refs và thời gian. Số lượt SLM không tăng. Báo cáo cũ không tự được thêm baseline bằng phiên bản luật hiện tại.
+
+Hash mã nguồn baseline lưu tại `lock.baseline_sha256` và được kiểm tra cùng khóa thí nghiệm. Chỉ so sánh chất lượng cùng mode và repeat 1. Baseline không có giới hạn context/token; lỗi context của SLM vẫn giữ UNKNOWN trong mẫu số, cần xem Coverage để hiểu khác biệt. Thời gian baseline chỉ đo phần phân loại bằng luật, không bao gồm tải/nạp model; không coi đây là phép đo cùng loại tài nguyên. JSON hợp lệ/response không áp dụng cho luật (không có response model). Không dùng kết quả luật làm ground truth.
+
+Với fixture hai ca evaluation: có 24 hàng SLM (2 model × 2 mode × 3 repeat × 2 ca) và thêm 4 hàng baseline (2 mode × 2 ca), không phải 28 ca độc lập.
+
 Lấy mẫu mục tiêu mỗi 200 ms: RSS tiến trình Service hiện tại (trong CLI gồm overhead coordinator) và tổng RSS cây tiến trình Ollama, tránh đếm PID hai lần. Không dùng RAM toàn máy làm RAM model. Peak là đỉnh quan sát được, có thể bỏ qua spike giữa hai mẫu. samples/valid_samples/reasons được lưu.
 
 VRAM lấy theo PID bằng nvidia-smi nếu có và đọc được. WDDM, GPU không hỗ trợ, tiến trình không xác định hoặc truy vấn lỗi giữ null kèm lý do, không thay bằng 0. Giá trị RSS/VRAM của lượt mock chỉ phục vụ kiểm tra pipeline, không phải tài nguyên suy luận SLM thật.
@@ -101,3 +111,7 @@ Tải JSONL đầy đủ để truy nguồn, warmup, mọi attempt, metrics và 
 ```
 
 Lệnh tạo thư mục mới dưới data/evaluation-mock, in evaluation_id/data_root. Có 1 warmup, 1 development, 2 evaluation; báo thiếu 9 development và 38 evaluation cùng nhóm còn thiếu. Hai model giả lập, hai mode, ba repeat cho 24 hàng chấm và 2 warmup. Output được đánh dấu synthetic, không có giá trị so sánh SLM. results.jsonl/comparison.csv/verification.json nằm trong thư mục vừa tạo. Muốn xem UI mẫu, dùng một config riêng có data_root trỏ store vừa in; không chuyển các hàng mẫu sang dataset thật.
+
+## Prompt theo model
+
+Cấu hình `prompt_version` chọn prompt Qwen; `llama_prompt_version` chọn prompt Llama. Các giá trị được phép là `v1` và `v4`; mặc định đều `v1` để tái lập protocol cũ. Payload và kết quả lưu phiên bản/hash prompt; runner khóa riêng hash của hai prompt. Hai model nhận cùng dữ liệu nhưng nếu chọn prompt khác nhau, phép đo là so sánh hai cấu hình hệ thống, không còn cô lập riêng ảnh hưởng của model. Không gộp vào các lượt dùng prompt giống nhau.

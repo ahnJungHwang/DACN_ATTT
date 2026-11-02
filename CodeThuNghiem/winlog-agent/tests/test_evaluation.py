@@ -151,7 +151,7 @@ def test_runner_repeats_reviews_export_and_local_report(tmp_path):
     assert len(runtime.calls)==26
     assert all('ground_truth' not in str(p) and 'Synthetic fixture author' not in str(p) for p in runtime.calls)
     assert all(t['complete_three_repeats'] for t in report['timings'])
-    assert len([c for c in report['comparison'] if c['primary']])==4
+    assert len([c for c in report['comparison'] if c['primary']])==6
     row=report['rows'][0]; entry=next(e for e in doc['entries'] if e['case_id']==row['case_id'])
     review_args={k:row[k] for k in ('case_id','model','mode','repeat')}
     record_review(store,eid,**review_args,annotator='Reviewer',incorrect=False,rationale='Account and session match',evidence_refs=entry['evidence_refs'])
@@ -183,3 +183,27 @@ def test_model_drift_stops_and_preserves_failed_report(tmp_path):
         report=read_evaluation(store,runner.evaluation_id)['report']
         assert report['state']=='failed' and report['rows']==[] and len(runtime.calls)==1
     finally: service.close()
+
+
+def test_baseline_integrated_same_cases_and_exports(tmp_path):
+    store,doc,eid,runtime=run_fixture(tmp_path)
+    result=read_evaluation(store,eid)
+    baseline=result['report']['baseline_rows']
+    scored={e['case_id'] for e in doc['entries'] if e['split']=='evaluation'}
+    assert len(baseline)==4
+    assert {r['case_id'] for r in baseline}==scored
+    assert {r['mode'] for r in baseline}=={'single','grouped'}
+    assert all(r['repeat']==1 and r['model']=='rules-only' for r in baseline)
+    assert len(runtime.calls)==26  # Baseline introduces no inference requests.
+    for row in baseline:
+        refs=next(e['evidence_refs'] for e in doc['entries'] if e['case_id']==row['case_id'])
+        assert all(set(a['evidence_refs'])<=set(refs) for a in row['attempts'])
+    encoded,_=export_evaluation(result,'jsonl')
+    records=[json.loads(line) for line in encoded.splitlines()]
+    assert len([r for r in records if r['type']=='baseline_result'])==4
+    csv,_=export_evaluation(result,'csv')
+    assert 'rules-only' in csv
+    comparisons=[r for r in result['report']['comparison'] if r['model']=='rules-only']
+    assert len(comparisons)==2 and all(r['cases']==2 for r in comparisons)
+    assert all(r['json_valid_response']['value'] is None for r in comparisons)
+    assert result['report']['lock']['baseline_sha256']

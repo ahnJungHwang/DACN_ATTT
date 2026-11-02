@@ -4,15 +4,46 @@ Rules run per correlation group, so one account's evidence is never attributed t
 Output is never added to model payloads and no ground-truth label is read here.
 """
 import argparse
+import re
+import ntpath
 from pathlib import Path
 from .config import Settings, load_settings
 from .correlation import correlate
 from .import_logs import import_events
 from .storage import Store, canonical
 
-ACCOUNT_COMMANDS = ('net user', 'net1 user', 'net localgroup', 'net1 localgroup')
-DOWNLOAD_MARKERS = ('downloadstring', 'downloadfile', 'mimikatz')
-ENCODED_FLAGS = ('-encodedcommand', ' -enc ')
+def command_tokens(command):
+    """Recognize direct net/net1 invocations and a single cmd /c wrapper.
+
+    Token boundaries avoid matching echo text, internet.exe or /address.
+    This is deliberately not a general shell interpreter.
+    """
+    command = command.strip()
+    tokens = re.findall(r'"[^"]*"|[^\s]+', command)
+    if not tokens:
+        return []
+    executable = ntpath.basename(tokens[0].strip('"')).casefold()
+    if executable in ('cmd', 'cmd.exe'):
+        tail = command[len(tokens[0]):].strip()
+        match = re.match(r'(?i)(?:/d\s+)?/[ck]\s+(.+)$', tail)
+        if not match:
+            return []
+        nested = match[1].strip()
+        if nested.startswith('"') and nested.endswith('"'):
+            nested = nested[1:-1]
+        tokens = re.findall(r'"[^"]*"|[^\s]+', nested)
+        if not tokens:
+            return []
+        executable = ntpath.basename(tokens[0].strip('"')).casefold()
+    args = [t.strip('"').casefold() for t in tokens[1:]]
+    return [executable, *args]
+
+
+def account_command(command):
+    tokens=command_tokens(command)
+    if not tokens: return False
+    executable,*args=tokens
+    return executable in ('net', 'net.exe', 'net1', 'net1.exe') and bool(args) and args[0] in ('user', 'localgroup') and '/add' in args[1:]
 RUN_KEY = 'currentversion\\run'
 RECON_COMMANDS = ('whoami', 'nltest', 'net group', 'systeminfo')
 
@@ -23,13 +54,25 @@ def text(event, field):
 
 def event_stages(event):
     cmd, script = text(event, 'command_line'), text(event, 'script_text')
+    tokens=command_tokens(cmd)
+    powershell=bool(tokens) and tokens[0] in ('powershell','powershell.exe','pwsh','pwsh.exe')
+    # Require combined behavior, not a keyword mentioned in text or a benign download.
+    execution=bool(re.search(r'(?i)(?:^|[;|\s(])(?:iex|invoke-expression)\b',script))
+    download=bool(re.search(r'\.(?:downloadstring|downloadfile)\s*\(',script))
+    encoded=any(t in ('-enc','-encodedcommand','-e') for t in tokens[1:])
+    concealed=any(tokens[i] in ('-w','-windowstyle') and tokens[i+1]=='hidden'
+                  for i in range(1,len(tokens)-1))
     stages = []
-    if event['event_id'] == 4688 and '/add' in cmd and any(k in cmd for k in ACCOUNT_COMMANDS):
+    if event['event_id'] == 4688 and account_command(cmd):
         stages.append('T1136/T1098 Create Account / Account Manipulation')
-    if (any(k in script for k in DOWNLOAD_MARKERS) or ('iex' in script and 'http' in script)
-            or any(k in cmd for k in ENCODED_FLAGS)):
+    if ((event['event_id']==4104 and execution and download)
+            or (event['event_id']==4688 and powershell and encoded and concealed)):
         stages.append('T1059.001 PowerShell')
-    if RUN_KEY in script or RUN_KEY in cmd:
+    registry_write=(event['event_id']==4104 and RUN_KEY in script and
+                    bool(re.search(r'(?i)(?:^|[;\s])(?:set-itemproperty|new-itemproperty)\b',script)))
+    registry_command=(event['event_id']==4688 and RUN_KEY in cmd and len(tokens)>1
+                      and tokens[0] in ('reg','reg.exe') and tokens[1]=='add')
+    if registry_write or registry_command:
         stages.append('T1547.001 Registry Run Keys')
     return stages
 

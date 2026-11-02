@@ -13,6 +13,8 @@ class Settings(BaseModel):
     host: Literal["127.0.0.1", "0.0.0.0"] = "127.0.0.1"
     port: int = Field(default=8000, ge=1024, le=65535)
     workers: Literal[1] = 1
+    tls_certfile: str | None = None
+    tls_keyfile: str | None = None
     allowed_models: list[str] = Field(default_factory=lambda: list(MODELS))
     ollama_url: Literal["http://127.0.0.1:11434"] = "http://127.0.0.1:11434"
     failure_window_seconds: int = Field(default=60, gt=0)
@@ -26,6 +28,8 @@ class Settings(BaseModel):
     import_max_events: int = Field(default=100000, gt=0)
     xml_max_depth: int = Field(default=32, ge=2)
     temperature: float = Field(default=0.0, ge=0, le=2)
+    prompt_version: Literal['v1','v4'] = 'v1'
+    llama_prompt_version: Literal['v1','v4'] = 'v1'
     num_ctx: int = Field(default=4096, gt=0)
     num_predict: int = Field(default=512, gt=0)
     context_reserve: int = Field(default=256, ge=0)
@@ -46,6 +50,8 @@ class Settings(BaseModel):
 
     @model_validator(mode="after")
     def coherent(self):
+        if bool(self.tls_certfile) != bool(self.tls_keyfile):
+            raise ValueError('TLS requires both certificate and private key')
         expected = "127.0.0.1" if self.bind_mode == "local" else "0.0.0.0"
         if self.host != expected:
             raise ValueError("host does not match explicit bind_mode")
@@ -60,6 +66,12 @@ def load_settings(path: Path) -> Settings:
         settings = Settings.model_validate(tomllib.load(handle))
     root = Path(settings.data_root)
     settings.data_root = str((path.resolve().parent / root).resolve())
+    for key in ('tls_certfile','tls_keyfile'):
+        value=getattr(settings,key)
+        if value:
+            resolved=(path.resolve().parent/value).resolve()
+            if not resolved.is_file(): raise ValueError('TLS file missing: '+key)
+            setattr(settings,key,str(resolved))
     return settings
 
 if __name__ == "__main__":

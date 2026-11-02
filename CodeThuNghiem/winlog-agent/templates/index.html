@@ -5,6 +5,7 @@
 <main><section id="login-panel"><h2>Kết nối phiên làm việc</h2><p>Dùng token trong thư mục dữ liệu: secrets/api-token.txt. Token chỉ gửi tới dịch vụ local này.</p>
 <form id="login-form"><label>Token truy cập<input id="token" type="password" required autocomplete="off"></label><button>Đăng nhập</button></form></section>
 <div id="workspace" hidden>
+<section class="mission"><span class="badge">MODEL OPERATIONS</span><h2>Trạm phân tích bằng chứng</h2><p>Hai model · Một hàng chờ suy luận · Cùng bằng chứng để đối chiếu</p><p id="activity-status" role="status">Đang kết nối trạng thái…</p><div id="activity-models" class="model-stations"></div><p>Hiển thị ca và nguồn log đang được xử lý. Model nhận cả payload của ca; hệ thống không suy đoán model đang đọc đến dòng nào.</p></section>
 <section><h2>1. Nhập log</h2><p>Chọn XML từ lần thu Windows 10. Tối đa 50 MiB mỗi file theo cấu hình mặc định.</p>
 <form id="import-form"><div class="columns"><label>Security (4624, 4625, 4688)<input name="security" type="file" accept=".xml"></label><label>PowerShell (4104)<input name="powershell" type="file" accept=".xml"></label></div>
 <label class="check"><input name="synthetic" type="checkbox"> Đây là dữ liệu mẫu tổng hợp</label><button>Nhập và kiểm tra</button></form>

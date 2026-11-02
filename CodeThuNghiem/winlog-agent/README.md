@@ -19,6 +19,7 @@ Kiểm thử ngày 2026-10-26: 104 test đạt trong môi trường Python cài 
 - [Kiểm tra n8n với hai model thật và phục hồi kết quả](docs/real-n8n-verification.md)
 - [Kiểm tra mất phản hồi, restart, timeout và sao lưu volume n8n](docs/recovery-verification.md)
 - [Đánh giá hai SLM, dataset và rubric](docs/evaluation.md)
+- [README cải thiện luật và prompt: thử nghiệm Qwen v1 + Llama v4](docs/README-prompt-tuning.md)
 - [README test model với DeepBlueCLI: dữ liệu, cách chạy, chỉ số và biểu đồ ngày 01/11/2026](docs/README-model-test-deepbluecli.md)
 
 app/: ứng dụng; scripts/: PowerShell/CLI; templates/ và static/: giao diện; workflows/: n8n; prompts/: prompt; tests/: kiểm thử; docs/: tài liệu.

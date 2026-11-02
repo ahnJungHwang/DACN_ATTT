@@ -74,3 +74,17 @@ def test_timeout_keeps_next_request_waiting(tmp_path):
     wait_for(lambda:service.status(second['request_id'])['state']=='completed')
     assert runtime.peak==1
     service.close()
+
+def test_per_model_prompt_is_snapshotted(tmp_path):
+    store=Store(tmp_path)
+    case=store.create_case([])
+    service=Service(store,Settings(llama_prompt_version='v4'),Runtime())
+    try:
+        jobs=[service.submit(case,model) for model in MODELS]
+        import json
+        with store.connect() as db:
+            saved=[json.loads(db.execute('SELECT payload FROM requests WHERE request_id=?',(job['request_id'],)).fetchone()[0]) for job in jobs]
+        assert [job['payload']['prompt_version'] for job in saved]==['v1','v4']
+        assert saved[0]['payload']['messages'][1]==saved[1]['payload']['messages'][1]
+    finally:
+        service.close()
