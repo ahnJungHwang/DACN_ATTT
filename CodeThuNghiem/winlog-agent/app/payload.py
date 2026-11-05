@@ -4,7 +4,7 @@ from .storage import canonical, digest
 
 PROMPT = (Path(__file__).resolve().parent.parent / 'prompts' / 'windows-log-v1.txt').read_text(encoding='utf-8')
 def load_prompt(version='v1'):
-    if version not in ('v1','v4'):
+    if version not in ('v1','v4','v5'):
         raise ValueError('Unsupported prompt version')
     return (Path(__file__).resolve().parent.parent/'prompts'/f'windows-log-{version}.txt').read_text(encoding='utf-8')
 SCHEMA = {'type': 'object', 'additionalProperties': False, 'required': ['label','reason','evidence_refs'],
@@ -27,6 +27,12 @@ def build_payload(events, groups, prompt_version='v1'):
             if row[role] is not None:
                 row[role] = {k: row[role].get(k) for k in ('name','domain','sid','logon_id')}
         row['ref'] = refs[e['event_ref']]
+        if prompt_version == 'v5':
+            # Keep literal evidence and references. Omit only absent fields to save context.
+            for role in ('user', 'subject', 'target'):
+                if row[role] is not None:
+                    row[role] = {k: v for k, v in row[role].items() if v is not None}
+            row = {k: v for k, v in row.items() if v is not None}
         projected.append(row)
     projected_groups = []
     for i, group in enumerate(groups, 1):
@@ -41,6 +47,18 @@ def build_payload(events, groups, prompt_version='v1'):
                                   'subject':'creator/requester context', 'target':'target context',
                                   'process_id':'new PID for 4688; execution PID for 4104',
                                   'logon_id':'successful target session or process account session; null if unknown'}}
+    if prompt_version == 'v5':
+        payload['login_evidence'] = {}
+        for kind, event_id in [('failed', 4625), ('successful', 4624)]:
+            matches = [r for r in projected if r.get('event_id') == event_id]
+            payload['login_evidence'][kind] = {
+                'count': len(matches),
+                'observations': [{'ref': r['ref'], 'target': (r.get('target') or {}).get('name')}
+                                 for r in matches]}
+    schema = SCHEMA
+    if prompt_version == 'v5' and refs:
+        schema = {**SCHEMA, 'properties': {**SCHEMA['properties'], 'evidence_refs': {
+            'type': 'array', 'items': {'type': 'string', 'enum': list(refs.values())}}}}
     return {'messages': [{'role':'system','content':prompt}, {'role':'user','content':canonical(payload)}],
-            'format': SCHEMA, 'reference_map': {v:k for k,v in refs.items()},
+            'format': schema, 'reference_map': {v:k for k,v in refs.items()},
             'prompt_version':prompt_version,'prompt_sha256': digest(prompt.encode()), 'payload_sha256': digest(canonical(payload).encode())}

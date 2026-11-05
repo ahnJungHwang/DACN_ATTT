@@ -154,3 +154,8 @@ Mỗi file lưu prompt, cấu hình, metadata, ca và toàn bộ phản hồi, k
 - Đo đủ các lượt lặp, lỗi đầu ra, coverage, cảnh báo nhầm và tài nguyên.
 
 Hiện chỉ có căn cứ để thử thêm Llama v4 trong môi trường phát triển; chưa có căn cứ tuyên bố cấu hình này cho kết quả đúng nhất trên mọi log.
+# Thử nghiệm nhận diện dò mật khẩu trên OpenSSH (05/11/2026)
+
+Cấu hình demo local dùng `prompt_version = 'v5'` và `llama_prompt_version = 'v5'`. Hai model nhận danh sách sự kiện và bảng đếm 4624/4625 tính từ các sự kiện đó, kèm tài khoản đích và ref gốc. Schema giới hạn mã trích dẫn vào các ref của ca. Prompt và bộ đếm không nhận nhãn chuẩn. Để quay lại v1, đặt hai giá trị về v1 rồi khởi động lại API; tạo request_id mới để thử.
+
+Ca OpenSSH `555bc05d` và nguồn OpenSSH brute force cùng kịch bản đã được dùng để chỉnh prompt: dành cho phát triển, loại khỏi đánh giá độc lập 11.4. XML đầu vào có SHA256 `2a19eb273b153e401a0cc93d8873a01c7a53114c39c0e4de31e239a1ad5bab59`. Phản hồi thật qua HTTPS lưu ở `data/openssh-v5-verified.json`. Toàn bộ bốn ca thử ở `data/auth-trial-61d39eb3-f82d-4261-8c6d-d87995f93443.json`. Cả hai cảnh báo đúng ca OpenSSH và ca lab ngắn, nhận ca PowerShell thường là NORMAL. Ca dài 19 sự kiện bị chặn vì kích thước ở Qwen; Llama trả ALERT. Llama còn trích thừa và lặp bằng chứng. Các kết quả là thử nghiệm phát triển trên máy local.

@@ -4,6 +4,8 @@ Công cụ này đo kết quả của tập ca đã đối chiếu nhãn; không
 
 ## 1. Chuẩn bị ca thật
 
+Quy trình 11.4 ngày 2026-11-04 nhận cả lượt VMware và log công khai có nguồn kiểm chứng được. Với EVTX công khai, lưu commit, hash EVTX, hash XML đã nhập, máy, thời gian, EventRecordID và bằng chứng tài khoản/phiên. Giữ cùng nguồn và cùng kịch bản trong một split. Sáu nguồn DeepBlueCLI đã dùng chỉnh prompt và các file đồng hành cùng kịch bản chỉ dành cho development. Chốt lựa chọn, nhãn và lý do trước suy luận. Chỉ nhận NORMAL khi chứng minh được hành vi trong phạm vi ca; ca thiếu căn cứ giữ ngoài mẫu số. Khi chấm, UNKNOWN và lỗi kỹ thuật vẫn nằm trong mẫu số của ca đã nhận. Báo riêng nguồn VMware và nguồn công khai. Một ca đã khóa có thể dùng để kiểm tra trước khi đủ số lượng; chỉ nghiệm thu bộ đầy đủ khi đạt các chỉ tiêu bên dưới.
+
 Thu các lần lab độc lập trên VMware Windows 10 theo windows10-collection.md. Ghi run_id, máy, lần khởi động, tài khoản, phiên và thao tác/thời gian. Nhập hai XML, tạo ca trên UI. Đối chiếu XML gốc và thao tác trước khi gán NORMAL/ALERT; không lấy dự đoán AI làm nhãn chuẩn. Không coi PowerShell đơn thuần là tấn công.
 
 Mục tiêu: 10 ca development và 40 ca evaluation, gồm 10 ca mỗi nhóm normal, password_guessing, mixed_same_session, mixed_different_session. Thêm đúng một ca warmup trung tính ngoài hai tập, nhãn NORMAL. File/nguồn và lần thu của warmup cũng phải độc lập. Thiếu dữ liệu vẫn có thể kiểm tra pipeline nhưng báo cáo nêu thiếu từng nhóm, không tự thêm ca cho đủ.

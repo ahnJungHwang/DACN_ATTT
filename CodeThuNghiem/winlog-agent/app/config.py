@@ -28,8 +28,8 @@ class Settings(BaseModel):
     import_max_events: int = Field(default=100000, gt=0)
     xml_max_depth: int = Field(default=32, ge=2)
     temperature: float = Field(default=0.0, ge=0, le=2)
-    prompt_version: Literal['v1','v4'] = 'v1'
-    llama_prompt_version: Literal['v1','v4'] = 'v1'
+    prompt_version: Literal['v1','v4','v5'] = 'v1'
+    llama_prompt_version: Literal['v1','v4','v5'] = 'v1'
     num_ctx: int = Field(default=4096, gt=0)
     num_predict: int = Field(default=512, gt=0)
     context_reserve: int = Field(default=256, ge=0)
