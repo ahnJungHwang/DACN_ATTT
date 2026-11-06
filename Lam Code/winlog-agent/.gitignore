@@ -1,0 +1,31 @@
+# Môi trường ảo Python
+.venv/
+venv/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+
+# Bộ dataset EVTX mẫu ngoài (60MB+)
+dataset/
+
+# Log thu thập trực tiếp từ máy thật
+data/client_*_live/
+data/realtime_live/
+
+# Kết quả JSON thô của từng lần chạy (chỉ giữ lại báo cáo tổng hợp .md và .csv trong results/)
+results/*/
+
+# Khóa bí mật / chứng chỉ SSL / cấu hình cục bộ
+key.pem
+cert.pem
+.env
+*.env
+
+# File tạm của Office / hệ điều hành
+~$*
+Thumbs.db
+.DS_Store
+
+# Tài liệu tham khảo nội bộ
+Bao_cao_huong_trien_khai_AI_Agent_Windows_Local_SLM.docx

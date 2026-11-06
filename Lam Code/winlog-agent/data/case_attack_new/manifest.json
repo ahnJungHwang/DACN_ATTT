@@ -1,0 +1,8 @@
+﻿{
+    "host":  "DESKTOP-D38O4BR",
+    "actions":  "5x dang nhap sai; dang nhap thanh cong; whoami; net user /add; PowerShell cradle",
+    "start_utc":  "2026-10-19T17:05:11Z",
+    "case_id":  "case_attack_new",
+    "end_utc":  "2026-10-19T17:20:12Z",
+    "ground_truth":  "ALERT"
+}

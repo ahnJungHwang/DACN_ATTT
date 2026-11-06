@@ -1,0 +1,12 @@
+{
+  "case_id": "case_edge_01_multi_user_one_attack",
+  "category": "EdgeCase",
+  "ground_truth": "ALERT",
+  "actions": "User A làm việc bình thường, User B bị dò mật khẩu 6 lần liên tiếp.",
+  "expected_stages": [
+    "Password Brute Force (MITRE T1110)"
+  ],
+  "security_count": 8,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

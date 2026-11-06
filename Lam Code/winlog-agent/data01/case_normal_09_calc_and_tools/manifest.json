@@ -1,0 +1,10 @@
+{
+  "case_id": "case_normal_09_calc_and_tools",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "actions": "Mở máy tính tính tiền và mở Task Manager kiểm tra ứng dụng.",
+  "expected_stages": [],
+  "security_count": 2,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

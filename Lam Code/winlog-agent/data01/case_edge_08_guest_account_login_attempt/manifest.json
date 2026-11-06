@@ -1,0 +1,12 @@
+{
+  "case_id": "case_edge_08_guest_account_login_attempt",
+  "category": "EdgeCase",
+  "ground_truth": "ALERT",
+  "actions": "Kẻ xâm nhập cố tình dò quét tài khoản Guest bị vô hiệu hóa.",
+  "expected_stages": [
+    "Password Brute Force (MITRE T1110)"
+  ],
+  "security_count": 5,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

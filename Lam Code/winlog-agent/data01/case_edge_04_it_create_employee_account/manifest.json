@@ -1,0 +1,10 @@
+{
+  "case_id": "case_edge_04_it_create_employee_account",
+  "category": "EdgeCase",
+  "ground_truth": "NORMAL",
+  "actions": "Quy trình nhân sự tạo tài khoản nhân viên mới hợp lệ không kèm leo thang.",
+  "expected_stages": [],
+  "security_count": 2,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

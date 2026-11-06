@@ -1,0 +1,8 @@
+{
+  "case_id": "case_attack_persistence_backdoor",
+  "ground_truth": "ALERT",
+  "actions": "Tạo tài khoản ngầm shadow_admin, gán quyền Administrators và thiết lập khóa khởi động Run Persistence.",
+  "security_count": 2,
+  "powershell_count": 1,
+  "created_at": "2026-11-01T11:05:51Z"
+}

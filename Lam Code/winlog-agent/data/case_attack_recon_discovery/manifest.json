@@ -1,0 +1,8 @@
+{
+  "case_id": "case_attack_recon_discovery",
+  "ground_truth": "ALERT",
+  "actions": "Dò quét tài khoản đi kèm chuỗi lệnh khám phá mạng: whoami, net user, net group Domain Admins, nltest.",
+  "security_count": 8,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T11:05:51Z"
+}

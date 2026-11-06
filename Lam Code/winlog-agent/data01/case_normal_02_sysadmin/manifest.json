@@ -1,0 +1,10 @@
+{
+  "case_id": "case_normal_02_sysadmin",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "actions": "Quản trị viên kiểm tra mạng và trạng thái dịch vụ.",
+  "expected_stages": [],
+  "security_count": 4,
+  "powershell_count": 1,
+  "created_at": "2026-11-01T15:42:22Z"
+}

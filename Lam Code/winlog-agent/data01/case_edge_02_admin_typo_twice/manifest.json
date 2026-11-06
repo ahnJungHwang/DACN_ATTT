@@ -1,0 +1,10 @@
+{
+  "case_id": "case_edge_02_admin_typo_twice",
+  "category": "EdgeCase",
+  "ground_truth": "NORMAL",
+  "actions": "Quản trị viên gõ nhầm pass 2 lần rồi vào thành công kiểm tra mạng.",
+  "expected_stages": [],
+  "security_count": 4,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

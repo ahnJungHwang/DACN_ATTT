@@ -1,0 +1,12 @@
+{
+  "case_id": "case_edge_05_bruteforce_all_failed",
+  "category": "EdgeCase",
+  "ground_truth": "ALERT",
+  "actions": "Dò mật khẩu liên tục 10 lần từ bên ngoài nhưng thất bại hoàn toàn.",
+  "expected_stages": [
+    "Password Brute Force (MITRE T1110)"
+  ],
+  "security_count": 10,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

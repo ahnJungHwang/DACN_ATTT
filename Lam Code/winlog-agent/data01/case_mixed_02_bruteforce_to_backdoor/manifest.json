@@ -1,0 +1,13 @@
+{
+  "case_id": "case_mixed_02_bruteforce_to_backdoor",
+  "category": "MultiStageAttack",
+  "ground_truth": "ALERT",
+  "actions": "Dò pass thành công và ngay lập tức tạo tài khoản backdoor.",
+  "expected_stages": [
+    "Password Brute Force (MITRE T1110)",
+    "Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098)"
+  ],
+  "security_count": 8,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

@@ -1,0 +1,8 @@
+﻿{
+    "host":  "DESKTOP-D38O4BR",
+    "actions":  "5x Brute Force; 1x Logon Success; whoami; net user hacker /add; PowerShell Cradle + Mimikatz",
+    "start_utc":  "2026-10-20T16:57:12Z",
+    "case_id":  "case_demo",
+    "end_utc":  "2026-10-20T16:57:22Z",
+    "ground_truth":  "ALERT"
+}

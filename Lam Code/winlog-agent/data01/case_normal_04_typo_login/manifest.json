@@ -1,0 +1,10 @@
+{
+  "case_id": "case_normal_04_typo_login",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "actions": "Người dùng gõ nhầm pass 1 lần rồi đăng nhập đúng và mở Notepad.",
+  "expected_stages": [],
+  "security_count": 3,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

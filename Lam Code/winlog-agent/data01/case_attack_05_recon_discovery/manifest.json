@@ -1,0 +1,12 @@
+{
+  "case_id": "case_attack_05_recon_discovery",
+  "category": "SpecificAttack",
+  "ground_truth": "ALERT",
+  "actions": "Chuỗi lệnh trinh sát hệ thống và miền trong chuỗi tấn công.",
+  "expected_stages": [
+    "System Reconnaissance (MITRE T1033)"
+  ],
+  "security_count": 8,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}
