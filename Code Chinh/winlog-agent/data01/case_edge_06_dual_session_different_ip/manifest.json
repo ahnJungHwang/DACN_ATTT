@@ -1,0 +1,10 @@
+{
+  "case_id": "case_edge_06_dual_session_different_ip",
+  "category": "EdgeCase",
+  "ground_truth": "NORMAL",
+  "actions": "Hai người dùng nội bộ cùng truy cập thư mục chia sẻ tệp công ty.",
+  "expected_stages": [],
+  "security_count": 3,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

@@ -1,0 +1,8 @@
+{
+  "case_id": "case_normal_office_worker",
+  "ground_truth": "NORMAL",
+  "actions": "Người dùng nguyen_van_a đăng nhập hợp lệ, mở Outlook, Excel báo cáo, Word và duyệt mail qua Chrome.",
+  "security_count": 5,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T11:05:51Z"
+}

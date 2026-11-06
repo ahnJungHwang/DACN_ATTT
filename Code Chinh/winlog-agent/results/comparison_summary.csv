@@ -1,0 +1,12 @@
+metric,qwen,llama
+Tên đầy đủ mô hình,qwen2.5:3b-instruct-q4_K_M,llama3.2:3b-instruct-q4_K_M
+Tổng số ca kiểm thử,40,40
+Độ chuẩn xác (Precision),89.3%,89.3%
+Độ nhạy phát hiện (Recall),100.0%,100.0%
+Điểm F1-Score,0.943,0.943
+Độ chính xác tổng thể (Accuracy),92.5%,75.0%
+Báo động giả (False Positive - FP),3 ca,3 ca
+Bỏ sót tấn công (False Negative - FN),0 ca,0 ca
+Tỷ lệ xuất JSON hợp lệ (Valid JSON),100.0%,100.0%
+Thời gian trung vị (Median Latency),6.06s,5.32s
+Thời gian trung bình (Mean Latency),6.25s,5.46s

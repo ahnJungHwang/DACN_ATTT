@@ -1,0 +1,8 @@
+{
+  "case_id": "case_normal_typo_login",
+  "ground_truth": "NORMAL",
+  "actions": "Người dùng le_thi_b gõ nhầm mật khẩu 1 lần duy nhất, sau đó đăng nhập thành công và mở Notepad ghi chú.",
+  "security_count": 3,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T11:05:51Z"
+}

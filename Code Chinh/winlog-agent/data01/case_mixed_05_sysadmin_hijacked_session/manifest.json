@@ -1,0 +1,12 @@
+{
+  "case_id": "case_mixed_05_sysadmin_hijacked_session",
+  "category": "MultiStageAttack",
+  "ground_truth": "ALERT",
+  "actions": "Phiên quản trị viên bị chèn lệnh độc hại tạo user quản trị.",
+  "expected_stages": [
+    "Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098)"
+  ],
+  "security_count": 3,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

@@ -1,0 +1,10 @@
+{
+  "case_id": "case_normal_01_office",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "actions": "Nhân viên văn phòng mở Outlook, Excel, Word, Chrome làm việc.",
+  "expected_stages": [],
+  "security_count": 5,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

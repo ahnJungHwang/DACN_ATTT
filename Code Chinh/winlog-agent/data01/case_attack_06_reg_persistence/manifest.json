@@ -1,0 +1,12 @@
+{
+  "case_id": "case_attack_06_reg_persistence",
+  "category": "SpecificAttack",
+  "ground_truth": "ALERT",
+  "actions": "Gán Registry Run Key duy trì khởi động mã độc.",
+  "expected_stages": [
+    "Malware Execution / PowerShell Download Cradle (MITRE T1059.001)"
+  ],
+  "security_count": 1,
+  "powershell_count": 1,
+  "created_at": "2026-11-01T15:42:22Z"
+}

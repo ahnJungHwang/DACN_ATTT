@@ -1,0 +1,13 @@
+{
+  "case_id": "case_mixed_10_recon_domain_trust",
+  "category": "MultiStageAttack",
+  "ground_truth": "ALERT",
+  "actions": "Dò pass và trinh sát Domain Controllers trong chuỗi tấn công.",
+  "expected_stages": [
+    "Password Brute Force (MITRE T1110)",
+    "System Reconnaissance (MITRE T1033)"
+  ],
+  "security_count": 7,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

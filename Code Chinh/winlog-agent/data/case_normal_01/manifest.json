@@ -1,0 +1,10 @@
+{
+    "case_id": "case_normal_01",
+    "host": "DESKTOP-D38O4BR",
+    "start_utc": "2026-10-18T13:30:53.8550929Z",
+    "end_utc": "2026-10-18T14:30:53.9490926Z",
+    "security_count": 41,
+    "powershell_count": 1,
+    "actions": "Dang nhap dung; whoami; Get-Date; Get-Process",
+    "ground_truth": "NORMAL"
+}

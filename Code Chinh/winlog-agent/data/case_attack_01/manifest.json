@@ -1,0 +1,8 @@
+{
+    "case_id":  "case_attack_01",
+    "host":  "WINLAB",
+    "start_utc":  "2026-10-19T07:00:00Z",
+    "end_utc":  "2026-10-19T07:10:00Z",
+    "actions":  "5x dang nhap sai mat khau; dang nhap thanh cong; whoami; net user /add hacker; PowerShell IEX download cradle",
+    "ground_truth":  "ALERT"
+}

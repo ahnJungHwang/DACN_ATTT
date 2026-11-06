@@ -1,0 +1,12 @@
+{
+  "case_id": "case_mixed_08_pass_the_hash_cmd",
+  "category": "MultiStageAttack",
+  "ground_truth": "ALERT",
+  "actions": "Đăng nhập qua mạng từ IP lạ kèm gọi WMI tạo user từ xa.",
+  "expected_stages": [
+    "Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098)"
+  ],
+  "security_count": 2,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

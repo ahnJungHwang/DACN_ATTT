@@ -1,0 +1,12 @@
+{
+  "case_id": "case_attack_01_bruteforce",
+  "category": "SpecificAttack",
+  "ground_truth": "ALERT",
+  "actions": "Dò mật khẩu 8 lần liên tiếp từ IP lạ rồi đăng nhập thành công.",
+  "expected_stages": [
+    "Password Brute Force (MITRE T1110)"
+  ],
+  "security_count": 10,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}

@@ -1,0 +1,8 @@
+{
+  "case_id": "case_attack_bruteforce",
+  "ground_truth": "ALERT",
+  "actions": "8 lần đăng nhập thất bại liên tiếp vào tài khoản admin_backup từ IP 10.10.15.66; sau đó đăng nhập thành công và mở cmd.",
+  "security_count": 10,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T11:05:51Z"
+}

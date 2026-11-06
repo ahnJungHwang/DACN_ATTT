@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "ollama-local/qwen2.5:3b-instruct-q4_K_M",
+  "providers": {
+    "ollama-local": {
+      "name": "Ollama Local",
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "http://127.0.0.1:11434/v1",
+        "apiKey": "ollama"
+      },
+      "models": {
+        "qwen2.5:3b-instruct-q4_K_M": {
+          "name": "Qwen 2.5 3B Local"
+        },
+        "llama3.2:3b-instruct-q4_K_M": {
+          "name": "Llama 3.2 3B Local"
+        }
+      }
+    }
+  }
+}

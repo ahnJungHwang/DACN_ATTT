@@ -1,0 +1,10 @@
+{
+  "case_id": "case_edge_03_automated_inventory_tool",
+  "category": "EdgeCase",
+  "ground_truth": "NORMAL",
+  "actions": "Công cụ thống kê tài sản phần cứng tự động kiểm tra hệ thống.",
+  "expected_stages": [],
+  "security_count": 3,
+  "powershell_count": 0,
+  "created_at": "2026-11-01T15:42:22Z"
+}
