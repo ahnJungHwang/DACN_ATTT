@@ -37,6 +37,17 @@ def test_partial_error_and_empty(tmp_path):
     assert import_report(store, empty['import_id'])['status'] == 'partial'
 
 
+def test_json_source_is_named_and_keeps_good_source(tmp_path):
+    exported = tmp_path / 'powershell.json'
+    exported.write_text('[{"Id":4104,"LogName":"Microsoft-Windows-PowerShell/Operational"}]', encoding='utf-8')
+    store = Store(tmp_path / 'data')
+    report = import_files(store, {'Security': FIXTURE, 'PowerShell': exported}, Settings())
+    assert report['status'] == 'partial' and report['event_count'] == 1
+    source = next(s for s in report['sources'] if s['source_name'] == 'PowerShell')
+    assert source['state'] == 'error'
+    assert source['metadata']['error'] == 'UNSUPPORTED_FORMAT_JSON'
+
+
 def test_total_limit_does_not_publish(tmp_path):
     xml = FIXTURE.read_text(encoding='utf-8')
     second = tmp_path / 'ps.xml'

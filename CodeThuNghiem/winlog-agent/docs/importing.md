@@ -14,6 +14,17 @@ Từ thư mục winlog-agent, dùng Python trong môi trường đã cài:
 
 Có thể truyền `--config config.local.toml`. Mặc định tối đa 50 MiB/file, 100.000 sự kiện cho cả lần nhập, XML sâu 32 cấp. Hỗ trợ UTF-8 có/không BOM, UTF-16 LE/BE có BOM; từ chối DTD/entity, XML lỗi, sai nguồn/channel/ID. Vượt tổng số sự kiện thì không công bố lần nhập. Không tự lấy phần đầu file. `complete` nghĩa cả hai nguồn đã nhập, không bảo đảm đủ bằng chứng kịch bản; luôn đọc thêm missing_event_ids, counts_by_id và quality_errors.
 
+Chỉ nhận Windows Event XML (gốc `Events` hoặc `Event`, như script thu hoặc Event Viewer → Save as XML). File định dạng khác bị từ chối trước khi phân tích XML, nguồn đó ở trạng thái `error` với mã cho biết định dạng nhận ra:
+
+| Mã lỗi | Nhận ra từ | Cách xử lý |
+|---|---|---|
+| `UNSUPPORTED_FORMAT_EVTX` | byte đầu `ElfFile` (file .evtx gốc) | Mở bằng Event Viewer → Save All Events As… XML, hoặc thu lại bằng Export-WindowsLogs.ps1 |
+| `UNSUPPORTED_FORMAT_JSON` | bắt đầu bằng `{` hoặc `[` (ví dụ `Get-WinEvent \| ConvertTo-Json`) | Xuất lại bằng `ToXml()`/script thu; JSON không giữ đủ XML gốc để làm bằng chứng |
+| `UNSUPPORTED_FORMAT_JSONL` | từ 2 dòng đầu trở lên, mỗi dòng là một JSON | Như trên; có thể là file `normalized/*.jsonl` do ứng dụng xuất, không nhập ngược lại |
+| `UNSUPPORTED_FORMAT_NOT_XML` | ký tự đầu (sau khoảng trắng/BOM) không phải `<`, ví dụ CSV hoặc text | Xuất lại dạng XML |
+
+Việc nhận diện chỉ đọc phần đầu file để báo lỗi rõ hơn, không nhập hay diễn giải nội dung. JSONL một dòng cũng là JSON hợp lệ nên báo `UNSUPPORTED_FORMAT_JSON`. File bắt đầu bằng `<` nhưng sai cấu trúc vẫn báo các lỗi XML như cũ (`INVALID_OR_UNSAFE_XML`, `EXPECTED_EVENTS_OR_EVENT`…).
+
 Thiếu nguồn hiển thị `missing`; nguồn lỗi hiển thị `error` và giữ nguồn đã nhập được. File Events rỗng vẫn giữ nguyên byte với collection_status=no_events, không tạo ca NORMAL. File trùng hash bị từ chối và báo source_id cũ để tra lại, không âm thầm tạo bản sao. JSONL tại `data_root/normalized/<import_id>.jsonl`; raw XML trong `raw/` giữ nguyên byte và SHA256. Đọc event_ref qua Store.event lấy đúng nguồn/ordinal/XML, không dùng đường dẫn từ client.
 
 ## Các trường

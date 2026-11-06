@@ -1,6 +1,7 @@
 """Bounded Windows XML reader. Never interprets log content as instructions."""
 import codecs
 from io import StringIO
+import json
 import re
 from xml.etree import ElementTree as ET
 from defusedxml.ElementTree import iterparse
@@ -8,6 +9,8 @@ from defusedxml.common import DefusedXmlException
 from .config import Settings
 
 NS = 'http://schemas.microsoft.com/win/2004/08/events/event'
+EVTX_MAGIC = b'ElfFile\x00'
+FORMAT_SNIFF_LINES = 5
 
 
 class LogFormatError(ValueError):
@@ -18,9 +21,40 @@ def local(tag):
     return tag.rsplit('}', 1)[-1]
 
 
+def _is_json_line(line):
+    try:
+        json.loads(line)
+    except ValueError:
+        return False
+    return True
+
+
+def unsupported_format(text):
+    """Name a common non-XML format so the user sees why a file was rejected.
+
+    Only looks at the start of the text; the content is never imported or interpreted.
+    """
+    head = text.lstrip()
+    if not head or head.startswith('<'):
+        return None
+    if head[0] in '{[':
+        lines = []
+        for line in StringIO(head):
+            if line.strip():
+                lines.append(line)
+            if len(lines) == FORMAT_SNIFF_LINES:
+                break
+        if len(lines) > 1 and all(_is_json_line(line) for line in lines):
+            return 'JSONL'
+        return 'JSON'
+    return 'NOT_XML'
+
+
 def read_xml(content: bytes, settings: Settings):
     if len(content) > settings.upload_max_bytes:
         raise LogFormatError('FILE_TOO_LARGE')
+    if content.startswith(EVTX_MAGIC):
+        raise LogFormatError('UNSUPPORTED_FORMAT_EVTX')
     encoding = 'utf-8-sig'
     if content.startswith((codecs.BOM_UTF16_LE, codecs.BOM_UTF16_BE)):
         encoding = 'utf-16'
@@ -30,6 +64,9 @@ def read_xml(content: bytes, settings: Settings):
         raise LogFormatError('UNSUPPORTED_ENCODING') from exc
     if '\x00' in text:
         raise LogFormatError('UNSUPPORTED_ENCODING_OR_NUL')
+    detected = unsupported_format(text)
+    if detected:
+        raise LogFormatError('UNSUPPORTED_FORMAT_' + detected)
     declaration = re.match(r'\s*<\?xml[^?]*encoding=[\"\x27]([^\"\x27]+)', text, re.I)
     if declaration and declaration[1].lower().replace('_', '-') not in (
         ('utf-16', 'utf-16le', 'utf-16be') if encoding == 'utf-16' else ('utf-8', 'utf8')
