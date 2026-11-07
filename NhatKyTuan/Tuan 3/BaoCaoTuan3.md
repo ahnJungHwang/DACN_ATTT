@@ -1,3 +1,10 @@
+# Nhật Ký Tuần 3
+
+- **Thời gian thực hiện**26/10/2026 - 01/11/2026.]
+- **Thành viên tham gia**: Lâm, Thắng
+
+---
+
 # BÁO CÁO BÀI THỰC HÀNH TUẦN 3
 
 **Môn học:** Đồ Án Chuyên Ngành An Toàn Thông Tin
