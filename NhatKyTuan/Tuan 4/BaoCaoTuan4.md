@@ -463,7 +463,7 @@ Mỗi lô mất từ 7,3 đến 15,5 s, cao hơn trung bình 6,25 s của Qwen �
 
 ### Kế hoạch tuần tới
 
-Ưu tiên sửa kết nối n8n và chạy lại một phiên đủ đường: client gửi log, server phân tích, n8n rẽ nhánh và Telegram nhận tin, có chung batch_id để đối chiếu. Sau đó cố định client_id, thêm gom cảnh báo và mã bằng chứng toàn cục. Cuối cùng xuất kết quả đánh giá log thật 16 ca ra CSV để đưa vào Chương 5 thay cho con số đang chỉ có trong commit.
+Ưu tiên tối ưu hóa cho AI agent (model được chọn Qwen 2.5 3B), cho AI đọc thêm các log mất nhãn trên repo: https://github.com/sbousseaden/EVTX-ATTACKSAMPLES  và repo: https://github.com/sans-blue-team/DeepBlueCLI/tree/master/evtx. Thêm rule cho AI bắt nhanh và chính xác hơn
 
 ---
 
@@ -484,3 +484,6 @@ Phiên lab ngày 07/11/2026 (Chương 6) cho thấy đường client → server 
 [1] so_lieu(2).docx - tài liệu mô tả và 22 ảnh màn hình do người dùng cung cấp. Toàn bộ hình trong báo cáo được lấy từ tài liệu này, đổi thứ tự theo luồng triển khai; hai hình đã che token hoặc Chat ID.
 
 [2] EVTX-ATTACK-SAMPLES: https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES - nguồn được dẫn trong [1]. Chưa có manifest để đối chiếu từng ca của bộ 40 ca với kho này.
+
+## Góp ý của thầy: 
+
