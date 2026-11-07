@@ -66,19 +66,28 @@ Write-AgentLog "Client Agent khoi dong. Host: $hostname ($clientIp), Server: $Se
 $lastSeenTime = (Get-Date).AddSeconds(-15)
 $lastSecRecord = [long]0
 $lastPsRecord = [long]0
+$lastSysRecord = [long]0
+
+# Ma su kien thu thap
+#  Security: 4624/4625/4648 dang nhap, 4688 tao tien trinh, 1102 xoa nhat ky,
+#            4720 tao tai khoan, 4728/4732 them vao nhom, 4698 tao scheduled task
+#  System  : 7045 cai service moi, 104 xoa nhat ky System
+$SecurityIds = 4624, 4625, 4648, 4688, 1102, 4720, 4728, 4732, 4698
+$SystemIds = 7045, 104
 
 # Vong lap giam sat
 while ($true) {
     try {
         $secEvents = @()
         $psEvents = @()
+        $sysEvents = @()
 
-        # 1. Quet Security Log (4624, 4625, 4648, 4688) neu co quyen Admin
+        # 1. Quet Security Log neu co quyen Admin
         if ($isAdmin) {
             try {
                 $secFilter = @{
                     LogName   = 'Security'
-                    Id        = 4624, 4625, 4648, 4688
+                    Id        = $SecurityIds
                     StartTime = $lastSeenTime
                 }
                 # Loc theo RecordId de khong gui lai su kien da gui (StartTime khong du chinh xac)
@@ -98,12 +107,23 @@ while ($true) {
                           Where-Object { $_.RecordId -gt $lastPsRecord })
         } catch {}
 
-        $totalNew = $secEvents.Count + $psEvents.Count
+        # 3. Quet System Log (7045 cai service, 104 xoa nhat ky) - doc duoc ca khi khong co quyen Admin
+        try {
+            $sysFilter = @{
+                LogName   = 'System'
+                Id        = $SystemIds
+                StartTime = $lastSeenTime
+            }
+            $sysEvents = @(Get-WinEvent -FilterHashtable $sysFilter -ErrorAction SilentlyContinue |
+                           Where-Object { $_.RecordId -gt $lastSysRecord })
+        } catch {}
+
+        $totalNew = $secEvents.Count + $psEvents.Count + $sysEvents.Count
 
         # CHI IN VA GUI KHI CO SU KIEN MOI (KHONG SPAM KHI KHONG CO GI)
         if ($totalNew -gt 0) {
             $nowStr = (Get-Date).ToString("HH:mm:ss")
-            Write-Host "[$nowStr] [PHAT HIEN] $totalNew su kien moi (Security: $($secEvents.Count), PowerShell: $($psEvents.Count))" -ForegroundColor Yellow
+            Write-Host "[$nowStr] [PHAT HIEN] $totalNew su kien moi (Security: $($secEvents.Count), PowerShell: $($psEvents.Count), System: $($sysEvents.Count))" -ForegroundColor Yellow
             Write-Host "  -> Dang dong goi va gui ve AI Server ($ServerUrl)..." -ForegroundColor Cyan
 
             # Chuyen sang XML
@@ -119,6 +139,12 @@ while ($true) {
                 $psXml = '<Events></Events>'
             }
 
+            if ($sysEvents.Count -gt 0) {
+                $sysXml = '<Events>' + (($sysEvents | ForEach-Object { $_.ToXml() }) -join '') + '</Events>'
+            } else {
+                $sysXml = '<Events></Events>'
+            }
+
             # Cap nhat moc: RecordId lon nhat da gui cho tung log + moc thoi gian (lui 2s lam vung dem)
             $maxTime = $lastSeenTime
             foreach ($e in $secEvents) {
@@ -129,6 +155,10 @@ while ($true) {
                 if ($e.TimeCreated -gt $maxTime) { $maxTime = $e.TimeCreated }
                 if ($e.RecordId -gt $lastPsRecord) { $lastPsRecord = $e.RecordId }
             }
+            foreach ($e in $sysEvents) {
+                if ($e.TimeCreated -gt $maxTime) { $maxTime = $e.TimeCreated }
+                if ($e.RecordId -gt $lastSysRecord) { $lastSysRecord = $e.RecordId }
+            }
             $lastSeenTime = $maxTime.AddSeconds(-2)
 
             $payloadObj = @{
@@ -136,6 +166,7 @@ while ($true) {
                 hostname       = $hostname
                 security_xml   = $secXml
                 powershell_xml = $psXml
+                system_xml     = $sysXml
                 model          = $Model
             }
             $payloadJson = $payloadObj | ConvertTo-Json -Depth 5

@@ -85,6 +85,7 @@ class IngestRequest(BaseModel):
     hostname: str = "unknown"
     security_xml: str = "<Events></Events>"
     powershell_xml: str = "<Events></Events>"
+    system_xml: str = "<Events></Events>"  # 7045 / 104 (client mới)
     model: str = "qwen"
 
 
@@ -153,6 +154,7 @@ def ingest_logs(req: IngestRequest):
 
     sec_file.write_text(req.security_xml, encoding="utf-8")
     ps_file.write_text(req.powershell_xml, encoding="utf-8")
+    (case_dir / "system.xml").write_text(req.system_xml, encoding="utf-8")
 
     try:
         events = read_events(case_dir)

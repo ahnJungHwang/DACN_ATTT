@@ -3,7 +3,8 @@
     "Nhan duoc CHOT TRUOC khi chay model (2026-11-07), lay theo mo ta cua nguon du lieu, khong theo ket qua model.",
     "category: scored = tinh diem; insufficient_evidence = nguon noi la tan cong nhung phan log ma agent thu duoc (4624/4625/4648/4688/4104) khong chua dau vet tan cong -> bao cao rieng; out_of_scope = khong co su kien nao agent thu duoc; unlabeled = nguon khong mo ta -> khong tinh diem.",
     "max_events: chi lay toi da N su kien dau tien theo thoi gian (gioi han thoi gian chay); duoc ghi vao manifest tung ca.",
-    "dual_use: hanh vi co the hop phap tuy ngu canh (vd cai OpenSSH server) - nguon xep vao ky thuat ATT&CK nen nhan ALERT."
+    "dual_use: hanh vi co the hop phap tuy ngu canh (vd cai OpenSSH server) - nguon xep vao ky thuat ATT&CK nen nhan ALERT.",
+    "Cap nhat 2026-11-07 (mo rong thu thap): them nhom 'coverage' = mau truoc day ngoai pham vi, nay agent thu duoc (7045, 4720/4728/4732). Su kien xoa log o vi tri dau file bi loai (dau vet chuan bi mau). Nhan van theo mo ta nguon, chot truoc khi chay."
   ],
   "max_events": 300,
   "sources": {
@@ -22,39 +23,256 @@
     }
   },
   "cases": [
-    {"case_id": "dbc_metasploit_psexec_native", "source": "deepbluecli", "file": "metasploit-psexec-native-target-security.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1569.002 Service Execution (Metasploit PsExec)", "label_basis": "README: Metasploit native target (security)"},
-    {"case_id": "dbc_metasploit_psexec_powershell", "source": "deepbluecli", "file": "metasploit-psexec-powershell-target-security.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1569.002 / T1059.001 (Metasploit PsExec PowerShell)", "label_basis": "README: Metasploit PowerShell target (security)"},
-    {"case_id": "dbc_password_spray", "source": "deepbluecli", "file": "password-spray.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1110.003 Password Spraying", "label_basis": "README: Password spraying"},
-    {"case_id": "dbc_obfuscation_encoding", "source": "deepbluecli", "file": "Powershell-Invoke-Obfuscation-encoding-menu.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1027 Obfuscated Files / T1059.001", "label_basis": "README: Obfuscation (encoding)"},
-    {"case_id": "dbc_obfuscation_many", "source": "deepbluecli", "file": "Powershell-Invoke-Obfuscation-many.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1027 Obfuscated Files / T1059.001", "label_basis": "Mau Invoke-Obfuscation trong thu muc evtx cua DeepBlueCLI"},
-    {"case_id": "dbc_obfuscation_string", "source": "deepbluecli", "file": "Powershell-Invoke-Obfuscation-string-menu.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1027 Obfuscated Files / T1059.001", "label_basis": "README: Obfuscation (string)"},
-    {"case_id": "dbc_powersploit_security", "source": "deepbluecli", "file": "powersploit-security.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1059.001 PowerSploit", "label_basis": "README: PowerSploit (security)"},
-    {"case_id": "dbc_powersploit_system", "source": "deepbluecli", "file": "powersploit-system.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1059.001 PowerSploit", "label_basis": "README: PowerSploit (system)"},
-    {"case_id": "dbc_psattack", "source": "deepbluecli", "file": "psattack-security.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1059.001 PSAttack", "label_basis": "README: PSAttack"},
-    {"case_id": "dbc_sliver_c2", "source": "deepbluecli", "file": "sliver-security.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1071 C2 (Sliver)", "label_basis": "Mau sliver trong thu muc evtx cua DeepBlueCLI"},
-    {"case_id": "dbc_smb_password_guessing", "source": "deepbluecli", "file": "smb-password-guessing-security.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1110.001 Password Guessing", "label_basis": "README: Password guessing"},
-    {"case_id": "e2m_local_bruteforce", "source": "evtx_to_mitre", "file": "ID 4776,4625-AccountRestore local bruteforce.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1110 Brute Force", "label_basis": "Ten mau: AccountRestore local bruteforce"},
-    {"case_id": "e2m_openssh_bruteforce_nonexist", "source": "evtx_to_mitre", "file": "ID4625-OpenSSH brutforce with non existing users.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1110 Brute Force (OpenSSH)", "label_basis": "Ten mau: OpenSSH brutforce with non existing users"},
-    {"case_id": "e2m_openssh_bruteforce_valid", "source": "evtx_to_mitre", "file": "ID4625-OpenSSH brutforce with valid users.evtx", "ground_truth": "ALERT", "category": "scored", "technique": "T1110 Brute Force (OpenSSH)", "label_basis": "Ten mau: OpenSSH brutforce with valid users"},
-    {"case_id": "e2m_openssh_install", "source": "evtx_to_mitre", "file": "ID4103-4104-OpenSSH server install.evtx", "ground_truth": "ALERT", "category": "scored", "dual_use": true, "technique": "T1021.004 Remote Services: SSH", "label_basis": "Ten mau: OpenSSH server install (xep vao ky thuat ATT&CK)"},
-    {"case_id": "e2m_openssh_activation", "source": "evtx_to_mitre", "file": "ID4103-4104-OpenSSH server activation and config.evtx", "ground_truth": "ALERT", "category": "scored", "dual_use": true, "technique": "T1021.004 Remote Services: SSH", "label_basis": "Ten mau: OpenSSH server activation and config"},
-
-    {"case_id": "dbc_metasploit_pwshpayload", "source": "deepbluecli", "file": "metasploit-psexec-pwshpayload.evtx", "ground_truth": "ALERT", "category": "insufficient_evidence", "technique": "Metasploit PsExec", "label_basis": "Chi co 1 su kien 4624 trong pham vi agent thu"},
-    {"case_id": "dbc_mimikatz_tokenelevate", "source": "deepbluecli", "file": "mimikatz-privilegedebug-tokenelevate-hashdump.evtx", "ground_truth": "ALERT", "category": "insufficient_evidence", "technique": "T1003 Mimikatz", "label_basis": "Chi co 2 su kien 4624 trong pham vi agent thu"},
-
-    {"case_id": "dbc_many_events_security", "source": "deepbluecli", "file": "many-events-security.evtx", "ground_truth": "UNKNOWN", "category": "unlabeled", "technique": "", "label_basis": "README khong mo ta noi dung; khong tinh diem"}
+    {
+      "case_id": "dbc_metasploit_psexec_native",
+      "source": "deepbluecli",
+      "file": "metasploit-psexec-native-target-security.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1569.002 Service Execution (Metasploit PsExec)",
+      "label_basis": "README: Metasploit native target (security)"
+    },
+    {
+      "case_id": "dbc_metasploit_psexec_powershell",
+      "source": "deepbluecli",
+      "file": "metasploit-psexec-powershell-target-security.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1569.002 / T1059.001 (Metasploit PsExec PowerShell)",
+      "label_basis": "README: Metasploit PowerShell target (security)"
+    },
+    {
+      "case_id": "dbc_password_spray",
+      "source": "deepbluecli",
+      "file": "password-spray.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1110.003 Password Spraying",
+      "label_basis": "README: Password spraying"
+    },
+    {
+      "case_id": "dbc_obfuscation_encoding",
+      "source": "deepbluecli",
+      "file": "Powershell-Invoke-Obfuscation-encoding-menu.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1027 Obfuscated Files / T1059.001",
+      "label_basis": "README: Obfuscation (encoding)"
+    },
+    {
+      "case_id": "dbc_obfuscation_many",
+      "source": "deepbluecli",
+      "file": "Powershell-Invoke-Obfuscation-many.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1027 Obfuscated Files / T1059.001",
+      "label_basis": "Mau Invoke-Obfuscation trong thu muc evtx cua DeepBlueCLI"
+    },
+    {
+      "case_id": "dbc_obfuscation_string",
+      "source": "deepbluecli",
+      "file": "Powershell-Invoke-Obfuscation-string-menu.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1027 Obfuscated Files / T1059.001",
+      "label_basis": "README: Obfuscation (string)"
+    },
+    {
+      "case_id": "dbc_powersploit_security",
+      "source": "deepbluecli",
+      "file": "powersploit-security.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1059.001 PowerSploit",
+      "label_basis": "README: PowerSploit (security)"
+    },
+    {
+      "case_id": "dbc_powersploit_system",
+      "source": "deepbluecli",
+      "file": "powersploit-system.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1059.001 PowerSploit",
+      "label_basis": "README: PowerSploit (system)"
+    },
+    {
+      "case_id": "dbc_psattack",
+      "source": "deepbluecli",
+      "file": "psattack-security.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1059.001 PSAttack",
+      "label_basis": "README: PSAttack"
+    },
+    {
+      "case_id": "dbc_sliver_c2",
+      "source": "deepbluecli",
+      "file": "sliver-security.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1071 C2 (Sliver)",
+      "label_basis": "Mau sliver trong thu muc evtx cua DeepBlueCLI"
+    },
+    {
+      "case_id": "dbc_smb_password_guessing",
+      "source": "deepbluecli",
+      "file": "smb-password-guessing-security.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1110.001 Password Guessing",
+      "label_basis": "README: Password guessing"
+    },
+    {
+      "case_id": "e2m_local_bruteforce",
+      "source": "evtx_to_mitre",
+      "file": "ID 4776,4625-AccountRestore local bruteforce.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1110 Brute Force",
+      "label_basis": "Ten mau: AccountRestore local bruteforce"
+    },
+    {
+      "case_id": "e2m_openssh_bruteforce_nonexist",
+      "source": "evtx_to_mitre",
+      "file": "ID4625-OpenSSH brutforce with non existing users.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1110 Brute Force (OpenSSH)",
+      "label_basis": "Ten mau: OpenSSH brutforce with non existing users"
+    },
+    {
+      "case_id": "e2m_openssh_bruteforce_valid",
+      "source": "evtx_to_mitre",
+      "file": "ID4625-OpenSSH brutforce with valid users.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "technique": "T1110 Brute Force (OpenSSH)",
+      "label_basis": "Ten mau: OpenSSH brutforce with valid users"
+    },
+    {
+      "case_id": "e2m_openssh_install",
+      "source": "evtx_to_mitre",
+      "file": "ID4103-4104-OpenSSH server install.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "dual_use": true,
+      "technique": "T1021.004 Remote Services: SSH",
+      "label_basis": "Ten mau: OpenSSH server install (xep vao ky thuat ATT&CK)"
+    },
+    {
+      "case_id": "e2m_openssh_activation",
+      "source": "evtx_to_mitre",
+      "file": "ID4103-4104-OpenSSH server activation and config.evtx",
+      "ground_truth": "ALERT",
+      "category": "scored",
+      "dual_use": true,
+      "technique": "T1021.004 Remote Services: SSH",
+      "label_basis": "Ten mau: OpenSSH server activation and config"
+    },
+    {
+      "case_id": "dbc_metasploit_pwshpayload",
+      "source": "deepbluecli",
+      "file": "metasploit-psexec-pwshpayload.evtx",
+      "ground_truth": "ALERT",
+      "category": "insufficient_evidence",
+      "technique": "Metasploit PsExec",
+      "label_basis": "Chi co 1 su kien 4624 trong pham vi agent thu"
+    },
+    {
+      "case_id": "dbc_mimikatz_tokenelevate",
+      "source": "deepbluecli",
+      "file": "mimikatz-privilegedebug-tokenelevate-hashdump.evtx",
+      "ground_truth": "ALERT",
+      "category": "insufficient_evidence",
+      "technique": "T1003 Mimikatz",
+      "label_basis": "Chi co 2 su kien 4624 trong pham vi agent thu"
+    },
+    {
+      "case_id": "dbc_many_events_security",
+      "source": "deepbluecli",
+      "file": "many-events-security.evtx",
+      "ground_truth": "UNKNOWN",
+      "category": "unlabeled",
+      "technique": "",
+      "label_basis": "README khong mo ta noi dung; khong tinh diem"
+    },
+    {
+      "case_id": "dbc_metasploit_psexec_native_system",
+      "source": "deepbluecli",
+      "file": "metasploit-psexec-native-target-system.evtx",
+      "ground_truth": "ALERT",
+      "category": "coverage",
+      "technique": "T1569.002 / T1543.003 PsExec (service)",
+      "label_basis": "README: Metasploit native target (system)"
+    },
+    {
+      "case_id": "dbc_metasploit_psexec_powershell_system",
+      "source": "deepbluecli",
+      "file": "metasploit-psexec-powershell-target-system.evtx",
+      "ground_truth": "ALERT",
+      "category": "coverage",
+      "technique": "T1569.002 / T1543.003 PsExec PowerShell (service)",
+      "label_basis": "README: Metasploit PowerShell target (system)"
+    },
+    {
+      "case_id": "dbc_new_user_admin_group",
+      "source": "deepbluecli",
+      "file": "new-user-security.evtx",
+      "ground_truth": "ALERT",
+      "category": "coverage",
+      "technique": "T1136.001 Create Account + T1098 Add to Administrators",
+      "label_basis": "README: New user creation / User added to administrator group"
+    },
+    {
+      "case_id": "dbc_many_events_system",
+      "source": "deepbluecli",
+      "file": "many-events-system.evtx",
+      "ground_truth": "UNKNOWN",
+      "category": "unlabeled",
+      "technique": "",
+      "label_basis": "README khong mo ta; 61 su kien 7045 - quan sat do nhieu"
+    }
   ],
   "out_of_scope": [
-    {"file": "disablestop-eventlog.evtx", "technique": "T1562.002 Dung dich vu Event Log", "needed_logs": "System 7035/7036/7040"},
-    {"file": "eventlog-dac.evtx", "technique": "T1070.001 Xoa/sua quyen nhat ky", "needed_logs": "Security 1102, 4673"},
-    {"file": "metasploit-psexec-native-target-system.evtx", "technique": "T1569.002 PsExec", "needed_logs": "System 7045"},
-    {"file": "metasploit-psexec-powershell-target-system.evtx", "technique": "T1569.002 PsExec", "needed_logs": "System 7045"},
-    {"file": "metasploit-sysmon.evtx", "technique": "Metasploit", "needed_logs": "Sysmon"},
-    {"file": "mimikatz-privesc-hashdump.evtx", "technique": "T1003.002 Mimikatz lsadump::sam", "needed_logs": "Security 4673/4674"},
-    {"file": "new-user-security.evtx", "technique": "T1136.001 Tao user + T1098 them vao Administrators", "needed_logs": "Security 4720, 4732"},
-    {"file": "sliver-sysmon.evtx", "technique": "Sliver C2", "needed_logs": "Sysmon"},
-    {"file": "wmi-event-filter-persistance.evtx", "technique": "T1546.003 WMI Event Subscription", "needed_logs": "WMI-Activity / Sysmon 19-21"},
-    {"file": "many-events-application.evtx", "technique": "(khong mo ta)", "needed_logs": "Application"},
-    {"file": "many-events-system.evtx", "technique": "(khong mo ta)", "needed_logs": "System"}
+    {
+      "file": "disablestop-eventlog.evtx",
+      "technique": "T1562.002 Dung dich vu Event Log",
+      "needed_logs": "System 7035/7036/7040 (su kien 104/1102 trong mau la dau vet chuan bi, da loai)"
+    },
+    {
+      "file": "eventlog-dac.evtx",
+      "technique": "T1070.001 Xoa/sua quyen nhat ky",
+      "needed_logs": "Security 1102, 4673 (su kien 104/1102 trong mau la dau vet chuan bi, da loai)"
+    },
+    {
+      "file": "metasploit-sysmon.evtx",
+      "technique": "Metasploit",
+      "needed_logs": "Sysmon"
+    },
+    {
+      "file": "mimikatz-privesc-hashdump.evtx",
+      "technique": "T1003.002 Mimikatz lsadump::sam",
+      "needed_logs": "Security 4673/4674"
+    },
+    {
+      "file": "sliver-sysmon.evtx",
+      "technique": "Sliver C2",
+      "needed_logs": "Sysmon"
+    },
+    {
+      "file": "wmi-event-filter-persistance.evtx",
+      "technique": "T1546.003 WMI Event Subscription",
+      "needed_logs": "WMI-Activity / Sysmon 19-21"
+    },
+    {
+      "file": "many-events-application.evtx",
+      "technique": "(khong mo ta)",
+      "needed_logs": "Application"
+    },
+    {
+      "file": "many-events-system.evtx",
+      "technique": "(khong mo ta)",
+      "needed_logs": "System"
+    }
   ]
 }

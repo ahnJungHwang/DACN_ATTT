@@ -60,7 +60,7 @@ def main() -> None:
     labels = json.loads((HERE / "labels.json").read_text(encoding="utf-8"))
     def complete(c: dict) -> bool:
         d = CASES_DIR / c["case_id"]
-        return all((d / f).exists() for f in ("manifest.json", "security.xml", "powershell.xml"))
+        return all((d / f).exists() for f in ("manifest.json", "security.xml", "powershell.xml", "system.xml"))
 
     cases = [c for c in labels["cases"] if complete(c)]
     # File bị thiếu sau khi tạo: thường do antivirus cách ly (nội dung mã độc thật) -> loại khỏi điểm, ghi vào báo cáo
@@ -72,7 +72,7 @@ def main() -> None:
             cdir = CASES_DIR / c["case_id"]
             man = json.loads((cdir / "manifest.json").read_text(encoding="utf-8-sig"))
             rule_any, rule_strong = rule_labels(cdir)
-            reps = args.repeats if c["category"] == "scored" else 1
+            reps = args.repeats if c["category"] in ("scored", "coverage") else 1
             for rep in range(1, reps + 1):
                 t = time.perf_counter()
                 try:
@@ -88,7 +88,7 @@ def main() -> None:
                 row = {
                     "model": model_key, "case_id": c["case_id"], "category": c["category"],
                     "ground_truth": c["ground_truth"], "technique": c.get("technique", ""),
-                    "dual_use": bool(c.get("dual_use")), "events": man["security_count"] + man["powershell_count"],
+                    "dual_use": bool(c.get("dual_use")), "events": man["security_count"] + man["powershell_count"] + man.get("system_count", 0),
                     "truncated": bool(man.get("truncated_to_first")), "repeat": rep,
                     "system": sys_label, "ai_only": ai_label, "rule_any": rule_any, "rule_strong": rule_strong,
                     "decision_source": src, "batches": nb, "seconds": el, "stages": stages, "error": err,
@@ -120,6 +120,7 @@ def write_outputs(rows: list[dict], labels: dict, args) -> None:
     cat = Counter(c["category"] for c in labels["cases"])
     md += [
         f"| Tính điểm (`scored`) | {cat['scored']} | Tấn công thật, có dấu vết trong log agent thu (4624/4625/4648/4688/4104) |",
+        f"| Độ phủ mới (`coverage`) | {cat['coverage']} | Trước đây ngoài phạm vi; nay agent thu 7045 / 4720 / 4728 / 4732 |",
         f"| Không đủ bằng chứng | {cat['insufficient_evidence']} | Nguồn nói là tấn công nhưng phần log agent thu chỉ có vài 4624 |",
         f"| Không có nhãn | {cat['unlabeled']} | Nguồn không mô tả; chỉ quan sát |",
         f"| **Ngoài phạm vi agent** | {len(labels['out_of_scope'])} | Tấn công chỉ để lại dấu vết ở log agent KHÔNG thu |",
@@ -133,10 +134,15 @@ def write_outputs(rows: list[dict], labels: dict, args) -> None:
     ]
 
     for model in sorted({r["model"] for r in rows}):
-        sc = [r for r in rows if r["model"] == model and r["category"] == "scored"]
+      md += [f"## 2. Kết quả — `{model}` ({A.MODELS[model]})", ""]
+      for group, title in (("scored", "Ca tấn công thật (bộ gốc 14 ca)"),
+                           ("coverage", "Ca độ phủ mới (sau khi mở rộng thu thập)")):
+        sc = [r for r in rows if r["model"] == model and r["category"] == group]
+        if not sc:
+            continue
         n_case = len({r["case_id"] for r in sc})
-        md += [f"## 2. Kết quả — `{model}` ({A.MODELS[model]})", "",
-               "### 2.1 Recall trên ca tấn công thật (tính theo từng lượt chạy)", "",
+        md += [f"### {title}", "",
+               "Recall tính theo từng lượt chạy:", "",
                "| Cách phát hiện | Recall | ",
                "|---|---|"]
         for key, name in (("system", "**Hệ thống** (luật mạnh + AI + tự thẩm định)"),
@@ -162,7 +168,7 @@ def write_outputs(rows: list[dict], labels: dict, args) -> None:
                f"- Lỗi kỹ thuật: {sum(1 for r in sc if r['system'] == 'ERROR')} lượt.",
                f"- Thời gian trung vị mỗi ca: {statistics.median(r['seconds'] for r in sc):.1f}s.",
                "",
-               "### 2.2 Chi tiết từng ca",
+               "Chi tiết từng ca:",
                "",
                "| Ca | Kỹ thuật | Sự kiện | Hệ thống | Riêng AI | Chỉ luật | Nguồn quyết định | TG TB (s) |",
                "|---|---|:---:|:---:|:---:|:---:|:---:|:---:|"]
@@ -173,13 +179,14 @@ def write_outputs(rows: list[dict], labels: dict, args) -> None:
             trunc = " (cắt 300)" if r0["truncated"] else ""
             md.append(f"| `{cid}`{mark} | {r0['technique']} | {r0['events']}{trunc} | {fmt(sysl)} | {fmt(ail)} | "
                       f"{r0['rule_any']} | {fmt(src)} | {sec:.1f} |")
-        other = [r for r in rows if r["model"] == model and r["category"] != "scored"]
-        if other:
-            md += ["", "### 2.3 Ca không tính điểm (quan sát)", "",
-                   "| Ca | Nhóm | Sự kiện | Hệ thống | Riêng AI | Chỉ luật |", "|---|---|:---:|:---:|:---:|:---:|"]
-            for r in other:
-                md.append(f"| `{r['case_id']}` | {r['category']} | {r['events']} | {r['system']} | {r['ai_only']} | {r['rule_any']} |")
         md.append("")
+      other = [r for r in rows if r["model"] == model and r["category"] not in ("scored", "coverage")]
+      if other:
+          md += ["### Ca không tính điểm (quan sát)", "",
+                 "| Ca | Nhóm | Sự kiện | Hệ thống | Riêng AI | Chỉ luật |", "|---|---|:---:|:---:|:---:|:---:|"]
+          for r in other:
+              md.append(f"| `{r['case_id']}` | {r['category']} | {r['events']} | {r['system']} | {r['ai_only']} | {r['rule_any']} |")
+          md.append("")
 
     md += ["## 3. Tấn công nằm ngoài phạm vi thu thập của agent", "",
            "Các mẫu dưới đây là tấn công thật nhưng agent hiện **không thể phát hiện** vì không thu loại log tương ứng:", "",

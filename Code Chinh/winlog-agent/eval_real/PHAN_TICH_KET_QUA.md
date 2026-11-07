@@ -54,3 +54,70 @@ Các ca bỏ sót ở trên **đã bị nhìn thấy**, nên nếu sửa luật/
 2. Bổ sung luật cho dấu hiệu chắc chắn: `wevtutil cl`, `Clear-EventLog`, `-enc`/`-e` rút gọn, `-w hidden` + `FromBase64String`, `\\.\pipe\` từ `cmd /c echo`.
 3. Thử mô hình lớn hơn vừa 6GB VRAM (vd Qwen2.5 7B Q4 ~4.7GB) và so sánh trên cùng bộ, có theo dõi nhiệt độ GPU.
 4. Thu log bình thường (bước 2) để đo báo động giả.
+
+---
+
+# Cập nhật sau khi MỞ RỘNG THU THẬP (07/11/2026, lượt 2)
+
+Thay đổi: agent thu thêm Security 1102/4720/4728/4732/4698 và System 7045/104; thêm 5 luật MITRE và mô tả các sự kiện mới vào prompt. Sự kiện xoá log ở **đầu** mỗi mẫu DeepBlueCLI (do người tạo mẫu xoá log trước khi ghi) được loại theo quy tắc đặt trước — nếu không, Recall sẽ tăng ảo gần 100%. Nhiệt độ GPU trong lượt chạy: tối đa 80°C, trung bình 67°C.
+
+## Kết quả
+
+| | Trước mở rộng | Sau mở rộng |
+|---|:---:|:---:|
+| Ca độ phủ mới (PsExec service 7045, tạo user + thêm Administrators) | không thấy được | **2/2 bắt được** (luật + AI cùng xác nhận) |
+| Bộ gốc 14 ca — Hệ thống (theo ca) | **9/14 (64%)** | **7/14 (50%)** |
+| Bộ gốc 14 ca — Riêng AI (theo lượt) | 55% | 45% |
+| Bộ gốc 14 ca — Chỉ luật | 36% | 36% (không đổi) |
+| `data01` (dữ liệu tự sinh) — Hệ thống | 97.5% | 97.5% (FP 1→0, FN 0→1) |
+| Mẫu bị Defender cách ly | 2 | 4 |
+
+## Phát hiện quan trọng: mô hình 3B rất nhạy với độ dài/nội dung prompt
+
+Nội dung log của 14 ca gốc **không thay đổi** (chúng không chứa sự kiện mới), chỉ có prompt dài thêm. Vậy mà kết quả của AI đổi:
+
+| Ca | Trước | Sau |
+|---|:---:|:---:|
+| `dbc_metasploit_psexec_powershell` | NORMAL | **ALERT** ✅ |
+| `dbc_password_spray` | ALERT | UNKNOWN ❌ |
+| `dbc_powersploit_security` | ALERT (2/3) | NORMAL ❌ |
+| `dbc_powersploit_system` | ALERT | NORMAL ❌ |
+| `dbc_sliver_c2` | NORMAL | ALERT 1/3 (không ổn định) |
+
+→ Thêm kiến thức cho loại sự kiện mới đã **làm giảm** khả năng nhận diện các loại cũ. Với mô hình 3B, prompt dài hơn làm mô hình "phân tán chú ý". Phần độ phủ mới bắt được là nhờ **luật mạnh** (dấu hiệu rõ ràng), AI chỉ xác nhận.
+
+## Hướng xử lý đề xuất
+
+1. **Prompt động:** chỉ đưa mô tả dấu hiệu tấn công của những loại sự kiện **có mặt trong lô** (lô chỉ có 4688 thì không cần mô tả 7045/4698). Prompt ngắn và tập trung hơn.
+2. **Mô hình lớn hơn** (vd Qwen2.5 7B Q4 ~4.7 GB, vừa 6 GB VRAM) — cần theo dõi nhiệt độ.
+3. **Đánh giá lại trên tập mới chưa dùng** (EVTX-ATTACK-SAMPLES): bộ 14 ca này đã được dùng hai lần để ra quyết định, càng chỉnh theo nó thì số liệu càng kém tin cậy.
+
+---
+
+# Lượt 3: PROMPT ĐỘNG (07/11/2026)
+
+Thay đổi: mô tả dấu hiệu cho sự kiện mở rộng (1102/104, 7045, 4720/4728/4732, 4698) chỉ được đưa vào prompt, bảng thống kê và prompt tự thẩm định **khi lô có loại sự kiện đó**. Đã đối chiếu với bản trước mở rộng (commit `e35eb49`): với lô chỉ có sự kiện cơ bản, toàn bộ đầu vào của mô hình **giống hệt từng ký tự**. GPU: tối đa 80°C, trung bình 68°C.
+
+## So sánh ba phiên bản (Qwen 2.5 3B, mỗi ca 3 lần)
+
+| | (1) Trước mở rộng | (2) Mở rộng, prompt tĩnh | (3) Mở rộng, **prompt động** |
+|---|:---:|:---:|:---:|
+| 14 ca log thật gốc — Hệ thống (theo ca) | 9/14 (64%) | 7/14 (50%) | **9/14 (64%)** |
+| 14 ca log thật gốc — Riêng AI (theo lượt) | 55% | 45% | **55%** |
+| Ca độ phủ mới (7045 PsExec, tạo user + Administrators) | không thấy được | 2/2 | **2/2** |
+| **Tổng ca tấn công thật bắt được** | 9/16 (56%) | 9/16 (56%) | **11/16 (69%)** |
+| `data01` — Hệ thống | 97.5% | 97.5% | 97.5% |
+| Độ ổn định (cùng kết quả cả 3 lần) | 13/14 | 13/14 | 13/14 + 2/2 |
+
+Kết quả từng ca của 14 ca gốc ở phiên bản (3) **trùng khớp hoàn toàn** với phiên bản (1).
+
+## Kết luận
+
+1. **Prompt động cho phép mở rộng phạm vi phát hiện mà không làm giảm khả năng cũ** của mô hình nhỏ: tổng số tấn công thật bắt được tăng từ 9/16 lên 11/16, không đánh đổi.
+2. Với mô hình 3B, "nhồi" thêm kiến thức vào prompt là có hại; nên đưa kiến thức **theo ngữ cảnh** (chỉ những gì liên quan đến dữ liệu đang xét). Đây là một nguyên tắc thiết kế quan trọng cho AI Agent chạy local.
+3. Phần độ phủ mới chủ yếu nhờ **luật mạnh** (dấu hiệu rõ ràng) và được AI xác nhận; các ca khó (Metasploit native, payload Base64 ẩn, Sliver xoá log bằng `wevtutil`) vẫn bị bỏ sót — giới hạn của mô hình 3B.
+
+## Lưu ý về độ tin cậy
+
+- Bộ 16 ca này đã được dùng **ba lần** để ra quyết định thiết kế → con số 69% là của tập phát triển. Đánh giá cuối cùng nên làm trên tập chưa từng dùng (EVTX-ATTACK-SAMPLES).
+- Vẫn chưa đo được báo động giả trên log thật (cần log hoạt động bình thường từ máy ảo).

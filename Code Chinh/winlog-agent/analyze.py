@@ -37,7 +37,21 @@ OLLAMA_URL = os.getenv(
 # Giới hạn theo số ký tự để giữ mỗi yêu cầu ở mức nhỏ.
 MAX_BATCH_CHARS = int(os.getenv("MAX_BATCH_CHARS", "15000"))
 
+# Mã sự kiện được phân tích. Nhóm mở rộng (07/11/2026): xoá nhật ký, cài service, tạo/nâng quyền tài khoản, scheduled task.
+SUPPORTED_EVENT_IDS = {
+    4624, 4625, 4648, 4688, 4104,      # đăng nhập, tạo tiến trình, PowerShell
+    1102, 104,                          # xoá nhật ký Security / System
+    7045,                               # cài service mới (System)
+    4720, 4728, 4732,                   # tạo tài khoản, thêm vào nhóm global / local
+    4698,                               # tạo scheduled task
+}
+MAX_FIELD_CHARS = 2000  # cắt TaskContent (file XML định nghĩa task) để vừa context
+
 FIELDS = {
+    "ServiceName", "ImagePath", "ServiceType", "StartType", "AccountName",   # 7045
+    "MemberName", "MemberSid", "TargetSid", "SamAccountName",                # 4720 / 4728 / 4732
+    "TaskName", "TaskContent",                                               # 4698
+    "Channel", "BackupPath",                                                 # 104 / 1102 (UserData)
     "SubjectUserSid",
     "SubjectUserName",
     "SubjectDomainName",
@@ -161,13 +175,15 @@ def is_benign_noise(event: dict) -> bool:
 
 
 def read_events(case_dir: Path) -> list[dict]:
-    """Đọc các sự kiện được hỗ trợ từ security.xml và powershell.xml."""
+    """Đọc các sự kiện được hỗ trợ từ security.xml, powershell.xml (bắt buộc) và system.xml (tuỳ chọn)."""
     events = []
 
-    for filename in ("security.xml", "powershell.xml"):
+    for filename in ("security.xml", "powershell.xml", "system.xml"):
         path = case_dir / filename
 
         if not path.is_file():
+            if filename == "system.xml":
+                continue  # client cũ / ca cũ không có log System
             raise ValueError(f"Missing file: {filename}")
 
         try:
@@ -195,7 +211,7 @@ def read_events(case_dir: Path) -> list[dict]:
                     f"Invalid EventID in {filename}: {event_id_text!r}"
                 ) from exc
 
-            if event_id not in {4624, 4625, 4648, 4688, 4104}:
+            if event_id not in SUPPORTED_EVENT_IDS:
                 continue
 
             timestamp = system.find("w:TimeCreated", NS)
@@ -207,6 +223,17 @@ def read_events(case_dir: Path) -> list[dict]:
                 for item in event.findall("w:EventData/w:Data", NS)
                 if item.get("Name") in FIELDS
             }
+            # 1102 / 104 lưu dữ liệu trong <UserData><LogFileCleared>...</LogFileCleared></UserData>
+            user_data = event.find("w:UserData", NS)
+            if user_data is not None:
+                for block in user_data:
+                    for item in block:
+                        name = item.tag.split("}")[-1]
+                        if name in FIELDS and item.text:
+                            data.setdefault(name, item.text)
+            # TaskContent là cả file XML định nghĩa task -> cắt bớt; ScriptBlockText giữ nguyên như trước
+            if len(data.get("TaskContent", "")) > MAX_FIELD_CHARS:
+                data["TaskContent"] = data["TaskContent"][:MAX_FIELD_CHARS] + "…[cắt bớt]"
 
             events.append({
                 "time": (
@@ -360,8 +387,86 @@ def correlate_security_events(events: list[dict]) -> dict:
             f"Phát hiện lệnh khám phá và trinh sát hệ thống (whoami/discovery) trong chuỗi tấn công. Bằng chứng: {', '.join(refs)}."
         )
 
+    def add(stage: str, evs: list[dict], detail: str, strong: bool) -> None:
+        refs = [e["event_ref"] for e in evs]
+        findings["stages"].append(stage)
+        if strong:
+            findings["strong_stages"].append(stage)
+        findings["evidence_refs"].extend(refs)
+        findings["details"].append(f"{detail} Bằng chứng: {', '.join(refs)}.")
+
+    # 6. Xoá nhật ký (Indicator Removal - MITRE T1070.001): 1102 (Security) / 104 (System)
+    cleared = [e for e in events if e.get("event_id") in (1102, 104)]
+    if cleared:
+        logs = sorted({e["data"].get("Channel") or ("Security" if e["event_id"] == 1102 else "System") for e in cleared})
+        add("Indicator Removal: Clear Windows Event Logs (MITRE T1070.001)", cleared,
+            f"Phát hiện nhật ký Windows bị xoá ({', '.join(logs)}) - Event 1102/104.", strong=True)
+
+    # 7. Cài service mới (MITRE T1543.003 / T1569.002): 7045; chắc chắn khi service chạy shell/script/file từ thư mục ghi được
+    services = [e for e in events if e.get("event_id") == 7045]
+    if services:
+        def suspicious_service(e: dict) -> bool:
+            p = (e["data"].get("ImagePath") or "").lower()
+            return any(k in p for k in SUSPICIOUS_SERVICE_PATH) or bool(RANDOM_WINDOWS_EXE.search(p))
+        bad = [e for e in services if suspicious_service(e)]
+        if bad:
+            add("Create or Modify System Process: Malicious Service (MITRE T1543.003 / T1569.002)", bad,
+                "Phát hiện service mới chạy lệnh shell/PowerShell hoặc file thực thi đáng ngờ (Event 7045, kiểu PsExec/Metasploit).",
+                strong=True)
+        others = [e for e in services if e not in bad]
+        if others:
+            add("New Service Installed (MITRE T1543.003)", others,
+                "Có service mới được cài (Event 7045) - cần xét ngữ cảnh (có thể là phần mềm/driver hợp lệ).", strong=False)
+
+    # 8. Tạo tài khoản (MITRE T1136.001): 4720 -> tín hiệu yếu
+    created = [e for e in events if e.get("event_id") == 4720]
+    if created:
+        users = ", ".join(dict.fromkeys(e["data"].get("TargetUserName", "?") for e in created))
+        add("Create Account: Local Account (MITRE T1136.001)", created,
+            f"Tài khoản mới được tạo (Event 4720): {users}.", strong=False)
+
+    # 9. Thêm vào nhóm đặc quyền (MITRE T1098): 4728/4732 với nhóm Administrators / Domain Admins...
+    group_adds = [e for e in events if e.get("event_id") in (4728, 4732)]
+    priv_adds = [
+        e for e in group_adds
+        if (e["data"].get("TargetSid") or "").upper() in PRIVILEGED_GROUP_SIDS
+        or (e["data"].get("TargetUserName") or "").lower() in PRIVILEGED_GROUP_NAMES
+    ]
+    if priv_adds:
+        groups = ", ".join(dict.fromkeys(e["data"].get("TargetUserName", "?") for e in priv_adds))
+        add("Account Manipulation: Add to Privileged Group (MITRE T1098)", priv_adds,
+            f"Tài khoản được thêm vào nhóm đặc quyền {groups} (Event 4728/4732).", strong=True)
+
+    # 10. Scheduled task (MITRE T1053.005): 4698; chắc chắn khi task chạy script mã hoá / tải từ mạng / file trong thư mục ghi được
+    tasks = [e for e in events if e.get("event_id") == 4698]
+    if tasks:
+        bad_tasks = [e for e in tasks
+                     if any(k in (e["data"].get("TaskContent") or "").lower() for k in SUSPICIOUS_TASK_CONTENT)]
+        if bad_tasks:
+            add("Scheduled Task Persistence (MITRE T1053.005)", bad_tasks,
+                "Scheduled task mới chạy PowerShell mã hoá / tải từ mạng / file trong thư mục tạm (Event 4698).", strong=True)
+        normal_tasks = [e for e in tasks if e not in bad_tasks]
+        if normal_tasks:
+            add("New Scheduled Task (MITRE T1053.005)", normal_tasks,
+                "Có scheduled task mới (Event 4698) - cần xét ngữ cảnh.", strong=False)
+
     findings["evidence_refs"] = list(dict.fromkeys(findings["evidence_refs"]))
     return findings
+
+
+SUSPICIOUS_SERVICE_PATH = (
+    "cmd.exe /c", "cmd /c", "%comspec%", "powershell", "pwsh", "-enc", "frombase64", "rundll32",
+    "\\admin$", "\\\\127.0.0.1", "\\temp\\", "\\appdata\\", "\\users\\public\\", "\\programdata\\",
+)
+# File .exe tên ngẫu nhiên đặt thẳng trong C:\Windows (kiểu PsExec của Metasploit)
+RANDOM_WINDOWS_EXE = re.compile(r"(?:\\windows|%systemroot%|%windir%)\\[a-z0-9]{6,12}\.exe\b")
+PRIVILEGED_GROUP_SIDS = {"S-1-5-32-544", "S-1-5-32-555", "S-1-5-32-548", "S-1-5-32-549", "S-1-5-32-551"}
+PRIVILEGED_GROUP_NAMES = {
+    "administrators", "domain admins", "enterprise admins", "schema admins",
+    "remote desktop users", "account operators", "backup operators", "server operators",
+}
+SUSPICIOUS_TASK_CONTENT = ("-enc", "frombase64", "downloadstring", "http://", "https://", "\\temp\\",
+                           "\\appdata\\", "\\users\\public\\", "iex", "bypass")
 
 
 def split_event_batches(
@@ -407,11 +512,44 @@ EVENT_MEANING = {
     4648: "Đăng nhập bằng thông tin xác thực tường minh (runas / explicit credentials)",
     4688: "Tạo tiến trình mới (xem NewProcessName, CommandLine)",
     4104: "PowerShell ScriptBlock (xem ScriptBlockText)",
+    1102: "Nhật ký Security BỊ XOÁ",
+    104: "Nhật ký System/ứng dụng BỊ XOÁ (xem Channel)",
+    7045: "Service mới được cài (xem ServiceName, ImagePath)",
+    4720: "Tài khoản người dùng mới được tạo (TargetUserName)",
+    4728: "Thành viên được thêm vào nhóm bảo mật global (TargetUserName = tên nhóm, MemberName/MemberSid = người được thêm)",
+    4732: "Thành viên được thêm vào nhóm bảo mật local (TargetUserName = tên nhóm, MemberSid = người được thêm)",
+    4698: "Scheduled task mới được tạo (TaskName, TaskContent)",
 }
 
 
-def build_system_prompt(schema: dict, correlation_hints: str = "") -> str:
-    # Prompt TRUNG LẬP: không nói trước có hay không có tấn công; tín hiệu luật (nếu có) chỉ là gợi ý cần xác minh.
+BASE_EVENT_IDS = (4624, 4625, 4648, 4688, 4104)
+
+# Mô tả dấu hiệu tấn công / hoạt động bình thường cho các loại sự kiện mở rộng.
+# Chỉ đưa vào prompt khi lô có loại sự kiện tương ứng (prompt động) - mô hình 3B rất nhạy với độ dài prompt.
+EXTENDED_SIGNS = [
+    ({1102, 104}, "Xoá dấu vết: sự kiện 1102 hoặc 104 (nhật ký bị xoá).", None),
+    ({7045},
+     "Service đáng ngờ (7045): ImagePath chạy cmd /c, powershell, %COMSPEC%, rundll32, file trong Temp/AppData/ADMIN$, "
+     "hoặc file .exe tên ngẫu nhiên đặt thẳng trong C:\\Windows (dấu hiệu PsExec/Metasploit).",
+     "Service/driver của phần mềm hợp lệ cài vào Program Files hoặc System32 (vd Windows Update, driver, phần mềm diệt virus)."),
+    ({4720, 4728, 4732},
+     "Tạo tài khoản (4720) rồi thêm vào nhóm đặc quyền như Administrators (4732/4728).",
+     "Tạo tài khoản / thêm vào nhóm thường (Users) khi cài đặt hoặc do bộ phận IT thực hiện, không kèm nhóm đặc quyền."),
+    ({4698},
+     "Scheduled task (4698) chạy PowerShell mã hoá, tải từ mạng hoặc file trong thư mục tạm.",
+     "Scheduled task của Microsoft/phần mềm cập nhật (\\Microsoft\\Windows\\..., GoogleUpdate, OneDrive...)."),
+]
+
+
+def build_system_prompt(schema: dict, correlation_hints: str = "", event_ids: set[int] | None = None) -> str:
+    """
+    Prompt TRUNG LẬP và ĐỘNG.
+    - Không nói trước có hay không có tấn công; tín hiệu luật (nếu có) chỉ là gợi ý cần xác minh.
+    - event_ids: các mã sự kiện có trong lô. Phần mô tả cho loại sự kiện mở rộng chỉ được thêm khi lô có loại đó;
+      lô chỉ có sự kiện cơ bản nhận prompt y hệt phiên bản trước khi mở rộng thu thập.
+      event_ids=None -> đưa đầy đủ mọi phần.
+    """
+    present = set(SUPPORTED_EVENT_IDS) if event_ids is None else set(event_ids)
     if correlation_hints:
         hints_text = (
             "\nTÍN HIỆU TỪ BỘ LUẬT (chỉ là gợi ý, BẮT BUỘC tự xác minh lại với dữ liệu; có thể là báo động giả):\n"
@@ -420,7 +558,13 @@ def build_system_prompt(schema: dict, correlation_hints: str = "") -> str:
     else:
         hints_text = ""
 
-    legend = "\n".join(f"- {eid}: {meaning}" for eid, meaning in EVENT_MEANING.items())
+    legend_ids = list(BASE_EVENT_IDS) + [eid for eid in EVENT_MEANING if eid not in BASE_EVENT_IDS and eid in present]
+    legend = "\n".join(f"- {eid}: {EVENT_MEANING[eid]}" for eid in legend_ids)
+
+    ext = [(sign, normal) for ids, sign, normal in EXTENDED_SIGNS if ids & present]
+    ext_signs = "".join(f"{i}. {sign}\n" for i, (sign, _) in enumerate(ext, start=6))
+    ext_normals = "".join(f"- {normal}\n" for _, normal in ext if normal)
+    last_item = 5 + len(ext) if ext else 4
 
     return (
         "Bạn là Chuyên gia Điều tra & Phân tích Sự cố An toàn Thông tin (SOC Tier-3 / DFIR). "
@@ -435,18 +579,20 @@ def build_system_prompt(schema: dict, correlation_hints: str = "") -> str:
         "4. Thực thi mã độc / C2: IEX, DownloadString, Invoke-WebRequest tới URL lạ, -EncodedCommand/-enc, FromBase64String, "
         "mimikatz, procdump/comsvcs nhắm vào lsass, sửa Registry Run, schtasks /create chạy file lạ, "
         "Set-MpPreference tắt Defender, wevtutil cl / xoá nhật ký, certutil/bitsadmin tải file.\n"
-        "5. Trinh sát (MITRE T1033/T1087/T1482): chuỗi whoami, net user, net group, systeminfo, nltest đi cùng dấu hiệu khác.\n\n"
+        "5. Trinh sát (MITRE T1033/T1087/T1482): chuỗi whoami, net user, net group, systeminfo, nltest đi cùng dấu hiệu khác.\n"
+        f"{ext_signs}\n"
         "HOẠT ĐỘNG BÌNH THƯỜNG (đặt NORMAL nếu chỉ có những thứ này):\n"
         "- Đăng nhập thành công 4624 thông thường; gõ sai mật khẩu 1-2 lần rồi đăng nhập được.\n"
         "- Mở ứng dụng văn phòng/trình duyệt/công cụ (OUTLOOK, EXCEL, WINWORD, chrome, notepad, calc, explorer, VS Code, git, python...).\n"
         "- Lệnh quản trị/chẩn đoán đơn lẻ: ipconfig, ping, hostname, Get-Service, Get-Process, sao lưu, dọn đĩa.\n"
         "- Bộ phận IT tạo tài khoản nhân viên mới (net user ... /add) KHÔNG kèm thêm vào nhóm Administrators và không có dấu hiệu khác.\n"
         "- Nhiều tài khoản đăng nhập mạng (LogonType 3) từ IP nội bộ để truy cập thư mục chia sẻ.\n"
+        f"{ext_normals}"
         f"{hints_text}\n"
         "QUY TẮC PHÁN QUYẾT:\n"
         "- TUYỆT ĐỐI TRUNG THỰC VỚI DỮ LIỆU: chỉ dựa vào trường có thật trong lô này. KHÔNG bịa ra sự kiện 4625, lệnh, URL hay công cụ không có trong log.\n"
         "- Sự kiện 4688 và 4624 KHÔNG phải là dò mật khẩu.\n"
-        "- CHỈ CẦN MỘT dấu hiệu tấn công (mục 1-4) là ĐỦ để đặt ALERT. KHÔNG cần có chuỗi nhiều giai đoạn; "
+        f"- CHỈ CẦN MỘT dấu hiệu tấn công (mục 1-{last_item}) là ĐỦ để đặt ALERT. KHÔNG cần có chuỗi nhiều giai đoạn; "
         "việc không có dò mật khẩu KHÔNG phải lý do để kết luận NORMAL.\n"
         "- Cách làm: duyệt từng sự kiện, so với các dấu hiệu tấn công trước, rồi mới so với hoạt động bình thường.\n"
         "- ALERT: evidence_refs phải là event_ref của chính các sự kiện độc hại đó.\n"
@@ -464,7 +610,7 @@ def build_batch_payload(batch: list[dict]) -> str:
         counts[e["event_id"]] = counts.get(e["event_id"], 0) + 1
     stats = "\n".join(
         f"- {eid} ({EVENT_MEANING.get(eid, 'khác')}): {counts.get(eid, 0)} sự kiện"
-        for eid in sorted(set(EVENT_MEANING) | set(counts))
+        for eid in sorted(set(BASE_EVENT_IDS) | set(counts))  # chỉ mã cơ bản + mã có trong lô (giữ payload ngắn)
     )
     events = [{**e, "event_meaning": EVENT_MEANING.get(e["event_id"], "")} for e in batch]
     return (
@@ -536,13 +682,20 @@ def verify_alert(batch: list[dict], verdict: dict, model: str) -> tuple[bool, st
     """
     cited = [e for e in batch if e["event_ref"] in set(verdict.get("evidence_refs", []))] or batch
     schema = SecondOpinion.model_json_schema()
+    # Prompt động: chỉ nhắc tới loại sự kiện mở rộng khi sự kiện được trích dẫn có loại đó
+    cited_ids = {e["event_id"] for e in cited}
+    ext = ""
+    if cited_ids & {1102, 104}:
+        ext += ", xoá nhật ký (1102/104)"
+    if 7045 in cited_ids:
+        ext += ", service chạy cmd/powershell hoặc file tên ngẫu nhiên trong C:\\Windows (7045)"
     prompt = (
         "Bạn là người KIỂM DUYỆT cảnh báo SOC, nhiệm vụ là loại bỏ báo động giả. "
         "Một phân tích viên vừa kết luận các sự kiện dưới đây là tấn công. Xét TỪNG sự kiện một cách độc lập.\n"
         "Chỉ đánh dấu độc hại khi BẢN THÂN sự kiện chứa hành vi tấn công rõ ràng, ví dụ: công cụ tấn công "
         "(mimikatz, procdump lsass), tải/thực thi mã từ xa (IEX, DownloadString, -enc), tạo tài khoản qua công cụ "
         "thực thi từ xa (wmic process call create, psexec), thêm vào nhóm Administrators, xoá nhật ký, tắt Defender, "
-        "tạo persistence (Registry Run, schtasks chạy file lạ).\n"
+        f"tạo persistence (Registry Run, schtasks chạy file lạ){ext}.\n"
         "KHÔNG độc hại: đăng nhập thành công thông thường, mở ứng dụng văn phòng/trình duyệt/notepad, lệnh chẩn đoán "
         "(ipconfig, ping, hostname, Get-Service), IT tạo tài khoản nhân viên bằng 'net user ten /add' trực tiếp.\n"
         "Không bịa thông tin không có trong sự kiện. Trả JSON theo schema: " + json.dumps(schema, ensure_ascii=False)
@@ -800,6 +953,7 @@ def analyze_case(
         prompt = build_system_prompt(
             schema,
             correlation_hints="\n".join(f"- {h}" for h in batch_hints),
+            event_ids={e["event_id"] for e in batch},  # prompt động theo loại sự kiện có trong lô
         )
 
         try:
