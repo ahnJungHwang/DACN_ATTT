@@ -483,6 +483,7 @@ https://github.com/ahnJungHwang/DACN_ATTT/blob/main/Code%20Chinh/winlog-agent/DI
 ## Phần lab của Lâm: 
 
 https://drive.google.com/drive/folders/1oxePZohzI-hTTwhqE01VqO2-vGHRK1SL
+https://github.com/ahnJungHwang/DACN_ATTT/blob/main/COMPARISON_REPORT%20by%20NHL.md
 
 ## Tài liệu sử dụng
 
