@@ -1,6 +1,6 @@
 # Nhật Ký Tuần 4
 
-- **Thời gian thực hiện**:02/11/2026 - 08/11/2026
+- **Thời gian thực hiện**: 02/11/2026 - 08/11/2026
 - **Thành viên tham gia**: Lâm, Thắng
 
 
@@ -478,6 +478,10 @@ Hướng phát triển ưu tiên gồm hoàn thiện dữ liệu đánh giá; th
 Phiên lab ngày 07/11/2026 (Chương 6) cho thấy đường client → server → dashboard đã chạy được trên HTTPS, nhưng nhánh n8n còn lỗi kết nối, một máy bị tách thành hai agent và cảnh báo bị lặp cho cùng kịch bản. Các lỗi này nên được sửa trước khi chạy lại đánh giá.
 
 ---
+
+## Phần lab của Thắng: https://github.com/ahnJungHwang/DACN_ATTT/blob/main/Code%20Chinh/winlog-agent/DIEM_YEU_VA_HUONG_PHAT_TRIEN.md, https://github.com/ahnJungHwang/DACN_ATTT/blob/main/Code%20Chinh/winlog-agent/results/COMPARISON_REPORT.md
+
+## Phần lab của Lâm: 
 
 ## Tài liệu sử dụng
 
