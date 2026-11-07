@@ -1,6 +1,6 @@
 # Điểm yếu và lộ trình phát triển
 
-> Cập nhật lần cuối: 07/11/2026. Đánh dấu `[x]` khi hoàn thành, ghi ngày và commit. Trước khi bắt đầu việc mới, đối chiếu với mục tiêu đề tài trong [`/CLAUDE.md`](../../CLAUDE.md).
+> Cập nhật lần cuối: 07/11/2026. 
 
 ## Hiện trạng (07/11/2026)
 
