@@ -1,6 +1,6 @@
 ﻿[CmdletBinding()]
 param(
-    [string]$ServerUrl = "https://192.168.153.1:8443/ingest",
+    [string]$ServerUrl = "https://192.168.147.1:8443/ingest",
     [int]$IntervalSeconds = 5,
     [string]$Model = "qwen",
     [string]$LogFile = "$PSScriptRoot\client_agent.log"
@@ -11,7 +11,7 @@ if (-not $IntervalSeconds -or $IntervalSeconds -le 0) {
     $IntervalSeconds = 5
 }
 if (-not $ServerUrl) {
-    $ServerUrl = "https://192.168.153.1:8443/ingest"
+    $ServerUrl = "https://192.168.147.1:8443/ingest"
 }
 
 # 2. Bo qua loi SSL khi dung HTTPS Self-Signed Certificate
@@ -64,6 +64,8 @@ Write-Host "--------------------------------------------------------------------
 Write-AgentLog "Client Agent khoi dong. Host: $hostname ($clientIp), Server: $ServerUrl, Admin: $isAdmin"
 
 $lastSeenTime = (Get-Date).AddSeconds(-15)
+$lastSecRecord = [long]0
+$lastPsRecord = [long]0
 
 # Vong lap giam sat
 while ($true) {
@@ -79,7 +81,9 @@ while ($true) {
                     Id        = 4624, 4625, 4648, 4688
                     StartTime = $lastSeenTime
                 }
-                $secEvents = @(Get-WinEvent -FilterHashtable $secFilter -ErrorAction SilentlyContinue)
+                # Loc theo RecordId de khong gui lai su kien da gui (StartTime khong du chinh xac)
+                $secEvents = @(Get-WinEvent -FilterHashtable $secFilter -ErrorAction SilentlyContinue |
+                               Where-Object { $_.RecordId -gt $lastSecRecord })
             } catch {}
         }
 
@@ -90,7 +94,8 @@ while ($true) {
                 Id        = 4104
                 StartTime = $lastSeenTime
             }
-            $psEvents = @(Get-WinEvent -FilterHashtable $psFilter -ErrorAction SilentlyContinue)
+            $psEvents = @(Get-WinEvent -FilterHashtable $psFilter -ErrorAction SilentlyContinue |
+                          Where-Object { $_.RecordId -gt $lastPsRecord })
         } catch {}
 
         $totalNew = $secEvents.Count + $psEvents.Count
@@ -114,15 +119,17 @@ while ($true) {
                 $psXml = '<Events></Events>'
             }
 
-            # Cap nhat moc thoi gian
+            # Cap nhat moc: RecordId lon nhat da gui cho tung log + moc thoi gian (lui 2s lam vung dem)
             $maxTime = $lastSeenTime
             foreach ($e in $secEvents) {
                 if ($e.TimeCreated -gt $maxTime) { $maxTime = $e.TimeCreated }
+                if ($e.RecordId -gt $lastSecRecord) { $lastSecRecord = $e.RecordId }
             }
             foreach ($e in $psEvents) {
                 if ($e.TimeCreated -gt $maxTime) { $maxTime = $e.TimeCreated }
+                if ($e.RecordId -gt $lastPsRecord) { $lastPsRecord = $e.RecordId }
             }
-            $lastSeenTime = $maxTime.AddMilliseconds(1)
+            $lastSeenTime = $maxTime.AddSeconds(-2)
 
             $payloadObj = @{
                 client_id      = $clientIp
@@ -134,7 +141,7 @@ while ($true) {
             $payloadJson = $payloadObj | ConvertTo-Json -Depth 5
 
             try {
-                $resp = Invoke-RestMethod -Uri $ServerUrl -Method POST -ContentType "application/json; charset=utf-8" -Body $payloadJson -TimeoutSec 30
+                $resp = Invoke-RestMethod -Uri $ServerUrl -Method POST -ContentType "application/json; charset=utf-8" -Body ([System.Text.Encoding]::UTF8.GetBytes($payloadJson)) -TimeoutSec 300
                 Write-Host "  [OK] Da day thanh cong len AI Server!`n" -ForegroundColor Green
                 Write-AgentLog "[OK] Da day $totalNew su kien len AI Server thanh cong."
             } catch {

@@ -2,7 +2,7 @@
 setlocal
 chcp 65001 >nul
 
-net session >nul 2>&1
+"%SystemRoot%\System32\whoami.exe" /groups | find "S-1-16-12288" >nul 2>&1
 if %errorlevel% neq 0 (
     echo ====================================================================
     echo   [!] CANH BAO: BAN CHUA MO BANG QUYEN ADMINISTRATOR!

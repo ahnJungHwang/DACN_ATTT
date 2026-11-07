@@ -1,0 +1,4 @@
+# Giu CRLF cho script Windows (cmd va PowerShell can CRLF dung de dem dong)
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
