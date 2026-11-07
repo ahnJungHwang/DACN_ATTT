@@ -6,12 +6,12 @@
 ## 📌 TỔNG QUAN KIẾN TRÚC CLIENT - SERVER
 
 Hệ thống được thiết kế theo mô hình **SOC / EDR phân tán**:
-* **Máy AI SERVER (`192.168.153.1`)**: Máy chủ trung tâm chịu trách nhiệm chạy Local SLM (Ollama), phân tích tương quan sự kiện, nhận định nguy cơ và tự động gửi cảnh báo khẩn cấp tới Telegram.
-* **Máy CLIENT (`192.168.153.147`)**: Máy trạm cần giám sát, chạy Agent thu thập log bằng PowerShell siêu nhẹ. **Không cần cài Python, không cần cài Ollama, không tốn tài nguyên.**
+* **Máy AI SERVER (`192.168.147.1`)**: Máy chủ trung tâm chịu trách nhiệm chạy Local SLM (Ollama), phân tích tương quan sự kiện, nhận định nguy cơ và tự động gửi cảnh báo khẩn cấp tới Telegram.
+* **Máy CLIENT (`192.168.147.136`)**: Máy trạm cần giám sát, chạy Agent thu thập log bằng PowerShell siêu nhẹ. **Không cần cài Python, không cần cài Ollama, không tốn tài nguyên.**
 
 ```
 ┌──────────────────────────────────────┐             ┌─────────────────────────────────────────┐
-│     MÁY CLIENT (192.168.153.147)     │             │       MÁY SERVER (192.168.153.1)        │
+│     MÁY CLIENT (192.168.147.136)     │             │       MÁY SERVER (192.168.147.1)        │
 │                                      │             │                                         │
 │  [Windows Event Log: Security + PS]  │             │   [FastAPI Server - app.py (Port 8000)] │
 │                  │                   │             │                      │                  │
@@ -32,7 +32,7 @@ Hệ thống được thiết kế theo mô hình **SOC / EDR phân tán**:
 
 ---
 
-## 🖥️ PHẦN 1: CẤU HÌNH TRÊN MÁY AI SERVER (`192.168.153.1`)
+## 🖥️ PHẦN 1: CẤU HÌNH TRÊN MÁY AI SERVER (`192.168.147.1`)
 
 Máy Server cần cài đặt môi trường AI và ứng dụng phân tích trung tâm.
 
@@ -58,7 +58,7 @@ Máy Server cần cài đặt môi trường AI và ứng dụng phân tích tru
 ---
 
 ### 3. Mở cổng tường lửa Windows (Firewall Port 8000)
-Để máy Client (`192.168.153.147`) có thể đẩy log sang Server qua cổng `8000`, mở PowerShell với quyền **Administrator** trên Server và chạy lệnh:
+Để máy Client (`192.168.147.136`) có thể đẩy log sang Server qua cổng `8000`, mở PowerShell với quyền **Administrator** trên Server và chạy lệnh:
 ```powershell
 New-NetFirewallRule -DisplayName "WinLog Agent Server (Port 8000)" -Direction Inbound -LocalPort 8000 -Protocol TCP -Action Allow
 ```
@@ -140,7 +140,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 
 ---
 
-## 💻 PHẦN 2: CẤU HÌNH TRÊN MÁY CLIENT (`192.168.153.147`)
+## 💻 PHẦN 2: CẤU HÌNH TRÊN MÁY CLIENT (`192.168.147.136`)
 
 Máy Client **hoàn toàn không cần cài đặt Python hay thư viện ngoài**.
 
@@ -169,8 +169,8 @@ Windows mặc định không ghi lại chi tiết dòng lệnh và PowerShell. �
       WINLOG CLIENT AGENT - GIAM SAT VA DAY LOG VE SERVER
    ======================================================================
     - Client Hostname    : WINLAB
-    - Client IP          : 192.168.153.147
-    - AI Server URL      : http://192.168.153.1:8000/ingest
+    - Client IP          : 192.168.147.136
+    - AI Server URL      : http://192.168.147.1:8000/ingest
     - Chu ky quet        : 15 giay/lan
    ----------------------------------------------------------------------
    [*] Dang ket noi thu toi AI Server...
@@ -201,18 +201,18 @@ Trong khi cửa sổ `run_client.bat` vẫn đang chạy:
 
 ### 2. Quan sát chuỗi phản ứng liên hoàn của hệ thống
 
-#### Tại máy Client (`192.168.153.147`):
+#### Tại máy Client (`192.168.147.136`):
 Trong vòng 15 giây, Agent phát hiện log và đẩy sang Server:
 ```text
 [07:11:15] [PHAT HIEN SU KIEN] Security: 10 | PowerShell: 9
-  -> Dang dong goi va gui ve AI Server (http://192.168.153.1:8000/ingest)...
+  -> Dang dong goi va gui ve AI Server (http://192.168.147.1:8000/ingest)...
   [OK] Da day 19 su kien log len AI Server thanh cong!
 ```
 
-#### Tại máy Server (`192.168.153.1`):
+#### Tại máy Server (`192.168.147.1`):
 Server tiếp nhận log, kích hoạt AI Qwen suy luận và phân tích tương quan:
 ```text
-[+] Nhan log tu Client WINLAB (192.168.153.147) gom 19 su kien.
+[+] Nhan log tu Client WINLAB (192.168.147.136) gom 19 su kien.
 [*] Dang chay Local SLM (qwen) phan tich tuong quan...
 [!] Ket qua AI: ALERT (14.03s)
 [!] PHAT HIEN TAN CONG! Dang ban canh bao ve Telegram...
@@ -222,7 +222,7 @@ Server tiếp nhận log, kích hoạt AI Qwen suy luận và phân tích tươn
 #### Tại Telegram:
 Điện thoại/máy tính của bạn sẽ rung chuông và nhận ngay tin nhắn:
 > 🚨 **CẢNH BÁO BẢO MẬT TỪ CLIENT** 🚨  
-> 🖥️ **Máy Client:** `WINLAB` (`192.168.153.147`)  
+> 🖥️ **Máy Client:** `WINLAB` (`192.168.147.136`)  
 > 🕒 **Thời gian:** `2026-10-21 21:42:29`  
 > ⚠️ **Trạng thái:** `ALERT`  
 > ⏱️ **Thời gian AI xử lý:** 14.03s  

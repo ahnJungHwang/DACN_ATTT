@@ -135,7 +135,7 @@ def send_server_telegram_alert(verdict: dict, client_id: str, hostname: str, ela
 @app.post("/ingest")
 def ingest_logs(req: IngestRequest):
     """
-    Nhận log XML từ máy Client (ví dụ 192.168.153.147), phân tích bằng Local SLM
+    Nhận log XML từ máy Client (ví dụ 192.168.147.136), phân tích bằng Local SLM
     và tự động gửi cảnh báo Telegram nếu phát hiện tấn công.
     """
     import time

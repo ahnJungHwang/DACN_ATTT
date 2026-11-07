@@ -130,7 +130,7 @@ def forward_log_to_n8n(payload: dict) -> tuple[bool, dict]:
 
     for url in urls:
         try:
-            resp = requests.post(url, json=payload, timeout=60)
+            resp = requests.post(url, json=payload, timeout=600)
             if resp.status_code in (200, 201):
                 print(f"[✓] n8n Webhook da tiep nhan thanh cong tai: {url}", flush=True)
                 try:
