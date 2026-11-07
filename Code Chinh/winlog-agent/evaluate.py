@@ -59,7 +59,7 @@ def get_available_cases(data_dir: Path) -> list[dict]:
             actions = ""
             if manifest_path.is_file():
                 try:
-                    meta = json.loads(manifest_path.read_text(encoding="utf-8"))
+                    meta = json.loads(manifest_path.read_text(encoding="utf-8-sig"))
                     ground_truth = meta.get("ground_truth", "UNKNOWN").upper()
                     actions = meta.get("actions", "")
                 except Exception:
@@ -101,6 +101,14 @@ def run_single_evaluation(
         stages = verdict.get("detected_stages", [])
         evidence_refs = verdict.get("evidence_refs", [])
         reason = verdict.get("reason", "").replace("\n", " ")
+        # Nhãn riêng của AI (sau kiểm chứng + tự thẩm định), không tính lớp luật
+        ai_batch = [b["verdict"]["label"] for b in res.get("batch_results", [])]
+        if "ALERT" in ai_batch:
+            ai_label = "ALERT"
+        elif ai_batch and all(lb == "NORMAL" for lb in ai_batch):
+            ai_label = "NORMAL"
+        else:
+            ai_label = "UNKNOWN"
 
         return {
             "success": res.get("analysis_status") == "OK",
@@ -111,6 +119,8 @@ def run_single_evaluation(
             "reason": reason[:120] + ("..." if len(reason) > 120 else ""),
             "json_valid": True,
             "error": "",
+            "decision_source": verdict.get("decision_source", ""),
+            "ai_label": ai_label,
         }
     except Exception as exc:
         elapsed = round(time.perf_counter() - started, 3)
@@ -123,17 +133,19 @@ def run_single_evaluation(
             "reason": f"Lỗi: {exc}",
             "json_valid": False,
             "error": str(exc),
+            "decision_source": "error",
+            "ai_label": "ERROR",
         }
 
 
-def calculate_metrics(records: list[dict]) -> dict:
+def calculate_metrics(records: list[dict], label_key: str = "pred_label") -> dict:
     """Tính toán ma trận nhầm lẫn và các chỉ số Precision, Recall, F1."""
     tp = fp = tn = fn = unknown = errors = 0
     latencies = []
 
     for r in records:
         gt = r["ground_truth"]
-        pred = r["pred_label"]
+        pred = r[label_key]
         latencies.append(r["elapsed_seconds"])
 
         if pred == "ERROR":
@@ -183,6 +195,10 @@ def calculate_metrics(records: list[dict]) -> dict:
         "valid_json_rate": round(valid_json_rate, 1),
         "median_latency": round(median_lat, 2),
         "avg_latency": round(avg_lat, 2),
+        "alert_by_source": {
+            src: sum(1 for r in records if r[label_key] == "ALERT" and r.get("decision_source") == src)
+            for src in ("rule+ai", "ai", "rule")
+        },
     }
 
 
@@ -281,11 +297,14 @@ def main():
                 "stages": "; ".join(res["stages"]),
                 "reason": res["reason"],
                 "error": res["error"],
+                "decision_source": res["decision_source"],
+                "ai_label": res["ai_label"],
             }
             model_records.append(record)
             detailed_records.append(record)
 
         summary_by_model[model_key] = calculate_metrics(model_records)
+        summary_by_model[model_key]["ai_only"] = calculate_metrics(model_records, label_key="ai_label")
 
     # --------------------------------------------------------------------------
     # XUẤT BẢNG SO SÁNH TỔNG HỢP RA CONSOLE
@@ -309,6 +328,14 @@ def main():
         ("Tỷ lệ xuất JSON hợp lệ (Valid JSON)", lambda m: f"{summary_by_model[m]['valid_json_rate']}%"),
         ("Thời gian trung vị (Median Latency)", lambda m: f"{summary_by_model[m]['median_latency']}s"),
         ("Thời gian trung bình (Mean Latency)", lambda m: f"{summary_by_model[m]['avg_latency']}s"),
+        ("Cảnh báo do Luật + AI xác nhận", lambda m: f"{summary_by_model[m]['alert_by_source']['rule+ai']} ca"),
+        ("Cảnh báo do AI tự phát hiện", lambda m: f"{summary_by_model[m]['alert_by_source']['ai']} ca"),
+        ("Cảnh báo chỉ do Luật (AI không xác nhận)", lambda m: f"{summary_by_model[m]['alert_by_source']['rule']} ca"),
+        ("[Riêng AI] Precision", lambda m: f"{summary_by_model[m]['ai_only']['precision']}%"),
+        ("[Riêng AI] Recall", lambda m: f"{summary_by_model[m]['ai_only']['recall']}%"),
+        ("[Riêng AI] F1-Score", lambda m: f"{summary_by_model[m]['ai_only']['f1']}"),
+        ("[Riêng AI] Accuracy", lambda m: f"{summary_by_model[m]['ai_only']['accuracy']}%"),
+        ("[Riêng AI] Báo động giả / Bỏ sót", lambda m: f"{summary_by_model[m]['ai_only']['fp']} / {summary_by_model[m]['ai_only']['fn']} ca"),
     ]
 
     for label, fn in rows:
@@ -325,7 +352,7 @@ def main():
         writer = csv.DictWriter(f, fieldnames=[
             "model_key", "model_name", "case_id", "ground_truth", "pred_label",
             "is_correct", "elapsed_seconds", "json_valid", "evidence_count",
-            "stages", "reason", "error"
+            "stages", "reason", "error", "decision_source", "ai_label"
         ])
         writer.writeheader()
         writer.writerows(detailed_records)
@@ -362,20 +389,23 @@ def main():
         "",
         "## 2. Chi tiết kết quả từng ca thử nghiệm",
         "",
-        "| Model | Case ID | Ground Truth | Dự đoán AI | Kết quả | Thời gian (s) | Giai đoạn tấn công phát hiện |",
-        "|---|---|:---:|:---:|:---:|:---:|---|",
+        "| Model | Case ID | Ground Truth | Hệ thống | Riêng AI | Nguồn quyết định | Kết quả | Thời gian (s) | Giai đoạn tấn công phát hiện |",
+        "|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|",
     ])
 
     for r in detailed_records:
         status_icon = "✅ Đúng" if r["is_correct"] else "❌ Sai"
         stages_disp = r["stages"] if r["stages"] else r["reason"][:50]
         md_lines.append(
-            f"| `{r['model_key']}` | `{r['case_id']}` | **{r['ground_truth']}** | `{r['pred_label']}` | {status_icon} | {r['elapsed_seconds']}s | {stages_disp} |"
+            f"| `{r['model_key']}` | `{r['case_id']}` | **{r['ground_truth']}** | `{r['pred_label']}` | `{r['ai_label']}` | {r['decision_source']} | {status_icon} | {r['elapsed_seconds']}s | {stages_disp} |"
         )
 
     md_lines.extend([
         "",
         "## 3. Nhận định và Kết luận",
+        "- **Cơ chế quyết định**: Luật MẠNH (brute force >= 3 lần sai, tải/thực thi mã độc, thêm vào nhóm Administrators) luôn cảnh báo làm lưới an toàn; các trường hợp còn lại do AI quyết định sau khi kiểm chứng bằng chứng với dữ liệu "
+        "và qua vòng tự thẩm định (self-verification).",
+        "- **Hệ thống** = nhãn cuối cùng. **Riêng AI** = nhãn của mô hình (sau kiểm chứng), không tính lớp luật — thể hiện năng lực tự phân tích của AI.",
         "- **Độ chuẩn xác và Nhạy (Precision / Recall)**: So sánh khả năng phân biệt giữa hành vi quản trị thông thường và tấn công mạng.",
         "- **Khả năng bám sát cấu trúc (JSON Compliance)**: Đảm bảo khả năng tích hợp tự động vào hệ thống SOC/EDR.",
         "- **Khuyến nghị lựa chọn**: Mô hình có điểm F1 cao nhất và tỷ lệ False Negative = 0 nên được ưu tiên triển khai chính thức.",
