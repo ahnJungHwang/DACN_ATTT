@@ -215,6 +215,6 @@ Các tài liệu trên được dùng để đối chiếu ý nghĩa sự kiện
 
 ---
 
-## 5 ẢNH CUỘC GẶP ONLINE QUA GOOGLE MEET
+## ẢNH CUỘC GẶP ONLINE QUA GOOGLE MEET
 
 ![Ảnh cuộc gặp online qua Google Meet](images/meet.png)
