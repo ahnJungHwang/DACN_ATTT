@@ -1,0 +1,16 @@
+{
+  "case_id": "case_rnd_007_alert",
+  "category": "RandomMix",
+  "ground_truth": "ALERT",
+  "actions": "Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_mixed_03_recon_then_mimikatz, evtx:Lateral_Movement__LM_4624_mimikatz_sekurlsa_pth_source_machine, data01:case_attack_02_ps_c2_download",
+  "expected_stages": [],
+  "sources": [
+    "data01:case_mixed_03_recon_then_mimikatz",
+    "evtx:Lateral_Movement__LM_4624_mimikatz_sekurlsa_pth_source_machine",
+    "data01:case_attack_02_ps_c2_download"
+  ],
+  "security_count": 12,
+  "powershell_count": 2,
+  "seed": 2026,
+  "created_at": "2026-11-07T15:47:40Z"
+}

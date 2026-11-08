@@ -1,0 +1,16 @@
+{
+  "case_id": "case_rnd_032_alert",
+  "category": "RandomMix",
+  "ground_truth": "ALERT",
+  "actions": "Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_mixed_03_recon_then_mimikatz, evtx:Credential_Access__Zerologon_VoidSec_CVE_2020_1472_4626_LT3_Anonym_follwedby_474, data01:case_attack_02_ps_c2_download",
+  "expected_stages": [],
+  "sources": [
+    "data01:case_mixed_03_recon_then_mimikatz",
+    "evtx:Credential_Access__Zerologon_VoidSec_CVE_2020_1472_4626_LT3_Anonym_follwedby_474",
+    "data01:case_attack_02_ps_c2_download"
+  ],
+  "security_count": 14,
+  "powershell_count": 2,
+  "seed": 2026,
+  "created_at": "2026-11-07T15:47:40Z"
+}

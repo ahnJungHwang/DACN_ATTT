@@ -6,33 +6,34 @@
 ## 📌 TỔNG QUAN KIẾN TRÚC CLIENT - SERVER
 
 Hệ thống được thiết kế theo mô hình **SOC / EDR phân tán**:
-* **Máy AI SERVER (`192.168.147.1`)**: Máy chủ trung tâm chịu trách nhiệm chạy Local SLM (Ollama), phân tích tương quan sự kiện, nhận định nguy cơ và tự động gửi cảnh báo khẩn cấp tới Telegram.
-* **Máy CLIENT (`192.168.147.136`)**: Máy trạm cần giám sát, chạy Agent thu thập log bằng PowerShell siêu nhẹ. **Không cần cài Python, không cần cài Ollama, không tốn tài nguyên.**
+* **Máy AI SERVER (`192.168.153.1`)**: Máy chủ trung tâm chịu trách nhiệm chạy Local SLM (Ollama), phân tích tương quan sự kiện, nhận định nguy cơ và tự động gửi cảnh báo khẩn cấp tới Telegram.
+* **Máy CLIENT (`192.168.153.147`)**: Máy trạm cần giám sát, chạy Agent thu thập log bằng PowerShell siêu nhẹ. **Không cần cài Python, không cần cài Ollama, không tốn tài nguyên.**
 
 ```
-┌──────────────────────────────────────┐             ┌─────────────────────────────────────────┐
-│     MÁY CLIENT (192.168.147.136)     │             │       MÁY SERVER (192.168.147.1)        │
-│                                      │             │                                         │
-│  [Windows Event Log: Security + PS]  │             │   [FastAPI Server - app.py (Port 8000)] │
-│                  │                   │             │                      │                  │
-│       (Định kỳ 15 giây/lần)          │             │                      ▼                  │
-│                  ▼                   │             │   [Correlation Engine + Ollama SLM]     │
-│         [client_agent.ps1]           │             │          (Model: qwen2.5:3b)            │
-│                  │                   │             │                      │                  │
-│                  └──── Gửi HTTP POST ─────────────►│                      ▼                  │
-│                        (Port 8000)   │             │             Kết luận: ALERT?            │
-└──────────────────────────────────────┘             │                      │                  │
-                                                     │                      ▼                  │
-                                                     │         [Telegram Bot Notification]     │
-                                                     └──────────────────────┬──────────────────┘
+┌──────────────────────────────────────┐             ┌──────────────────────────────────────────────────┐
+│     MÁY CLIENT (192.168.153.147)     │             │            MÁY SERVER (192.168.153.1)            │
+│                                      │             │                                                  │
+│  [Windows Event Log: Security + PS]  │             │   [FastAPI Server - app.py (Port 8000/9443)]     │
+│                  │                   │             │                      │                           │
+│       (Định kỳ 5-15s/lần)            │             │                      ▼                           │
+│                  ▼                   │             │   [Correlation Engine + Ollama Local SLM]        │
+│         [client_agent.ps1]           │             │            (Model: qwen2.5:3b)                   │
+│                  │                   │             │                      │                           │
+│                  └──── Gửi HTTP POST ─────────────►│                      ▼                           │
+│                        (Port 8000)   │             │   [Đẩy Webhook sang n8n Workflow (Port 5679)]    │
+└──────────────────────────────────────┘             │                      │                           │
+                                                     │                      ▼                           │
+                                                     │           [n8n Workflow Automation]              │
+                                                     │          (IF: ALERT ➔ Format Markdown)           │
+                                                     └──────────────────────┬───────────────────────────┘
                                                                             │
                                                                             ▼
-                                                                📱 Điện thoại chuyên viên SOC
+                                                                📱 Telegram Chuyên viên SOC
 ```
 
 ---
 
-## 🖥️ PHẦN 1: CẤU HÌNH TRÊN MÁY AI SERVER (`192.168.147.1`)
+## 🖥️ PHẦN 1: CẤU HÌNH TRÊN MÁY AI SERVER (`192.168.153.1`)
 
 Máy Server cần cài đặt môi trường AI và ứng dụng phân tích trung tâm.
 
@@ -48,99 +49,49 @@ Máy Server cần cài đặt môi trường AI và ứng dụng phân tích tru
 
 ### 2. Cài đặt Python & Thư viện dự án
 1. Cài đặt Python 3.10 trở lên (nhớ tích chọn **"Add python.exe to PATH"** khi cài).
-2. Mở PowerShell tại thư mục dự án `winlog-agent` và tạo môi trường ảo:
+2. Mở PowerShell tại thư mục dự án `D:\Freelancer\AI_agent_ollama\winlog-agent` và tạo môi trường ảo:
    ```powershell
-   cd winlog-agent
+   cd D:\Freelancer\AI_agent_ollama\winlog-agent
    python -m venv .venv
-   .\.venv\Scripts\pip install -r requirements.txt
+   .\.venv\Scripts\pip install fastapi uvicorn requests pydantic
    ```
 
 ---
 
 ### 3. Mở cổng tường lửa Windows (Firewall Port 8000)
-Để máy Client (`192.168.147.136`) có thể đẩy log sang Server qua cổng `8000`, mở PowerShell với quyền **Administrator** trên Server và chạy lệnh:
+Để máy Client (`192.168.153.147`) có thể đẩy log sang Server qua cổng `8000`, mở PowerShell với quyền **Administrator** trên Server và chạy lệnh:
 ```powershell
 New-NetFirewallRule -DisplayName "WinLog Agent Server (Port 8000)" -Direction Inbound -LocalPort 8000 -Protocol TCP -Action Allow
 ```
 
 ---
 
-### 4. Hướng dẫn tạo và cấu hình Telegram Bot nhận cảnh báo (Chi tiết từ đầu)
+### 4. Khởi động Docker n8n & Nạp Workflow Cảnh báo SOC
 
-Để hệ thống có thể tự động gửi thông báo khẩn cấp về điện thoại hoặc máy tính của bạn khi phát hiện tấn công, hãy làm theo 4 bước sau:
+Hệ thống sử dụng **n8n Workflow Automation** làm trung tâm điều phối và gửi cảnh báo tới Telegram:
 
-#### Bước 4.1 — Tạo Bot mới qua BotFather
-1. Mở ứng dụng **Telegram** (hoặc truy cập [Telegram Web](https://web.telegram.org)).
-2. Tại ô tìm kiếm (Search), gõ tìm kiếm: **`@BotFather`** *(chú ý chọn tài khoản chính thức có dấu tích xanh xác thực của Telegram)*.
-3. Bấm nút **START** (hoặc gõ gửi lệnh `/start`).
-4. Gửi tiếp lệnh: **`/newbot`**
-5. BotFather sẽ yêu cầu nhập tên hiển thị của Bot:
-   - Gõ tên bất kỳ bạn thích, ví dụ: `SOC Alert Bot` hoặc `AI Log Monitoring`.
-6. BotFather sẽ yêu cầu nhập **Username** cho Bot (bắt buộc phải kết thúc bằng chữ `bot` hoặc `_bot`):
-   - Ví dụ: `my_soc_alert_bot` hoặc `winlog_detector_bot`.
-7. Khi tạo thành công, BotFather sẽ gửi lại một thông điệp kèm chuỗi mã **HTTP API Token** có dạng:
-   ```text
-   Use this token to access the HTTP API:
-   1234567890:AAH_xxx_ABCdef1234567890XYZ
-   ```
-   👉 Hãy lưu lại chuỗi này, đây chính là **`TELEGRAM_BOT_TOKEN`**.
+1. Click đúp vào file: 👉 **`run_n8n.bat`** (hoặc gõ `docker compose up -d`).
+2. Mở trình duyệt web truy cập: **`http://localhost:5679`**
+3. Nếu là lần đầu mở n8n, hãy tạo tài khoản Admin (Email & Password tùy ý).
+4. Tại thanh menu bên trái, vào mục **Workflows** ➔ Bấm nút **`Add workflow`** (hoặc biểu tượng `...` góc phải) ➔ Chọn **`Import from file`**.
+5. Chọn file **`winlog_soc_workflow.json`** ngay trong thư mục dự án.
+6. Bật công tắc **`Active`** (chuyển sang màu xanh lá) ở góc trên bên phải để n8n kích hoạt webhook lắng nghe tại đường dẫn: `http://localhost:5679/webhook/windows-log` (hoặc cổng 5678 tùy cấu hình của bạn).
 
 ---
 
-#### Bước 4.2 — Lấy Chat ID của bạn (Nơi nhận tin nhắn)
-Bot cần biết ID tài khoản của bạn để gửi thông báo riêng tư:
-1. Tại ô tìm kiếm của Telegram, gõ tìm: **`@userinfobot`**
-2. Bấm vào bot có tên **User Info Bot** và bấm **START**.
-3. Bot sẽ phản hồi lại ngay thông tin tài khoản của bạn, trong đó có một dòng số:
-   ```text
-   Id: 987654321
-   ```
-   👉 Hãy copy dãy số đó, đây chính là **`TELEGRAM_CHAT_ID`**.
-
-*(Lưu ý nếu muốn gửi vào Group Telegram của đội ngũ SOC: Thêm bot vừa tạo vào Group, cấp quyền gửi tin, sau đó lấy Chat ID của Group dạng số âm, ví dụ `-1001234567890`).*
-
----
-
-#### Bước 4.3 — Kích hoạt Bot (Rất quan trọng - Tránh lỗi `Chat not found`)
-Telegram có chính sách bảo mật chống spam: **Bot không được phép tự ý gửi tin nhắn cho người dùng nếu người dùng đó chưa từng chủ động mở lời với bot.**
-1. Tìm kiếm con bot bạn vừa tạo ở Bước 4.1 (ví dụ `@my_soc_alert_bot`).
-2. Bấm nút **START** ở dưới cùng khung chat (hoặc gửi tin nhắn bất kỳ như `hi` hay `alo`).
-3. Sau khi bạn đã gửi tin nhắn mở đầu, bot đã sẵn sàng gửi cảnh báo cho bạn.
-
----
-
-#### Bước 4.4 — Cấu hình Token và Chat ID vào hệ thống
-Trên máy Server, bạn có 2 cách để cấu hình thông số vừa lấy được:
-
-* **Cách 1 (Sửa trực tiếp trong code - Nhanh nhất)**:
-  Mở file `app.py` bằng Notepad hoặc VSCode, tìm đến dòng cấu hình Telegram và thay thế giá trị của bạn vào:
-  ```python
-  TELEGRAM_BOT_TOKEN = "ĐIỀN_TOKEN_BOT_VỪA_LẤY_Ở_BƯỚC_4.1_VÀO_ĐÂY"
-  TELEGRAM_CHAT_ID = "ĐIỀN_CHAT_ID_VỪA_LẤY_Ở_BƯỚC_4.2_VÀO_ĐÂY"
-  ```
-
-* **Cách 2 (Dùng biến môi trường - Khuyên dùng trong sản xuất)**:
-  Thiết lập biến môi trường trên Windows PowerShell trước khi chạy server:
-  ```powershell
-  $env:TELEGRAM_BOT_TOKEN = "ĐIỀN_TOKEN_BOT_VÀO_ĐÂY"
-  $env:TELEGRAM_CHAT_ID = "ĐIỀN_CHAT_ID_VÀO_ĐÂY"
-  ```
-
----
-
-### 5. Khởi động Server
-Trên máy Server, bạn chỉ cần click đúp vào file:
-👉 **`run_server.bat`**
+### 5. Khởi động AI Server qua HTTPS (Port 9443)
+Do Workflow trong n8n kết nối tới API Server qua địa chỉ `https://host.docker.internal:9443/ingest`, trên máy Server bạn hãy khởi chạy bằng file HTTPS:
+👉 Click đúp vào file: **`run_server_https.bat`**
 
 Cửa sổ sẽ hiện lên và giữ nguyên trạng thái lắng nghe:
 ```text
-INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Uvicorn running on https://0.0.0.0:9443 (Press CTRL+C to quit)
 ```
-*(Hãy luôn giữ cửa sổ này chạy khi thực hiện giám sát).*
+*(Server đã sẵn sàng nhận log từ Client, tự động chuyển tiếp vào n8n Webhook `windows-log` và phân tích AI khi n8n gọi lại).*
 
 ---
 
-## 💻 PHẦN 2: CẤU HÌNH TRÊN MÁY CLIENT (`192.168.147.136`)
+## 💻 PHẦN 2: CẤU HÌNH TRÊN MÁY CLIENT (`192.168.153.147`)
 
 Máy Client **hoàn toàn không cần cài đặt Python hay thư viện ngoài**.
 
@@ -169,8 +120,8 @@ Windows mặc định không ghi lại chi tiết dòng lệnh và PowerShell. �
       WINLOG CLIENT AGENT - GIAM SAT VA DAY LOG VE SERVER
    ======================================================================
     - Client Hostname    : WINLAB
-    - Client IP          : 192.168.147.136
-    - AI Server URL      : http://192.168.147.1:8000/ingest
+    - Client IP          : 192.168.153.147
+    - AI Server URL      : http://192.168.153.1:8000/ingest
     - Chu ky quet        : 15 giay/lan
    ----------------------------------------------------------------------
    [*] Dang ket noi thu toi AI Server...
@@ -201,34 +152,43 @@ Trong khi cửa sổ `run_client.bat` vẫn đang chạy:
 
 ### 2. Quan sát chuỗi phản ứng liên hoàn của hệ thống
 
-#### Tại máy Client (`192.168.147.136`):
+#### Tại máy Client (`192.168.153.147`):
 Trong vòng 15 giây, Agent phát hiện log và đẩy sang Server:
 ```text
 [07:11:15] [PHAT HIEN SU KIEN] Security: 10 | PowerShell: 9
-  -> Dang dong goi va gui ve AI Server (http://192.168.147.1:8000/ingest)...
+  -> Dang dong goi va gui ve AI Server (http://192.168.153.1:8000/ingest)...
   [OK] Da day 19 su kien log len AI Server thanh cong!
 ```
 
-#### Tại máy Server (`192.168.147.1`):
-Server tiếp nhận log, kích hoạt AI Qwen suy luận và phân tích tương quan:
+#### Tại máy Server (`192.168.153.1`):
+Server tiếp nhận log, kích hoạt AI Qwen suy luận và chuyển tiếp kết quả sang n8n:
 ```text
-[+] Nhan log tu Client WINLAB (192.168.147.136) gom 19 su kien.
+[+] Nhan log tu Client WINLAB (192.168.153.147) gom 19 su kien.
 [*] Dang chay Local SLM (qwen) phan tich tuong quan...
 [!] Ket qua AI: ALERT (14.03s)
-[!] PHAT HIEN TAN CONG! Dang ban canh bao ve Telegram...
-[✓] Da gui canh bao Telegram thanh cong!
+[!] PHAT HIEN TAN CONG! Dang kich hoat luong n8n SOC Workflow...
+[*] Dang day ket qua sang n8n Workflow (http://127.0.0.1:5679/webhook/winlog-alert)...
+[✓] Da day du lieu thanh cong vao luong n8n! (Endpoint: http://127.0.0.1:5679/webhook/winlog-alert)
+[✓] n8n Engine dang dieu phoi: IF (ALERT) -> Format -> Telegram Alert.
 ```
 
-#### Tại Telegram:
+#### Tại n8n Workflow & Telegram:
+Trên giao diện `http://localhost:5679`, bạn sẽ thấy các node sáng đèn xanh:
+1. **Webhook Nhận Log từ AI Server**: Tiếp nhận gói JSON từ `app.py`.
+2. **IF - Kiểm tra nhãn ALERT**: Đánh giá điều kiện `label == "ALERT"`.
+3. **Định dạng Cảnh báo Markdown**: Ghép các trường bằng chứng, tiến trình, thời gian xử lý.
+4. **Gửi Cảnh báo tới Telegram Bot**: Thực hiện gửi tin nhắn cảnh báo tới chuyên viên SOC.
+
 Điện thoại/máy tính của bạn sẽ rung chuông và nhận ngay tin nhắn:
-> 🚨 **CẢNH BÁO BẢO MẬT TỪ CLIENT** 🚨  
-> 🖥️ **Máy Client:** `WINLAB` (`192.168.147.136`)  
+> 🚨 **CẢNH BÁO BẢO MẬT TỪ N8N SOC WORKFLOW** 🚨  
+> 🖥️ **Máy Client:** `WINLAB` (`192.168.153.147`)  
 > 🕒 **Thời gian:** `2026-10-21 21:42:29`  
 > ⚠️ **Trạng thái:** `ALERT`  
 > ⏱️ **Thời gian AI xử lý:** 14.03s  
-> 🎯 **Giai đoạn:** `Credential Access, Persistence, Privilege Escalation`  
+> 🎯 **Giai đoạn MITRE:** `Credential Access, Persistence, Privilege Escalation`  
 > 📝 **Chi tiết phát hiện:** Phát hiện 5 lần đăng nhập thất bại liên tiếp (Event 4625) nhằm vào tài khoản 'fake_hacker_test'; lệnh tạo backdoor user và gán quyền Administrators; lệnh PowerShell tải mã độc từ xa.  
-> 🔍 **Bằng chứng:** `E0008, E0009, E0010, E0011, E0012, E0022, E0024...`
+> 🔍 **Bằng chứng:** `E0008, E0009, E0010, E0011, E0012, E0022, E0024...`  
+> ⚡ **Điều phối bởi:** n8n Workflow Automation Engine
 
 ---
 
@@ -237,6 +197,7 @@ Server tiếp nhận log, kích hoạt AI Qwen suy luận và phân tích tươn
 | Tình trạng | Nguyên nhân | Cách xử lý |
 |---|---|---|
 | **Client báo: `[!] CANH BAO: Chua ket noi duoc toi AI Server`** | Tường lửa trên Server chặn cổng 8000 hoặc Server chưa bật. | 1. Đảm bảo file `run_server.bat` đang chạy trên Server.<br>2. Chạy lệnh mở cổng 8000 trong PowerShell Admin trên Server (xem Bước 1.3). |
+| **Server báo: `[!] Khong the ket noi toi n8n Webhook`** | Container n8n chưa bật hoặc workflow n8n chưa được Active. | 1. Chạy `run_n8n.bat` để bật Docker n8n.<br>2. Truy cập `http://localhost:5679` và kiểm tra công tắc **Active** của workflow đã bật màu xanh chưa. |
 | **Cửa sổ CMD trên Client đứng yên, không quét tiếp** | Người dùng click chuột vào cửa sổ CMD gây ra chế độ **Select/QuickEdit** (Windows đóng băng tiến trình). | Bấm vào cửa sổ CMD và ấn phím **`ENTER`** (hoặc click chuột phải) để thoát trạng thái bôi đen. |
 | **Telegram không nhận được tin nhắn** | Tài khoản Telegram chưa bấm `START` với bot. | Mở cuộc trò chuyện với con Bot của bạn và bấm nút **START** (hoặc gửi tin nhắn bất kỳ cho bot). |
 | **Client không bắt được sự kiện sau khi chạy lệnh tấn công** | Chưa chạy `setup_client.bat` bằng quyền Administrator. | Click chuột phải `setup_client.bat` chọn **Run as administrator** để Windows bật tính năng ghi log. |
@@ -247,13 +208,17 @@ Server tiếp nhận log, kích hoạt AI Qwen suy luận và phân tích tươn
 
 | File | Máy chạy | Chức năng |
 |---|---|---|
-| **`app.py`** | Server | API nhận log, tích hợp Qwen AI và Telegram Alert. |
-| **`analyze.py`** | Server | Lõi phân tích tương quan sự kiện, tiền lọc nhiễu, prompt AI. |
+| **`app.py`** | Server | API nhận log, phân tích bằng Qwen AI và chuyển tiếp sang n8n Webhook. |
+| **`winlog_soc_workflow.json`** | Server / n8n | File cấu hình toàn bộ luồng tự động hóa n8n (Webhook ➔ IF ➔ Telegram). |
+| **`run_n8n.bat`** | Server | 1-Click khởi chạy Docker n8n trên cổng 5679. |
+| **`docker-compose.yml`** | Server | Cấu hình service n8n container và mạng kết nối với host. |
+| **`analyze.py`** | Server | Lõi phân tích tương quan sự kiện, tiền lọc nhiễu, prompt AI Local SLM. |
 | **`generate_data01.py`** | Server | Script tự động khởi tạo bộ Benchmark 40 ca kiểm thử chuẩn vào thư mục `data01/`. |
 | **`evaluate.py`** | Server | Script tự động chạy benchmark so sánh Qwen và Llama, tính Precision/Recall/F1. |
 | **`run_evaluation.bat`** | Server | File 1-click khởi chạy đánh giá so sánh và xuất báo cáo CSV/Markdown. |
 | **`run_server.bat`** | Server | File 1-click khởi động Server API cổng 8000. |
+| **`run_server_https.bat`** | Server | File 1-click khởi động Server API bảo mật HTTPS cổng 9443. |
 | **`setup_client.bat`** | Client | File 1-click bật chính sách Windows Audit (Process Creation, PowerShell). |
 | **`run_client.bat`** | Client | File 1-click khởi chạy Agent thu gom log. |
-| **`client_agent.ps1`** | Client | Script quét Windows Event Log mỗi 15s và đẩy sang Server. |
+| **`client_agent.ps1`** | Client | Script quét Windows Event Log mỗi 5-15s và đẩy sang Server. |
 | **`simulate_attack.bat`** | Client | File mô phỏng 3 chuỗi tấn công thực tế (tự động dọn dẹp). |

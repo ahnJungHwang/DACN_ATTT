@@ -1,0 +1,68 @@
+{
+  "seed": 2026,
+  "source": "F:\\winlog-agent_update_new\\winlog-agent_update\\winlog-agent\\data01",
+  "anonymized": true,
+  "count": 40,
+  "mapping": {
+    "users": {
+      "user_general": "user01",
+      "user_typo": "user02",
+      "shadow_root": "user03",
+      "clerk": "user04",
+      "admin_sys": "user05",
+      "user_office": "user06",
+      "recon_target": "user07",
+      "accountant": "user08",
+      "user_finance": "user09",
+      "backdoor_adm": "user10",
+      "backup_user": "user11",
+      "attacker": "user12",
+      "admin_dom": "user13",
+      "backup_svc": "user14",
+      "staff_2": "user15",
+      "shadow_admin": "user16",
+      "operator": "user17",
+      "hr_victim": "user18",
+      "staff_1": "user19",
+      "admin_corp": "user20",
+      "hr_staff": "user21",
+      "it_support": "user22",
+      "nhanvien_moi": "user23",
+      "dev_lead": "user24",
+      "admin_chief": "user25",
+      "dev_user": "user26",
+      "domain_admin": "user27",
+      "user_b": "user28",
+      "compromised_user": "user29",
+      "scanner": "user30",
+      "user_a": "user31",
+      "admin_backup": "user32",
+      "night_operator": "user33"
+    },
+    "hosts": {
+      "WORKSTATION-SOC": "WS-8901"
+    },
+    "domains": {
+      "exploit-kit.biz": "host01.net",
+      "malware-drop.ru": "host02.net",
+      "threat.net": "host03.net",
+      "tool.lab": "host04.net",
+      "c2-malicious.xyz": "host05.net",
+      "c2.server": "host06.net",
+      "evil.org": "host07.net",
+      "evil-actor.xyz": "host08.net",
+      "rev.c2": "host09.net",
+      "npm-typo.org": "host10.net"
+    },
+    "tokens": {
+      "implant": "obj01",
+      "beacon": "obj02",
+      "backdoor": "obj03",
+      "steal_token": "obj04",
+      "hack123": "obj05",
+      "reverse": "obj06",
+      "meterpreter": "obj07",
+      "payload": "obj08"
+    }
+  }
+}

@@ -4,10 +4,26 @@ chcp 65001 >nul
 cd /d "%~dp0"
 title WinLog AI SOC - Demo 1: Quick Attack Simulation
 
-powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$code = (Get-Content -LiteralPath '%~f0' | Select-Object -Skip 10) -join [Environment]::NewLine; Invoke-Expression $code"
+:: Kiem tra quyen Administrator
+net session >nul 2>&1
+if %errorlevel% neq 0 (
+    echo ====================================================================
+    echo   [!] CANH BAO: FILE SIMULATE CAN CHAY VOI QUYEN ADMINISTRATOR!
+    echo ====================================================================
+    echo   De tao duoc Event 4688 ^(Backdoor User^) va Event 4625 ^(Brute-force^),
+    echo   Vui long click chuot phai vao file nay va chon "Run as administrator".
+    echo ====================================================================
+    echo.
+    pause
+    exit /b
+)
+
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$l = Get-Content -LiteralPath '%~f0'; $i = [array]::IndexOf($l, '#PS_START'); Invoke-Expression (($l[($i + 1)..($l.Count - 1)]) -join [Environment]::NewLine)"
 echo.
 pause
 exit /b
+
+#PS_START
 
 # ==============================================================================
 # DEMO 1: KICH BAN MO PHONG TAN CONG NHANH TU DONG (1-CLICK RUN)
@@ -49,8 +65,8 @@ net localgroup Administrators hacker_soc_test /add
 Write-Host " [OK] Da tao xong su kien Event 4688." -ForegroundColor Green
 Write-Host ""
 
-Write-Host "[*] Dang cho 5 giay de Client Agent kip quet va gui su kien..." -ForegroundColor Cyan
-Start-Sleep -Seconds 5
+Write-Host "[*] Dang cho 8 giay de Client Agent kip quet va gui su kien..." -ForegroundColor Cyan
+Start-Sleep -Seconds 8
 
 Write-Host "[*] Dang tu dong xoa user test de giu sach may an toan..." -ForegroundColor Cyan
 net user hacker_soc_test /delete
@@ -59,5 +75,6 @@ Write-Host ""
 
 Write-Host "======================================================================" -ForegroundColor Green
 Write-Host "   DA KICH HOAT CHUOI TAN CONG DEMO 1 THANH CONG!" -ForegroundColor Green
-Write-Host "   Hay quan sat cua so Client Agent va kiem tra Telegram ngay!" -ForegroundColor Yellow
+Write-Host "   -> Nhin sang cua so Client Agent de xem Agent bat su kien!" -ForegroundColor Yellow
+Write-Host "   -> Dong thoi kiem tra tin nhan Telegram tu bot!" -ForegroundColor Yellow
 Write-Host "======================================================================" -ForegroundColor Green

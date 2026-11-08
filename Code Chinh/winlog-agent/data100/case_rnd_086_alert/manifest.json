@@ -1,0 +1,14 @@
+{
+  "case_id": "case_rnd_086_alert",
+  "category": "RandomMix",
+  "ground_truth": "ALERT",
+  "actions": "Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_08_schtasks_persistence",
+  "expected_stages": [],
+  "sources": [
+    "data01:case_attack_08_schtasks_persistence"
+  ],
+  "security_count": 1,
+  "powershell_count": 1,
+  "seed": 2026,
+  "created_at": "2026-11-07T15:47:40Z"
+}

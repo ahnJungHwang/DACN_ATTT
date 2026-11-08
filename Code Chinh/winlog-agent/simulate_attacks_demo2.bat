@@ -2,12 +2,27 @@
 setlocal
 chcp 65001 >nul
 cd /d "%~dp0"
-title WinLog AI SOC - Demo 2: Diverse Attack Scenarios (MITRE ATT&CK)
+title WinLog AI SOC - Demo 2: Diverse Attack Scenarios (MITRE ATT^&CK)
 
-powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$code = (Get-Content -LiteralPath '%~f0' | Select-Object -Skip 10) -join [Environment]::NewLine; Invoke-Expression $code"
+:: Kiem tra quyen Administrator
+net session >nul 2>&1
+if %errorlevel% neq 0 (
+    echo ====================================================================
+    echo   [!] CANH BAO: FILE SIMULATE CAN CHAY VOI QUYEN ADMINISTRATOR!
+    echo ====================================================================
+    echo   Vui long click chuot phai vao file nay va chon "Run as administrator".
+    echo ====================================================================
+    echo.
+    pause
+    exit /b
+)
+
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$l = Get-Content -LiteralPath '%~f0'; $i = [array]::IndexOf($l, '#PS_START'); Invoke-Expression (($l[($i + 1)..($l.Count - 1)]) -join [Environment]::NewLine)"
 echo.
 pause
 exit /b
+
+#PS_START
 
 # ==============================================================================
 # DEMO 2: KICH BAN MO PHONG TAN CONG DA DANG (MENU TUONG TAC MITRE ATT&CK)

@@ -1,124 +1,147 @@
 {
-  "name": "WinLog SOC - windows-log",
-  "id": "winlogSocWebhook1",
-  "active": false,
-  "settings": { "executionOrder": "v1" },
+  "name": "My workflow 2",
   "nodes": [
     {
-      "id": "a1000000-0000-4000-8000-000000000001",
-      "name": "Webhook windows-log",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [0, 0],
-      "webhookId": "5d0c6f0e-7a51-4c1e-9a31-0f2f5b8e7a01",
       "parameters": {
         "httpMethod": "POST",
         "path": "windows-log",
-        "responseMode": "responseNode",
+        "responseMode": "lastNode",
         "options": {}
-      }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "42719e1f-af88-413f-a304-c15833e6260d",
+      "name": "Webhook",
+      "webhookId": "54118b81-3cde-4eb6-b57e-fec0e42881f7"
     },
     {
-      "id": "a1000000-0000-4000-8000-000000000002",
-      "name": "AI Analyze (Server /ingest)",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [240, 0],
       "parameters": {
         "method": "POST",
-        "url": "https://host.docker.internal:8443/ingest",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [ { "name": "x-n8n-request", "value": "true" } ]
-        },
+        "url": "https://host.docker.internal:9443/ingest",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify($json.body) }}",
+        "jsonBody": "={\n  \"client_id\": \"{{ $json.body.client_id }}\",\n  \"hostname\": \"{{ $json.body.hostname }}\",\n  \"security_xml\": \"{{ $json.body.security_xml }}\",\n  \"powershell_xml\": \"{{ $json.body.powershell_xml }}\",\n  \"model\": \"qwen\"\n}",
         "options": {
-          "allowUnauthorizedCerts": true,
-          "timeout": 600000
+          "allowUnauthorizedCerts": true
         }
-      }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "3b90bf17-e0c2-4c9b-b373-db2a6f5e0e72",
+      "name": "HTTP Request"
     },
     {
-      "id": "a1000000-0000-4000-8000-000000000003",
-      "name": "Is ALERT?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [480, 0],
       "parameters": {
         "conditions": {
-          "options": { "caseSensitive": true, "typeValidation": "loose" },
-          "combinator": "and",
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
           "conditions": [
             {
-              "id": "c1",
+              "id": "c981e48f-388e-483e-9ee4-03cc85b77ace",
               "leftValue": "={{ $json.verdict.label }}",
               "rightValue": "ALERT",
-              "operator": { "type": "string", "operation": "equals" }
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
             }
-          ]
+          ],
+          "combinator": "and"
         },
         "options": {}
-      }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        448,
+        0
+      ],
+      "id": "6178fd0f-62c5-4efd-acc9-6d018cf1b02c",
+      "name": "If"
     },
     {
-      "id": "a1000000-0000-4000-8000-000000000004",
-      "name": "Telegram Alert",
+      "parameters": {
+        "chatId": "6269241707",
+        "text": "=🚨 CẢNH BÁO PHÁT HIỆN TẤN CÔNG (AI SOC)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🖥️ Máy trạm: {{ $json.hostname || $json.client_id || 'Endpoint-01' }}\n⚠️ Đánh giá: {{ $json.verdict.label }}\n🎯 Kỹ thuật: {{ $json.verdict.detected_stages ? $json.verdict.detected_stages.join(', ') : 'N/A' }}\n📝 Chi tiết: {{ $json.verdict.reason }}\n🔍 Bằng chứng: {{ $json.verdict.evidence_refs ? $json.verdict.evidence_refs.join(', ') : 'N/A' }}",
+        "additionalFields": {}
+      },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
-      "position": [720, -120],
-      "onError": "continueRegularOutput",
+      "position": [
+        672,
+        -96
+      ],
+      "id": "0770410a-02e0-43b4-8c26-f27cba5ab7a5",
+      "name": "Send a text message",
+      "webhookId": "fa5d5786-f2e1-41d9-9eee-b0fa9006c453",
       "credentials": {
-        "telegramApi": { "id": "rFNcHEVx81X5OkpZ", "name": "Telegram DACNAIagentbot" }
-      },
-      "parameters": {
-        "chatId": "6205012466",
-        "text": "={{ $json.text }}",
-        "additionalFields": { "appendAttribution": false, "parse_mode": "HTML" }
-      }
-    },
-    {
-      "id": "a1000000-0000-4000-8000-000000000006",
-      "name": "Build Alert Text",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [600, -120],
-      "parameters": {
-        "jsCode": "const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst r = $json;\nconst v = r.verdict || {};\nconst stages = (v.detected_stages || []).join(', ') || 'Không xác định';\nconst ev = (v.evidence_refs || []).join(', ') || 'N/A';\nlet reason = String(v.reason || '');\nif (reason.length > 3000) reason = reason.slice(0, 3000) + '…';\nconst text = [\n  '🚨 <b>CẢNH BÁO BẢO MẬT TỪ CLIENT</b> 🚨',\n  '',\n  `🖥️ <b>Máy:</b> <code>${esc(r.hostname)}</code> (<code>${esc(r.client_id)}</code>)`,\n  `🕒 <b>Thời gian:</b> ${esc(new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }))}`,\n  `⚠️ <b>Kết luận:</b> <b>${esc(v.label)}</b>`,\n  `⏱️ <b>AI xử lý:</b> ${esc(r.elapsed_seconds)}s`,\n  `🎯 <b>Giai đoạn:</b> ${esc(stages)}`,\n  `🧠 <b>Nguồn quyết định:</b> ${esc(({ 'rule+ai': 'Bộ luật + AI xác nhận', 'ai': 'AI tự phát hiện (đã tự thẩm định)', 'rule': 'Bộ luật (AI không xác nhận)' })[(r.result && r.result.verdict && r.result.verdict.decision_source) || ''] || 'Không rõ')}`,\n  '',\n  `📝 <b>Chi tiết:</b>\\n${esc(reason)}`,\n  '',\n  `🔍 <b>Bằng chứng:</b> <code>${esc(ev)}</code>`,\n].join('\\n');\nreturn [{ json: { text } }];"
-      }
-    },
-    {
-      "id": "a1000000-0000-4000-8000-000000000005",
-      "name": "Respond to Client",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [960, 0],
-      "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ JSON.stringify($('AI Analyze (Server /ingest)').item.json) }}",
-        "options": {}
+        "telegramApi": {
+          "id": "32Snld3d8LPldg6C",
+          "name": "Telegram account"
+        }
       }
     }
   ],
+  "pinData": {},
   "connections": {
-    "Webhook windows-log": {
-      "main": [[ { "node": "AI Analyze (Server /ingest)", "type": "main", "index": 0 } ]]
-    },
-    "AI Analyze (Server /ingest)": {
-      "main": [[ { "node": "Is ALERT?", "type": "main", "index": 0 } ]]
-    },
-    "Is ALERT?": {
+    "Webhook": {
       "main": [
-        [ { "node": "Build Alert Text", "type": "main", "index": 0 } ],
-        [ { "node": "Respond to Client", "type": "main", "index": 0 } ]
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
-    "Build Alert Text": {
-      "main": [[ { "node": "Telegram Alert", "type": "main", "index": 0 } ]]
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     },
-    "Telegram Alert": {
-      "main": [[ { "node": "Respond to Client", "type": "main", "index": 0 } ]]
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
-  }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2a8cd5c7-c529-4fea-881f-8c2fc0e3e1d7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "257636496287ee354bdeba9285ee95854fff8c5aebeca54a1060e20e4e7f4a6e"
+  },
+  "nodeGroups": [],
+  "id": "iXMsgvwYBNblrcaz",
+  "tags": []
 }

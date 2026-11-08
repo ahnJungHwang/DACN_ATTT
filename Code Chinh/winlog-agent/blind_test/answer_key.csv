@@ -1,0 +1,41 @@
+﻿blind_id,case_id,category,ground_truth,expected_stages,actions
+B001,case_mixed_05_sysadmin_hijacked_session,MultiStageAttack,ALERT,Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098),Phiên quản trị viên bị chèn lệnh độc hại tạo user quản trị.
+B002,case_mixed_03_recon_then_mimikatz,MultiStageAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Trinh sát đặc quyền hệ thống sau đó chạy script Mimikatz dump pass.
+B003,case_normal_01_office,Benign,NORMAL,,"Nhân viên văn phòng mở Outlook, Excel, Word, Chrome làm việc."
+B004,case_normal_07_browser_work,Benign,NORMAL,,Nhân viên nhân sự duyệt web cổng thông tin và đồng bộ OneDrive.
+B005,case_mixed_08_pass_the_hash_cmd,MultiStageAttack,ALERT,Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098),Đăng nhập qua mạng từ IP lạ kèm gọi WMI tạo user từ xa.
+B006,case_normal_09_calc_and_tools,Benign,NORMAL,,Mở máy tính tính tiền và mở Task Manager kiểm tra ứng dụng.
+B007,case_attack_05_recon_discovery,SpecificAttack,ALERT,System Reconnaissance (MITRE T1033),Chuỗi lệnh trinh sát hệ thống và miền trong chuỗi tấn công.
+B008,case_mixed_06_c2_and_eventlog_clear,MultiStageAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Tải mã độc C2 sau đó thực thi lệnh xóa nhật ký Security.
+B009,case_edge_04_it_create_employee_account,EdgeCase,NORMAL,,Quy trình nhân sự tạo tài khoản nhân viên mới hợp lệ không kèm leo thang.
+B010,case_attack_02_ps_c2_download,SpecificAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),PowerShell Download Cradle tải và thực thi mã độc C2 từ xa.
+B011,case_edge_07_scheduled_script_failed,EdgeCase,NORMAL,,Tác vụ tự động kiểm tra trạng thái gặp lỗi đường dẫn không hợp lệ.
+B012,case_edge_09_suspicious_script_benign_name,EdgeCase,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Script ngụy trang tên WindowsUpdate nhưng nội dung là tải C2 beacon.
+B013,case_edge_08_guest_account_login_attempt,EdgeCase,ALERT,Password Brute Force (MITRE T1110),Kẻ xâm nhập cố tình dò quét tài khoản Guest bị vô hiệu hóa.
+B014,case_attack_06_reg_persistence,SpecificAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Gán Registry Run Key duy trì khởi động mã độc.
+B015,case_mixed_04_dev_malicious_package,MultiStageAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Gói thư viện lập trình độc hại âm thầm kích hoạt PowerShell đánh cắp token.
+B016,case_edge_02_admin_typo_twice,EdgeCase,NORMAL,,Quản trị viên gõ nhầm pass 2 lần rồi vào thành công kiểm tra mạng.
+B017,case_attack_09_procdump_lsass,SpecificAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Dump bộ nhớ tiến trình lsass và trích xuất mật khẩu.
+B018,case_edge_03_automated_inventory_tool,EdgeCase,NORMAL,,Công cụ thống kê tài sản phần cứng tự động kiểm tra hệ thống.
+B019,case_normal_06_disk_cleanup,Benign,NORMAL,,Quản trị viên dọn dẹp ổ đĩa và kiểm tra dung lượng còn trống.
+B020,case_edge_01_multi_user_one_attack,EdgeCase,ALERT,Password Brute Force (MITRE T1110),"User A làm việc bình thường, User B bị dò mật khẩu 6 lần liên tiếp."
+B021,case_edge_06_dual_session_different_ip,EdgeCase,NORMAL,,Hai người dùng nội bộ cùng truy cập thư mục chia sẻ tệp công ty.
+B022,case_mixed_02_bruteforce_to_backdoor,MultiStageAttack,ALERT,Password Brute Force (MITRE T1110); Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098),Dò pass thành công và ngay lập tức tạo tài khoản backdoor.
+B023,case_mixed_10_recon_domain_trust,MultiStageAttack,ALERT,Password Brute Force (MITRE T1110); System Reconnaissance (MITRE T1033),Dò pass và trinh sát Domain Controllers trong chuỗi tấn công.
+B024,case_normal_05_backup_script,Benign,NORMAL,,Script PowerShell định kỳ nén file sao lưu dữ liệu.
+B025,case_normal_04_typo_login,Benign,NORMAL,,Người dùng gõ nhầm pass 1 lần rồi đăng nhập đúng và mở Notepad.
+B026,case_attack_10_disable_defender,SpecificAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Tắt tính năng giám sát thời gian thực của Windows Defender và tải C2.
+B027,case_attack_04_mimikatz_dump,SpecificAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Chạy Mimikatz trích xuất mật khẩu bộ nhớ tiến trình lsass.
+B028,case_attack_03_backdoor_account,SpecificAttack,ALERT,Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098),Lệnh tạo user ẩn và cấp quyền Administrators.
+B029,case_edge_10_remote_desktop_after_hours,EdgeCase,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Đăng nhập RDP từ IP nước ngoài lúc 2h30 sáng tải reverse shell.
+B030,case_attack_01_bruteforce,SpecificAttack,ALERT,Password Brute Force (MITRE T1110),Dò mật khẩu 8 lần liên tiếp từ IP lạ rồi đăng nhập thành công.
+B031,case_normal_10_powershell_profile,Benign,NORMAL,,PowerShell khởi chạy nạp module quản trị Active Directory hợp lệ.
+B032,case_mixed_09_stealth_persistence_run,MultiStageAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Chỉnh sửa Excel đồng thời tiến trình ngầm cài đặt khóa Run duy trì mã độc.
+B033,case_normal_02_sysadmin,Benign,NORMAL,,Quản trị viên kiểm tra mạng và trạng thái dịch vụ.
+B034,case_mixed_07_browser_exploit_payload,MultiStageAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Trình duyệt dính mã khai thác tạo tiến trình PowerShell tải Meterpreter.
+B035,case_edge_05_bruteforce_all_failed,EdgeCase,ALERT,Password Brute Force (MITRE T1110),Dò mật khẩu liên tục 10 lần từ bên ngoài nhưng thất bại hoàn toàn.
+B036,case_attack_07_encoded_powershell,SpecificAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Thực thi PowerShell mã hóa Base64 tải payload từ xa.
+B037,case_normal_08_pdf_reader,Benign,NORMAL,,Mở hóa đơn PDF và tiến trình in ấn văn bản Windows.
+B038,case_normal_03_developer,Benign,NORMAL,,"Lập trình viên chạy Git, Unit test Python và build NPM."
+B039,case_mixed_01_office_macro_c2,MultiStageAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Mở tài liệu Word chứa macro tự động kích hoạt PowerShell tải reverse shell.
+B040,case_attack_08_schtasks_persistence,SpecificAttack,ALERT,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),Tạo Scheduled Task định kỳ 15 phút gọi PowerShell tải mã độc.
