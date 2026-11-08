@@ -1,0 +1,15 @@
+{
+  "case_id": "case_rnd_024_alert",
+  "category": "RandomMix",
+  "ground_truth": "ALERT",
+  "actions": "Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_mixed_06_c2_and_eventlog_clear, evtx:Privilege_Escalation__samaccount_spoofing_CVE_2021_42287_CVE_2021_42278_DC_secur",
+  "expected_stages": [],
+  "sources": [
+    "data01:case_mixed_06_c2_and_eventlog_clear",
+    "evtx:Privilege_Escalation__samaccount_spoofing_CVE_2021_42287_CVE_2021_42278_DC_secur"
+  ],
+  "security_count": 13,
+  "powershell_count": 2,
+  "seed": 2026,
+  "created_at": "2026-11-07T15:47:40Z"
+}

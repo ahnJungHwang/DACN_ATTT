@@ -1,0 +1,147 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "windows-log",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "42719e1f-af88-413f-a304-c15833e6260d",
+      "name": "Webhook",
+      "webhookId": "54118b81-3cde-4eb6-b57e-fec0e42881f7"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://host.docker.internal:9443/ingest",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"client_id\": \"{{ $json.body.client_id }}\",\n  \"hostname\": \"{{ $json.body.hostname }}\",\n  \"security_xml\": \"{{ $json.body.security_xml }}\",\n  \"powershell_xml\": \"{{ $json.body.powershell_xml }}\",\n  \"model\": \"qwen\"\n}",
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "3b90bf17-e0c2-4c9b-b373-db2a6f5e0e72",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "c981e48f-388e-483e-9ee4-03cc85b77ace",
+              "leftValue": "={{ $json.verdict.label }}",
+              "rightValue": "ALERT",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        448,
+        0
+      ],
+      "id": "6178fd0f-62c5-4efd-acc9-6d018cf1b02c",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "chatId": "6269241707",
+        "text": "=🚨 CẢNH BÁO PHÁT HIỆN TẤN CÔNG (AI SOC)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🖥️ Máy trạm: {{ $json.hostname || $json.client_id || 'Endpoint-01' }}\n⚠️ Đánh giá: {{ $json.verdict.label }}\n🎯 Kỹ thuật: {{ $json.verdict.detected_stages ? $json.verdict.detected_stages.join(', ') : 'N/A' }}\n📝 Chi tiết: {{ $json.verdict.reason }}\n🔍 Bằng chứng: {{ $json.verdict.evidence_refs ? $json.verdict.evidence_refs.join(', ') : 'N/A' }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        672,
+        -96
+      ],
+      "id": "0770410a-02e0-43b4-8c26-f27cba5ab7a5",
+      "name": "Send a text message",
+      "webhookId": "fa5d5786-f2e1-41d9-9eee-b0fa9006c453",
+      "credentials": {
+        "telegramApi": {
+          "id": "32Snld3d8LPldg6C",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2a8cd5c7-c529-4fea-881f-8c2fc0e3e1d7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "257636496287ee354bdeba9285ee95854fff8c5aebeca54a1060e20e4e7f4a6e"
+  },
+  "nodeGroups": [],
+  "id": "iXMsgvwYBNblrcaz",
+  "tags": []
+}

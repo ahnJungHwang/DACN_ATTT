@@ -1,0 +1,146 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "windows-log",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        96
+      ],
+      "id": "cf9df800-12f6-4d09-b86f-1f4a847bfce4",
+      "name": "Webhook",
+      "webhookId": "54118b81-3cde-4eb6-b57e-fec0e42881f7"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://host.docker.internal:9443/ingest",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"client_id\": \"{{ $json.body.client_id }}\",\n  \"hostname\": \"{{ $json.body.hostname }}\",\n  \"security_xml\": \"{{ $json.body.security_xml }}\",\n  \"powershell_xml\": \"{{ $json.body.powershell_xml }}\",\n  \"model\": \"qwen\"\n}",
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        96
+      ],
+      "id": "9e586b53-7986-4daa-b07a-ac870a0057c6",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "c981e48f-388e-483e-9ee4-03cc85b77ace",
+              "leftValue": "={{ $json.verdict.label }}",
+              "rightValue": "ALERT",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        448,
+        96
+      ],
+      "id": "1c8b6359-5fa1-42a9-a791-15da1e9b4582",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "chatId": "6269241707",
+        "text": "=🚨 CẢNH BÁO PHÁT HIỆN TẤN CÔNG (AI SOC)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🖥️ Máy trạm: {{ $json.hostname || $json.client_id || 'Endpoint-01' }}\n⚠️ Đánh giá: {{ $json.verdict.label }}\n🎯 Kỹ thuật: {{ $json.verdict.detected_stages ? $json.verdict.detected_stages.join(', ') : 'N/A' }}\n📝 Chi tiết: {{ $json.verdict.reason }}\n🔍 Bằng chứng: {{ $json.verdict.evidence_refs ? $json.verdict.evidence_refs.join(', ') : 'N/A' }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        672,
+        0
+      ],
+      "id": "a20bf43a-29bf-44c9-bf8d-d31edfa2e253",
+      "name": "Send a text message",
+      "webhookId": "fa5d5786-f2e1-41d9-9eee-b0fa9006c453",
+      "credentials": {
+        "telegramApi": {
+          "id": "RPTA86u5hLxeHgpt",
+          "name": "Telegram account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "601b4471-17e6-44a2-8204-51fdac63e294",
+  "meta": {
+    "instanceId": "393557c7925a4ba8de481682bf2e2b71109bf406b370f76f2a0c6e3134f35a27"
+  },
+  "nodeGroups": [],
+  "id": "mzgZ4xVFJCpQLGOD",
+  "tags": []
+}

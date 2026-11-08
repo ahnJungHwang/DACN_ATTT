@@ -1,0 +1,10 @@
+{
+  "seed": 2026,
+  "count": 100,
+  "p_alert": 0.5,
+  "n_alert": 46,
+  "n_normal": 54,
+  "attack_pool": 40,
+  "benign_pool": 58,
+  "generated_at": "2026-11-07T15:47:40Z"
+}

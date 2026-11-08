@@ -12,9 +12,7 @@ echo ====================================================================
 echo   KHOI DONG WINLOG AI SERVER (192.168.147.1:8000)
 echo ====================================================================
 echo   Server san sang nhan log tu Client 192.168.147.136
-echo   va tu dong canh bao qua Telegram khi phat hien tan cong.
-echo   * Giao dien Web SOC Dashboard: http://localhost:8000/dashboard
-echo   * Tai lieu Swagger API       : http://localhost:8000/docs
+echo   va tu dong chuyen tiep toi n8n Workflow (cong 5678/5679 tu do) de canh bao Telegram.
 echo ====================================================================
 echo.
 

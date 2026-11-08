@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WinLog SOC - Security Dashboard</title>
+<style>
+:root{
+  --bg:#0b1020; --panel:#121a30; --panel2:#18223d; --line:#25314f; --text:#dbe4ff; --mute:#8593b8;
+  --brand:#3b82f6; --ok:#22c55e; --low:#38bdf8; --med:#eab308; --high:#f97316; --crit:#ef4444;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:14px/1.45 "Segoe UI",system-ui,sans-serif}
+button,input,select{font:inherit;color:inherit}
+a{color:var(--brand)}
+.app{display:grid;grid-template-columns:210px 1fr;grid-template-rows:56px 1fr;height:100vh}
+header{grid-column:1/3;display:flex;align-items:center;gap:16px;padding:0 18px;background:#0e1530;border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px}
+.logo i{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:grid;place-items:center;font-style:normal;font-size:15px}
+.spacer{flex:1}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:4px 11px;border:1px solid var(--line);border-radius:99px;background:var(--panel);font-size:12.5px;color:var(--mute)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--crit)}
+.dot.on{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.btn{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 11px;cursor:pointer}
+.btn:hover{border-color:var(--brand)}
+.btn.on{background:#1d3a72;border-color:var(--brand)}
+nav{background:#0e1530;border-right:1px solid var(--line);padding:14px 10px;display:flex;flex-direction:column;gap:3px}
+nav button{display:flex;align-items:center;gap:10px;background:none;border:0;border-radius:8px;padding:9px 12px;cursor:pointer;color:var(--mute);text-align:left}
+nav button:hover{background:var(--panel)}
+nav button.active{background:#1b2a55;color:#fff}
+nav .badge{margin-left:auto;background:var(--crit);color:#fff;border-radius:99px;padding:0 7px;font-size:11px;min-width:20px;text-align:center}
+nav .badge:empty,nav .badge[data-n="0"]{display:none}
+nav .sep{height:1px;background:var(--line);margin:10px 4px}
+main{overflow:auto;padding:18px 20px 40px}
+h2{margin:0 0 14px;font-size:18px}
+.view{display:none}.view.active{display:block}
+.grid{display:grid;gap:14px}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card h3{margin:0 0 10px;font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--mute)}
+.kpi .v{font-size:30px;font-weight:700;line-height:1.1}
+.kpi .s{color:var(--mute);font-size:12px;margin-top:4px}
+.kpi.crit{border-color:#6b2230;background:linear-gradient(180deg,#2a1420,var(--panel))}
+.kpi.crit .v{color:var(--crit)}
+.row2{grid-template-columns:2fr 1fr}
+.row3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1100px){.row2,.row3{grid-template-columns:1fr}}
+@media(max-width:760px){.app{grid-template-columns:1fr}nav{display:none}}
+.bar{display:grid;grid-template-columns:minmax(90px,38%) 1fr 44px;gap:8px;align-items:center;margin:6px 0;font-size:12.5px}
+.bar .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .b{height:10px;background:#0c1328;border-radius:5px;overflow:hidden}
+.bar .b>i{display:block;height:100%;background:var(--brand);border-radius:5px}
+.bar .n{text-align:right;color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{position:sticky;top:0;background:var(--panel2);text-align:left;font-weight:600;color:var(--mute);padding:8px 10px;font-size:12px;text-transform:uppercase;letter-spacing:.4px;z-index:1}
+td{padding:7px 10px;border-top:1px solid var(--line);vertical-align:top}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:#17224a}
+tr.fresh{animation:fresh 2.5s ease-out}
+@keyframes fresh{from{background:#25407a}to{background:transparent}}
+.mono{font-family:var(--mono);font-size:12.5px}
+.sum{max-width:560px;word-break:break-word;color:#c3cdf0}
+.lvl{display:inline-block;min-width:28px;text-align:center;border-radius:6px;padding:1px 6px;font-weight:700;font-size:12px;color:#06101f}
+.l-low{background:var(--low)}.l-med{background:var(--med)}.l-high{background:var(--high)}.l-crit{background:var(--crit);color:#fff}
+.tag{display:inline-block;border:1px solid var(--line);background:#0c1328;border-radius:6px;padding:0 7px;font-size:12px;color:var(--mute);margin:0 4px 2px 0}
+.tag.alert{background:#3a1420;border-color:#7a2335;color:#ffb4bf}
+.tag.ok{background:#102a1c;border-color:#1f5a38;color:#9be8b9}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.filters input,.filters select{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px;outline:0}
+.filters input{flex:1;min-width:220px}
+.filters input:focus,.filters select:focus{border-color:var(--brand)}
+.tablewrap{max-height:calc(100vh - 210px);overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.alertcard{border-left:4px solid var(--crit);margin-bottom:12px}
+.alertcard.normal{border-left-color:var(--ok)}
+.alertcard .hd{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.alertcard .why{color:#d3dcfb}
+.term{background:#050810;border:1px solid var(--line);border-radius:12px;font-family:var(--mono);font-size:12.8px;height:calc(100vh - 190px);overflow:auto;padding:10px 14px}
+.term.mini{height:260px}
+.term div{white-space:pre-wrap;word-break:break-word;padding:1px 0}
+.term .ts{color:#4b5a84;margin-right:8px}
+.t-alert{color:#ff7b8a;font-weight:700}.t-warn{color:#fbbf24}.t-ok{color:#4ade80}.t-info{color:#7dd3fc}.t-err{color:#ff9d9d}.t-dim{color:#8593b8}
+.drawer{position:fixed;top:0;right:0;width:min(560px,100%);height:100%;background:#0e1530;border-left:1px solid var(--line);transform:translateX(100%);transition:.2s;z-index:50;overflow:auto;padding:18px}
+.drawer.open{transform:none;box-shadow:-20px 0 50px #0008}
+.drawer h3{margin:0 0 4px}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:4px 12px;font-size:13px;margin-top:12px}
+.kv div:nth-child(odd){color:var(--mute)}
+.kv div:nth-child(even){font-family:var(--mono);font-size:12.5px;word-break:break-all}
+#toasts{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:10px;z-index:100;width:min(400px,calc(100% - 36px))}
+.toast{background:#2a1420;border:1px solid #8a2a3c;border-left:5px solid var(--crit);border-radius:10px;padding:12px 14px;box-shadow:0 10px 30px #000a;animation:in .25s;cursor:pointer}
+.toast.ok{background:#102a1c;border-color:#1f5a38;border-left-color:var(--ok)}
+.toast b{display:block;margin-bottom:3px}
+@keyframes in{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
+.banner{display:none;background:linear-gradient(90deg,#7f1d2d,#4a1020);border:1px solid #a22b40;border-radius:12px;padding:11px 16px;margin-bottom:14px;align-items:center;gap:12px;animation:pulse 1.6s infinite}
+.banner.show{display:flex}
+@keyframes pulse{50%{box-shadow:0 0 0 4px #ef444455}}
+.empty{color:var(--mute);padding:26px;text-align:center}
+svg text{fill:var(--mute);font-size:11px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--mute);margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo"><i>🛡</i><span>WinLog&nbsp;SOC</span></div>
+    <span class="pill"><span class="dot" id="conn"></span><span id="connTxt">Đang kết nối…</span></span>
+    <span class="pill" id="clock">--:--:--</span>
+    <div class="spacer"></div>
+    <button class="btn on" id="liveOnly" title="Chỉ hiện dữ liệu nhận trực tiếp từ client (ẩn dữ liệu lịch sử trong results/)">Chỉ dữ liệu live</button>
+    <button class="btn on" id="soundBtn" title="Âm thanh cảnh báo">🔔 Âm thanh</button>
+  </header>
+
+  <nav>
+    <button data-v="overview" class="active">📊 Tổng quan</button>
+    <button data-v="alerts">🚨 Cảnh báo AI <span class="badge" id="bAlerts" data-n="0"></span></button>
+    <button data-v="events">📜 Sự kiện</button>
+    <button data-v="agents">💻 Agents</button>
+    <div class="sep"></div>
+    <button data-v="terminal">⌨️ Terminal server</button>
+    <div class="sep"></div>
+    <button onclick="location.href='/docs'">📘 API Docs</button>
+  </nav>
+
+  <main>
+    <div class="banner" id="banner"><span style="font-size:22px">🚨</span><div><b id="bnTitle"></b><div id="bnSub" style="opacity:.85"></div></div><div class="spacer"></div><button class="btn" id="bnClose">Đã xem</button></div>
+
+    <!-- OVERVIEW -->
+    <section class="view active" id="v-overview">
+      <h2>Tổng quan an ninh</h2>
+      <div class="grid kpis">
+        <div class="card kpi"><h3>Tổng sự kiện</h3><div class="v" id="kEvents">0</div><div class="s" id="kEventsS"></div></div>
+        <div class="card kpi crit"><h3>Cảnh báo AI (ALERT)</h3><div class="v" id="kAlerts">0</div><div class="s" id="kAlertsS"></div></div>
+        <div class="card kpi"><h3>Đăng nhập thất bại</h3><div class="v" id="kFail">0</div><div class="s">Event 4625</div></div>
+        <div class="card kpi"><h3>Mức nghiêm trọng ≥ 12</h3><div class="v" id="kCrit">0</div><div class="s">theo luật phát hiện</div></div>
+        <div class="card kpi"><h3>Agents hoạt động</h3><div class="v" id="kAgents">0</div><div class="s" id="kAgentsS"></div></div>
+      </div>
+      <div class="grid row2" style="margin-bottom:14px">
+        <div class="card"><h3>Sự kiện theo thời gian</h3><div id="chTime"></div>
+          <div class="legend"><span><i style="background:var(--low)"></i>Thấp</span><span><i style="background:var(--med)"></i>Trung bình</span><span><i style="background:var(--high)"></i>Cao</span><span><i style="background:var(--crit)"></i>Nghiêm trọng</span></div></div>
+        <div class="card"><h3>Phân bố mức độ</h3><div id="chSev"></div></div>
+      </div>
+      <div class="grid row3" style="margin-bottom:14px">
+        <div class="card"><h3>Top Event ID</h3><div id="topEid"></div></div>
+        <div class="card"><h3>Top người dùng</h3><div id="topUser"></div></div>
+        <div class="card"><h3>Top IP nguồn</h3><div id="topIp"></div></div>
+      </div>
+      <div class="grid row2">
+        <div class="card"><h3>Cảnh báo gần nhất</h3><div id="recentAlerts"></div></div>
+        <div class="card"><h3>Terminal server (trực tiếp)</h3><div class="term mini" id="termMini"></div></div>
+      </div>
+    </section>
+
+    <!-- ALERTS -->
+    <section class="view" id="v-alerts">
+      <h2>Kết quả phân tích AI (Local SLM)</h2>
+      <div class="filters">
+        <select id="aFilter"><option value="">Tất cả kết luận</option><option value="ALERT">Chỉ ALERT</option><option value="NORMAL">Chỉ NORMAL</option></select>
+      </div>
+      <div id="alertList"></div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="view" id="v-events">
+      <h2>Sự kiện Windows</h2>
+      <div class="filters">
+        <input id="fText" placeholder="Tìm kiếm: user, IP, command line, Event ID, host…">
+        <select id="fLevel"><option value="0">Mọi mức độ</option><option value="12">≥ 12 Nghiêm trọng</option><option value="8">≥ 8 Cao</option><option value="5">≥ 5 Trung bình</option></select>
+        <select id="fChan"><option value="">Mọi channel</option></select>
+        <select id="fAgent"><option value="">Mọi agent</option></select>
+        <span class="pill" id="fCount"></span>
+      </div>
+      <div class="tablewrap"><table><thead><tr><th>Thời gian</th><th>Mức</th><th>Event</th><th>Host</th><th>Người dùng</th><th>Mô tả</th></tr></thead><tbody id="evBody"></tbody></table></div>
+    </section>
+
+    <!-- AGENTS -->
+    <section class="view" id="v-agents">
+      <h2>Agents (Windows client)</h2>
+      <div class="tablewrap"><table><thead><tr><th>Trạng thái</th><th>Client ID</th><th>Hostname</th><th>Sự kiện</th><th>Cảnh báo</th><th>Kết luận gần nhất</th><th>Tín hiệu cuối</th></tr></thead><tbody id="agBody"></tbody></table></div>
+    </section>
+
+    <!-- TERMINAL -->
+    <section class="view" id="v-terminal">
+      <h2>Terminal server <span class="pill" style="font-size:12px;vertical-align:middle">giống hệt output của cửa sổ run_server.bat</span></h2>
+      <div class="filters">
+        <input id="tFilter" placeholder="Lọc dòng terminal…">
+        <button class="btn on" id="tScroll">Tự cuộn</button>
+        <button class="btn" id="tClear">Xoá màn hình</button>
+      </div>
+      <div class="term" id="term"></div>
+    </section>
+  </main>
+</div>
+
+<aside class="drawer" id="drawer"></aside>
+<div id="toasts"></div>
+
+<script>
+"use strict";
+const S={events:[],analyses:[],agents:[],terminal:[],totals:{events:0,alerts:0,analyses:0},liveOnly:true,sound:true,seq:-1,fresh:new Set()};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const lvlCls=l=>l>=12?"crit":l>=8?"high":l>=5?"med":"low";
+const lvlCol=c=>({crit:"var(--crit)",high:"var(--high)",med:"var(--med)",low:"var(--low)"}[c]);
+const fmtT=iso=>{const d=new Date(iso);return isNaN(d)?esc(iso):d.toLocaleString("vi-VN",{hour12:false,day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit"})};
+const fmtHM=ms=>new Date(ms).toLocaleTimeString("vi-VN",{hour12:false,hour:"2-digit",minute:"2-digit"});
+const ago=iso=>{const s=(Date.now()-new Date(iso))/1000;if(s<5)return"vừa xong";if(s<60)return Math.floor(s)+" giây trước";if(s<3600)return Math.floor(s/60)+" phút trước";if(s<86400)return Math.floor(s/3600)+" giờ trước";return Math.floor(s/86400)+" ngày trước"};
+
+/* ---------- views ---------- */
+$$("nav button[data-v]").forEach(b=>b.onclick=()=>showView(b.dataset.v));
+function showView(v){
+  $$("nav button[data-v]").forEach(b=>b.classList.toggle("active",b.dataset.v===v));
+  $$(".view").forEach(s=>s.classList.toggle("active",s.id==="v-"+v));
+  S.view=v; dirty(); if(v==="terminal")scrollTerm(true);
+}
+S.view="overview";
+$("#liveOnly").onclick=e=>{S.liveOnly=!S.liveOnly;e.currentTarget.classList.toggle("on",S.liveOnly);dirty()};
+$("#soundBtn").onclick=e=>{S.sound=!S.sound;e.currentTarget.classList.toggle("on",S.sound)};
+$("#bnClose").onclick=()=>$("#banner").classList.remove("show");
+setInterval(()=>$("#clock").textContent=new Date().toLocaleString("vi-VN",{hour12:false}),1000);
+
+/* ---------- data helpers ---------- */
+const evs=()=>S.liveOnly?S.events.filter(e=>e.live):S.events;
+const ans=()=>S.liveOnly?S.analyses.filter(a=>a.live):S.analyses;
+function topN(arr,key,n=6){const m=new Map();for(const e of arr){const k=key(e);if(!k)continue;m.set(k,(m.get(k)||0)+1)}return[...m].sort((a,b)=>b[1]-a[1]).slice(0,n)}
+function bars(el,rows,color){
+  if(!rows.length){el.innerHTML='<div class="empty">Chưa có dữ liệu</div>';return}
+  const max=rows[0][1];
+  el.innerHTML=rows.map(([k,v])=>`<div class="bar"><div class="t" title="${esc(k)}">${esc(k)}</div><div class="b"><i style="width:${v/max*100}%;${color?`background:${color}`:""}"></i></div><div class="n">${v}</div></div>`).join("");
+}
+
+/* ---------- charts ---------- */
+function timeChart(list){
+  const el=$("#chTime");
+  if(!list.length){el.innerHTML='<div class="empty">Chưa có sự kiện</div>';return}
+  const ts=list.map(e=>+new Date(e.ts)).filter(x=>!isNaN(x));
+  let min=Math.min(...ts),max=Math.max(...ts); if(max-min<60000){min=max-60000}
+  const N=36,w=(max-min)/N||1,bk=Array.from({length:N},()=>({low:0,med:0,high:0,crit:0}));
+  for(const e of list){const t=+new Date(e.ts);if(isNaN(t))continue;const i=Math.min(N-1,Math.floor((t-min)/w));bk[i][lvlCls(e.level)]++}
+  const mx=Math.max(1,...bk.map(b=>b.low+b.med+b.high+b.crit));
+  const W=760,H=210,L=34,B=24,T=8,bw=(W-L)/N;
+  let g="";
+  for(let i=0;i<=4;i++){const y=T+(H-T-B)*i/4;g+=`<line x1="${L}" x2="${W}" y1="${y}" y2="${y}" stroke="#25314f" stroke-dasharray="3 4"/><text x="${L-6}" y="${y+4}" text-anchor="end">${Math.round(mx*(1-i/4))}</text>`}
+  bk.forEach((b,i)=>{let y=H-B;for(const c of["low","med","high","crit"]){const h=(H-T-B)*b[c]/mx;if(!h)continue;y-=h;g+=`<rect x="${L+i*bw+1.5}" y="${y}" width="${bw-3}" height="${h}" rx="2" fill="${lvlCol(c)}"><title>${fmtHM(min+i*w)} · ${c}: ${b[c]}</title></rect>`}});
+  for(let i=0;i<=5;i++){const x=L+(W-L)*i/5;g+=`<text x="${x}" y="${H-6}" text-anchor="${i==0?"start":i==5?"end":"middle"}">${fmtHM(min+(max-min)*i/5)}</text>`}
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%">${g}</svg>`;
+}
+function donut(list){
+  const el=$("#chSev"),c={low:0,med:0,high:0,crit:0};list.forEach(e=>c[lvlCls(e.level)]++);
+  const tot=list.length;if(!tot){el.innerHTML='<div class="empty">Chưa có dữ liệu</div>';return}
+  const names={crit:"Nghiêm trọng (12+)",high:"Cao (8-11)",med:"Trung bình (5-7)",low:"Thấp (0-4)"};
+  let a=-Math.PI/2,paths="";const R=70,r=46,cx=90,cy=90;
+  for(const k of["crit","high","med","low"]){if(!c[k])continue;const f=c[k]/tot,b=a+f*2*Math.PI-(f===1?.0001:0);
+    const p=(ang,rad)=>[cx+rad*Math.cos(ang),cy+rad*Math.sin(ang)],lg=f>.5?1:0;
+    const[x1,y1]=p(a,R),[x2,y2]=p(b,R),[x3,y3]=p(b,r),[x4,y4]=p(a,r);
+    paths+=`<path d="M${x1} ${y1}A${R} ${R} 0 ${lg} 1 ${x2} ${y2}L${x3} ${y3}A${r} ${r} 0 ${lg} 0 ${x4} ${y4}Z" fill="${lvlCol(k)}"><title>${names[k]}: ${c[k]}</title></path>`;a=b}
+  el.innerHTML=`<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><svg viewBox="0 0 180 180" width="170">${paths}<text x="90" y="88" text-anchor="middle" style="fill:var(--text);font-size:24px;font-weight:700">${tot}</text><text x="90" y="106" text-anchor="middle">sự kiện</text></svg>
+  <div style="flex:1;min-width:130px">${["crit","high","med","low"].map(k=>`<div class="bar" style="grid-template-columns:12px 1fr 36px"><i style="width:10px;height:10px;border-radius:3px;background:${lvlCol(k)}"></i><div class="t">${names[k]}</div><div class="n">${c[k]}</div></div>`).join("")}</div></div>`;
+}
+
+/* ---------- renders ---------- */
+function renderOverview(){
+  const E=evs(),A=ans(),ag=S.agents.filter(a=>!S.liveOnly||a.live);
+  const alerts=A.filter(a=>a.label==="ALERT"),act=ag.filter(a=>a.status==="active");
+  $("#kEvents").textContent=E.length.toLocaleString();
+  $("#kEventsS").textContent=S.liveOnly?`${S.totals.events} nhận từ khi server chạy`:"gồm cả dữ liệu lịch sử";
+  $("#kAlerts").textContent=alerts.length;
+  $("#kAlertsS").textContent=A.length?`${A.length} lượt phân tích · ${(100*alerts.length/A.length).toFixed(0)}% ALERT`:"chưa có phân tích";
+  $("#kFail").textContent=E.filter(e=>e.event_id===4625).length;
+  $("#kCrit").textContent=E.filter(e=>e.level>=12).length;
+  $("#kAgents").textContent=act.length;
+  $("#kAgentsS").textContent=`${ag.length} agent đã đăng ký`;
+  timeChart(E);donut(E);
+  bars($("#topEid"),topN(E,e=>`${e.event_id} · ${e.title}`));
+  bars($("#topUser"),topN(E,e=>e.user),"#8b5cf6");
+  bars($("#topIp"),topN(E,e=>e.ip),"#f97316");
+  const ra=[...A].reverse().filter(a=>a.label==="ALERT").slice(0,4);
+  $("#recentAlerts").innerHTML=ra.length?ra.map(a=>`<div style="margin-bottom:10px"><span class="tag alert">ALERT</span><b>${esc(a.host)}</b> <span style="color:var(--mute)">· ${ago(a.ts)}</span><div class="why" style="font-size:13px;margin-top:3px">${esc(a.reason)}</div></div>`).join(""):'<div class="empty">Không có cảnh báo 🎉</div>';
+  const mini=$("#termMini");mini.innerHTML=S.terminal.slice(-60).map(termLine).join("");mini.scrollTop=mini.scrollHeight;
+  $("#bAlerts").textContent=alerts.length;$("#bAlerts").dataset.n=alerts.length;
+}
+function renderAlerts(){
+  const f=$("#aFilter").value;let A=[...ans()].reverse();if(f)A=A.filter(a=>a.label===f);
+  $("#alertList").innerHTML=A.length?A.slice(0,200).map(a=>{const al=a.label==="ALERT";return`<div class="card alertcard ${al?"":"normal"}"><div class="hd"><span class="tag ${al?"alert":"ok"}">${esc(a.label)}</span><b>${esc(a.host)}</b><span style="color:var(--mute)">${esc(a.agent)}</span><span class="spacer"></span><span style="color:var(--mute);font-size:12.5px">${fmtT(a.ts)} · ${ago(a.ts)}</span></div><div class="why">${esc(a.reason||"(không có mô tả)")}</div><div style="margin-top:8px">${(a.stages||[]).map(s=>`<span class="tag">${esc(typeof s==="string"?s:JSON.stringify(s))}</span>`).join("")}${a.model?`<span class="tag">model: ${esc(a.model)}</span>`:""}${a.elapsed!=null?`<span class="tag">${a.elapsed}s</span>`:""}${a.status&&a.status!=="OK"?`<span class="tag">${esc(a.status)}</span>`:""}</div></div>`}).join(""):'<div class="empty card">Chưa có kết quả phân tích nào.</div>';
+}
+function renderEvents(){
+  const q=$("#fText").value.trim().toLowerCase(),lv=+$("#fLevel").value,ch=$("#fChan").value,ag=$("#fAgent").value;
+  const all=evs();
+  fillSel($("#fChan"),[...new Set(all.map(e=>e.channel))].filter(Boolean));
+  fillSel($("#fAgent"),[...new Set(all.map(e=>e.agent))]);
+  let L=all.filter(e=>e.level>=lv&&(!ch||e.channel===ch)&&(!ag||e.agent===ag)&&(!q||(e.event_id+" "+e.title+" "+e.rule+" "+e.host+" "+e.user+" "+e.ip+" "+e.summary).toLowerCase().includes(q)));
+  L=L.sort((a,b)=>b.ts<a.ts?-1:b.ts>a.ts?1:0);
+  $("#fCount").textContent=`${L.length} / ${all.length} sự kiện`;
+  $("#evBody").innerHTML=L.slice(0,400).map(e=>`<tr data-id="${esc(e.id)}" class="${S.fresh.has(e.id)?"fresh":""}"><td class="mono" style="white-space:nowrap">${fmtT(e.ts)}</td><td><span class="lvl l-${lvlCls(e.level)}">${e.level}</span></td><td><b>${e.event_id}</b><div style="color:var(--mute);font-size:12px">${esc(e.rule)}</div></td><td>${esc(e.host)}</td><td>${esc(e.user)}${e.ip?`<div class="mono" style="color:var(--mute)">${esc(e.ip)}</div>`:""}</td><td class="sum mono">${esc(e.summary)}</td></tr>`).join("")||'<tr><td colspan="6" class="empty">Không có sự kiện phù hợp</td></tr>';
+  S.fresh.clear();
+}
+function fillSel(sel,vals){const cur=sel.value,first=sel.options[0].outerHTML;const h=first+vals.map(v=>`<option ${v===cur?"selected":""}>${esc(v)}</option>`).join("");if(sel.dataset.h!==h){sel.innerHTML=h;sel.dataset.h=h;sel.value=cur}}
+function renderAgents(){
+  const ag=S.agents.filter(a=>!S.liveOnly||a.live);
+  $("#agBody").innerHTML=ag.map(a=>`<tr style="cursor:default"><td><span class="dot ${a.status==="active"?"on":""}" style="display:inline-block"></span> ${a.status==="active"?"Active":"Disconnected"}</td><td class="mono">${esc(a.client_id)}</td><td>${esc(a.hostname)}</td><td>${a.events}</td><td>${a.alerts?`<span class="tag alert">${a.alerts}</span>`:0}</td><td>${a.last_verdict?`<span class="tag ${a.last_verdict==="ALERT"?"alert":"ok"}">${esc(a.last_verdict)}</span>`:"-"}</td><td>${ago(a.last_seen)}</td></tr>`).join("")||'<tr><td colspan="7" class="empty">Chưa có agent nào kết nối</td></tr>';
+}
+/* terminal */
+function termLine(t){
+  const l=t.line;let c="t-dim";
+  if(/PHAT HIEN TAN CONG|ALERT/.test(l))c="t-alert";
+  else if(/\[x\]|Loi|Error|Traceback|\b(5\d\d|4\d\d)\b.*(HTTP|")/i.test(l)&&!/ 200 /.test(l))c="t-err";
+  else if(/\[!\]/.test(l))c="t-warn";
+  else if(/\[(OK|✓)\]|NORMAL/.test(l))c="t-ok";
+  else if(/\[\+\]|\[\*\]|\[-\]|--->|->/.test(l))c="t-info";
+  return`<div class="${c}"><span class="ts">${new Date(t.ts).toLocaleTimeString("vi-VN",{hour12:false})}</span>${esc(l)}</div>`;
+}
+let tAuto=true;
+$("#tScroll").onclick=e=>{tAuto=!tAuto;e.currentTarget.classList.toggle("on",tAuto)};
+$("#tClear").onclick=()=>{S.terminal=[];dirty()};
+$("#tFilter").oninput=()=>renderTerminal();
+function renderTerminal(){
+  const f=$("#tFilter").value.toLowerCase(),el=$("#term");
+  el.innerHTML=S.terminal.filter(t=>!f||t.line.toLowerCase().includes(f)).slice(-800).map(termLine).join("");
+  if(tAuto)el.scrollTop=el.scrollHeight;
+}
+function scrollTerm(){const el=$("#term");el.scrollTop=el.scrollHeight}
+
+let pending=false;
+function dirty(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;render()})}
+function render(){
+  renderOverview(); // cập nhật badge + KPI luôn
+  if(S.view==="alerts")renderAlerts();
+  if(S.view==="events")renderEvents();
+  if(S.view==="agents")renderAgents();
+  if(S.view==="terminal")renderTerminal();
+}
+["#fText","#fLevel","#fChan","#fAgent","#aFilter"].forEach(s=>$(s).addEventListener("input",dirty));
+setInterval(()=>{if(S.view==="agents"||S.view==="overview")dirty()},15000); // cập nhật "x giây trước"
+
+/* detail drawer */
+$("#evBody").addEventListener("click",e=>{const tr=e.target.closest("tr[data-id]");if(!tr)return;const ev=S.events.find(x=>x.id===tr.dataset.id);if(ev)openDrawer(ev)});
+function openDrawer(e){
+  $("#drawer").innerHTML=`<button class="btn" onclick="closeDrawer()" style="float:right">✕ Đóng</button><h3>Event ${e.event_id} · ${esc(e.title)}</h3><span class="lvl l-${lvlCls(e.level)}">level ${e.level}</span> <span class="tag">${esc(e.rule)}</span>
+  <div class="kv"><div>Thời gian</div><div>${esc(e.ts)}</div><div>Host</div><div>${esc(e.host)}</div><div>Agent</div><div>${esc(e.agent)}</div><div>Channel</div><div>${esc(e.channel)}</div><div>User</div><div>${esc(e.user||"-")}</div><div>IP</div><div>${esc(e.ip||"-")}</div></div>
+  <h3 style="margin-top:18px;font-size:13px;color:var(--mute)">DỮ LIỆU GỐC (EventData)</h3><div class="kv">${Object.entries(e.data).map(([k,v])=>`<div>${esc(k)}</div><div>${esc(v)}</div>`).join("")}</div>`;
+  $("#drawer").classList.add("open");
+}
+function closeDrawer(){$("#drawer").classList.remove("open")}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
+
+/* ---------- alerts: toast / sound / notification ---------- */
+let actx;
+function beep(){if(!S.sound)return;try{actx=actx||new AudioContext();[0,.22,.44].forEach(t=>{const o=actx.createOscillator(),g=actx.createGain();o.type="square";o.frequency.value=t===.22?660:880;g.gain.value=.05;o.connect(g);g.connect(actx.destination);o.start(actx.currentTime+t);o.stop(actx.currentTime+t+.15)})}catch(e){}}
+function toast(a){
+  const d=document.createElement("div"),al=a.label==="ALERT";d.className="toast"+(al?"":" ok");
+  d.innerHTML=`<b>${al?"🚨 PHÁT HIỆN TẤN CÔNG":"✅ Phân tích hoàn tất: NORMAL"} — ${esc(a.host)}</b><div style="font-size:13px">${esc((a.reason||"").slice(0,200))}</div>`;
+  d.onclick=()=>{d.remove();showView(al?"alerts":"overview")};
+  $("#toasts").appendChild(d);setTimeout(()=>d.remove(),al?15000:5000);
+}
+function onAnalysis(a){
+  S.analyses.push(a);if(S.analyses.length>500)S.analyses.shift();
+  if(!a.live)return;S.totals.analyses++;
+  if(a.label==="ALERT"){
+    S.totals.alerts++;toast(a);beep();
+    $("#bnTitle").textContent=`Phát hiện tấn công trên ${a.host}`;$("#bnSub").textContent=a.reason;$("#banner").classList.add("show");
+    document.title="🚨 (ALERT) WinLog SOC";
+    try{if(Notification.permission==="granted")new Notification("WinLog SOC — ALERT: "+a.host,{body:a.reason})}catch(e){}
+  }else if(a.status!=="SKIPPED_BENIGN")toast(a);
+}
+window.addEventListener("focus",()=>{document.title="WinLog SOC - Security Dashboard"});
+try{if("Notification" in window&&Notification.permission==="default")Notification.requestPermission()}catch(e){}
+
+/* ---------- connect ---------- */
+function setConn(ok){$("#conn").classList.toggle("on",ok);$("#connTxt").textContent=ok?"Đã kết nối server":"Mất kết nối — đang thử lại…"}
+async function load(){
+  const r=await fetch("/api/state");const d=await r.json();
+  Object.assign(S,{events:d.events,analyses:d.analyses,agents:d.agents,terminal:d.terminal,totals:d.totals,seq:d.seq});
+  dirty();
+}
+function connect(){
+  const es=new EventSource("/api/stream?since="+S.seq);
+  es.onopen=()=>setConn(true);
+  es.onerror=()=>{setConn(false);es.close();setTimeout(async()=>{try{await load()}catch(e){}connect()},2000)};
+  const upd=m=>{if(m.lastEventId)S.seq=+m.lastEventId};
+  es.addEventListener("term",m=>{upd(m);S.terminal.push(JSON.parse(m.data));if(S.terminal.length>1500)S.terminal.shift();dirty()});
+  es.addEventListener("event",m=>{upd(m);const e=JSON.parse(m.data);S.events.push(e);S.fresh.add(e.id);S.totals.events++;if(S.events.length>5000)S.events.shift();dirty()});
+  es.addEventListener("analysis",m=>{upd(m);onAnalysis(JSON.parse(m.data));dirty()});
+  es.addEventListener("agent",m=>{upd(m);S.agents=JSON.parse(m.data);dirty()});
+}
+load().then(connect).catch(()=>{setConn(false);setTimeout(()=>location.reload(),3000)});
+</script>
+</body>
+</html>

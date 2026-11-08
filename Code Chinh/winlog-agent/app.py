@@ -6,7 +6,7 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
 if sys.stderr and hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 
@@ -19,9 +19,14 @@ app = FastAPI(
 )
 
 
+import siem  # SIEM dashboard: bắt log terminal + sự kiện + cảnh báo -> web
+
+siem.install(app)
+
+
 @app.get("/", include_in_schema=False)
 def root():
-    """Tự động chuyển hướng trang chủ về giao diện SOC Dashboard (/dashboard)."""
+    """Trang chủ -> SIEM Dashboard (Swagger UI vẫn ở /docs)."""
     return RedirectResponse(url="/dashboard")
 
 
@@ -91,81 +96,196 @@ class IngestRequest(BaseModel):
 
 import os
 
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+N8N_WEBHOOK_URL = os.getenv("N8N_WEBHOOK_URL", "http://localhost:5678/webhook/windows-log")
+
+_EMPTY_XML = {"", "<Events></Events>", "<Events />"}
 
 
-def send_server_telegram_alert(verdict: dict, client_id: str, hostname: str, elapsed: float):
-    """Gửi cảnh báo phát hiện tấn công từ Client về Telegram."""
+def is_request_from_n8n(request: Request) -> bool:
+    """Phát hiện request đến từ n8n HTTP Request node (axios) hay từ Client PowerShell."""
+    ua = request.headers.get("user-agent", "").lower()
+    host = request.headers.get("host", "").lower()
+    if request.headers.get("x-n8n-request", "").lower() == "true":
+        return True
+    if "axios" in ua or "n8n" in ua:
+        return True
+    if "host.docker.internal" in host:
+        return True
+    return False
+
+
+def find_n8n_webhook_url() -> str:
+    """Tự động dò tìm cổng n8n đang hoạt động (5679 hoặc 5678) trong vài mili-giây."""
     import requests
-    from datetime import datetime
 
-    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID:
-        print("[!] Chưa cấu hình TELEGRAM_BOT_TOKEN hoặc TELEGRAM_CHAT_ID. Bỏ qua gửi Telegram.", flush=True)
-        return
+    env_url = os.getenv("N8N_WEBHOOK_URL")
+    if env_url:
+        return env_url
 
-    now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    reason = verdict.get("reason", "Phát hiện hành vi tấn công.")
-    evidence = verdict.get("evidence_refs", [])
-    evidence_str = ", ".join(evidence) if evidence else "N/A"
-    stages = verdict.get("detected_stages", [])
-    stages_str = ", ".join(stages) if stages else "Không xác định"
+    # Quét nhanh endpoint /healthz trên các cổng n8n phổ biến (ưu tiên 5679 theo máy khách)
+    for port in ("5679", "5678"):
+        for host in ("localhost", "127.0.0.1"):
+            try:
+                resp = requests.get(f"http://{host}:{port}/healthz", timeout=0.8)
+                if resp.status_code == 200:
+                    return f"http://{host}:{port}/webhook/windows-log"
+            except Exception:
+                continue
 
-    message = (
-        f"🚨 *CẢNH BÁO BẢO MẬT TỪ CLIENT* 🚨\n\n"
-        f"🖥️ *Máy Client:* `{hostname}` (`{client_id}`)\n"
-        f"🕒 *Thời gian:* `{now_str}`\n"
-        f"⚠️ *Trạng thái:* *{verdict.get('label', 'ALERT')}*\n"
-        f"⏱️ *Thời gian AI xử lý:* {elapsed:.2f}s\n"
-        f"🎯 *Giai đoạn:* `{stages_str}`\n\n"
-        f"📝 *Chi tiết phát hiện:*\n{reason}\n\n"
-        f"🔍 *Bằng chứng:* `{evidence_str}`"
-    )
+    return "http://localhost:5679/webhook/windows-log"
 
-    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    try:
-        requests.post(
-            url,
-            json={"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "Markdown"},
-            timeout=10,
-        )
-    except Exception as exc:
-        print(f"[!] Lỗi gửi Telegram: {exc}", flush=True)
+
+def notify_n8n_clean(client_id: str, hostname: str, model: str) -> tuple[bool, dict]:
+    """
+    Gửi payload KHÔNG có XML đến n8n Webhook.
+    XML đã được lưu vào disk — n8n gọi lại /ingest, app.py đọc từ disk và chạy AI.
+    Trả về (success, n8n_response).
+    """
+    import requests
+
+    payload = {
+        "client_id": client_id,
+        "hostname": hostname,
+        "security_xml": "",       # rỗng — XML đã lưu trên disk
+        "powershell_xml": "",     # rỗng — XML đã lưu trên disk
+        "model": model,
+    }
+
+    base_url = find_n8n_webhook_url()
+    candidate_urls = [
+        base_url,
+        base_url.replace("/webhook/", "/webhook-test/"),
+    ]
+    # Dự phòng cổng đối ứng (5678 <-> 5679)
+    alt_port = "5678" if ":5679" in base_url else "5679"
+    candidate_urls.append(base_url.replace(":5679", f":{alt_port}").replace(":5678", f":{alt_port}"))
+    candidate_urls.append(base_url.replace(":5679", f":{alt_port}").replace(":5678", f":{alt_port}").replace("/webhook/", "/webhook-test/"))
+
+    print(f"[*] Dang kich hoat n8n Workflow (Target URL: {base_url})...", flush=True)
+    for url in candidate_urls:
+        print(f"    -> Thu: {url}", flush=True)
+        try:
+            # AI + tu tham dinh co the mat vai phut voi lo lon; het gio som se khien server phan tich lai lan 2
+            resp = requests.post(url, json=payload, timeout=600)
+            if resp.status_code in (200, 201):
+                print(f"[✓] n8n da xu ly xong ({url})", flush=True)
+                try:
+                    return True, resp.json()
+                except Exception:
+                    return True, {"status": "ok"}
+            elif resp.status_code == 500 and "No item to return" in resp.text:
+                print(f"[✓] n8n da xu ly xong: Nhanh IF re sang False (NORMAL - khong gui Telegram)", flush=True)
+                return True, {"status": "ok", "verdict": {"label": "NORMAL"}}
+        except Exception as e:
+            print(f"    [x] {url}: {e}", flush=True)
+            continue
+
+    print("[!] Khong the ket noi toi n8n. Fallback phan tich truc tiep.", flush=True)
+    return False, {}
 
 
 @app.post("/ingest")
-def ingest_logs(req: IngestRequest):
+def ingest_logs(req: IngestRequest, request: Request):
     """
-    Nhận log XML từ máy Client (ví dụ 192.168.147.136), phân tích bằng Local SLM
-    và tự động gửi cảnh báo Telegram nếu phát hiện tấn công.
+    Luồng 2 bước:
+    Bước 1 — Client gọi: lưu XML vào disk → gửi payload rỗng đến n8n → đợi n8n trả về.
+    Bước 2 — n8n gọi lại: đọc XML từ disk → AI phân tích → trả verdict → n8n IF → Telegram.
     """
     import time
-    from pathlib import Path
-    from datetime import datetime, timezone
     from analyze import BASE, analyze_case, is_benign_noise, read_events
 
     clean_client = req.client_id.replace(".", "_").replace(":", "_")
     case_id = f"client_{clean_client}_live"
     case_dir = BASE / "data" / case_id
-    case_dir.mkdir(parents=True, exist_ok=True)
 
-    sec_file = case_dir / "security.xml"
-    ps_file = case_dir / "powershell.xml"
+    from datetime import datetime
+    now_str = datetime.now().strftime("%H:%M:%S")
 
-    sec_file.write_text(req.security_xml, encoding="utf-8")
-    ps_file.write_text(req.powershell_xml, encoding="utf-8")
-    (case_dir / "system.xml").write_text(req.system_xml, encoding="utf-8")
+    # ---- BƯỚC 1: Client gọi ----
+    if not is_request_from_n8n(request):
+        sec_valid = req.security_xml.strip() not in _EMPTY_XML
+        ps_valid = req.powershell_xml.strip() not in _EMPTY_XML
+        sys_valid = req.system_xml.strip() not in _EMPTY_XML
 
+        clean_sec = req.security_xml if sec_valid else "<Events></Events>"
+        clean_ps = req.powershell_xml if ps_valid else "<Events></Events>"
+        clean_sys = req.system_xml if sys_valid else "<Events></Events>"
+
+        sec_count = clean_sec.count("<Event ") + clean_sec.count("<Event>")
+        ps_count = clean_ps.count("<Event ") + clean_ps.count("<Event>")
+        sys_count = clean_sys.count("<Event ") + clean_sys.count("<Event>")
+        total_events = sec_count + ps_count + sys_count
+        # Lô chỉ có log System (vd 7045 cài service) vẫn phải phân tích, không coi là heartbeat
+        has_new_xml = (sec_valid or ps_valid or sys_valid) and (total_events > 0)
+
+        if not has_new_xml:
+            siem.heartbeat(req.client_id, req.hostname)
+            return {
+                "client_id": req.client_id,
+                "hostname": req.hostname,
+                "analysis_status": "NO_NEW_DATA",
+                "message": "Server san sang, chua co su kien moi.",
+                "timestamp": now_str,
+            }
+
+        # Lưu XML thực tế từ Client vào disk cho phiên phân tích này
+        case_dir.mkdir(parents=True, exist_ok=True)
+        (case_dir / "security.xml").write_text(clean_sec, encoding="utf-8")
+        (case_dir / "powershell.xml").write_text(clean_ps, encoding="utf-8")
+        (case_dir / "system.xml").write_text(clean_sys, encoding="utf-8")
+
+        siem.record_events(req.client_id, req.hostname, clean_sec, clean_ps)
+
+        print(f"\n====================================================================", flush=True)
+        print(f"[+] [{now_str}] NHAN LOG TU CLIENT: {req.hostname} ({req.client_id})", flush=True)
+        print(f"    * Tong so su kien : {total_events} (Security: {sec_count}, PowerShell: {ps_count}, System: {sys_count})", flush=True)
+        print(f"    * Da luu vao disk : {case_dir.name}", flush=True)
+        print(f"    * Dang chuyen tiep vao n8n Workflow de dieu phoi...", flush=True)
+
+        success, n8n_resp = notify_n8n_clean(req.client_id, req.hostname, req.model)
+        if success:
+            print(f"    [OK] n8n da xu ly xong! Gui phan hoi xac nhan ve Client.", flush=True)
+            print(f"====================================================================", flush=True)
+            return {
+                "status": "SUCCESS",
+                "message": f"Server da nhan {total_events} su kien va dieu phoi qua n8n thanh cong.",
+                "events_count": total_events,
+                "security_count": sec_count,
+                "powershell_count": ps_count,
+                "client_id": req.client_id,
+                "hostname": req.hostname,
+                "timestamp": now_str,
+            }
+        # n8n không khả dụng → fallback phân tích trực tiếp bên dưới
+        print("[*] Fallback: n8n khong phan hoi, server phan tich truc tiep.", flush=True)
+
+    # ---- BƯỚC 2: n8n gọi lại HOẶC fallback → đọc XML từ disk và AI phân tích ----
+    if not is_request_from_n8n(request):
+        source_label = "Fallback"
+    else:
+        source_label = "n8n Callback"
+    print(f"\n---> [{now_str}] [{source_label}] Bat dau phan tich AI cho {req.hostname} ({req.client_id})...", flush=True)
+
+    if not case_dir.exists():
+        return {
+            "client_id": req.client_id,
+            "hostname": req.hostname,
+            "analysis_status": "NO_DATA",
+            "verdict": {"label": "NORMAL", "detected_stages": [], "reason": "Chua co du lieu log tren disk.", "evidence_refs": []},
+        }
+
+    # Tiền lọc sự kiện nhiễu
     try:
         events = read_events(case_dir)
         significant = [e for e in events if not is_benign_noise(e)]
         if not significant:
+            print(f"[-] {req.hostname}: Toan bo su kien lanh tinh.", flush=True)
+            siem.record_verdict(req.client_id, req.hostname, {"label": "NORMAL", "reason": "Chi co tien trinh he thong thong thuong."}, status="SKIPPED_BENIGN", model=req.model)
             return {
                 "client_id": req.client_id,
                 "hostname": req.hostname,
                 "analysis_status": "SKIPPED_BENIGN",
-                "message": "Toàn bộ sự kiện là tiến trình nền hệ thống lành tính.",
-                "verdict": {"label": "NORMAL", "reason": "Chỉ có tiến trình hệ thống thông thường."},
+                "verdict": {"label": "NORMAL", "detected_stages": [], "reason": "Chi co tien trinh he thong thong thuong.", "evidence_refs": []},
             }
     except ValueError as exc:
         if "No supported events found" in str(exc):
@@ -173,14 +293,12 @@ def ingest_logs(req: IngestRequest):
                 "client_id": req.client_id,
                 "hostname": req.hostname,
                 "analysis_status": "NO_TARGET_EVENTS",
-                "message": "Không có sự kiện nằm trong diện theo dõi.",
-                "verdict": {"label": "NORMAL", "reason": "Không có sự kiện mục tiêu."},
+                "verdict": {"label": "NORMAL", "detected_stages": [], "reason": "Khong co su kien muc tieu.", "evidence_refs": []},
             }
 
+    # Chạy AI
+    print(f"[*] [{source_label}] Dang chay Local SLM ({req.model}) voi {len(events)} su kien...", flush=True)
     started = time.perf_counter()
-    print(f"\n[+] Nhan log tu Client {req.hostname} ({req.client_id}) gom {len(events)} su kien.", flush=True)
-    print(f"[*] Dang chay Local SLM ({req.model}) phan tich tuong quan...", flush=True)
-
     try:
         result = analyze_case(case_id, model_key=req.model)
         elapsed = time.perf_counter() - started
@@ -191,21 +309,28 @@ def ingest_logs(req: IngestRequest):
     verdict = result.get("verdict", {})
     label = verdict.get("label", "UNKNOWN")
     print(f"[!] Ket qua AI: {label} ({elapsed:.2f}s)", flush=True)
-
     if label == "ALERT":
-        print(f"[!] PHAT HIEN TAN CONG! Dang ban canh bao ve Telegram...", flush=True)
-        send_server_telegram_alert(verdict, req.client_id, req.hostname, elapsed)
-        print(f"[✓] Da gui canh bao Telegram thanh cong!", flush=True)
+        print("[!] PHAT HIEN TAN CONG! Tra ve ket qua cho n8n de gui Telegram...", flush=True)
 
+    siem.record_verdict(req.client_id, req.hostname, verdict, elapsed=round(elapsed, 2), model=req.model)
+
+    # Don dep XML tren disk ngay sau khi da doc va phan tich xong de khong bao gio bi phan tich lap lai
+    try:
+        (case_dir / "security.xml").write_text("<Events></Events>", encoding="utf-8")
+        (case_dir / "powershell.xml").write_text("<Events></Events>", encoding="utf-8")
+    except Exception:
+        pass
+
+    # Trả về đúng cấu trúc mà n8n Node IF đọc: {{ $json.verdict.label }}
     return {
         "client_id": req.client_id,
         "hostname": req.hostname,
         "elapsed_seconds": round(elapsed, 2),
-        "result": result,
+        "verdict": {
+            "label": label,
+            "detected_stages": verdict.get("detected_stages", []),
+            "reason": verdict.get("reason", ""),
+            "evidence_refs": verdict.get("evidence_refs", []),
+            "decision_source": verdict.get("decision_source", ""),  # rule+ai / ai / rule (hien trong tin Telegram)
+        },
     }
-
-
-from dashboard import setup_dashboard
-
-setup_dashboard(app, telegram_alert_fn=send_server_telegram_alert)
-
