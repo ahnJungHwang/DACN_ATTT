@@ -1,6 +1,8 @@
 # Điểm yếu và lộ trình phát triển
 
-> Cập nhật lần cuối: 07/11/2026. Đánh dấu `[x]` khi hoàn thành, ghi ngày và commit. Trước khi bắt đầu việc mới, đối chiếu với mục tiêu đề tài trong [`/CLAUDE.md`](../../CLAUDE.md).
+
+## Quyết định đã chốt
+- **07/11/2026 — Tiếp tục phát triển trên `Code Chinh/`, KHÔNG ghép code của Thắng (`CodeThuNghiem/`, `Thang Code/`).** Lý do: ghép nguyên khối sẽ mất các loại sự kiện đã hỗ trợ (4648, 1102/104, 7045, 4720/4728/4732, 4698), xung đột khi dùng chung Ollama (`EXTERNAL_MODEL_LOADED`, một worker), làm chậm cảnh báo, và vô hiệu các số liệu đã đo. Các mục trong lộ trình (xác thực, cửa sổ trượt, ...) được tự viết trong `Code Chinh`; có thể tham khảo ý tưởng từ `CodeThuNghiem` nhưng không chép nguyên module.
 
 ## Hiện trạng (07/11/2026)
 
