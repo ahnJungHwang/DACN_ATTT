@@ -473,8 +473,6 @@ Bảng Qwen có đủ 40 ca và cho kết quả 37 đúng, ba cảnh báo sai �
 
 Hướng phát triển ưu tiên gồm hoàn thiện dữ liệu đánh giá; thêm ngữ cảnh để phân biệt thao tác quản trị và tấn công; kiểm tra bằng chứng mô hình; bổ sung batch_id, lưu bền vững và chống trùng; đo độ trễ từ thời điểm Windows sinh sự kiện đến khi nhận Telegram. Chỉ sau khi các phép thử này có kết quả mới mở rộng nhiều client và đánh giá tải thực tế.
 
-Phiên lab ngày 07/11/2026 (Chương 6) cho thấy đường client → server → dashboard đã chạy được trên HTTPS, nhưng nhánh n8n còn lỗi kết nối, một máy bị tách thành hai agent và cảnh báo bị lặp cho cùng kịch bản. Các lỗi này nên được sửa trước khi chạy lại đánh giá.
-
 ---
 
 ## Phần lab của Thắng: 
