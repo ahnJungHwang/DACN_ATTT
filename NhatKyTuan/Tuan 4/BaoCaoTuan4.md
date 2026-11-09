@@ -490,4 +490,4 @@ https://github.com/ahnJungHwang/DACN_ATTT/blob/main/COMPARISON_REPORT%20by%20NHL
 [2] EVTX-ATTACK-SAMPLES: https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES - nguồn được dẫn trong [1]. Chưa có manifest để đối chiếu từng ca của bộ 40 ca với kho này.
 
 ## Góp ý của thầy: 
-
+Đề tài của nhóm gần với nhóm 1, nên nhóm lấy Security log làm nguồn chính và tập trung vào vận hành cảnh báo từ Windows tới Telegram. Dữ liệu đánh giá phải có phần lớn là log bình thường, vì thực tế là vậy. Thầy cần pipeline chạy ổn định và không gửi trùng cảnh báo, bộ đánh giá có nhãn lưu CSV từng ca ngay trong repo, bảng so sánh Qwen, Llama và một công cụ không dùng AI như DeepBlueCLI hoặc Sigma, kèm số đo độ trễ từ lúc sinh sự kiện tới lúc nhận cảnh báo. Nhóm dọn repo cho gọn, code để ở một thư mục chính.
