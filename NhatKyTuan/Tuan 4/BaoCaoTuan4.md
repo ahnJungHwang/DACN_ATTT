@@ -478,7 +478,7 @@ Phiên lab ngày 07/11/2026 (Chương 6) cho thấy đường client → server 
 ---
 
 ## Phần lab của Thắng: 
-https://github.com/ahnJungHwang/DACN_ATTT/blob/main/Code%20Chinh/winlog-agent/DIEM_YEU_VA_HUONG_PHAT_TRIEN.md, https://github.com/ahnJungHwang/DACN_ATTT/blob/main/Code%20Chinh/winlog-agent/results/COMPARISON_REPORT.md
+https://github.com/ahnJungHwang/DACN_ATTT/blob/main/Code%20Chinh/winlog-agent/md/DIEM_YEU_VA_HUONG_PHAT_TRIEN.md, https://github.com/ahnJungHwang/DACN_ATTT/blob/main/Code%20Chinh/winlog-agent/results/COMPARISON_REPORT.md
 
 ## Phần lab của Lâm: 
 

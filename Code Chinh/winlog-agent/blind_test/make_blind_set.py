@@ -27,7 +27,7 @@ if sys.stdout and hasattr(sys.stdout, "reconfigure"):
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "core"))  # analyze.py nằm trong core/
 
 from analyze import correlate_security_events, is_benign_noise, read_events  # noqa: E402
 

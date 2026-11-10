@@ -20,7 +20,7 @@ from math import sqrt
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent))
+sys.path.insert(0, str(HERE.parent / "core"))  # analyze.py nằm trong core/
 import analyze as A  # noqa: E402
 
 CASES_DIR = HERE / "cases"

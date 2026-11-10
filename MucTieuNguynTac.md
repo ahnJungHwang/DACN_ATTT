@@ -4,7 +4,7 @@
 Xây dựng **AI Agent** tự động phân tích hành vi nguy hiểm dựa trên **log Windows**, kết hợp **n8n** (điều phối + cảnh báo Telegram) và **mô hình AI local chạy bằng Ollama**. Máy ảo Win10 là client sinh/thu log và gửi về máy Windows thật là server; server bóc tách XML để phân tích.
 
 Mọi thay đổi phải phục vụ mục tiêu này. Trước khi đề xuất hướng mới, đối chiếu với lộ trình trong
-[`Code Chinh/winlog-agent/DIEM_YEU_VA_HUONG_PHAT_TRIEN.md`](Code%20Chinh/winlog-agent/DIEM_YEU_VA_HUONG_PHAT_TRIEN.md) và cập nhật file đó khi xong một mục.
+[`Code Chinh/winlog-agent/md/DIEM_YEU_VA_HUONG_PHAT_TRIEN.md`](Code%20Chinh/winlog-agent/md/DIEM_YEU_VA_HUONG_PHAT_TRIEN.md) và cập nhật file đó khi xong một mục.
 
 ## Kiến trúc (code chính ở `Code Chinh/winlog-agent/`)
 `client_agent.ps1` (VM, quét Security/PowerShell/System mỗi 5s, lọc theo RecordId) → HTTPS `POST /ingest` :8443 → `app1.py` (FastAPI) chuyển sang n8n webhook `windows-log` (container `n8n`, cổng 5678) → n8n gọi lại `/ingest` (header `x-n8n-request`) → `analyze.py::analyze_case` → nếu ALERT thì n8n gửi Telegram.

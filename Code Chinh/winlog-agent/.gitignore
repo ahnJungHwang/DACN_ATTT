@@ -33,3 +33,7 @@ Bao_cao_huong_trien_khai_AI_Agent_Windows_Local_SLM.docx
 
 # Ca kiem thu sinh tu EVTX that (tao lai bang eval_real/build_cases.ps1)
 eval_real/cases/
+
+# File sinh ra khi chay client agent
+client_agent.log
+client_agent.pid
