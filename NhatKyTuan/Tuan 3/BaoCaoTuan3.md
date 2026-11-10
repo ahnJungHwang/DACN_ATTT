@@ -1,6 +1,6 @@
 # Nhật Ký Tuần 3
 
-- **Thời gian thực hiện**: 26/10/2026 - 01/11/2026.]
+- **Thời gian thực hiện**26/10/2026 - 01/11/2026.]
 - **Thành viên tham gia**: Lâm, Thắng
 
 ---
@@ -786,8 +786,3 @@ Khi bổ sung nhiều client, gán host_id ổn định, kiểm soát quyền g�
 | UNKNOWN dù từng lô NORMAL | Kiểm tra logic tổng hợp và ngữ cảnh liên lô. UNKNOWN có thể là kết quả thận trọng, không đồng nghĩa lỗi kết nối. |
 | Cảnh báo lặp | Đối chiếu mã cảnh báo và lô gửi lại; kiểm tra app.py và n8n có đồng thời gửi cùng kết quả hay không. |
 | AI nêu bằng chứng không có | Kiểm tra event_ref có trong ca, buộc đầu ra theo schema và đối chiếu log nguồn; không dùng diễn giải đó làm kết luận. |
-
-### Góp ý của thầy:
-- Thêm HTTPS thay vì chạy trên HTTP
-- Thêm web UI
-- Cần các chỉ số đánh giá của 2 model AI trong ollama (Qwen 2.5 3B và LLama 3.2 3B)
