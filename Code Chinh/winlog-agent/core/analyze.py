@@ -310,6 +310,22 @@ def correlate_security_events(events: list[dict]) -> dict:
             f"Phát hiện {len(failed_logons)} lần đăng nhập thất bại liên tiếp (Event 4625) nhằm vào tài khoản '{user_str}'. Bằng chứng: {', '.join(refs)}."
         )
 
+    # 1b. Password Spraying (MITRE T1110.003): một mật khẩu thử trên NHIỀU tài khoản khác nhau
+    #     (khác brute force dò một tài khoản). >=3 tài khoản khác nhau bị đăng nhập sai -> chắc chắn.
+    sprayed_users = list(dict.fromkeys(
+        (e["data"].get("TargetUserName") or "").lower() for e in failed_logons
+        if (e["data"].get("TargetUserName") or "") not in ("", "-")
+    ))
+    if len(sprayed_users) >= 3:
+        refs = [e["event_ref"] for e in failed_logons]
+        findings["stages"].append("Password Spraying (MITRE T1110.003)")
+        findings["strong_stages"].append("Password Spraying (MITRE T1110.003)")
+        findings["evidence_refs"].extend(refs)
+        findings["details"].append(
+            f"Phát hiện đăng nhập thất bại (Event 4625) trên {len(sprayed_users)} tài khoản khác nhau "
+            f"({', '.join(sprayed_users[:8])}) -> dấu hiệu Password Spraying. Bằng chứng: {', '.join(refs)}."
+        )
+
     # 2. Phát hiện Đăng nhập thành công sau chuỗi dò quét (Valid Accounts - MITRE T1078)
     if failed_logons:
         last_failed_ref = failed_logons[-1]["event_ref"]

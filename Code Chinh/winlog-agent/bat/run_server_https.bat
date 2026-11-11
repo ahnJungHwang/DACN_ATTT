@@ -18,7 +18,7 @@ echo   (Su dung cert.pem va key.pem)
 echo ====================================================================
 echo.
 
-.\.venv\Scripts\python.exe -m uvicorn --app-dir app %APP_MODULE%:app --host 0.0.0.0 --port %HTTPS_PORT% --ssl-keyfile key.pem --ssl-certfile cert.pem
+.\.venv\Scripts\python.exe -m uvicorn --timeout-graceful-shutdown 3 --app-dir app %APP_MODULE%:app --host 0.0.0.0 --port %HTTPS_PORT% --ssl-keyfile key.pem --ssl-certfile cert.pem
 
 echo.
 pause

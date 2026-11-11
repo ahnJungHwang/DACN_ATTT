@@ -413,32 +413,58 @@ def _load_history():
 _stop = threading.Event()
 
 
-def _hook_shutdown_signals():
-    """Khi bấm Ctrl+C: báo cho các stream SSE kết thúc, nếu không uvicorn sẽ chờ mãi
-    các kết nối trình duyệt đang mở và tiến trình không thoát (vẫn giữ cổng 9443).
+def _hook_server_shutdown():
+    """Ctrl+C tắt server gọn, không còn 'ERROR: Cancel 0 running task(s), timeout graceful shutdown exceeded'.
 
-    App được nạp TRƯỚC khi uvicorn đăng ký signal handler (self.handle_exit), nên ta
-    bọc chính Server.handle_exit của uvicorn thay vì gọi signal.signal()."""
+    Hai nguyên nhân cũ:
+    1. uvicorn (>= 0.2x) đăng ký signal handler `self.handle_exit` TRƯỚC khi nạp app.py, nên bọc
+       Server.handle_exit không bao giờ có tác dụng -> stream SSE của trang SIEM không được báo dừng.
+    2. Đóng kết nối HTTPS phải chờ client đáp lại TLS close_notify (tới 30 s); trình duyệt / client
+       giữ keep-alive thường không đáp -> uvicorn chờ tới hết --timeout-graceful-shutdown.
+
+    Cách sửa: bọc Server.shutdown (được tra cứu lúc chạy nên chắc chắn có hiệu lực):
+    - đặt _stop ngay khi bắt đầu tắt -> các stream SSE kết thúc trong <= 0.5 s;
+    - kết nối đã trả lời XONG và không còn dữ liệu chờ gửi -> abort() (bỏ bắt tay TLS close_notify).
+      Kết nối đang xử lý dở (vd AI đang phân tích) KHÔNG bị đụng tới, vẫn chờ như bình thường."""
     try:
         from uvicorn.server import Server
     except Exception:
         return
-    if getattr(Server.handle_exit, "_siem_wrapped", False):
+    if getattr(Server.shutdown, "_siem_wrapped", False):
         return
-    orig = Server.handle_exit
+    orig = Server.shutdown
 
-    def handle_exit(self, sig, frame):
+    async def _abort_idle_connections(server):
+        await asyncio.sleep(0.6)  # cho stream SSE kịp kết thúc & phản hồi cuối kịp gửi
+        while server.server_state.connections:
+            for conn in list(server.server_state.connections):
+                cycle = getattr(conn, "cycle", None)
+                transport = getattr(conn, "transport", None)
+                if transport is None or (cycle is not None and not getattr(cycle, "response_complete", False)):
+                    continue  # còn đang xử lý request -> để uvicorn chờ như thường
+                try:
+                    if transport.get_write_buffer_size() == 0:  # không làm mất dữ liệu chưa gửi
+                        transport.abort()
+                except Exception:
+                    pass
+            await asyncio.sleep(0.2)
+
+    async def shutdown(self, *args, **kwargs):
         _stop.set()
-        return orig(self, sig, frame)
+        task = asyncio.ensure_future(_abort_idle_connections(self))
+        try:
+            return await orig(self, *args, **kwargs)
+        finally:
+            task.cancel()
 
-    handle_exit._siem_wrapped = True
-    Server.handle_exit = handle_exit
+    shutdown._siem_wrapped = True
+    Server.shutdown = shutdown
 
 
 # ----------------------------------------------------------------- API
 def install(app: FastAPI):
     _install_tee()
-    _hook_shutdown_signals()
+    _hook_server_shutdown()
     _load_history()
 
     @app.on_event("shutdown")

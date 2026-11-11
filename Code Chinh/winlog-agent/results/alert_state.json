@@ -1,0 +1,65 @@
+{
+ "192.168.153.147|T1059.001": {
+  "incident_id": "INC-20261111-170046-008",
+  "client_id": "192.168.153.147",
+  "hostname": "DESKTOP-D38O4BR",
+  "technique": "T1059.001",
+  "first_seen": "2026-11-11T17:00:46.448578+00:00",
+  "last_seen": "2026-11-11T17:08:18.444973+00:00",
+  "count": 6
+ },
+ "192.168.153.147|T1098/T1136": {
+  "incident_id": "INC-20261111-170113-008",
+  "client_id": "192.168.153.147",
+  "hostname": "DESKTOP-D38O4BR",
+  "technique": "T1098/T1136",
+  "first_seen": "2026-11-11T17:01:13.443856+00:00",
+  "last_seen": "2026-11-11T17:06:10.132915+00:00",
+  "count": 6
+ },
+ "192.168.153.147|T1110": {
+  "incident_id": "INC-20261111-170145-008",
+  "client_id": "192.168.153.147",
+  "hostname": "DESKTOP-D38O4BR",
+  "technique": "T1110",
+  "first_seen": "2026-11-11T17:01:45.102145+00:00",
+  "last_seen": "2026-11-11T17:06:47.240103+00:00",
+  "count": 6
+ },
+ "192.168.153.147|T1033": {
+  "incident_id": "INC-20261111-170159-008",
+  "client_id": "192.168.153.147",
+  "hostname": "DESKTOP-D38O4BR",
+  "technique": "T1033",
+  "first_seen": "2026-11-11T17:01:59.716260+00:00",
+  "last_seen": "2026-11-11T17:06:10.132915+00:00",
+  "count": 5
+ },
+ "192.168.153.147|powershell execution": {
+  "incident_id": "INC-20261111-164356-005",
+  "client_id": "192.168.153.147",
+  "hostname": "DESKTOP-D38O4BR",
+  "technique": "powershell execution",
+  "first_seen": "2026-11-11T16:43:56.996799+00:00",
+  "last_seen": "2026-11-11T16:44:27.108473+00:00",
+  "count": 2
+ },
+ "192.168.153.147|tạo tiến trình mới": {
+  "incident_id": "INC-20261111-164413-006",
+  "client_id": "192.168.153.147",
+  "hostname": "DESKTOP-D38O4BR",
+  "technique": "tạo tiến trình mới",
+  "first_seen": "2026-11-11T16:44:13.005362+00:00",
+  "last_seen": "2026-11-11T16:44:13.005362+00:00",
+  "count": 1
+ },
+ "192.168.153.147|powershell scriptblock execution": {
+  "incident_id": "INC-20261111-170027-007",
+  "client_id": "192.168.153.147",
+  "hostname": "DESKTOP-D38O4BR",
+  "technique": "powershell scriptblock execution",
+  "first_seen": "2026-11-11T17:00:27.904970+00:00",
+  "last_seen": "2026-11-11T17:00:27.904970+00:00",
+  "count": 1
+ }
+}

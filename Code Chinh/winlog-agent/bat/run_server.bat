@@ -16,7 +16,7 @@ echo   va tu dong chuyen tiep toi n8n Workflow (cong 5678/5679 tu do) de canh ba
 echo ====================================================================
 echo.
 
-.\.venv\Scripts\python.exe -m uvicorn --app-dir app %APP_MODULE%:app --host 0.0.0.0 --port 8000
+.\.venv\Scripts\python.exe -m uvicorn --timeout-graceful-shutdown 3 --app-dir app %APP_MODULE%:app --host 0.0.0.0 --port 8000
 
 echo.
 pause

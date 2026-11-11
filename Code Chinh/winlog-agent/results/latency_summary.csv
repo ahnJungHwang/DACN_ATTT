@@ -1,0 +1,36 @@
+﻿group,metric,column,n,min,median,mean,p95,max
+Cảnh báo đã gửi Telegram,Sự kiện đầu → cảnh báo,e2e_first_s,13,10.166,23.725,23.652,32.908,33.909
+Cảnh báo đã gửi Telegram,Sự kiện cuối → cảnh báo,e2e_last_s,13,9.268,12.559,16.363,27.243,27.853
+Cảnh báo đã gửi Telegram,① Client gom & gửi,collect_s,13,1.049,3.636,5.005,13.535,15.91
+Cảnh báo đã gửi Telegram,② Truyền tải,transfer_s,13,0.003,0.017,0.953,4.92,12.081
+Cảnh báo đã gửi Telegram,③ n8n gọi lại,n8n_hop_s,13,0.047,0.068,0.072,0.104,0.116
+Cảnh báo đã gửi Telegram,④ AI phân tích,ai_s,13,6.291,8.263,9.483,14.144,14.398
+Cảnh báo đã gửi Telegram,⑤ n8n + Telegram,notify_s,13,0.737,0.781,0.851,1.084,1.281
+ALERT bị chặn vì trùng,Sự kiện đầu → cảnh báo,e2e_first_s,23,9.154,18.295,17.931,27.557,28.599
+ALERT bị chặn vì trùng,Sự kiện cuối → cảnh báo,e2e_last_s,23,5.274,11.627,13.132,21.282,22.548
+ALERT bị chặn vì trùng,① Client gom & gửi,collect_s,23,1.163,4.051,4.414,7.403,12.251
+ALERT bị chặn vì trùng,② Truyền tải,transfer_s,23,0.005,0.014,0.02,0.034,0.145
+ALERT bị chặn vì trùng,③ n8n gọi lại,n8n_hop_s,23,0.049,0.066,0.067,0.09,0.134
+ALERT bị chặn vì trùng,④ AI phân tích,ai_s,23,3.82,7.687,8.607,14.007,14.897
+ALERT bị chặn vì trùng,⑤ n8n + Telegram,notify_s,23,0.018,0.023,0.023,0.028,0.029
+NORMAL (không cảnh báo),Sự kiện đầu → cảnh báo,e2e_first_s,17,4.035,19.436,18.631,32.224,34.722
+NORMAL (không cảnh báo),Sự kiện cuối → cảnh báo,e2e_last_s,17,3.229,14.52,15.628,30.379,31.577
+NORMAL (không cảnh báo),① Client gom & gửi,collect_s,17,0.759,6.463,8.862,20.93,24.166
+NORMAL (không cảnh báo),② Truyền tải,transfer_s,17,-0.001,0.017,1.443,12.091,12.099
+NORMAL (không cảnh báo),③ n8n gọi lại,n8n_hop_s,17,0.047,0.067,0.068,0.1,0.107
+NORMAL (không cảnh báo),④ AI phân tích,ai_s,17,0.022,5.753,5.23,8.481,10.659
+NORMAL (không cảnh báo),⑤ n8n + Telegram,notify_s,17,0.015,0.022,0.024,0.039,0.041
+Tất cả các lô (vận hành bình thường),Sự kiện đầu → cảnh báo,e2e_first_s,53,4.035,20.273,19.559,31.855,34.722
+Tất cả các lô (vận hành bình thường),Sự kiện cuối → cảnh báo,e2e_last_s,53,3.229,12.47,14.725,28.477,31.577
+Tất cả các lô (vận hành bình thường),① Client gom & gửi,collect_s,53,0.759,4.679,5.985,15.188,24.166
+Tất cả các lô (vận hành bình thường),② Truyền tải,transfer_s,53,-0.001,0.014,0.706,4.934,12.099
+Tất cả các lô (vận hành bình thường),③ n8n gọi lại,n8n_hop_s,53,0.047,0.066,0.069,0.102,0.134
+Tất cả các lô (vận hành bình thường),④ AI phân tích,ai_s,53,0.022,7.308,7.739,14.002,14.897
+Tất cả các lô (vận hành bình thường),⑤ n8n + Telegram,notify_s,53,0.015,0.026,0.227,0.911,1.281
+Lô tồn đọng do server ngừng,Sự kiện đầu → cảnh báo,e2e_first_s,1,377.958,377.958,377.958,377.958,377.958
+Lô tồn đọng do server ngừng,Sự kiện cuối → cảnh báo,e2e_last_s,1,261.942,261.942,261.942,261.942,261.942
+Lô tồn đọng do server ngừng,① Client gom & gửi,collect_s,1,241.766,241.766,241.766,241.766,241.766
+Lô tồn đọng do server ngừng,② Truyền tải,transfer_s,1,7.122,7.122,7.122,7.122,7.122
+Lô tồn đọng do server ngừng,③ n8n gọi lại,n8n_hop_s,1,0.049,0.049,0.049,0.049,0.049
+Lô tồn đọng do server ngừng,④ AI phân tích,ai_s,1,12.055,12.055,12.055,12.055,12.055
+Lô tồn đọng do server ngừng,⑤ n8n + Telegram,notify_s,1,0.951,0.951,0.951,0.951,0.951

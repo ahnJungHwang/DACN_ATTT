@@ -18,6 +18,10 @@ for _p in (ROOT / "core", ROOT / "web" / "backend"):
         sys.path.insert(0, str(_p))
 
 from analyze import analyze_case, MODELS, MAX_BATCH_CHARS
+import alerting  # core/alerting.py: chống trùng cảnh báo + đo độ trễ đầu-cuối
+
+DEDUP = alerting.AlertDeduplicator()      # ALERT_DEDUP_MINUTES (mặc định 10 phút)
+LATENCY = alerting.LatencyRecorder()      # -> results/latency.csv
 
 app = FastAPI(
     title="WinLog AI Agent",
@@ -99,6 +103,7 @@ class IngestRequest(BaseModel):
     powershell_xml: str = "<Events></Events>"
     system_xml: str = "<Events></Events>"  # 7045 / 104 (client mới)
     model: str = "qwen"
+    client_sent_utc: str | None = None     # giờ client gửi (đồng hồ máy client) -> bù lệch đồng hồ khi đo độ trễ
 
 
 import os
@@ -207,6 +212,7 @@ def ingest_logs(req: IngestRequest, request: Request):
 
     from datetime import datetime
     now_str = datetime.now().strftime("%H:%M:%S")
+    latency_row = None  # bước 1 gán hàm ghi latency.csv; bước 2 (fallback) dùng lại
 
     # ---- BƯỚC 1: Client gọi ----
     if not is_request_from_n8n(request):
@@ -243,6 +249,21 @@ def ingest_logs(req: IngestRequest, request: Request):
 
         siem.record_events(req.client_id, req.hostname, clean_sec, clean_ps)
 
+        # Đo độ trễ: mốc thời gian sinh sự kiện (đồng hồ client) + lúc client gửi + lúc server nhận
+        server_recv = alerting.utcnow()
+        event_first, event_last = alerting.event_time_range(clean_sec, clean_ps, clean_sys)
+        client_sent = alerting.parse_time(req.client_sent_utc)
+        LATENCY.pop_analysis(req.client_id)  # bỏ kết quả cũ còn sót (nếu có)
+
+        def _latency_row(path: str, telegram_sent: bool, telegram_date=None) -> dict:
+            return LATENCY.record(
+                client_id=req.client_id, hostname=req.hostname, model=req.model, path=path,
+                events_total=total_events, events_security=sec_count, event_first=event_first,
+                event_last=event_last, client_sent=client_sent, server_recv=server_recv,
+                done=alerting.utcnow(), analysis=LATENCY.pop_analysis(req.client_id),
+                telegram_sent=telegram_sent, telegram_date=telegram_date)
+        latency_row = _latency_row
+
         print(f"\n====================================================================", flush=True)
         print(f"[+] [{now_str}] NHAN LOG TU CLIENT: {req.hostname} ({req.client_id})", flush=True)
         print(f"    * Tong so su kien : {total_events} (Security: {sec_count}, PowerShell: {ps_count}, System: {sys_count})", flush=True)
@@ -251,6 +272,17 @@ def ingest_logs(req: IngestRequest, request: Request):
 
         success, n8n_resp = notify_n8n_clean(req.client_id, req.hostname, req.model)
         if success:
+            # n8n (responseMode = lastNode) chỉ trả lời SAU khi node Telegram chạy xong
+            # -> lúc này = lúc cảnh báo đã gửi tới Telegram. Node Telegram trả về message_id + date.
+            tg = n8n_resp if isinstance(n8n_resp, dict) else {}
+            tg = tg.get("result", tg) if isinstance(tg.get("result"), dict) else tg
+            telegram_sent = bool(tg.get("message_id"))
+            tg_date = None
+            if isinstance(tg.get("date"), (int, float)):
+                from datetime import datetime as _dt, timezone as _tz
+                tg_date = _dt.fromtimestamp(tg["date"], _tz.utc)
+            lat = latency_row("n8n", telegram_sent, tg_date)
+            _print_latency(lat)
             print(f"    [OK] n8n da xu ly xong! Gui phan hoi xac nhan ve Client.", flush=True)
             print(f"====================================================================", flush=True)
             return {
@@ -262,24 +294,48 @@ def ingest_logs(req: IngestRequest, request: Request):
                 "client_id": req.client_id,
                 "hostname": req.hostname,
                 "timestamp": now_str,
+                "label": lat.get("label", ""),
+                "alert_status": lat.get("alert_status", ""),
+                "telegram_sent": telegram_sent,
+                "latency": {k: lat.get(k) for k in ("e2e_from_first_s", "e2e_from_last_s", "collect_s", "ai_s", "notify_s")},
             }
         # n8n không khả dụng → fallback phân tích trực tiếp bên dưới
         print("[*] Fallback: n8n khong phan hoi, server phan tich truc tiep.", flush=True)
 
     # ---- BƯỚC 2: n8n gọi lại HOẶC fallback → đọc XML từ disk và AI phân tích ----
-    if not is_request_from_n8n(request):
-        source_label = "Fallback"
-    else:
-        source_label = "n8n Callback"
+    fallback = not is_request_from_n8n(request)
+    source_label = "Fallback" if fallback else "n8n Callback"
     print(f"\n---> [{now_str}] [{source_label}] Bat dau phan tich AI cho {req.hostname} ({req.client_id})...", flush=True)
+    ai_start = alerting.utcnow()
+
+    def _clear_disk_xml():
+        # Xoá XML ngay sau khi đã đọc để KHÔNG bao giờ phân tích lặp lại (cả system.xml: 7045 / 104)
+        for name in ("security.xml", "powershell.xml", "system.xml"):
+            try:
+                (case_dir / name).write_text("<Events></Events>", encoding="utf-8")
+            except Exception:
+                pass
+
+    def _finish(resp: dict, label: str, alert: dict | None = None) -> dict:
+        """Ghi mốc thời gian AI cho bước 1 ghép thành 1 dòng latency.csv; fallback thì ghi luôn."""
+        alert = alert or {"status": "NOT_ALERT", "notify": False}
+        LATENCY.set_analysis(req.client_id, label=label, alert_status=alert["status"],
+                             ai_start=ai_start, ai_done=alerting.utcnow())
+        resp["notify"] = alert["notify"]
+        resp["alert"] = alert
+        if fallback and latency_row is not None:
+            lat = latency_row("fallback", False)  # không có n8n -> không có Telegram
+            _print_latency(lat)
+            resp["latency"] = {k: lat.get(k) for k in ("e2e_from_first_s", "e2e_from_last_s", "collect_s", "ai_s", "notify_s")}
+        return resp
 
     if not case_dir.exists():
-        return {
+        return _finish({
             "client_id": req.client_id,
             "hostname": req.hostname,
             "analysis_status": "NO_DATA",
             "verdict": {"label": "NORMAL", "detected_stages": [], "reason": "Chua co du lieu log tren disk.", "evidence_refs": []},
-        }
+        }, "NORMAL")
 
     # Tiền lọc sự kiện nhiễu
     try:
@@ -288,20 +344,23 @@ def ingest_logs(req: IngestRequest, request: Request):
         if not significant:
             print(f"[-] {req.hostname}: Toan bo su kien lanh tinh.", flush=True)
             siem.record_verdict(req.client_id, req.hostname, {"label": "NORMAL", "reason": "Chi co tien trinh he thong thong thuong."}, status="SKIPPED_BENIGN", model=req.model)
-            return {
+            _clear_disk_xml()
+            return _finish({
                 "client_id": req.client_id,
                 "hostname": req.hostname,
                 "analysis_status": "SKIPPED_BENIGN",
                 "verdict": {"label": "NORMAL", "detected_stages": [], "reason": "Chi co tien trinh he thong thong thuong.", "evidence_refs": []},
-            }
+            }, "NORMAL")
     except ValueError as exc:
         if "No supported events found" in str(exc):
-            return {
+            _clear_disk_xml()
+            return _finish({
                 "client_id": req.client_id,
                 "hostname": req.hostname,
                 "analysis_status": "NO_TARGET_EVENTS",
                 "verdict": {"label": "NORMAL", "detected_stages": [], "reason": "Khong co su kien muc tieu.", "evidence_refs": []},
-            }
+            }, "NORMAL")
+        raise HTTPException(status_code=400, detail=f"Log khong hop le: {exc}")
 
     # Chạy AI
     print(f"[*] [{source_label}] Dang chay Local SLM ({req.model}) voi {len(events)} su kien...", flush=True)
@@ -312,32 +371,48 @@ def ingest_logs(req: IngestRequest, request: Request):
     except Exception as exc:
         print(f"[!] Loi phan tich: {exc}", flush=True)
         raise HTTPException(status_code=500, detail=f"Lỗi phân tích: {exc}")
+    _clear_disk_xml()
 
     verdict = result.get("verdict", {})
     label = verdict.get("label", "UNKNOWN")
     print(f"[!] Ket qua AI: {label} ({elapsed:.2f}s)", flush=True)
-    if label == "ALERT":
-        print("[!] PHAT HIEN TAN CONG! Tra ve ket qua cho n8n de gui Telegram...", flush=True)
 
     siem.record_verdict(req.client_id, req.hostname, verdict, elapsed=round(elapsed, 2), model=req.model)
 
-    # Don dep XML tren disk ngay sau khi da doc va phan tich xong de khong bao gio bi phan tich lap lai
-    try:
-        (case_dir / "security.xml").write_text("<Events></Events>", encoding="utf-8")
-        (case_dir / "powershell.xml").write_text("<Events></Events>", encoding="utf-8")
-    except Exception:
-        pass
+    # Chống trùng: cùng máy + cùng kỹ thuật MITRE trong ALERT_DEDUP_MINUTES phút -> không gửi Telegram lại
+    alert = DEDUP.check(req.client_id, req.hostname, verdict, model=req.model)
+    if label == "ALERT" and alert["notify"]:
+        tag = "SU CO MOI" if alert["status"] == "NEW" else "THEM KY THUAT MOI " + ", ".join(alert["new_techniques"])
+        print(f"[!] PHAT HIEN TAN CONG ({tag}) {', '.join(alert['incident_ids'])} -> gui Telegram qua n8n", flush=True)
+    elif label == "ALERT":
+        print(f"[=] Canh bao TRUNG {', '.join(alert['incident_ids'])} (lan {alert['repeat_count']} trong "
+              f"{alert['window_minutes']:g} phut) -> KHONG gui Telegram lai", flush=True)
 
-    # Trả về đúng cấu trúc mà n8n Node IF đọc: {{ $json.verdict.label }}
-    return {
+    # n8n Node IF đọc {{ $json.verdict.label }} == "ALERT" -> Telegram.
+    # Cảnh báo trùng trả nhãn "ALERT_DUPLICATE" cho n8n để IF rẽ False (không cần sửa workflow);
+    # nhãn thật vẫn ở "true_label", trong SIEM và results/alerts_log.csv.
+    n8n_label = "ALERT_DUPLICATE" if (label == "ALERT" and not alert["notify"]) else label
+    return _finish({
         "client_id": req.client_id,
         "hostname": req.hostname,
         "elapsed_seconds": round(elapsed, 2),
+        "true_label": label,
         "verdict": {
-            "label": label,
+            "label": n8n_label,
             "detected_stages": verdict.get("detected_stages", []),
             "reason": verdict.get("reason", ""),
             "evidence_refs": verdict.get("evidence_refs", []),
             "decision_source": verdict.get("decision_source", ""),  # rule+ai / ai / rule (hien trong tin Telegram)
+            "incident_ids": alert.get("incident_ids", []),
         },
-    }
+    }, label, alert)
+
+
+def _print_latency(lat: dict) -> None:
+    """In tóm tắt độ trễ đầu-cuối ra terminal server (chi tiết trong results/latency.csv)."""
+    if not lat or lat.get("e2e_from_first_s") in ("", None):
+        return
+    tg = "da gui Telegram" if lat.get("telegram_sent") in (True, "True") else "khong gui Telegram"
+    print(f"    [T] Do tre: su kien -> xong = {lat['e2e_from_first_s']}s (tu su kien cuoi: {lat['e2e_from_last_s']}s)"
+          f" | client gom: {lat.get('collect_s')}s | AI: {lat.get('ai_s')}s | n8n/Telegram: {lat.get('notify_s')}s"
+          f" | {lat.get('label')} {lat.get('alert_status')} | {tg}", flush=True)

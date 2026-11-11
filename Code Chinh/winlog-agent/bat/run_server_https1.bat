@@ -51,7 +51,7 @@ goto :start_server
 :start_server
 echo [*] Khoi dong Uvicorn Server tren port 9443...
 echo.
-.\.venv\Scripts\python.exe -m uvicorn --app-dir app app:app --host 0.0.0.0 --port 9443 --ssl-keyfile key.pem --ssl-certfile cert.pem
+.\.venv\Scripts\python.exe -m uvicorn --timeout-graceful-shutdown 3 --app-dir app app:app --host 0.0.0.0 --port 9443 --ssl-keyfile key.pem --ssl-certfile cert.pem
 goto :finish
 
 :no_python

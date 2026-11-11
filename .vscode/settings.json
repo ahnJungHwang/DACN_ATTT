@@ -1,0 +1,8 @@
+{
+    // Pylance: các module được app/*.py thêm vào sys.path lúc chạy (core/analyze.py, web/backend/siem.py, dashboard.py)
+    "python.analysis.extraPaths": [
+        "Code Chinh/winlog-agent/core",
+        "Code Chinh/winlog-agent/web/backend"
+    ],
+    "python.defaultInterpreterPath": "${workspaceFolder}/Code Chinh/winlog-agent/.venv/Scripts/python.exe"
+}

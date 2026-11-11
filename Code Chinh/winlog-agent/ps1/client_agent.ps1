@@ -185,6 +185,22 @@ while ($true) {
         $psEvents = @()
         $sysEvents = @()
 
+        # 0. Log bi xoa (1102 / 104) -> Windows co the danh so RecordId lai tu dau.
+        #    Neu RecordId moi nhat < moc da gui thi dat lai moc, neu khong se bo sot chinh su kien xoa log.
+        foreach ($chk in @(@{ Log = 'Security'; Var = 'lastSecRecord'; Need = $isAdmin },
+                           @{ Log = 'System';   Var = 'lastSysRecord'; Need = $true })) {
+            if (-not $chk.Need) { continue }
+            $mark = Get-Variable -Name $chk.Var -ValueOnly
+            if ($mark -gt 0) {
+                $newest = Get-WinEvent -LogName $chk.Log -MaxEvents 1 -ErrorAction SilentlyContinue
+                if ($newest -and $newest.RecordId -lt $mark) {
+                    Set-Variable -Name $chk.Var -Value ([long]0)
+                    Write-Host "[$((Get-Date).ToString('HH:mm:ss'))] [!] $($chk.Log) log vua bi XOA/RESET (RecordId $($newest.RecordId) < $mark) -> dat lai moc doc log." -ForegroundColor Magenta
+                    Write-AgentLog -Message "[WARN] $($chk.Log) log bi xoa/reset: RecordId $($newest.RecordId) < $mark -> dat lai moc."
+                }
+            }
+        }
+
         # 1. Quet Security Log neu co quyen Admin
         if ($isAdmin) {
             try {
@@ -286,12 +302,15 @@ while ($true) {
                 powershell_xml = $psXml
                 system_xml     = $sysXml
                 model          = $Model
+                # Gio client luc gui (UTC) -> server bu lech dong ho 2 may khi do do tre su kien -> canh bao
+                client_sent_utc = (Get-Date).ToUniversalTime().ToString("o")
             }
             $payloadJson = $payloadObj | ConvertTo-Json -Depth 5
 
             try {
                 $sw = [System.Diagnostics.Stopwatch]::StartNew()
-                $resp = Invoke-RestMethod -Uri $ServerUrl -Method POST -ContentType "application/json; charset=utf-8" -Body ([System.Text.Encoding]::UTF8.GetBytes($payloadJson)) -TimeoutSec 300
+                # 660s > thoi gian server cho n8n (600s): het gio som -> client gui lai cung lo -> phan tich & canh bao trung
+                $resp = Invoke-RestMethod -Uri $ServerUrl -Method POST -ContentType "application/json; charset=utf-8" -Body ([System.Text.Encoding]::UTF8.GetBytes($payloadJson)) -TimeoutSec 660
                 $sw.Stop()
                 $elapsedSec = [Math]::Round($sw.Elapsed.TotalSeconds, 1)
                 # Server da nhan -> moi chot moc. Thoi gian lui 2s lam vung dem; RecordId chong gui trung.
@@ -305,6 +324,14 @@ while ($true) {
                     Write-Host "  * Thong diep Server : $($resp.message)" -ForegroundColor Green
                 }
                 Write-Host "  * Thoi gian phan hoi: ${elapsedSec}s" -ForegroundColor Gray
+                if ($resp.label) {
+                    $tgText = if ($resp.telegram_sent) { "DA GUI Telegram" } elseif ($resp.alert_status -eq 'DUPLICATE') { "TRUNG -> khong gui lai Telegram" } else { "khong gui Telegram" }
+                    $col = if ($resp.label -eq 'ALERT') { 'Red' } else { 'Green' }
+                    Write-Host "  * Ket luan AI       : $($resp.label) ($tgText)" -ForegroundColor $col
+                }
+                if ($resp.latency -and "$($resp.latency.e2e_from_first_s)" -ne "") {
+                    Write-Host "  * Do tre dau-cuoi   : $($resp.latency.e2e_from_first_s)s tu su kien dau tien (AI $($resp.latency.ai_s)s, n8n/Telegram $($resp.latency.notify_s)s)" -ForegroundColor Gray
+                }
                 Write-Host "====================================================================`n" -ForegroundColor Yellow
                 Write-AgentLog -Message "[OK] Da day $totalNew su kien len Server ($elapsedSec s)."
             } catch {
