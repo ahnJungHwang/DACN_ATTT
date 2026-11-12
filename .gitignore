@@ -16,3 +16,9 @@ venv/
 Thumbs.db
 desktop.ini
 ~$*
+
+# Thư mục thử nghiệm cũ, đã gỡ khỏi repo ở fbe53ba (chỉ còn trên máy cá nhân)
+CodeThuNghiem/
+Thang Code/
+Lam Code/
+.venv*/

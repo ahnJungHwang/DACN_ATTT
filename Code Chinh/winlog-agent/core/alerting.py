@@ -1,6 +1,6 @@
 """Chống gửi trùng cảnh báo + đo độ trễ đầu-cuối cho luồng /ingest.
 
-1. AlertDeduplicator — mỗi cảnh báo ALERT được gom theo khóa (máy client, kỹ thuật MITRE).
+1. AlertDeduplicator — mỗi cảnh báo ALERT được gom theo khóa (máy client, kỹ thuật MITRE mức cha).
    - Khóa chưa thấy, hoặc đã im lặng quá ALERT_DEDUP_MINUTES phút -> sự cố MỚI -> gửi Telegram.
    - Khóa đang mở (tấn công còn tiếp diễn) -> TRÙNG -> chỉ tăng bộ đếm, KHÔNG gửi Telegram.
      Mỗi lần trùng, sự cố được gia hạn (cửa sổ trượt): sự cố đóng khi im lặng đủ N phút.
@@ -91,6 +91,10 @@ _NAME_TO_ID = {  # tên cụ thể đứng TRƯỚC tên chung (so khớp chuỗ
     "indicator removal": "T1070.001", "clear windows event logs": "T1070.001",
     "scheduled task persistence": "T1053.005", "new scheduled task": "T1053.005",
     "malicious service": "T1543.003/T1569.002", "new service installed": "T1543.003",
+    # Tên AI tự đặt đã gặp trong alerts_log.csv 11/11: cùng một đợt chạy lệnh PowerShell
+    # nhưng bị tách thành sự cố riêng -> gom chung với luật T1059.001
+    "powershell": "T1059.001", "tạo tiến trình": "T1059.001", "process creat": "T1059.001",
+    "đăng nhập thất bại": "T1110",  # gặp trong results/comparison_details.csv
 }
 
 
@@ -99,18 +103,28 @@ def _stage_name(stage: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"\(.*?\)", "", stage or "")).strip().lower()
 
 
-def technique_key(stage: str, known: dict[str, str] | None = None) -> str:
-    """'Password Brute Force (MITRE T1110)' -> 'T1110'; không có mã -> tra theo tên, cuối cùng là tên chuẩn hoá."""
+# Mã con được gom về mã cha (T1136.001 -> T1136) để các luật khác nhau của cùng một hành vi
+# không tách thành nhiều sự cố. Ngoại lệ giữ nguyên mã con: Password Spraying là phát hiện
+# riêng (luật 1b trong analyze.py), phải báo kể cả khi sự cố brute force T1110 đang mở.
+_KEEP_SUBTECHNIQUE = {"T1110.003"}
+
+
+def technique_keys(stage: str, known: dict[str, list[str]] | None = None) -> list[str]:
+    """Các khóa chống trùng của một stage.
+
+    'Backdoor ... (MITRE T1136 / T1098)' -> ['T1098', 'T1136']; 'Create Account (MITRE T1136.001)' -> ['T1136'].
+    Không có mã -> tra theo tên. Tên không tra được dồn hết về 'ai-unspecified': AI diễn đạt tự do
+    vô hạn kiểu, nếu mỗi kiểu là một khóa thì mỗi kiểu lại gửi một tin trùng. Tên gốc vẫn còn
+    trong verdict / trang SIEM.
+    """
     ids = _TECH.findall(stage or "")
-    if ids:
-        return "/".join(sorted(dict.fromkeys(ids)))
-    name = _stage_name(stage)
-    if known and name in known:
-        return known[name]
-    for k, v in _NAME_TO_ID.items():
-        if k in name:
-            return v
-    return name or "ai-unspecified"
+    if not ids:
+        name = _stage_name(stage)
+        if known and name in known:
+            return known[name]
+        ids = _TECH.findall(next((v for k, v in _NAME_TO_ID.items() if k in name), ""))
+    keys = sorted({i if i in _KEEP_SUBTECHNIQUE else i.split(".")[0] for i in ids})
+    return keys or ["ai-unspecified"]
 
 
 class AlertDeduplicator:
@@ -148,8 +162,8 @@ class AlertDeduplicator:
 
         stages = verdict.get("detected_stages") or []
         # tên -> mã lấy từ chính các stage có mã trong cùng kết luận (vd luật ghi kèm mã, AI ghi tên trần)
-        known = {_stage_name(s): technique_key(s) for s in stages if _TECH.search(s or "")}
-        techs = list(dict.fromkeys(technique_key(s, known) for s in stages)) or ["ai-unspecified"]
+        known = {_stage_name(s): technique_keys(s) for s in stages if _TECH.search(s or "")}
+        techs = list(dict.fromkeys(k for s in stages for k in technique_keys(s, known))) or ["ai-unspecified"]
         new, dup, incidents, repeat = [], [], [], 0
         with self._lock:
             # dọn sự cố đã đóng lâu (giữ file nhỏ)
@@ -164,7 +178,9 @@ class AlertDeduplicator:
                     s["last_seen"] = now.isoformat()
                     dup.append(t)
                 else:
-                    s = {"incident_id": f"INC-{now.strftime('%Y%m%d-%H%M%S')}-{len(self._state) + 1:03d}",
+                    # số thứ tự = lớn nhất đang có + 1 (len() bị lặp số sau khi dọn / mở lại sự cố)
+                    seq = 1 + max((int(v["incident_id"].rsplit("-", 1)[1]) for v in self._state.values()), default=0)
+                    s = {"incident_id": f"INC-{now.strftime('%Y%m%d-%H%M%S')}-{seq:03d}",
                          "client_id": client_id, "hostname": hostname, "technique": t,
                          "first_seen": now.isoformat(), "last_seen": now.isoformat(), "count": 1}
                     self._state[key] = s
