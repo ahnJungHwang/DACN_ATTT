@@ -1,0 +1,15 @@
+{
+  "case_id": "case_rnd_080_alert",
+  "category": "RandomMix",
+  "ground_truth": "ALERT",
+  "actions": "Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_01_bruteforce, data01:case_attack_09_procdump_lsass",
+  "expected_stages": [],
+  "sources": [
+    "data01:case_attack_01_bruteforce",
+    "data01:case_attack_09_procdump_lsass"
+  ],
+  "security_count": 15,
+  "powershell_count": 1,
+  "seed": 20261112,
+  "created_at": "2026-11-12T04:51:50Z"
+}

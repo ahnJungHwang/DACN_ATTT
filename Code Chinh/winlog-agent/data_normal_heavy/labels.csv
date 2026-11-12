@@ -1,0 +1,201 @@
+﻿case_id,ground_truth,category,expected_stages,sources,security_count,powershell_count,actions
+case_rnd_001_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_002_alert,ALERT,RandomMix,,data01:case_mixed_09_stealth_persistence_run; data01:case_attack_04_mimikatz_dump,8,2,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_mixed_09_stealth_persistence_run, data01:case_attack_04_mimikatz_dump"
+case_rnd_003_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_004_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_005_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_006_alert,ALERT,RandomMix,,data01:case_attack_07_encoded_powershell,6,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_07_encoded_powershell
+case_rnd_007_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_008_normal,NORMAL,RandomMix,,benign-background,7,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_009_alert,ALERT,RandomMix,,data01:case_attack_02_ps_c2_download; evtx:Credential_Access__phish_windows_credentials_powershell_scriptblockLog_4104,1,3,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_02_ps_c2_download, evtx:Credential_Access__phish_windows_credentials_powershell_scriptblockLog_4104"
+case_rnd_010_alert,ALERT,RandomMix,,evtx:Lateral_Movement__LM_ScheduledTask_ATSVC_target_host,13,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Lateral_Movement__LM_ScheduledTask_ATSVC_target_host
+case_rnd_011_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_012_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_013_normal,NORMAL,RandomMix,,benign-background,7,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_014_alert,ALERT,RandomMix,,data01:case_mixed_05_sysadmin_hijacked_session,9,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_mixed_05_sysadmin_hijacked_session
+case_rnd_015_normal,NORMAL,RandomMix,,benign-background,10,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_016_normal,NORMAL,RandomMix,,benign-background,5,2,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_017_alert,ALERT,RandomMix,,evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688; evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688,13,0,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688, evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688"
+case_rnd_018_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_019_alert,ALERT,RandomMix,,evtx:Credential_Access__remote_pwd_reset_rpc_mimikatz_postzerologon_target_DC; data01:case_mixed_10_recon_domain_trust; evtx:Lateral_Movement__remote_task_update_4624_4702_same_logonid,19,0,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Credential_Access__remote_pwd_reset_rpc_mimikatz_postzerologon_target_DC, data01:case_mixed_10_recon_domain_trust, evtx:Lateral_Movement__remote_task_update_4624_4702_same_logonid"
+case_rnd_020_normal,NORMAL,RandomMix,,benign-background,6,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_021_normal,NORMAL,RandomMix,,benign-background,7,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_022_alert,ALERT,RandomMix,,evtx:Credential_Access__remote_sam_registry_access_via_backup_operator_priv; evtx:Lateral_Movement__LM_4624_mimikatz_sekurlsa_pth_source_machine,15,1,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Credential_Access__remote_sam_registry_access_via_backup_operator_priv, evtx:Lateral_Movement__LM_4624_mimikatz_sekurlsa_pth_source_machine"
+case_rnd_023_normal,NORMAL,RandomMix,,benign-background,2,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_024_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_025_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_026_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_027_normal,NORMAL,RandomMix,,benign-background,7,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_028_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_029_normal,NORMAL,RandomMix,,benign-background,11,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_030_normal,NORMAL,RandomMix,,benign-background,15,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_031_alert,ALERT,RandomMix,,evtx:Credential_Access__Zerologon_VoidSec_CVE_2020_1472_4626_LT3_Anonym_follwedby_474; data01:case_mixed_06_c2_and_eventlog_clear,14,2,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Credential_Access__Zerologon_VoidSec_CVE_2020_1472_4626_LT3_Anonym_follwedby_474, data01:case_mixed_06_c2_and_eventlog_clear"
+case_rnd_032_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_033_normal,NORMAL,RandomMix,,benign-background,2,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_034_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_035_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_036_normal,NORMAL,RandomMix,,benign-background,5,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_037_normal,NORMAL,RandomMix,,benign-background,1,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_038_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_039_normal,NORMAL,RandomMix,,benign-background,11,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_040_normal,NORMAL,RandomMix,,benign-background,5,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_041_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_042_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_043_normal,NORMAL,RandomMix,,benign-background,9,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_044_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_045_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_046_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_047_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_048_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_049_normal,NORMAL,RandomMix,,benign-background,7,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_050_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_051_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_052_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_053_normal,NORMAL,RandomMix,,benign-background,2,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_054_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_055_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_056_normal,NORMAL,RandomMix,,benign-background,7,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_057_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_058_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_059_normal,NORMAL,RandomMix,,benign-background,2,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_060_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_061_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_062_alert,ALERT,RandomMix,,evtx:Lateral_Movement__LM_4624_mimikatz_sekurlsa_pth_source_machine,10,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Lateral_Movement__LM_4624_mimikatz_sekurlsa_pth_source_machine
+case_rnd_063_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_064_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_065_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_066_normal,NORMAL,RandomMix,,benign-background,2,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_067_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_068_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_069_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_070_normal,NORMAL,RandomMix,,benign-background,6,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_071_normal,NORMAL,RandomMix,,benign-background,1,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_072_normal,NORMAL,RandomMix,,benign-background,14,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_073_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_074_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_075_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_076_normal,NORMAL,RandomMix,,benign-background,11,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_077_normal,NORMAL,RandomMix,,benign-background,7,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_078_normal,NORMAL,RandomMix,,benign-background,10,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_079_alert,ALERT,RandomMix,,data01:case_attack_03_backdoor_account; data01:case_attack_05_recon_discovery,10,0,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_03_backdoor_account, data01:case_attack_05_recon_discovery"
+case_rnd_080_alert,ALERT,RandomMix,,data01:case_attack_01_bruteforce; data01:case_attack_09_procdump_lsass,15,1,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_01_bruteforce, data01:case_attack_09_procdump_lsass"
+case_rnd_081_normal,NORMAL,RandomMix,,benign-background,7,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_082_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_083_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_084_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_085_normal,NORMAL,RandomMix,,benign-background,1,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_086_normal,NORMAL,RandomMix,,benign-background,2,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_087_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_088_normal,NORMAL,RandomMix,,benign-background,5,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_089_normal,NORMAL,RandomMix,,benign-background,8,2,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_090_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_091_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_092_normal,NORMAL,RandomMix,,benign-background,11,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_093_alert,ALERT,RandomMix,,data01:case_attack_02_ps_c2_download; evtx:Command_and_Control__DE_RDP_Tunnel_5156,26,1,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_02_ps_c2_download, evtx:Command_and_Control__DE_RDP_Tunnel_5156"
+case_rnd_094_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_095_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_096_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_097_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_098_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_099_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_100_normal,NORMAL,RandomMix,,benign-background,7,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_101_normal,NORMAL,RandomMix,,benign-background,8,2,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_102_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_103_alert,ALERT,RandomMix,,data01:case_attack_10_disable_defender; data01:case_mixed_05_sysadmin_hijacked_session,9,2,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_10_disable_defender, data01:case_mixed_05_sysadmin_hijacked_session"
+case_rnd_104_alert,ALERT,RandomMix,,data01:case_mixed_10_recon_domain_trust; evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688; data01:case_mixed_02_bruteforce_to_backdoor,20,0,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_mixed_10_recon_domain_trust, evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688, data01:case_mixed_02_bruteforce_to_backdoor"
+case_rnd_105_normal,NORMAL,RandomMix,,benign-background,5,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_106_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_107_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_108_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_109_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_110_alert,ALERT,RandomMix,,data01:case_attack_05_recon_discovery,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_05_recon_discovery
+case_rnd_111_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_112_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_113_alert,ALERT,RandomMix,,data01:case_attack_09_procdump_lsass,10,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_09_procdump_lsass
+case_rnd_114_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_115_normal,NORMAL,RandomMix,,benign-background,2,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_116_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_117_normal,NORMAL,RandomMix,,benign-background,1,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_118_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_119_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_120_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_121_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_122_alert,ALERT,RandomMix,,data01:case_mixed_09_stealth_persistence_run,8,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_mixed_09_stealth_persistence_run
+case_rnd_123_alert,ALERT,RandomMix,,evtx:Lateral_Movement__LM_WMI_4624_4688_TargetHost; evtx:Privilege_Escalation__samaccount_spoofing_CVE_2021_42287_CVE_2021_42278_DC_secur; evtx:Credential_Access__CA_4624_4625_LogonType2_LogonProc_chrome,22,1,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Lateral_Movement__LM_WMI_4624_4688_TargetHost, evtx:Privilege_Escalation__samaccount_spoofing_CVE_2021_42287_CVE_2021_42278_DC_secur, evtx:Credential_Access__CA_4624_4625_LogonType2_LogonProc_chrome"
+case_rnd_124_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_125_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_126_normal,NORMAL,RandomMix,,benign-background,5,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_127_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_128_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_129_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_130_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_131_normal,NORMAL,RandomMix,,benign-background,1,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_132_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_133_normal,NORMAL,RandomMix,,benign-background,9,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_134_alert,ALERT,RandomMix,,evtx:Lateral_Movement__LM_WMI_4624_4688_TargetHost; data01:case_mixed_05_sysadmin_hijacked_session; data01:case_attack_04_mimikatz_dump,16,1,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Lateral_Movement__LM_WMI_4624_4688_TargetHost, data01:case_mixed_05_sysadmin_hijacked_session, data01:case_attack_04_mimikatz_dump"
+case_rnd_135_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_136_alert,ALERT,RandomMix,,evtx:Credential_Access__phish_windows_credentials_powershell_scriptblockLog_4104,3,2,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Credential_Access__phish_windows_credentials_powershell_scriptblockLog_4104
+case_rnd_137_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_138_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_139_alert,ALERT,RandomMix,,evtx:Privilege_Escalation__Runas_4624_4648_Webshell_CreateProcessAsUserA,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Privilege_Escalation__Runas_4624_4648_Webshell_CreateProcessAsUserA
+case_rnd_140_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_141_alert,ALERT,RandomMix,,data01:case_mixed_10_recon_domain_trust; data01:case_mixed_09_stealth_persistence_run,11,1,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_mixed_10_recon_domain_trust, data01:case_mixed_09_stealth_persistence_run"
+case_rnd_142_alert,ALERT,RandomMix,,evtx:Command_and_Control__DE_RDP_Tunnel_5156; evtx:Credential_Access__phish_windows_credentials_powershell_scriptblockLog_4104; data01:case_attack_03_backdoor_account,31,3,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Command_and_Control__DE_RDP_Tunnel_5156, evtx:Credential_Access__phish_windows_credentials_powershell_scriptblockLog_4104, data01:case_attack_03_backdoor_account"
+case_rnd_143_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_144_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_145_alert,ALERT,RandomMix,,evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688; data01:case_attack_04_mimikatz_dump,13,1,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688, data01:case_attack_04_mimikatz_dump"
+case_rnd_146_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_147_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_148_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_149_alert,ALERT,RandomMix,,data01:case_attack_07_encoded_powershell,1,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_07_encoded_powershell
+case_rnd_150_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_151_normal,NORMAL,RandomMix,,benign-background,7,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_152_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_153_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_154_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_155_alert,ALERT,RandomMix,,data01:case_attack_07_encoded_powershell; evtx:Lateral_Movement__LM_WMI_4624_4688_TargetHost,16,1,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_07_encoded_powershell, evtx:Lateral_Movement__LM_WMI_4624_4688_TargetHost"
+case_rnd_156_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_157_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_158_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_159_normal,NORMAL,RandomMix,,benign-background,9,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_160_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_161_alert,ALERT,RandomMix,,data01:case_attack_04_mimikatz_dump; evtx:Lateral_Movement__LM_WMIC_4648_rpcss,7,1,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_04_mimikatz_dump, evtx:Lateral_Movement__LM_WMIC_4648_rpcss"
+case_rnd_162_normal,NORMAL,RandomMix,,benign-background,1,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_163_normal,NORMAL,RandomMix,,benign-background,9,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_164_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_165_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_166_normal,NORMAL,RandomMix,,benign-background,1,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_167_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_168_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_169_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_170_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_171_normal,NORMAL,RandomMix,,benign-background,6,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_172_normal,NORMAL,RandomMix,,benign-background,7,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_173_alert,ALERT,RandomMix,,data01:case_attack_01_bruteforce; data01:case_attack_01_bruteforce,27,1,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_01_bruteforce, data01:case_attack_01_bruteforce"
+case_rnd_174_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_175_normal,NORMAL,RandomMix,,benign-background,2,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_176_normal,NORMAL,RandomMix,,benign-background,8,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_177_normal,NORMAL,RandomMix,,benign-background,1,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_178_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_179_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_180_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_181_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_182_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_183_normal,NORMAL,RandomMix,,benign-background,8,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_184_normal,NORMAL,RandomMix,,benign-background,15,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_185_normal,NORMAL,RandomMix,,benign-background,7,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_186_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_187_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_188_normal,NORMAL,RandomMix,,benign-background,4,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_189_normal,NORMAL,RandomMix,,benign-background,6,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_190_normal,NORMAL,RandomMix,,benign-background,5,2,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_191_normal,NORMAL,RandomMix,,benign-background,1,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_192_normal,NORMAL,RandomMix,,benign-background,7,1,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_193_alert,ALERT,RandomMix,,data01:case_attack_09_procdump_lsass; data01:case_attack_07_encoded_powershell,4,3,"Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_09_procdump_lsass, data01:case_attack_07_encoded_powershell"
+case_rnd_194_normal,NORMAL,RandomMix,,benign-background,5,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_195_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_196_alert,ALERT,RandomMix,,data01:case_mixed_02_bruteforce_to_backdoor,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_mixed_02_bruteforce_to_backdoor
+case_rnd_197_normal,NORMAL,RandomMix,,benign-background,8,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_198_normal,NORMAL,RandomMix,,benign-background,12,2,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_199_normal,NORMAL,RandomMix,,benign-background,4,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background
+case_rnd_200_normal,NORMAL,RandomMix,,benign-background,3,0,Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background

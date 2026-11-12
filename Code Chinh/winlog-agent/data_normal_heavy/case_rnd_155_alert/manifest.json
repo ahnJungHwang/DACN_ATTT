@@ -1,0 +1,15 @@
+{
+  "case_id": "case_rnd_155_alert",
+  "category": "RandomMix",
+  "ground_truth": "ALERT",
+  "actions": "Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_attack_07_encoded_powershell, evtx:Lateral_Movement__LM_WMI_4624_4688_TargetHost",
+  "expected_stages": [],
+  "sources": [
+    "data01:case_attack_07_encoded_powershell",
+    "evtx:Lateral_Movement__LM_WMI_4624_4688_TargetHost"
+  ],
+  "security_count": 16,
+  "powershell_count": 1,
+  "seed": 20261112,
+  "created_at": "2026-11-12T04:51:50Z"
+}

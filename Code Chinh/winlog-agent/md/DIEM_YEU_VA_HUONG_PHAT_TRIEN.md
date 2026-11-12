@@ -59,7 +59,7 @@
 ### Trung hạn — hoàn thiện đánh giá (quan trọng nhất cho báo cáo)
 - [ ] (#13) Thu log hoạt động bình thường từ máy ảo (≈10 phiên, nhãn theo phiên) → đo báo động giả
 - [ ] (#14, #15) Đánh giá cuối trên tập CHƯA DÙNG (EVTX-ATTACK-SAMPLES), nhãn chốt trước, người chấm chéo
-- [ ] So sánh với DeepBlueCLI / Hayabusa / Chainsaw (Sigma) trên cùng dữ liệu
+- [~] So sánh với DeepBlueCLI / Hayabusa / Chainsaw (Sigma) trên cùng dữ liệu — 12/11: DeepBlueCLI đã chạy trên 31 file EVTX thật (`eval_real/run_deepblue.ps1`, bảng ở `eval_real/SO_SANH_CONG_CU.md`). Ca tấn công có dấu vết trong log agent thu: DeepBlueCLI 13/16, Qwen hệ thống 9/14, Llama hệ thống 10/14 (2 ca bị Defender cách ly). **Còn thiếu:** log bình thường thật để đo báo động giả cho cả ba, Hayabusa/Chainsaw.
 - [ ] Thử Qwen2.5 7B Q4 (~4.7 GB VRAM), theo dõi nhiệt độ GPU
 - [~] (#17) Gom cảnh báo thành sự cố (cùng máy + thời gian + kỹ thuật) — `core/alerting.py` (12/11, cửa sổ trượt 10 phút). 13/11: gom theo mã MITRE cha (riêng Password Spraying T1110.003 giữ khóa riêng), tên AI tự đặt quy về mã hoặc dồn vào một khóa chung; test ở `tests/test_alerting.py`. Chạy lại `results/alerts_log.csv` phiên 11/11 (37 ALERT): 14 → 11 tin. **Còn thiếu:** đo lại trên lab thật rồi sinh lại `results/LATENCY_REPORT.md`; AI vẫn được đặt tên stage tự do (tên lạ đến trước mã của luật thì vẫn ra 2 tin).
 - [ ] (#12) Chống prompt injection: đánh dấu log là dữ liệu không tin cậy, kiểm tra chéo bằng luật

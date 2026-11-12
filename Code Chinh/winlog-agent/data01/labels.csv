@@ -1,0 +1,41 @@
+﻿case_id,ground_truth,category,expected_stages,sources,security_count,powershell_count,actions
+case_attack_01_bruteforce,ALERT,SpecificAttack,Password Brute Force (MITRE T1110),,10,0,Dò mật khẩu 8 lần liên tiếp từ IP lạ rồi đăng nhập thành công.
+case_attack_02_ps_c2_download,ALERT,SpecificAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,1,1,PowerShell Download Cradle tải và thực thi mã độc C2 từ xa.
+case_attack_03_backdoor_account,ALERT,SpecificAttack,Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098),,2,0,Lệnh tạo user ẩn và cấp quyền Administrators.
+case_attack_04_mimikatz_dump,ALERT,SpecificAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,1,1,Chạy Mimikatz trích xuất mật khẩu bộ nhớ tiến trình lsass.
+case_attack_05_recon_discovery,ALERT,SpecificAttack,System Reconnaissance (MITRE T1033),,8,0,Chuỗi lệnh trinh sát hệ thống và miền trong chuỗi tấn công.
+case_attack_06_reg_persistence,ALERT,SpecificAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,1,1,Gán Registry Run Key duy trì khởi động mã độc.
+case_attack_07_encoded_powershell,ALERT,SpecificAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,1,1,Thực thi PowerShell mã hóa Base64 tải payload từ xa.
+case_attack_08_schtasks_persistence,ALERT,SpecificAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,1,1,Tạo Scheduled Task định kỳ 15 phút gọi PowerShell tải mã độc.
+case_attack_09_procdump_lsass,ALERT,SpecificAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,2,1,Dump bộ nhớ tiến trình lsass và trích xuất mật khẩu.
+case_attack_10_disable_defender,ALERT,SpecificAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,1,1,Tắt tính năng giám sát thời gian thực của Windows Defender và tải C2.
+case_edge_01_multi_user_one_attack,ALERT,EdgeCase,Password Brute Force (MITRE T1110),,8,0,"User A làm việc bình thường, User B bị dò mật khẩu 6 lần liên tiếp."
+case_edge_02_admin_typo_twice,NORMAL,EdgeCase,,,4,0,Quản trị viên gõ nhầm pass 2 lần rồi vào thành công kiểm tra mạng.
+case_edge_03_automated_inventory_tool,NORMAL,EdgeCase,,,3,0,Công cụ thống kê tài sản phần cứng tự động kiểm tra hệ thống.
+case_edge_04_it_create_employee_account,NORMAL,EdgeCase,,,2,0,Quy trình nhân sự tạo tài khoản nhân viên mới hợp lệ không kèm leo thang.
+case_edge_05_bruteforce_all_failed,ALERT,EdgeCase,Password Brute Force (MITRE T1110),,10,0,Dò mật khẩu liên tục 10 lần từ bên ngoài nhưng thất bại hoàn toàn.
+case_edge_06_dual_session_different_ip,NORMAL,EdgeCase,,,3,0,Hai người dùng nội bộ cùng truy cập thư mục chia sẻ tệp công ty.
+case_edge_07_scheduled_script_failed,NORMAL,EdgeCase,,,1,1,Tác vụ tự động kiểm tra trạng thái gặp lỗi đường dẫn không hợp lệ.
+case_edge_08_guest_account_login_attempt,ALERT,EdgeCase,Password Brute Force (MITRE T1110),,5,0,Kẻ xâm nhập cố tình dò quét tài khoản Guest bị vô hiệu hóa.
+case_edge_09_suspicious_script_benign_name,ALERT,EdgeCase,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,1,1,Script ngụy trang tên WindowsUpdate nhưng nội dung là tải C2 beacon.
+case_edge_10_remote_desktop_after_hours,ALERT,EdgeCase,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,2,1,Đăng nhập RDP từ IP nước ngoài lúc 2h30 sáng tải reverse shell.
+case_mixed_01_office_macro_c2,ALERT,MultiStageAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,2,1,Mở tài liệu Word chứa macro tự động kích hoạt PowerShell tải reverse shell.
+case_mixed_02_bruteforce_to_backdoor,ALERT,MultiStageAttack,Password Brute Force (MITRE T1110); Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098),,8,0,Dò pass thành công và ngay lập tức tạo tài khoản backdoor.
+case_mixed_03_recon_then_mimikatz,ALERT,MultiStageAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,2,1,Trinh sát đặc quyền hệ thống sau đó chạy script Mimikatz dump pass.
+case_mixed_04_dev_malicious_package,ALERT,MultiStageAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,2,1,Gói thư viện lập trình độc hại âm thầm kích hoạt PowerShell đánh cắp token.
+case_mixed_05_sysadmin_hijacked_session,ALERT,MultiStageAttack,Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098),,3,0,Phiên quản trị viên bị chèn lệnh độc hại tạo user quản trị.
+case_mixed_06_c2_and_eventlog_clear,ALERT,MultiStageAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,1,1,Tải mã độc C2 sau đó thực thi lệnh xóa nhật ký Security.
+case_mixed_07_browser_exploit_payload,ALERT,MultiStageAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,2,1,Trình duyệt dính mã khai thác tạo tiến trình PowerShell tải Meterpreter.
+case_mixed_08_pass_the_hash_cmd,ALERT,MultiStageAttack,Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098),,2,0,Đăng nhập qua mạng từ IP lạ kèm gọi WMI tạo user từ xa.
+case_mixed_09_stealth_persistence_run,ALERT,MultiStageAttack,Malware Execution / PowerShell Download Cradle (MITRE T1059.001),,1,1,Chỉnh sửa Excel đồng thời tiến trình ngầm cài đặt khóa Run duy trì mã độc.
+case_mixed_10_recon_domain_trust,ALERT,MultiStageAttack,Password Brute Force (MITRE T1110); System Reconnaissance (MITRE T1033),,7,0,Dò pass và trinh sát Domain Controllers trong chuỗi tấn công.
+case_normal_01_office,NORMAL,Benign,,,5,0,"Nhân viên văn phòng mở Outlook, Excel, Word, Chrome làm việc."
+case_normal_02_sysadmin,NORMAL,Benign,,,4,1,Quản trị viên kiểm tra mạng và trạng thái dịch vụ.
+case_normal_03_developer,NORMAL,Benign,,,4,1,"Lập trình viên chạy Git, Unit test Python và build NPM."
+case_normal_04_typo_login,NORMAL,Benign,,,3,0,Người dùng gõ nhầm pass 1 lần rồi đăng nhập đúng và mở Notepad.
+case_normal_05_backup_script,NORMAL,Benign,,,1,1,Script PowerShell định kỳ nén file sao lưu dữ liệu.
+case_normal_06_disk_cleanup,NORMAL,Benign,,,1,1,Quản trị viên dọn dẹp ổ đĩa và kiểm tra dung lượng còn trống.
+case_normal_07_browser_work,NORMAL,Benign,,,3,0,Nhân viên nhân sự duyệt web cổng thông tin và đồng bộ OneDrive.
+case_normal_08_pdf_reader,NORMAL,Benign,,,2,0,Mở hóa đơn PDF và tiến trình in ấn văn bản Windows.
+case_normal_09_calc_and_tools,NORMAL,Benign,,,2,0,Mở máy tính tính tiền và mở Task Manager kiểm tra ứng dụng.
+case_normal_10_powershell_profile,NORMAL,Benign,,,1,1,PowerShell khởi chạy nạp module quản trị Active Directory hợp lệ.

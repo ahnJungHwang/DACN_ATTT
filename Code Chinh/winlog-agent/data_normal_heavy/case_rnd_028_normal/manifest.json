@@ -1,0 +1,14 @@
+{
+  "case_id": "case_rnd_028_normal",
+  "category": "RandomMix",
+  "ground_truth": "NORMAL",
+  "actions": "Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: benign-background",
+  "expected_stages": [],
+  "sources": [
+    "benign-background"
+  ],
+  "security_count": 4,
+  "powershell_count": 0,
+  "seed": 20261112,
+  "created_at": "2026-11-12T04:51:49Z"
+}

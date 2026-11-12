@@ -1,0 +1,16 @@
+﻿case_id,ground_truth,category,expected_stages,sources,security_count,powershell_count,actions
+case_attack_01,ALERT,,,,,,5x dang nhap sai mat khau; dang nhap thanh cong; whoami; net user /add hacker; PowerShell IEX download cradle
+case_attack_bruteforce,ALERT,,,,10,0,8 lần đăng nhập thất bại liên tiếp vào tài khoản admin_backup từ IP 10.10.15.66; sau đó đăng nhập thành công và mở cmd.
+case_attack_credential_dump,ALERT,,,,1,1,Kiểm tra SeDebugPrivilege và chạy script Invoke-Mimikatz để dump mật khẩu từ bộ nhớ tiến trình lsass.
+case_attack_new,ALERT,,,,,,5x dang nhap sai; dang nhap thanh cong; whoami; net user /add; PowerShell cradle
+case_attack_persistence_backdoor,ALERT,,,,2,1,"Tạo tài khoản ngầm shadow_admin, gán quyền Administrators và thiết lập khóa khởi động Run Persistence."
+case_attack_powershell_c2,ALERT,,,,2,1,Chạy PowerShell ẩn danh với Download Cradle tải payload từ máy chủ C2 http://c2-malicious.xyz/beacon.ps1.
+case_attack_recon_discovery,ALERT,,,,8,0,"Dò quét tài khoản đi kèm chuỗi lệnh khám phá mạng: whoami, net user, net group Domain Admins, nltest."
+case_demo,ALERT,,,,,,5x Brute Force; 1x Logon Success; whoami; net user hacker /add; PowerShell Cradle + Mimikatz
+case_mixed_stealth_attack,ALERT,,,,2,1,Tài liệu Word kích hoạt mã độc macro chạy ngầm PowerShell tải reverse shell qua mạng.
+case_normal_01,NORMAL,,,,41,1,Dang nhap dung; whoami; Get-Date; Get-Process
+case_normal_backup_script,NORMAL,,,,1,1,Tác vụ tự động chạy lệnh Compress-Archive sao lưu thư mục công ty D:\CompanyData vào ổ E:\BackupDaily.
+case_normal_developer,NORMAL,,,,4,1,"Lập trình viên làm việc thông thường: git clone, git status, chạy unit test python, docker ps."
+case_normal_office_worker,NORMAL,,,,5,0,"Người dùng nguyen_van_a đăng nhập hợp lệ, mở Outlook, Excel báo cáo, Word và duyệt mail qua Chrome."
+case_normal_sysadmin_task,NORMAL,,,,4,1,"Quản trị viên kiểm tra cấu hình mạng (ipconfig, ping) và giám sát trạng thái dịch vụ (Get-Service)."
+case_normal_typo_login,NORMAL,,,,3,0,"Người dùng le_thi_b gõ nhầm mật khẩu 1 lần duy nhất, sau đó đăng nhập thành công và mở Notepad ghi chú."

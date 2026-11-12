@@ -1,0 +1,22 @@
+metric,qwen
+Tên đầy đủ mô hình,qwen2.5:3b-instruct-q4_K_M
+Tổng số ca kiểm thử,200
+Độ chuẩn xác (Precision),52.2%
+Độ nhạy phát hiện (Recall),77.4%
+Điểm F1-Score,0.623
+Độ chính xác tổng thể (Accuracy),85.0%
+Báo động giả (False Positive - FP),22 ca
+Bỏ sót tấn công (False Negative - FN),7 ca
+Tỉ lệ báo động giả (FP / số ca NORMAL),13.0% (22/169)
+Không kết luận được (UNKNOWN / lỗi),1 / 0 ca
+Tỷ lệ xuất JSON hợp lệ (Valid JSON),100.0%
+Thời gian trung vị (Median Latency),9.76s
+Thời gian trung bình (Mean Latency),11.61s
+Cảnh báo do Luật + AI xác nhận,18 ca
+Cảnh báo do AI tự phát hiện,22 ca
+Cảnh báo chỉ do Luật (AI không xác nhận),6 ca
+[Riêng AI] Precision,45.0%
+[Riêng AI] Recall,58.1%
+[Riêng AI] F1-Score,0.507
+[Riêng AI] Accuracy,82.0%
+[Riêng AI] Báo động giả / Bỏ sót,22 / 13 ca

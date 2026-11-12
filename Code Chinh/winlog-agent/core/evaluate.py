@@ -138,6 +138,29 @@ def run_single_evaluation(
         }
 
 
+def pace_model_calls(limit: int, abort: int = 78) -> None:
+    """Bọc các hàm gọi mô hình trong analyze.py: chờ GPU <= limit °C trước mỗi lần gọi (bảo vệ laptop)."""
+    import subprocess
+    import analyze
+
+    def gpu_temp() -> int:
+        out = subprocess.run(["nvidia-smi", "--query-gpu=temperature.gpu", "--format=csv,noheader"],
+                             capture_output=True, text=True).stdout
+        return int(float(out.split()[0]))
+
+    def wait():
+        t = gpu_temp()
+        if t >= abort:
+            raise SystemExit(f"[!] GPU {t}°C >= {abort}°C -> dừng đánh giá để bảo vệ máy.")
+        while t > limit:
+            time.sleep(5)
+            t = gpu_temp()
+
+    for name in ("analyze_batch", "verify_alert"):
+        fn = getattr(analyze, name)
+        setattr(analyze, name, lambda *a, _fn=fn, **k: (wait(), _fn(*a, **k))[1])
+
+
 def calculate_metrics(records: list[dict], label_key: str = "pred_label") -> dict:
     """Tính toán ma trận nhầm lẫn và các chỉ số Precision, Recall, F1."""
     tp = fp = tn = fn = unknown = errors = 0
@@ -169,6 +192,7 @@ def calculate_metrics(records: list[dict], label_key: str = "pred_label") -> dic
                 tn += 1
 
     total = len(records)
+    n_normal = sum(1 for r in records if r["ground_truth"] == "NORMAL")
     precision = (tp / (tp + fp)) if (tp + fp) > 0 else 0.0
     recall = (tp / (tp + fn)) if (tp + fn) > 0 else 0.0
     f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) > 0 else 0.0
@@ -188,6 +212,8 @@ def calculate_metrics(records: list[dict], label_key: str = "pred_label") -> dic
         "fn": fn,
         "unknown": unknown,
         "errors": errors,
+        "n_normal": n_normal,
+        "fpr": round(fp / n_normal * 100, 1) if n_normal else 0.0,
         "precision": round(precision * 100, 1),
         "recall": round(recall * 100, 1),
         "f1": round(f1, 3),
@@ -210,7 +236,11 @@ def main():
     parser.add_argument("--no-filter", action="store_true", help="Không lọc tiến trình nhiễu")
     parser.add_argument("--data-dir", default="", help="Thư mục chứa dữ liệu ca kiểm thử (mặc định: data01 nếu có, không thì data)")
     parser.add_argument("--output-dir", default="", help="Thư mục xuất báo cáo (mặc định: results/)")
+    parser.add_argument("--max-gpu-temp", type=int, default=0,
+                        help="Chờ GPU nguội tới ngưỡng này (°C) trước MỖI lần gọi mô hình; dừng hẳn nếu >= 78°C. 0 = tắt")
     args = parser.parse_args()
+    if args.max_gpu_temp:
+        pace_model_calls(args.max_gpu_temp)
 
     models_to_run = [m.strip() for m in args.models.split(",") if m.strip()]
     invalid_models = [m for m in models_to_run if m not in MODELS]
@@ -325,6 +355,8 @@ def main():
         ("Độ chính xác tổng thể (Accuracy)", lambda m: f"{summary_by_model[m]['accuracy']}%"),
         ("Báo động giả (False Positive - FP)", lambda m: f"{summary_by_model[m]['fp']} ca"),
         ("Bỏ sót tấn công (False Negative - FN)", lambda m: f"{summary_by_model[m]['fn']} ca"),
+        ("Tỉ lệ báo động giả (FP / số ca NORMAL)", lambda m: f"{summary_by_model[m]['fpr']}% ({summary_by_model[m]['fp']}/{summary_by_model[m]['n_normal']})"),
+        ("Không kết luận được (UNKNOWN / lỗi)", lambda m: f"{summary_by_model[m]['unknown']} / {summary_by_model[m]['errors']} ca"),
         ("Tỷ lệ xuất JSON hợp lệ (Valid JSON)", lambda m: f"{summary_by_model[m]['valid_json_rate']}%"),
         ("Thời gian trung vị (Median Latency)", lambda m: f"{summary_by_model[m]['median_latency']}s"),
         ("Thời gian trung bình (Mean Latency)", lambda m: f"{summary_by_model[m]['avg_latency']}s"),

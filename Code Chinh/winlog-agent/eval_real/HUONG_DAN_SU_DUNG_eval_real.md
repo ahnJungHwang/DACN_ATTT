@@ -14,6 +14,10 @@ Mục đích: kiểm tra hệ thống còn đúng không khi gặp dữ liệu n
 | `real_log_results.csv` | Kết quả chi tiết từng ca. |
 | `REAL_LOG_REPORT.md` | Báo cáo kết quả. |
 | `PHAN_TICH_KET_QUA.md` | Phân tích, nhận xét kết quả. |
+| `run_deepblue.ps1` | Chạy DeepBlueCLI (công cụ không dùng AI) trên cùng các file `.evtx`. Ghi `deepblue_results.csv`. |
+| `compare_tools.py` | Chấm điểm và lập bảng so sánh DeepBlueCLI với hệ thống. Ghi `SO_SANH_CONG_CU.md`. |
+| `normal_evtx/` | Các file `.evtx` xuất từ máy ảo trong lúc dùng bình thường. Mỗi file là một ca nhãn `NORMAL`, dùng để đo báo động giả. |
+| `minh_chung/` | Ảnh chụp màn hình lúc chạy, làm minh chứng. |
 
 ## Quy trình 2 bước (đứng ở thư mục gốc `winlog-agent`)
 
@@ -54,6 +58,20 @@ So sánh 3 cách phát hiện:
 3. **Chỉ luật**: không dùng AI.
 
 Mỗi chỉ số kèm khoảng tin cậy 95% (Wilson). Kết quả được ghi vào `real_log_results.csv` và `REAL_LOG_REPORT.md`.
+
+### 3. So sánh với DeepBlueCLI
+
+```powershell
+powershell -ExecutionPolicy Bypass -File eval_realun_deepblue.ps1
+.venv\Scripts\python.exe eval_real\compare_tools.py
+```
+
+- Tải `DeepBlue.ps1`, `regexes.txt`, `safelist.txt` từ <https://github.com/sans-blue-team/DeepBlueCLI> (đúng commit ghi trong `labels.json`) vào thư mục `tool` nằm cạnh thư mục `evtx` của DeepBlueCLI, hoặc chỉ đường dẫn bằng `-ToolDir`. Không đưa các file này vào repo (GPL-3.0).
+- DeepBlueCLI được chạy trên cả các file trong `out_of_scope` của `labels.json`: đó là tấn công nằm ở loại log agent không thu.
+- Một file có từ 1 phát hiện trở lên thì tính là `ALERT`. Ca mà mọi phát hiện chỉ là "Log Clear" thì tính là không bắt được, vì sự kiện xoá log trong bộ mẫu là dấu vết người tạo mẫu (hệ thống của nhóm cũng đã loại nó ở bước 1).
+- Đo báo động giả: xuất log lúc dùng máy bình thường, ví dụ `wevtutil epl Security C:
+ormal_session_01.evtx`, chép vào `eval_real
+ormal_evtx\` rồi chạy lại 2 lệnh trên.
 
 ## Yêu cầu
 

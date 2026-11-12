@@ -1,0 +1,15 @@
+{
+  "case_id": "case_rnd_017_alert",
+  "category": "RandomMix",
+  "ground_truth": "ALERT",
+  "actions": "Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688, evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688",
+  "expected_stages": [],
+  "sources": [
+    "evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688",
+    "evtx:Privilege_Escalation__NTLM2SelfRelay_med0x2e_security_4624_4688"
+  ],
+  "security_count": 13,
+  "powershell_count": 0,
+  "seed": 20261112,
+  "created_at": "2026-11-12T04:51:49Z"
+}

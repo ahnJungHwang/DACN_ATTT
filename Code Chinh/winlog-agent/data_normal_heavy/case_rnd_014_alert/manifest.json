@@ -1,0 +1,14 @@
+{
+  "case_id": "case_rnd_014_alert",
+  "category": "RandomMix",
+  "ground_truth": "ALERT",
+  "actions": "Ca sinh ngẫu nhiên (coin-flip). Nguồn khối: data01:case_mixed_05_sysadmin_hijacked_session",
+  "expected_stages": [],
+  "sources": [
+    "data01:case_mixed_05_sysadmin_hijacked_session"
+  ],
+  "security_count": 9,
+  "powershell_count": 0,
+  "seed": 20261112,
+  "created_at": "2026-11-12T04:51:49Z"
+}
