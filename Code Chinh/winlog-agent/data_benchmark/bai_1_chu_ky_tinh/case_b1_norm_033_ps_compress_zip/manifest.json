@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_033_ps_compress_zip",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Nén thư mục báo cáo cuối tháng thành tệp tin zip.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.241781"
+}

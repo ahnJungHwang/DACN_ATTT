@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_057_netsh_firewall_add_rule",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.673122"
+}

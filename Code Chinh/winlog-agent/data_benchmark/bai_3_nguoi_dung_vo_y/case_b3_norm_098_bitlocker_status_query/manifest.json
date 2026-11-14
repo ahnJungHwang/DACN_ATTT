@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_098_bitlocker_status_query",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.718206"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_036_ps_get_eventlog_system",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Xem 5 sự kiện nhật ký gần nhất trong System Event Log.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.245094"
+}

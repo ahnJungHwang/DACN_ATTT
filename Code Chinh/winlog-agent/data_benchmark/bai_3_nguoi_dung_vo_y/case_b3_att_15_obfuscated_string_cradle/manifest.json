@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_15_obfuscated_string_cradle",
+  "category": "Execution",
+  "ground_truth": "ALERT",
+  "description": "PowerShell làm rối chuỗi bằng ký tự backtick và ghép chuỗi d`o`w`n`l`o`a`d.",
+  "mitre_technique": "T1059.001",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.579255"
+}

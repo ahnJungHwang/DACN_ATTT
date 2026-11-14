@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_37_powersploit_portscan",
+  "category": "Discovery",
+  "ground_truth": "ALERT",
+  "description": "Thực thi module PowerSploit Invoke-Portscan quét dải mạng LAN.",
+  "mitre_technique": "T1046",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.190295"
+}

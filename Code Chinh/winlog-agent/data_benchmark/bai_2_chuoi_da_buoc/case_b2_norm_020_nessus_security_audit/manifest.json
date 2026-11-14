@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_norm_020_nessus_security_audit",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.",
+  "mitre_technique": "-",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.434582"
+}

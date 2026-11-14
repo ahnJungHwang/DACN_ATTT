@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_039_git_branch_list",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Xem danh sách các nhánh tính năng đang phát triển cục bộ.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.247361"
+}

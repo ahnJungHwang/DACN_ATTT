@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_14_com_hijack_clsid",
+  "category": "Persistence",
+  "ground_truth": "ALERT",
+  "description": "COM Object Hijacking: Ghi đè InprocServer32 trong HKCU CLSID.",
+  "mitre_technique": "T1546.015",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.578280"
+}

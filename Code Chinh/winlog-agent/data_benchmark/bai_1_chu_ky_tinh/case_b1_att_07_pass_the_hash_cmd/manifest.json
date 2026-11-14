@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_07_pass_the_hash_cmd",
+  "category": "LateralMovement",
+  "ground_truth": "ALERT",
+  "description": "Pass-The-Hash: Thực thi Mimikatz sekurlsa::pth mở phiên dòng lệnh mới.",
+  "mitre_technique": "T1550.002",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.155110"
+}

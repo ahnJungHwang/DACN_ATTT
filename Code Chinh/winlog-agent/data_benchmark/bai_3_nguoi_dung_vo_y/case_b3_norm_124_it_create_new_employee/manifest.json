@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_124_it_create_new_employee",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.742059"
+}

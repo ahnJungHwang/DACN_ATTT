@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_12_appcertdlls_persistence",
+  "category": "Persistence",
+  "ground_truth": "ALERT",
+  "description": "Ghi tên DLL độc hại vào AppCertDlls để tự nạp cùng mọi tiến trình.",
+  "mitre_technique": "T1546.009",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.576680"
+}

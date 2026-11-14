@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_49_powersploit_mimikatz_dump",
+  "category": "CredentialAccess",
+  "ground_truth": "ALERT",
+  "description": "Nạp reflective DLL Mimikatz trực tiếp vào bộ nhớ powershell.",
+  "mitre_technique": "T1003.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.201959"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_20_schtasks_create_backdoor",
+  "category": "Persistence",
+  "ground_truth": "ALERT",
+  "description": "Tạo tác vụ lập lịch Schtasks kích hoạt mã độc định kỳ 10 phút.",
+  "mitre_technique": "T1053.005",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.170424"
+}

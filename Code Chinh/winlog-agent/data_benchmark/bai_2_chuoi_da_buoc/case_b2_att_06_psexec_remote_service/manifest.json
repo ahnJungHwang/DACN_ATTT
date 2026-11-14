@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_06_psexec_remote_service",
+  "category": "LateralMovement",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: PsExec kết nối máy chủ quản trị -> Cài đặt remote service PSEXESVC -> Điều khiển.",
+  "mitre_technique": "T1569.002",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.366897"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_23_fsutil_usn_deletejournal",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Xóa nhật ký thay đổi tệp tin NTFS USN Journal để xóa dấu vết điều tra.",
+  "mitre_technique": "T1070",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.173586"
+}

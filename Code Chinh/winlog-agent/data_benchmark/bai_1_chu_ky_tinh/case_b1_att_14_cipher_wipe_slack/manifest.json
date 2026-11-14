@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_14_cipher_wipe_slack",
+  "category": "Impact",
+  "ground_truth": "ALERT",
+  "description": "Cipher Wipe: Tiêu hủy dữ liệu ổ đĩa bằng tiện ích cipher /w ghi đè vùng trống.",
+  "mitre_technique": "T1485",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.163726"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_05_regsvr32_squiblydoo_remote",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Tấn công Squiblydoo nạp scriptlet từ domain c2 qua regsvr32.",
+  "mitre_technique": "T1218.010",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.570721"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_46_empire_stager_launch",
+  "category": "Execution",
+  "ground_truth": "ALERT",
+  "description": "PowerShell Empire: Nạp stager độc hại bằng scriptlet base64.",
+  "mitre_technique": "T1059.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.199578"
+}

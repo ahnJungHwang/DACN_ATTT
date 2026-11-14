@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_26_icacls_deny_admin",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Chặn quyền truy cập của Quản trị viên vào thư mục mã độc bằng icacls deny.",
+  "mitre_technique": "T1222.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.178223"
+}

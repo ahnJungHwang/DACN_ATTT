@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_02_recon_then_mimikatz",
+  "category": "MultiStage",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: Trinh sát hệ thống whoami /priv -> nltest -> Dump LSASS bằng Mimikatz.",
+  "mitre_technique": "T1033 / T1003.001",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.362892"
+}

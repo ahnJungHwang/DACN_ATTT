@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_50_wevtutil_clear_system",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Xóa nhật ký sự kiện System và Application bằng wevtutil.",
+  "mitre_technique": "T1070.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.202838"
+}

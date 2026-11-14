@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_137_git_status",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Kiểm tra trạng thái các tệp tin mã nguồn trong kho Git.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.346637"
+}

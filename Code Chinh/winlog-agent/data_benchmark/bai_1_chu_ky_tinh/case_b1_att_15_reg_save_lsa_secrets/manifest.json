@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_15_reg_save_lsa_secrets",
+  "category": "CredentialAccess",
+  "ground_truth": "ALERT",
+  "description": "Trích xuất LSA Secrets nội bộ từ khóa Registry SECURITY.",
+  "mitre_technique": "T1003.002",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.164969"
+}

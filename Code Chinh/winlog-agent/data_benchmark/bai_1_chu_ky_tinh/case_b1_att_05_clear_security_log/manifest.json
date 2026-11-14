@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_05_clear_security_log",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Xóa sạch toàn bộ nhật ký sự kiện Security qua wevtutil.",
+  "mitre_technique": "T1070.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.153239"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_42_sharpup_audit",
+  "category": "PrivilegeEscalation",
+  "ground_truth": "ALERT",
+  "description": "SharpUp: Quét lỗ hổng cấu hình dịch vụ để leo thang đặc quyền.",
+  "mitre_technique": "T1068",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.195935"
+}

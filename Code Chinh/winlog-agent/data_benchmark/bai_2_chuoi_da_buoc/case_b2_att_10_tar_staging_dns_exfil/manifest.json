@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_10_tar_staging_dns_exfil",
+  "category": "Exfiltration",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: Thu thập tài liệu docx/xlsx thành tệp tar.gz -> Tuồn dữ liệu qua DNS Tunneling.",
+  "mitre_technique": "T1560 / T1048.003",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.370808"
+}

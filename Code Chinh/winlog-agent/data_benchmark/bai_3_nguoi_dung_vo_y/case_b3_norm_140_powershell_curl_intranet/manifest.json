@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_140_powershell_curl_intranet",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.755879"
+}

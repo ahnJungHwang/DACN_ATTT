@@ -1,0 +1,801 @@
+scenario,model_key,case_id,ground_truth,pred_label,classification,elapsed_seconds,json_valid,reason
+1,qwen,case_b1_att_01_mimikatz_sekurlsa,ALERT,ALERT,TP (Bắt trúng),5.976,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+1,qwen,case_b1_att_02_procdump_lsass,ALERT,ALERT,TP (Bắt trúng),5.532,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001.
+1,qwen,case_b1_att_03_powershell_encoded_c2,ALERT,ALERT,TP (Bắt trúng),4.44,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,qwen,case_b1_att_04_disable_windefend,ALERT,ALERT,TP (Bắt trúng),4.434,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện Impair Defenses (MITRE T1562.001) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+1,qwen,case_b1_att_05_clear_security_log,ALERT,NORMAL,FN (Bỏ sót tấn công),4.214,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_06_kerberoasting_spn,ALERT,NORMAL,FN (Bỏ sót tấn công),4.153,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_07_pass_the_hash_cmd,ALERT,ALERT,TP (Bắt trúng),4.671,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+1,qwen,case_b1_att_08_vssadmin_delete_shadows,ALERT,ALERT,TP (Bắt trúng),4.876,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Inhibit System Recovery (MITRE T1490) từ bằng chứng có độ tin cậy cao: E0001.
+1,qwen,case_b1_att_09_certutil_decode_exec,ALERT,ALERT,TP (Bắt trúng),6.385,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Deobfuscate/Decode Files (MITRE T1140) từ bằng chứng có độ tin cậy cao: E0001.
+1,qwen,case_b1_att_10_reg_save_sam_system,ALERT,ALERT,TP (Bắt trúng),5.008,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+1,qwen,case_b1_att_11_vaultcmd_theft,ALERT,ALERT,TP (Bắt trúng),4.413,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001.
+1,qwen,case_b1_att_12_bitsadmin_download,ALERT,ALERT,TP (Bắt trúng),4.554,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,qwen,case_b1_att_13_curl_drop_exec,ALERT,ALERT,TP (Bắt trúng),4.651,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Ingress Tool Transfer (MITRE T1105 / T1197) từ bằng chứng có độ tin cậy cao: E0001.
+1,qwen,case_b1_att_14_cipher_wipe_slack,ALERT,ALERT,TP (Bắt trúng),4.519,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Impact / Data Destruction & Ransomware (MITRE T1485 / T1486) từ bằng chứng có độ tin cậy cao: ...
+1,qwen,case_b1_att_15_reg_save_lsa_secrets,ALERT,ALERT,TP (Bắt trúng),4.18,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001.
+1,qwen,case_b1_att_16_rubeus_asktgt,ALERT,NORMAL,FN (Bỏ sót tấn công),3.791,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_17_lazagne_all_passwords,ALERT,ALERT,TP (Bắt trúng),4.359,True,"Hành vi này liên quan đến việc sử dụng laZagne.exe, một công cụ brute force để dò mật khẩu. Sự kiện bao gồm thông tin về người dùng tấn công..."
+1,qwen,case_b1_att_18_net_user_backdoor_add,ALERT,ALERT,TP (Bắt trúng),3.868,True,Hành vi tấn công bao gồm việc tạo tài khoản backdoor (hacker) vào nhóm Administrators.
+1,qwen,case_b1_att_19_reg_add_run_persistence,ALERT,NORMAL,FN (Bỏ sót tấn công),3.95,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_20_schtasks_create_backdoor,ALERT,NORMAL,FN (Bỏ sót tấn công),3.498,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_21_wmic_shadowcopy_delete,ALERT,ALERT,TP (Bắt trúng),3.935,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Inhibit System Recovery (MITRE T1490) từ bằng chứng có độ tin cậy cao: E0001.
+1,qwen,case_b1_att_22_wbadmin_delete_catalog,ALERT,ALERT,TP (Bắt trúng),4.049,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Inhibit System Recovery (MITRE T1490) từ bằng chứng có độ tin cậy cao: E0001.
+1,qwen,case_b1_att_23_fsutil_usn_deletejournal,ALERT,NORMAL,FN (Bỏ sót tấn công),4.144,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_24_bcdedit_recovery_disable,ALERT,NORMAL,FN (Bỏ sót tấn công),4.271,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_25_attrib_hide_executable,ALERT,NORMAL,FN (Bỏ sót tấn công),3.877,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_26_icacls_deny_admin,ALERT,NORMAL,FN (Bỏ sót tấn công),3.672,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_27_net_stop_windefend,ALERT,NORMAL,FN (Bỏ sót tấn công),3.976,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_28_fltmc_unload_sysmon,ALERT,NORMAL,FN (Bỏ sót tấn công),3.64,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_29_sc_stop_wuauserv,ALERT,NORMAL,FN (Bỏ sót tấn công),4.275,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_30_netsh_firewall_disable,ALERT,NORMAL,FN (Bỏ sót tấn công),3.714,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_31_takeown_system_file,ALERT,NORMAL,FN (Bỏ sót tấn công),4.222,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_32_powershell_iex_download,ALERT,ALERT,TP (Bắt trúng),4.384,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,qwen,case_b1_att_33_certutil_urlcache_download,ALERT,ALERT,TP (Bắt trúng),4.816,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,qwen,case_b1_att_34_rundll32_advpack_inf,ALERT,ALERT,TP (Bắt trúng),5.102,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện LOLBAS / Script Proxy Execution (MITRE T1218) từ bằng chứng có độ tin cậy cao: E0001.
+1,qwen,case_b1_att_35_regsvr32_scrobj_sct,ALERT,ALERT,TP (Bắt trúng),5.116,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,qwen,case_b1_att_36_mshta_inline_vbscript,ALERT,ALERT,TP (Bắt trúng),5.0,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,qwen,case_b1_att_37_powersploit_portscan,ALERT,NORMAL,FN (Bỏ sót tấn công),3.947,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_38_wmic_process_create_cmd,ALERT,ALERT,TP (Bắt trúng),4.603,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,qwen,case_b1_att_39_pwdump7_extract,ALERT,NORMAL,FN (Bỏ sót tấn công),4.035,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_40_secretsdump_remote,ALERT,ALERT,TP (Bắt trúng),4.768,True,"Hành vi này liên quan đến việc sử dụng PowerShell để thực thi payloads độc hại, bao gồm cả việc tải tệp từ Internet và thực hiện các hoạt độ..."
+1,qwen,case_b1_att_41_crackmapexec_exec,ALERT,ALERT,TP (Bắt trúng),5.076,True,Hành vi này bao gồm việc sử dụng crackmapexec để reconnaissance và tạo backdoor bằng cách chạy 'whoami' với quyền Administrator.
+1,qwen,case_b1_att_42_sharpup_audit,ALERT,NORMAL,FN (Bỏ sót tấn công),5.541,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_43_winpeas_enum,ALERT,NORMAL,FN (Bỏ sót tấn công),5.233,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_att_44_wsl_linpeas_exec,ALERT,ALERT,TP (Bắt trúng),5.329,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Ingress Tool Transfer (MITRE T1105 / T1197) từ bằng chứng có độ tin cậy cao: E0001.
+1,qwen,case_b1_att_45_cobaltstrike_beacon_spawn,ALERT,ALERT,TP (Bắt trúng),5.154,True,"Hành vi bao gồm việc sử dụng PowerShell để thực thi tệp độc hại từ đường dẫn cụ thể (rundll32.exe C:\Users\Public\beacon.dll,StartW) với quy..."
+1,qwen,case_b1_att_46_empire_stager_launch,ALERT,ALERT,TP (Bắt trúng),5.317,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,qwen,case_b1_att_47_metasploit_rev_tcp,ALERT,ERROR,ERROR (Lỗi),0.005,False,"Lỗi: Invalid XML in security.xml: not well-formed (invalid token): line 2, column 1496"
+1,qwen,case_b1_att_48_mimikatz_sekurlsa_tickets,ALERT,ALERT,TP (Bắt trúng),4.854,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+1,qwen,case_b1_att_49_powersploit_mimikatz_dump,ALERT,ALERT,TP (Bắt trúng),5.091,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,qwen,case_b1_att_50_wevtutil_clear_system,ALERT,NORMAL,FN (Bỏ sót tấn công),4.633,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_001_word_open,NORMAL,NORMAL,TN (Đúng lành tính),4.235,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_002_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),5.986,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_003_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),5.817,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_004_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),5.501,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_005_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),5.817,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_006_edge_intranet,NORMAL,NORMAL,TN (Đúng lành tính),5.401,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_007_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),5.282,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_008_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),5.211,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_009_zoom_join,NORMAL,NORMAL,TN (Đúng lành tính),5.486,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_010_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),5.936,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_011_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),5.728,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_012_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),5.015,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_013_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),4.387,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_014_cmd_ipconfig,NORMAL,NORMAL,TN (Đúng lành tính),4.46,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_015_cmd_ping_gateway,NORMAL,NORMAL,TN (Đúng lành tính),4.536,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_016_cmd_hostname,NORMAL,NORMAL,TN (Đúng lành tính),5.352,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_017_cmd_whoami,NORMAL,NORMAL,TN (Đúng lành tính),5.557,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_018_cmd_systeminfo,NORMAL,NORMAL,TN (Đúng lành tính),4.956,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_019_cmd_netstat_active,NORMAL,NORMAL,TN (Đúng lành tính),5.489,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_020_cmd_route_lan,NORMAL,NORMAL,TN (Đúng lành tính),5.548,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_021_cmd_arp_table,NORMAL,NORMAL,TN (Đúng lành tính),5.794,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_022_cmd_nslookup_dns,NORMAL,NORMAL,TN (Đúng lành tính),5.543,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_023_cmd_tasklist_sys,NORMAL,NORMAL,TN (Đúng lành tính),5.421,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_024_cmd_chkdsk_verify,NORMAL,NORMAL,TN (Đúng lành tính),5.642,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_025_cmd_dism_health,NORMAL,NORMAL,TN (Đúng lành tính),5.662,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_026_cmd_sfc_verify,NORMAL,NORMAL,TN (Đúng lành tính),5.293,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_027_cmd_gpupdate,NORMAL,NORMAL,TN (Đúng lành tính),5.061,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_028_cmd_robocopy_docs,NORMAL,NORMAL,TN (Đúng lành tính),4.513,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_029_ps_get_process,NORMAL,NORMAL,TN (Đúng lành tính),4.625,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_030_ps_get_service,NORMAL,NORMAL,TN (Đúng lành tính),6.026,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_031_ps_get_date,NORMAL,NORMAL,TN (Đúng lành tính),5.966,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_032_ps_get_hotfix,NORMAL,NORMAL,TN (Đúng lành tính),6.169,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_033_ps_compress_zip,NORMAL,NORMAL,TN (Đúng lành tính),5.794,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_034_ps_test_connection,NORMAL,NORMAL,TN (Đúng lành tính),5.887,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_035_ps_get_disk,NORMAL,NORMAL,TN (Đúng lành tính),5.668,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_036_ps_get_eventlog_system,NORMAL,NORMAL,TN (Đúng lành tính),4.815,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_037_git_status,NORMAL,NORMAL,TN (Đúng lành tính),4.471,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_038_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),4.798,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_039_git_branch_list,NORMAL,NORMAL,TN (Đúng lành tính),4.445,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_040_node_version,NORMAL,NORMAL,TN (Đúng lành tính),5.479,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_041_python_version,NORMAL,NORMAL,TN (Đúng lành tính),5.174,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_042_pip_list,NORMAL,NORMAL,TN (Đúng lành tính),4.707,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_043_vscode_editor,NORMAL,NORMAL,TN (Đúng lành tính),4.704,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_044_docker_ps,NORMAL,NORMAL,TN (Đúng lành tính),4.12,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_045_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),5.504,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_046_mvn_clean,NORMAL,NORMAL,TN (Đúng lành tính),5.362,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_047_cargo_build,NORMAL,NORMAL,TN (Đúng lành tính),4.596,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_048_go_build,NORMAL,NORMAL,TN (Đúng lành tính),5.424,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_049_dotnet_run,NORMAL,NORMAL,TN (Đúng lành tính),5.389,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_050_winget_search,NORMAL,NORMAL,TN (Đúng lành tính),4.771,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_051_word_open,NORMAL,NORMAL,TN (Đúng lành tính),5.229,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_052_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),5.298,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_053_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),4.629,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_054_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),4.724,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_055_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),4.511,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_056_edge_intranet,NORMAL,NORMAL,TN (Đúng lành tính),4.281,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_057_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),4.45,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_058_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),4.304,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_059_zoom_join,NORMAL,NORMAL,TN (Đúng lành tính),4.176,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_060_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),4.2,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_061_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),4.119,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_062_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),4.182,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_063_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),4.13,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_064_cmd_ipconfig,NORMAL,NORMAL,TN (Đúng lành tính),4.161,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_065_cmd_ping_gateway,NORMAL,NORMAL,TN (Đúng lành tính),4.138,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_066_cmd_hostname,NORMAL,NORMAL,TN (Đúng lành tính),3.571,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_067_cmd_whoami,NORMAL,NORMAL,TN (Đúng lành tính),3.693,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_068_cmd_systeminfo,NORMAL,NORMAL,TN (Đúng lành tính),3.599,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_069_cmd_netstat_active,NORMAL,NORMAL,TN (Đúng lành tính),4.206,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_070_cmd_route_lan,NORMAL,NORMAL,TN (Đúng lành tính),3.911,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_071_cmd_arp_table,NORMAL,NORMAL,TN (Đúng lành tính),3.634,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_072_cmd_nslookup_dns,NORMAL,NORMAL,TN (Đúng lành tính),4.026,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_073_cmd_tasklist_sys,NORMAL,NORMAL,TN (Đúng lành tính),3.633,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_074_cmd_chkdsk_verify,NORMAL,NORMAL,TN (Đúng lành tính),4.032,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_075_cmd_dism_health,NORMAL,NORMAL,TN (Đúng lành tính),3.82,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_076_cmd_sfc_verify,NORMAL,NORMAL,TN (Đúng lành tính),3.914,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_077_cmd_gpupdate,NORMAL,NORMAL,TN (Đúng lành tính),3.499,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_078_cmd_robocopy_docs,NORMAL,NORMAL,TN (Đúng lành tính),3.965,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_079_ps_get_process,NORMAL,NORMAL,TN (Đúng lành tính),4.101,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_080_ps_get_service,NORMAL,NORMAL,TN (Đúng lành tính),6.055,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_081_ps_get_date,NORMAL,NORMAL,TN (Đúng lành tính),4.609,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_082_ps_get_hotfix,NORMAL,NORMAL,TN (Đúng lành tính),4.373,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_083_ps_compress_zip,NORMAL,NORMAL,TN (Đúng lành tính),4.072,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_084_ps_test_connection,NORMAL,NORMAL,TN (Đúng lành tính),3.698,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_085_ps_get_disk,NORMAL,NORMAL,TN (Đúng lành tính),4.049,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_086_ps_get_eventlog_system,NORMAL,NORMAL,TN (Đúng lành tính),4.192,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_087_git_status,NORMAL,NORMAL,TN (Đúng lành tính),4.494,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_088_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),4.457,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_089_git_branch_list,NORMAL,NORMAL,TN (Đúng lành tính),4.539,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_090_node_version,NORMAL,NORMAL,TN (Đúng lành tính),4.453,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_091_python_version,NORMAL,NORMAL,TN (Đúng lành tính),4.506,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_092_pip_list,NORMAL,NORMAL,TN (Đúng lành tính),4.267,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_093_vscode_editor,NORMAL,NORMAL,TN (Đúng lành tính),4.175,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_094_docker_ps,NORMAL,NORMAL,TN (Đúng lành tính),3.81,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_095_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),4.121,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_096_mvn_clean,NORMAL,NORMAL,TN (Đúng lành tính),4.174,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_097_cargo_build,NORMAL,NORMAL,TN (Đúng lành tính),3.677,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_098_go_build,NORMAL,NORMAL,TN (Đúng lành tính),3.561,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_099_dotnet_run,NORMAL,NORMAL,TN (Đúng lành tính),3.715,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_100_winget_search,NORMAL,NORMAL,TN (Đúng lành tính),3.525,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_101_word_open,NORMAL,NORMAL,TN (Đúng lành tính),3.868,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_102_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),3.702,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_103_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),3.597,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_104_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),3.817,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_105_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),3.64,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_106_edge_intranet,NORMAL,NORMAL,TN (Đúng lành tính),3.534,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_107_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),3.942,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_108_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),3.557,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_109_zoom_join,NORMAL,NORMAL,TN (Đúng lành tính),3.681,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_110_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),3.93,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_111_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),3.626,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_112_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),3.606,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_113_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),3.7,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_114_cmd_ipconfig,NORMAL,NORMAL,TN (Đúng lành tính),3.62,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_115_cmd_ping_gateway,NORMAL,NORMAL,TN (Đúng lành tính),3.524,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_116_cmd_hostname,NORMAL,NORMAL,TN (Đúng lành tính),3.589,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_117_cmd_whoami,NORMAL,NORMAL,TN (Đúng lành tính),3.758,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_118_cmd_systeminfo,NORMAL,NORMAL,TN (Đúng lành tính),3.743,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_119_cmd_netstat_active,NORMAL,NORMAL,TN (Đúng lành tính),3.678,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_120_cmd_route_lan,NORMAL,NORMAL,TN (Đúng lành tính),3.534,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_121_cmd_arp_table,NORMAL,NORMAL,TN (Đúng lành tính),3.943,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_122_cmd_nslookup_dns,NORMAL,NORMAL,TN (Đúng lành tính),3.982,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_123_cmd_tasklist_sys,NORMAL,NORMAL,TN (Đúng lành tính),3.674,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_124_cmd_chkdsk_verify,NORMAL,NORMAL,TN (Đúng lành tính),5.174,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_125_cmd_dism_health,NORMAL,NORMAL,TN (Đúng lành tính),4.25,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_126_cmd_sfc_verify,NORMAL,NORMAL,TN (Đúng lành tính),4.001,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_127_cmd_gpupdate,NORMAL,NORMAL,TN (Đúng lành tính),3.896,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_128_cmd_robocopy_docs,NORMAL,NORMAL,TN (Đúng lành tính),4.067,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_129_ps_get_process,NORMAL,NORMAL,TN (Đúng lành tính),4.254,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_130_ps_get_service,NORMAL,NORMAL,TN (Đúng lành tính),4.209,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_131_ps_get_date,NORMAL,NORMAL,TN (Đúng lành tính),4.23,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_132_ps_get_hotfix,NORMAL,NORMAL,TN (Đúng lành tính),4.941,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_133_ps_compress_zip,NORMAL,NORMAL,TN (Đúng lành tính),5.705,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_134_ps_test_connection,NORMAL,NORMAL,TN (Đúng lành tính),4.673,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_135_ps_get_disk,NORMAL,NORMAL,TN (Đúng lành tính),4.59,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_136_ps_get_eventlog_system,NORMAL,NORMAL,TN (Đúng lành tính),4.947,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_137_git_status,NORMAL,NORMAL,TN (Đúng lành tính),4.199,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_138_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),4.49,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_139_git_branch_list,NORMAL,NORMAL,TN (Đúng lành tính),4.108,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_140_node_version,NORMAL,NORMAL,TN (Đúng lành tính),4.109,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_141_python_version,NORMAL,NORMAL,TN (Đúng lành tính),3.936,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_142_pip_list,NORMAL,NORMAL,TN (Đúng lành tính),4.149,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_143_vscode_editor,NORMAL,NORMAL,TN (Đúng lành tính),4.096,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_144_docker_ps,NORMAL,NORMAL,TN (Đúng lành tính),4.006,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_145_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),4.117,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_146_mvn_clean,NORMAL,NORMAL,TN (Đúng lành tính),4.383,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_147_cargo_build,NORMAL,NORMAL,TN (Đúng lành tính),4.054,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_148_go_build,NORMAL,NORMAL,TN (Đúng lành tính),4.111,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_149_dotnet_run,NORMAL,NORMAL,TN (Đúng lành tính),4.079,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,qwen,case_b1_norm_150_winget_search,NORMAL,NORMAL,TN (Đúng lành tính),4.058,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_att_01_mimikatz_sekurlsa,ALERT,ALERT,TP (Bắt trúng),6.496,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+1,llama,case_b1_att_02_procdump_lsass,ALERT,ALERT,TP (Bắt trúng),5.035,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001.
+1,llama,case_b1_att_03_powershell_encoded_c2,ALERT,ALERT,TP (Bắt trúng),5.321,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,llama,case_b1_att_04_disable_windefend,ALERT,ALERT,TP (Bắt trúng),4.948,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện Impair Defenses (MITRE T1562.001) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+1,llama,case_b1_att_05_clear_security_log,ALERT,ALERT,TP (Bắt trúng),4.755,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu (Password Brute Force) trên hệ thống. Bằng chứng là sự kiện Event ID 4688 với LogonType = 2...
+1,llama,case_b1_att_06_kerberoasting_spn,ALERT,ALERT,TP (Bắt trúng),4.865,True,Tấn công mạng có thể đang được thực hiện. Bằng chứng: Sự kiện 4688 và 4104 cho thấy việc sử dụng PowerShell để tạo một token Kerberos Reques...
+1,llama,case_b1_att_07_pass_the_hash_cmd,ALERT,ALERT,TP (Bắt trúng),4.802,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+1,llama,case_b1_att_08_vssadmin_delete_shadows,ALERT,ALERT,TP (Bắt trúng),4.74,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Inhibit System Recovery (MITRE T1490) từ bằng chứng có độ tin cậy cao: E0001.
+1,llama,case_b1_att_09_certutil_decode_exec,ALERT,ALERT,TP (Bắt trúng),4.648,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Deobfuscate/Decode Files (MITRE T1140) từ bằng chứng có độ tin cậy cao: E0001.
+1,llama,case_b1_att_10_reg_save_sam_system,ALERT,ALERT,TP (Bắt trúng),4.929,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+1,llama,case_b1_att_11_vaultcmd_theft,ALERT,ALERT,TP (Bắt trúng),4.81,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001.
+1,llama,case_b1_att_12_bitsadmin_download,ALERT,ALERT,TP (Bắt trúng),4.512,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,llama,case_b1_att_13_curl_drop_exec,ALERT,ALERT,TP (Bắt trúng),4.45,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Ingress Tool Transfer (MITRE T1105 / T1197) từ bằng chứng có độ tin cậy cao: E0001.
+1,llama,case_b1_att_14_cipher_wipe_slack,ALERT,ALERT,TP (Bắt trúng),4.823,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Impact / Data Destruction & Ransomware (MITRE T1485 / T1486) từ bằng chứng có độ tin cậy cao: ...
+1,llama,case_b1_att_15_reg_save_lsa_secrets,ALERT,ALERT,TP (Bắt trúng),3.999,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001.
+1,llama,case_b1_att_16_rubeus_asktgt,ALERT,ALERT,TP (Bắt trúng),4.708,True,"Phát hiện hành vi tấn công bằng cách sử dụng Rubeus.exe để thực thi lệnh asktgt, một phần của chuỗi brute-force mật khẩu. Bằng chứng này cho..."
+1,llama,case_b1_att_17_lazagne_all_passwords,ALERT,ALERT,TP (Bắt trúng),4.362,True,Phát hiện hành vi tấn công bằng cách sử dụng phần mềm laZagne để lấy mật khẩu từ hệ thống
+1,llama,case_b1_att_18_net_user_backdoor_add,ALERT,ALERT,TP (Bắt trúng),4.526,True,Tài khoản backdoor được tạo và người dùng không xác định được đã thêm tài khoản vào nhóm Administrators. Điều này có thể là dấu hiệu của tấn...
+1,llama,case_b1_att_19_reg_add_run_persistence,ALERT,ALERT,TP (Bắt trúng),4.669,True,"Phát hiện hành vi đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, cần lưu ý rằng chỉ có một sự ki..."
+1,llama,case_b1_att_20_schtasks_create_backdoor,ALERT,ALERT,TP (Bắt trúng),4.611,True,"Sự kiện 4625 được phát hiện với SubjectUserName là 'attacker', cho thấy một chuỗi brute-force đã xác nhận. Tuy nhiên, không có bằng chứng cụ..."
+1,llama,case_b1_att_21_wmic_shadowcopy_delete,ALERT,ALERT,TP (Bắt trúng),4.538,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Inhibit System Recovery (MITRE T1490) từ bằng chứng có độ tin cậy cao: E0001.
+1,llama,case_b1_att_22_wbadmin_delete_catalog,ALERT,ALERT,TP (Bắt trúng),4.701,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Inhibit System Recovery (MITRE T1490) từ bằng chứng có độ tin cậy cao: E0001.
+1,llama,case_b1_att_23_fsutil_usn_deletejournal,ALERT,ALERT,TP (Bắt trúng),4.255,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu (fsutil.exe usn deletejournal /D C:) trên hệ thống WORKSTATION-SOC.corp.local
+1,llama,case_b1_att_24_bcdedit_recovery_disable,ALERT,ALERT,TP (Bắt trúng),4.658,True,Tấn công tấn công bằng cách sử dụng brute-force để đăng nhập vào hệ thống. Bằng chứng cho thấy attacker đã thực hiện 2 lần đăng nhập thất bạ...
+1,llama,case_b1_att_25_attrib_hide_executable,ALERT,ALERT,TP (Bắt trúng),4.644,True,"Tính năng 'attrib.exe' được sử dụng để thay đổi quyền truy cập vào tệp svchost.exe, có thể là dấu hiệu của hành vi tấn công. Tuy nhiên, khôn..."
+1,llama,case_b1_att_26_icacls_deny_admin,ALERT,ALERT,TP (Bắt trúng),4.54,True,Phát hiện hành vi tấn công bằng cách brute-force mật khẩu trong sự kiện Security của WORKSTATION-SOC.corp.local. Bằng chứng là sự kiện với I...
+1,llama,case_b1_att_27_net_stop_windefend,ALERT,ALERT,TP (Bắt trúng),4.872,True,Phát hiện hành vi tấn công bằng cách sử dụng mật khẩu brute force để đăng nhập vào hệ thống. Bằng chứng là sự kiện 4688 với LogonType = 2 và...
+1,llama,case_b1_att_28_fltmc_unload_sysmon,ALERT,ALERT,TP (Bắt trúng),4.295,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu từ IP hoặc tài khoản
+1,llama,case_b1_att_29_sc_stop_wuauserv,ALERT,ALERT,TP (Bắt trúng),6.4,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu sai, sau đó sử dụng lệnh net.exe stop wuauserv /y để tắt dịch vụ Wind..."
+1,llama,case_b1_att_30_netsh_firewall_disable,ALERT,ALERT,TP (Bắt trúng),5.837,True,Tính năng 'Set All Profiles State Off' trong netsh.exe được sử dụng để vô hiệu hóa phòng thủ bảo mật của Windows. Điều này có thể là dấu hiệ...
+1,llama,case_b1_att_31_takeown_system_file,ALERT,ALERT,TP (Bắt trúng),5.937,True,"Tất cả các sự kiện trong chuỗi đều liên quan đến việc đăng nhập thành công với mật khẩu sai, sau đó sử dụng lệnh takeown.exe để lấy quyền sở..."
+1,llama,case_b1_att_32_powershell_iex_download,ALERT,ALERT,TP (Bắt trúng),6.28,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,llama,case_b1_att_33_certutil_urlcache_download,ALERT,ALERT,TP (Bắt trúng),4.627,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,llama,case_b1_att_34_rundll32_advpack_inf,ALERT,ALERT,TP (Bắt trúng),5.118,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện LOLBAS / Script Proxy Execution (MITRE T1218) từ bằng chứng có độ tin cậy cao: E0001.
+1,llama,case_b1_att_35_regsvr32_scrobj_sct,ALERT,ALERT,TP (Bắt trúng),5.165,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,llama,case_b1_att_36_mshta_inline_vbscript,ALERT,ALERT,TP (Bắt trúng),5.372,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,llama,case_b1_att_37_powersploit_portscan,ALERT,ALERT,TP (Bắt trúng),5.636,True,"Phát hiện chuỗi hành vi tấn công bằng cách sử dụng brute-force để đăng nhập vào hệ thống, sau đó thực hiện lệnh Invoke-Portscan để quét các ..."
+1,llama,case_b1_att_38_wmic_process_create_cmd,ALERT,ALERT,TP (Bắt trúng),4.806,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,llama,case_b1_att_39_pwdump7_extract,ALERT,ALERT,TP (Bắt trúng),4.317,True,Phát hiện hành vi tấn công bằng cách sử dụng lệnh pwdump7.exe -d để lấy mật khẩu từ hệ thống
+1,llama,case_b1_att_40_secretsdump_remote,ALERT,ALERT,TP (Bắt trúng),4.61,True,Tài khoản admin của công ty đã được tấn công bằng cách sử dụng lệnh secretsdump.py để lấy mật khẩu từ bộ nhớ LSASS.
+1,llama,case_b1_att_41_crackmapexec_exec,ALERT,ALERT,TP (Bắt trúng),4.562,True,Phát hiện hành vi tấn công bằng cách sử dụng crackmapexec để thực hiện brute-force trên tài khoản administrator của hệ thống.
+1,llama,case_b1_att_42_sharpup_audit,ALERT,ALERT,TP (Bắt trúng),4.323,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu (SharpUp.exe audit) từ IP address -
+1,llama,case_b1_att_43_winpeas_enum,ALERT,ALERT,TP (Bắt trúng),4.655,True,Phát hiện hành vi tấn công bằng cách sử dụng mật khẩu brute force để đăng nhập vào hệ thống. Bằng chứng là sự kiện 4688 với LogonType = 2 và...
+1,llama,case_b1_att_44_wsl_linpeas_exec,ALERT,ALERT,TP (Bắt trúng),4.939,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Ingress Tool Transfer (MITRE T1105 / T1197) từ bằng chứng có độ tin cậy cao: E0001.
+1,llama,case_b1_att_45_cobaltstrike_beacon_spawn,ALERT,ALERT,TP (Bắt trúng),4.604,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, cần lưu ý rằng chỉ có một lần đ..."
+1,llama,case_b1_att_46_empire_stager_launch,ALERT,ALERT,TP (Bắt trúng),5.133,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,llama,case_b1_att_47_metasploit_rev_tcp,ALERT,ERROR,ERROR (Lỗi),0.002,False,"Lỗi: Invalid XML in security.xml: not well-formed (invalid token): line 2, column 1496"
+1,llama,case_b1_att_48_mimikatz_sekurlsa_tickets,ALERT,ALERT,TP (Bắt trúng),5.147,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+1,llama,case_b1_att_49_powersploit_mimikatz_dump,ALERT,ALERT,TP (Bắt trúng),4.643,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+1,llama,case_b1_att_50_wevtutil_clear_system,ALERT,ALERT,TP (Bắt trúng),4.907,True,Tất cả các sự kiện đều liên quan đến việc sử dụng lệnh wevtutil.exe để thực thi lệnh cl System và Application. Điều này có thể là một dấu hi...
+1,llama,case_b1_norm_001_word_open,NORMAL,NORMAL,TN (Đúng lành tính),4.922,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_002_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),5.032,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_003_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),4.149,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_004_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),4.907,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_005_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),4.464,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_006_edge_intranet,NORMAL,ALERT,FP (Báo động giả),5.879,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+1,llama,case_b1_norm_007_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),5.328,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_008_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),5.078,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_009_zoom_join,NORMAL,ALERT,FP (Báo động giả),5.55,True,"Phát hiện sự kiện Logon Type 2 (đăng nhập từ xa) trên WORKSTATION-SOC.corp.local, với lệnh CommandLine chứa tham số ẩn bypass trong Zoom.exe..."
+1,llama,case_b1_norm_010_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),4.74,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_011_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),4.897,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_012_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),4.893,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_013_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),4.43,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_014_cmd_ipconfig,NORMAL,ALERT,FP (Báo động giả),4.672,True,Sự kiện LogonType 2 (đăng nhập từ xa) và NewProcessName ipconfig.exe /all cho thấy hành vi trinh sát mạng của hệ thống WORKSTATION-SOC.corp....
+1,llama,case_b1_norm_015_cmd_ping_gateway,NORMAL,ALERT,FP (Báo động giả),4.871,True,"Phát hiện sự kiện Logon Type 2 (đăng nhập từ xa) trên WORKSTATION-SOC.corp.local với lệnh ping.exe -n 4 192.168.1.1, có thể là dấu hiệu của ..."
+1,llama,case_b1_norm_016_cmd_hostname,NORMAL,ALERT,FP (Báo động giả),4.675,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu từ tài khoản user_marketing trên WORKSTATION-SOC.corp.local. Bằng chứng là sự kiện 4688 với...
+1,llama,case_b1_norm_017_cmd_whoami,NORMAL,ALERT,FP (Báo động giả),5.23,True,"Sự kiện 4688 cho thấy người dùng 'dev_backend' đã thực hiện lệnh 'whoami.exe' từ vị trí C:\Windows\System32\explorer.exe, điều này có thể là..."
+1,llama,case_b1_norm_018_cmd_systeminfo,NORMAL,ALERT,FP (Báo động giả),5.312,True,"Sự kiện LogonType=2 với Commandline='systeminfo.exe' cho thấy hành vi trinh sát hệ thống, cụ thể là việc sử dụng lệnh systeminfo.exe để thu ..."
+1,llama,case_b1_norm_019_cmd_netstat_active,NORMAL,ALERT,FP (Báo động giả),5.345,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_020_cmd_route_lan,NORMAL,ALERT,FP (Báo động giả),5.111,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, cần lưu ý rằng chỉ một lần đăng..."
+1,llama,case_b1_norm_021_cmd_arp_table,NORMAL,ALERT,FP (Báo động giả),5.241,True,Sự kiện LogonType 2 (đăng nhập từ xa) và NewProcessName arp.exe -a (tìm kiếm địa chỉ IP trên mạng) cho thấy hành vi trinh sát hệ thống
+1,llama,case_b1_norm_022_cmd_nslookup_dns,NORMAL,ALERT,FP (Báo động giả),5.253,True,"Sự kiện nslookup.exe được thực thi trên WORKSTATION-SOC với lệnh corp.local, có thể là một dấu hiệu của hoạt động trinh sát hệ thống."
+1,llama,case_b1_norm_023_cmd_tasklist_sys,NORMAL,ALERT,FP (Báo động giả),5.254,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_024_cmd_chkdsk_verify,NORMAL,ALERT,FP (Báo động giả),5.702,True,Chuỗi các sự kiện này cho thấy một cuộc tấn công bằng cách dò mật khẩu (Password Brute Force) trên hệ thống. Sự kiện 4688 chỉ ra rằng tài kh...
+1,llama,case_b1_norm_025_cmd_dism_health,NORMAL,ALERT,FP (Báo động giả),5.486,True,"Sự kiện LogonType 2 (đăng nhập từ xa) và NewProcessName 'dism.exe' cho thấy một hành vi trinh sát hệ thống, có thể là bước đầu tiên trong ch..."
+1,llama,case_b1_norm_026_cmd_sfc_verify,NORMAL,NORMAL,TN (Đúng lành tính),4.937,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_027_cmd_gpupdate,NORMAL,ALERT,FP (Báo động giả),3.946,True,Hành vi đăng nhập thành công sau dò mật khẩu (MITRE T1078) phát hiện được trong sự kiện này. Sự kiện 4624 thành công ngay sau một chuỗi brut...
+1,llama,case_b1_norm_028_cmd_robocopy_docs,NORMAL,ALERT,FP (Báo động giả),4.515,True,"Phát hiện sự kiện Logon Type 2 (một lần đăng nhập) với địa chỉ IP không xác định và tên người dùng user_marketing, đồng thời có lệnh robocop..."
+1,llama,case_b1_norm_029_ps_get_process,NORMAL,ALERT,FP (Báo động giả),4.517,True,Phát hiện chuỗi brute-force đăng nhập thất bại với lệnh powershell.exe -c Get-Process | Sort-Object CPU -Descending | Select-Object -First 1...
+1,llama,case_b1_norm_030_ps_get_service,NORMAL,ALERT,FP (Báo động giả),4.273,True,"Phát hiện chuỗi brute-force đăng nhập thất bại từ cùng IP hoặc tài khoản, sau đó sử dụng lệnh Get-Service để kiểm tra trạng thái Spooler. Bằ..."
+1,llama,case_b1_norm_031_ps_get_date,NORMAL,ALERT,FP (Báo động giả),4.324,True,"Có sự cố đăng nhập thất bại với nhiều lần gõ sai mật khẩu từ cùng IP hoặc tài khoản, đồng thời có lệnh powershell.exe được thực thi ngay sau..."
+1,llama,case_b1_norm_032_ps_get_hotfix,NORMAL,ALERT,FP (Báo động giả),4.654,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm việc sử dụng lệnh `powershell.exe -c Get-HotFix | Sort-Object InstalledOn -Desce..."
+1,llama,case_b1_norm_033_ps_compress_zip,NORMAL,ALERT,FP (Báo động giả),4.286,True,Phát hiện hành vi tấn công bằng cách sử dụng mật khẩu brute force để đăng nhập vào hệ thống. Bằng chứng cho thấy sự kiện 4625 (Login Failure...
+1,llama,case_b1_norm_034_ps_test_connection,NORMAL,ALERT,FP (Báo động giả),4.263,True,"Phát hiện chuỗi brute-force đăng nhập với nhiều lần thất bại từ cùng IP hoặc tài khoản, sau đó có một lệnh PowerShell thực thi lệnh Test-Net..."
+1,llama,case_b1_norm_035_ps_get_disk,NORMAL,ALERT,FP (Báo động giả),4.308,True,"Phát hiện chuỗi brute-force đăng nhập thất bại từ cùng IP hoặc tài khoản, sau đó sử dụng lệnh powershell.exe để thực thi lệnh Get-Disk | Get..."
+1,llama,case_b1_norm_036_ps_get_eventlog_system,NORMAL,ALERT,FP (Báo động giả),3.973,True,"Phát hiện chuỗi hành vi dò mật khẩu từ cùng IP hoặc tài khoản, sau đó đăng nhập thành công bằng cách sử dụng kết quả của lệnh Get-EventLog. ..."
+1,llama,case_b1_norm_037_git_status,NORMAL,ALERT,FP (Báo động giả),3.944,True,"Tài khoản người dùng 'dev_backend' đã thực hiện lệnh 'git status' trên hệ thống, có thể là một dấu hiệu của hoạt động trinh sát hoặc khám ph..."
+1,llama,case_b1_norm_038_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),3.802,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_039_git_branch_list,NORMAL,ALERT,FP (Báo động giả),3.88,True,"Tài khoản 'dev_backend' đã thực hiện lệnh 'git.exe branch -a' trên hệ thống, có thể là một hành vi nghi ngờ trong bối cảnh tấn công mạng."
+1,llama,case_b1_norm_040_node_version,NORMAL,NORMAL,TN (Đúng lành tính),4.619,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_041_python_version,NORMAL,NORMAL,TN (Đúng lành tính),4.069,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_042_pip_list,NORMAL,ALERT,FP (Báo động giả),4.066,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, cần lưu ý rằng chỉ một lần đăng..."
+1,llama,case_b1_norm_043_vscode_editor,NORMAL,ALERT,FP (Báo động giả),4.01,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_044_docker_ps,NORMAL,ALERT,FP (Báo động giả),4.118,True,"Đăng nhập thành công sau dò mật khẩu, với lệnh docker.exe ps được thực thi ngay sau khi đăng nhập thất bại"
+1,llama,case_b1_norm_045_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),3.634,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_046_mvn_clean,NORMAL,ALERT,FP (Báo động giả),4.395,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_047_cargo_build,NORMAL,ALERT,FP (Báo động giả),3.947,True,"Phát hiện sự kiện đăng nhập thành công với mật khẩu sai (Typo login) sau 4 lần đăng nhập thất bại, có thể là dấu hiệu của tấn công Password ..."
+1,llama,case_b1_norm_048_go_build,NORMAL,ALERT,FP (Báo động giả),4.421,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_049_dotnet_run,NORMAL,ALERT,FP (Báo động giả),4.212,True,Phát hiện sự kiện đăng nhập thành công với mật khẩu không chính xác (LogonType: 2) và lệnh chạy chương trình .NET (dotnet.exe run --project ...
+1,llama,case_b1_norm_050_winget_search,NORMAL,ALERT,FP (Báo động giả),4.152,True,"Sự kiện đăng nhập thất bại (Event ID 4625) với nhiều lần gõ sai mật khẩu liên tiếp từ cùng IP hoặc tài khoản, sau đó sự kiện đăng nhập thành..."
+1,llama,case_b1_norm_051_word_open,NORMAL,NORMAL,TN (Đúng lành tính),3.871,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_052_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),4.128,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_053_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),3.561,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_054_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),3.711,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_055_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),3.611,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_056_edge_intranet,NORMAL,ALERT,FP (Báo động giả),3.882,True,"Phát hiện hành vi đăng nhập thành công sau dò mật khẩu, có thể là dấu hiệu của tấn công Password Brute Force"
+1,llama,case_b1_norm_057_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),3.558,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_058_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),3.634,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_059_zoom_join,NORMAL,ALERT,FP (Báo động giả),4.049,True,"Phát hiện sự kiện Logon Type 2 (đăng nhập từ xa) trên WORKSTATION-SOC.corp.local, với lệnh CommandLine chứa tham số ẩn bypass trong Zoom.exe..."
+1,llama,case_b1_norm_060_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),3.606,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_061_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),4.043,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_062_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),3.996,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_063_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),3.517,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_064_cmd_ipconfig,NORMAL,ALERT,FP (Báo động giả),3.96,True,Sự kiện LogonType 2 (đăng nhập từ xa) và NewProcessName ipconfig.exe /all cho thấy hành vi trinh sát mạng của hệ thống WORKSTATION-SOC.corp....
+1,llama,case_b1_norm_065_cmd_ping_gateway,NORMAL,ALERT,FP (Báo động giả),4.105,True,"Phát hiện sự kiện Logon Type 2 (đăng nhập từ xa) trên WORKSTATION-SOC.corp.local với lệnh ping.exe -n 4 192.168.1.1, có thể là dấu hiệu của ..."
+1,llama,case_b1_norm_066_cmd_hostname,NORMAL,ALERT,FP (Báo động giả),4.218,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+1,llama,case_b1_norm_067_cmd_whoami,NORMAL,ALERT,FP (Báo động giả),4.542,True,"Sự kiện 4688 cho thấy người dùng 'dev_backend' đã thực hiện lệnh 'whoami.exe' từ vị trí C:\Windows\System32\explorer.exe, điều này có thể là..."
+1,llama,case_b1_norm_068_cmd_systeminfo,NORMAL,ALERT,FP (Báo động giả),4.372,True,Sự kiện LogonType=2 với SubjectUserSid=S-1-5-21-3686947128-2095841011-3536572084-1001 và TargetUserName=- trên WORKSTATION-SOC.corp.local có...
+1,llama,case_b1_norm_069_cmd_netstat_active,NORMAL,ALERT,FP (Báo động giả),3.91,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_070_cmd_route_lan,NORMAL,ALERT,FP (Báo động giả),4.025,True,"Vào lúc 08:01, người dùng user_marketing đã đăng nhập thành công vào hệ thống với mật khẩu sai 2 lần trước đó. Điều này cho thấy có thể có m..."
+1,llama,case_b1_norm_071_cmd_arp_table,NORMAL,ALERT,FP (Báo động giả),4.251,True,"Phát hiện sự kiện Logon Type 2 (một lần đăng nhập) với địa chỉ IP không xác định và tên máy tính WORKSTATION-SOC, đồng thời có lệnh arp.exe ..."
+1,llama,case_b1_norm_072_cmd_nslookup_dns,NORMAL,ALERT,FP (Báo động giả),3.822,True,"Sự kiện nslookup.exe được thực thi trên WORKSTATION-SOC với lệnh corp.local, có thể là một dấu hiệu của hoạt động trinh sát hệ thống."
+1,llama,case_b1_norm_073_cmd_tasklist_sys,NORMAL,ALERT,FP (Báo động giả),3.896,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_074_cmd_chkdsk_verify,NORMAL,ALERT,FP (Báo động giả),4.149,True,"Sự kiện đăng nhập thất bại (Event ID 4625) với nhiều lần cố gắng từ cùng IP hoặc tài khoản, sau đó sự kiện đăng nhập thành công (Event ID 46..."
+1,llama,case_b1_norm_075_cmd_dism_health,NORMAL,ALERT,FP (Báo động giả),3.971,True,"Sự kiện LogonType 2 (đăng nhập từ xa) và NewProcessName 'dism.exe' cho thấy một hành vi trinh sát hệ thống, có thể là phần của chuỗi tấn côn..."
+1,llama,case_b1_norm_076_cmd_sfc_verify,NORMAL,ALERT,FP (Báo động giả),4.705,True,Sự kiện 4688 được phát hiện trong chuỗi các sự kiện liên quan đến đăng nhập của người dùng user_marketing. Sự kiện này cho thấy rằng người d...
+1,llama,case_b1_norm_077_cmd_gpupdate,NORMAL,ALERT,FP (Báo động giả),4.227,True,"Phát hiện sự kiện Logon Type 2 (đăng nhập từ xa) trên WORKSTATION-SOC.corp.local, có thể là dấu hiệu của tấn công mạng"
+1,llama,case_b1_norm_078_cmd_robocopy_docs,NORMAL,NORMAL,TN (Đúng lành tính),4.259,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_079_ps_get_process,NORMAL,ALERT,FP (Báo động giả),4.479,True,"Phát hiện chuỗi brute-force đăng nhập thất bại với nhiều lần cố gắng từ cùng IP hoặc tài khoản, sau đó sử dụng lệnh PowerShell để thực thi l..."
+1,llama,case_b1_norm_080_ps_get_service,NORMAL,ALERT,FP (Báo động giả),4.271,True,"Phát hiện chuỗi brute-force đăng nhập thất bại với nhiều lần cố gắng từ cùng IP hoặc tài khoản, sau đó một lệnh PowerShell thực thi Get-Serv..."
+1,llama,case_b1_norm_081_ps_get_date,NORMAL,ALERT,FP (Báo động giả),4.778,True,"Phát hiện chuỗi hành vi từ các sự kiện Event 4625 và Event 4104, trong đó có lệnh powershell.exe -c Get-Date -Format 'yyyy-MM-dd HH:mm:ss' đ..."
+1,llama,case_b1_norm_082_ps_get_hotfix,NORMAL,ALERT,FP (Báo động giả),4.544,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm việc sử dụng lệnh `powershell.exe -c Get-HotFix | Sort-Object InstalledOn -Desce..."
+1,llama,case_b1_norm_083_ps_compress_zip,NORMAL,ALERT,FP (Báo động giả),4.32,True,"Phát hiện chuỗi hành vi gõ sai mật khẩu 4 lần liên tiếp từ cùng IP hoặc tài khoản, sau đó đăng nhập thành công bằng cách sử dụng lệnh Compre..."
+1,llama,case_b1_norm_084_ps_test_connection,NORMAL,ALERT,FP (Báo động giả),4.388,True,"Phát hiện chuỗi brute-force đăng nhập với nhiều lần thất bại từ cùng IP hoặc tài khoản, sau đó có một lệnh PowerShell thực thi lệnh Test-Net..."
+1,llama,case_b1_norm_085_ps_get_disk,NORMAL,ALERT,FP (Báo động giả),4.34,True,"Phát hiện chuỗi brute-force đăng nhập thất bại từ cùng IP hoặc tài khoản, sau đó sử dụng lệnh powershell.exe để thực thi lệnh Get-Disk | Get..."
+1,llama,case_b1_norm_086_ps_get_eventlog_system,NORMAL,ALERT,FP (Báo động giả),4.495,True,"Phát hiện chuỗi hành vi dò mật khẩu từ cùng IP hoặc tài khoản, sau đó đăng nhập thành công bằng cách sử dụng kết quả của lệnh Get-EventLog. ..."
+1,llama,case_b1_norm_087_git_status,NORMAL,ALERT,FP (Báo động giả),3.886,True,"Tài khoản 'dev_backend' đã đăng nhập vào hệ thống với lệnh 'git.exe status', có thể là một hành vi bất thường trong môi trường doanh nghiệp."
+1,llama,case_b1_norm_088_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),4.072,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_089_git_branch_list,NORMAL,ALERT,FP (Báo động giả),3.893,True,"Tài khoản 'dev_backend' đã thực hiện lệnh 'git.exe branch -a' trên hệ thống, có thể là một hành vi nghi ngờ trong bối cảnh tấn công mạng."
+1,llama,case_b1_norm_090_node_version,NORMAL,NORMAL,TN (Đúng lành tính),4.229,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_091_python_version,NORMAL,NORMAL,TN (Đúng lành tính),3.549,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_092_pip_list,NORMAL,ALERT,FP (Báo động giả),3.98,True,Sự kiện đăng nhập thất bại (Event ID 4625) với nhiều lần cố gắng từ cùng IP hoặc tài khoản trong vòng ngắn gợi nghi ngờ về việc dò mật khẩu.
+1,llama,case_b1_norm_093_vscode_editor,NORMAL,ALERT,FP (Báo động giả),4.041,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_094_docker_ps,NORMAL,ALERT,FP (Báo động giả),3.941,True,"Sự kiện đăng nhập thất bại (Event ID 4625) với nhiều lần gõ sai mật khẩu liên tiếp từ cùng IP hoặc tài khoản, sau đó sự kiện đăng nhập thành..."
+1,llama,case_b1_norm_095_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),3.591,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_096_mvn_clean,NORMAL,ALERT,FP (Báo động giả),4.084,True,"Phát hiện hành vi đăng nhập thất bại với nhiều lần cố gắng từ cùng IP hoặc tài khoản trong thời gian ngắn, có thể là dấu hiệu của tấn công m..."
+1,llama,case_b1_norm_097_cargo_build,NORMAL,ALERT,FP (Báo động giả),4.119,True,"Phát hiện sự kiện đăng nhập thành công với mật khẩu sai (Typo login) sau 4 lần đăng nhập thất bại, có thể là dấu hiệu của tấn công Password ..."
+1,llama,case_b1_norm_098_go_build,NORMAL,ALERT,FP (Báo động giả),4.036,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_099_dotnet_run,NORMAL,ALERT,FP (Báo động giả),4.593,True,Phát hiện sự kiện đăng nhập thành công với mật khẩu không chính xác (LogonType: 2) và lệnh chạy chương trình .NET (dotnet.exe run --project ...
+1,llama,case_b1_norm_100_winget_search,NORMAL,ALERT,FP (Báo động giả),4.032,True,"Sự kiện đăng nhập thất bại (Event ID 4625) với nhiều lần gõ sai mật khẩu liên tiếp từ cùng IP hoặc tài khoản, sau đó sự kiện đăng nhập thành..."
+1,llama,case_b1_norm_101_word_open,NORMAL,NORMAL,TN (Đúng lành tính),3.99,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_102_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),4.162,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_103_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),3.543,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_104_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),4.229,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_105_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),3.624,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_106_edge_intranet,NORMAL,ALERT,FP (Báo động giả),3.888,True,"Phát hiện hành vi đăng nhập thất bại từ IP WORKSTATION-SOC.corp.local với LogonType 2, có thể là dấu hiệu tấn công mật khẩu"
+1,llama,case_b1_norm_107_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),3.575,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_108_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),3.6,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_109_zoom_join,NORMAL,ALERT,FP (Báo động giả),3.737,True,"Sự kiện LogonType=2 với TargetUserName=- và NewProcessName=Zoom.exe, có thể là hành vi tấn công từ xa"
+1,llama,case_b1_norm_110_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),3.58,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_111_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),3.831,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_112_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),3.985,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_113_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),3.804,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_114_cmd_ipconfig,NORMAL,ALERT,FP (Báo động giả),4.075,True,"Sự kiện LogonType 2 (đăng nhập từ xa) và NewProcessName ipconfig.exe /all cho thấy hành vi trinh sát mạng, cụ thể là việc sử dụng lệnh ipcon..."
+1,llama,case_b1_norm_115_cmd_ping_gateway,NORMAL,ALERT,FP (Báo động giả),4.143,True,"Phát hiện sự kiện Logon Type 2 (đăng nhập từ xa) trên WORKSTATION-SOC.corp.local với lệnh ping.exe -n 4 192.168.1.1, có thể là dấu hiệu của ..."
+1,llama,case_b1_norm_116_cmd_hostname,NORMAL,ALERT,FP (Báo động giả),4.037,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_117_cmd_whoami,NORMAL,ALERT,FP (Báo động giả),4.658,True,"Sự kiện 4688 (Logon Type) cho thấy người dùng dev_backend đã đăng nhập vào hệ thống với LogonType = 2, điều này có thể là một dấu hiệu của t..."
+1,llama,case_b1_norm_118_cmd_systeminfo,NORMAL,ALERT,FP (Báo động giả),4.362,True,Sự kiện LogonType=2 với SubjectUserSid=S-1-5-21-3686947128-2095841011-3536572084-1001 và TargetUserName=- trên WORKSTATION-SOC.corp.local có...
+1,llama,case_b1_norm_119_cmd_netstat_active,NORMAL,ALERT,FP (Báo động giả),3.962,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_120_cmd_route_lan,NORMAL,ALERT,FP (Báo động giả),4.059,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, cần lưu ý rằng chỉ một lần đăng..."
+1,llama,case_b1_norm_121_cmd_arp_table,NORMAL,ALERT,FP (Báo động giả),4.24,True,"Sự kiện LogonType 2 (đăng nhập từ xa) và CommandLine 'arp.exe -a' cho thấy hoạt động trinh sát mạng, cụ thể là thu thập thông tin về các thi..."
+1,llama,case_b1_norm_122_cmd_nslookup_dns,NORMAL,ALERT,FP (Báo động giả),3.916,True,"Sự kiện nslookup.exe được thực thi trên WORKSTATION-SOC với lệnh corp.local, có thể là một dấu hiệu của hoạt động trinh sát hệ thống."
+1,llama,case_b1_norm_123_cmd_tasklist_sys,NORMAL,ALERT,FP (Báo động giả),3.978,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_124_cmd_chkdsk_verify,NORMAL,ALERT,FP (Báo động giả),4.202,True,"Sự kiện 4625 được phát hiện với SubjectUserSid và TargetUserSid tương ứng, cho thấy một chuỗi đăng nhập thất bại từ cùng IP hoặc tài khoản. ..."
+1,llama,case_b1_norm_125_cmd_dism_health,NORMAL,ALERT,FP (Báo động giả),3.998,True,"Sự kiện LogonType 2 (đăng nhập từ xa) và NewProcessName 'dism.exe' cho thấy một hành vi trinh sát hệ thống, có thể là bước đầu tiên trong ch..."
+1,llama,case_b1_norm_126_cmd_sfc_verify,NORMAL,ALERT,FP (Báo động giả),4.065,True,"Sự kiện 4625 được phát hiện với SubjectUserName = user_marketing, indicating một cuộc đăng nhập thất bại. Tuy nhiên, sau đó sự kiện 4624 thà..."
+1,llama,case_b1_norm_127_cmd_gpupdate,NORMAL,ALERT,FP (Báo động giả),3.971,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_128_cmd_robocopy_docs,NORMAL,ALERT,FP (Báo động giả),3.802,True,"Đăng nhập thành công sau dò mật khẩu, Robocopy được thực thi từ địa chỉ C:\Users\user\Documents"
+1,llama,case_b1_norm_129_ps_get_process,NORMAL,ALERT,FP (Báo động giả),4.486,True,"Phát hiện chuỗi brute-force đăng nhập thất bại với nhiều lần cố gắng từ cùng IP hoặc tài khoản, sau đó sử dụng lệnh PowerShell để thực thi l..."
+1,llama,case_b1_norm_130_ps_get_service,NORMAL,ALERT,FP (Báo động giả),4.094,True,"Phát hiện chuỗi brute-force đăng nhập thất bại với lệnh powershell.exe -c Get-Service -Name Spooler, sau đó một lệnh PowerShell khác được th..."
+1,llama,case_b1_norm_131_ps_get_date,NORMAL,ALERT,FP (Báo động giả),4.831,True,"Phát hiện chuỗi hành vi từ các sự kiện Event 4625 và Event 4104, trong đó có lệnh `powershell.exe -c Get-Date -Format 'yyyy-MM-dd HH:mm:ss'`..."
+1,llama,case_b1_norm_132_ps_get_hotfix,NORMAL,ALERT,FP (Báo động giả),4.493,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm việc sử dụng lệnh `powershell.exe -c Get-HotFix | Sort-Object InstalledOn -Desce..."
+1,llama,case_b1_norm_133_ps_compress_zip,NORMAL,ALERT,FP (Báo động giả),4.323,True,"Phát hiện chuỗi hành vi gõ sai mật khẩu 4 lần liên tiếp từ cùng IP hoặc tài khoản, sau đó đăng nhập thành công bằng cách sử dụng lệnh Compre..."
+1,llama,case_b1_norm_134_ps_test_connection,NORMAL,ALERT,FP (Báo động giả),4.337,True,"Phát hiện chuỗi brute-force đăng nhập với nhiều lần thất bại từ cùng IP hoặc tài khoản, sau đó có một lệnh PowerShell thực thi lệnh Test-Net..."
+1,llama,case_b1_norm_135_ps_get_disk,NORMAL,ALERT,FP (Báo động giả),4.266,True,"Phát hiện chuỗi brute-force đăng nhập thất bại từ cùng IP hoặc tài khoản, sau đó sử dụng lệnh powershell.exe để thực thi lệnh Get-Disk | Get..."
+1,llama,case_b1_norm_136_ps_get_eventlog_system,NORMAL,ALERT,FP (Báo động giả),4.218,True,"Phát hiện chuỗi hành vi dò mật khẩu từ cùng IP hoặc tài khoản, sau đó đăng nhập thành công bằng cách sử dụng kết quả của lệnh Get-EventLog. ..."
+1,llama,case_b1_norm_137_git_status,NORMAL,ALERT,FP (Báo động giả),3.908,True,"Tài khoản người dùng 'dev_backend' đã thực hiện lệnh 'git status' trên hệ thống, có thể là một dấu hiệu của hoạt động trinh sát hoặc khám ph..."
+1,llama,case_b1_norm_138_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),3.917,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_139_git_branch_list,NORMAL,ALERT,FP (Báo động giả),3.867,True,"Tài khoản 'dev_backend' đã thực hiện lệnh 'git.exe branch -a' trên hệ thống, có thể là một hành vi nghi ngờ trong bối cảnh tấn công mạng."
+1,llama,case_b1_norm_140_node_version,NORMAL,NORMAL,TN (Đúng lành tính),4.244,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_141_python_version,NORMAL,NORMAL,TN (Đúng lành tính),3.577,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_142_pip_list,NORMAL,ALERT,FP (Báo động giả),3.914,True,Sự kiện đăng nhập thất bại (Event ID 4625) với nhiều lần cố gắng từ cùng IP hoặc tài khoản trong vòng ngắn gợi nghi ngờ về việc dò mật khẩu.
+1,llama,case_b1_norm_143_vscode_editor,NORMAL,ALERT,FP (Báo động giả),4.32,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_144_docker_ps,NORMAL,ALERT,FP (Báo động giả),3.998,True,"Đăng nhập thành công sau dò mật khẩu, sự kiện 4624 thành công ngay sau một chuỗi brute-force đã xác nhận."
+1,llama,case_b1_norm_145_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),3.838,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_146_mvn_clean,NORMAL,ALERT,FP (Báo động giả),4.041,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_147_cargo_build,NORMAL,NORMAL,TN (Đúng lành tính),3.871,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+1,llama,case_b1_norm_148_go_build,NORMAL,ALERT,FP (Báo động giả),4.002,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+1,llama,case_b1_norm_149_dotnet_run,NORMAL,ALERT,FP (Báo động giả),3.873,True,Phát hiện sự kiện đăng nhập thành công với mật khẩu không chính xác (LogonType: 2) và lệnh chạy dotnet.exe run --project WebApi trong cùng p...
+1,llama,case_b1_norm_150_winget_search,NORMAL,ALERT,FP (Báo động giả),4.072,True,"Sự kiện đăng nhập thất bại (Event ID 4625) với nhiều lần gõ sai mật khẩu liên tiếp từ cùng IP hoặc tài khoản, sau đó sự kiện đăng nhập thành..."
+1,deepblue,case_b1_att_01_mimikatz_sekurlsa,ALERT,ALERT,TP (Bắt trúng),0.0042,True,DeepBlueCLI: Mimikatz Credential Dumping Keywords (regexes.txt)
+1,deepblue,case_b1_att_02_procdump_lsass,ALERT,ALERT,TP (Bắt trúng),0.0021,True,DeepBlueCLI: ProcDump LSASS Memory Dumping
+1,deepblue,case_b1_att_03_powershell_encoded_c2,ALERT,ALERT,TP (Bắt trúng),0.0022,True,DeepBlueCLI: PowerShell Download Cradle Pattern (regexes.txt); DeepBlueCLI: Obfuscated Base64 Encoded Command
+1,deepblue,case_b1_att_04_disable_windefend,ALERT,NORMAL,FN (Bỏ sót tấn công),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_05_clear_security_log,ALERT,ALERT,TP (Bắt trúng),0.0014,True,DeepBlueCLI: Security Event Log Cleared (Event 1102)
+1,deepblue,case_b1_att_06_kerberoasting_spn,ALERT,NORMAL,FN (Bỏ sót tấn công),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_07_pass_the_hash_cmd,ALERT,ALERT,TP (Bắt trúng),0.0022,True,DeepBlueCLI: Mimikatz Credential Dumping Keywords (regexes.txt)
+1,deepblue,case_b1_att_08_vssadmin_delete_shadows,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_09_certutil_decode_exec,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_10_reg_save_sam_system,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0028,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_11_vaultcmd_theft,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_12_bitsadmin_download,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_13_curl_drop_exec,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_14_cipher_wipe_slack,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_15_reg_save_lsa_secrets,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_16_rubeus_asktgt,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_17_lazagne_all_passwords,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_18_net_user_backdoor_add,ALERT,ALERT,TP (Bắt trúng),0.002,True,DeepBlueCLI: User Creation & Admin Group Escalation (Event 4720/4728)
+1,deepblue,case_b1_att_19_reg_add_run_persistence,ALERT,ALERT,TP (Bắt trúng),0.0019,True,DeepBlueCLI: Registry Run Key Persistence Pattern
+1,deepblue,case_b1_att_20_schtasks_create_backdoor,ALERT,ALERT,TP (Bắt trúng),0.0014,True,DeepBlueCLI: Scheduled Task Persistence Pattern
+1,deepblue,case_b1_att_21_wmic_shadowcopy_delete,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_22_wbadmin_delete_catalog,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_23_fsutil_usn_deletejournal,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_24_bcdedit_recovery_disable,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_25_attrib_hide_executable,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_26_icacls_deny_admin,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_27_net_stop_windefend,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_28_fltmc_unload_sysmon,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_29_sc_stop_wuauserv,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_30_netsh_firewall_disable,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_31_takeown_system_file,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_32_powershell_iex_download,ALERT,ALERT,TP (Bắt trúng),0.0026,True,DeepBlueCLI: PowerShell Download Cradle Pattern (regexes.txt)
+1,deepblue,case_b1_att_33_certutil_urlcache_download,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_34_rundll32_advpack_inf,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_35_regsvr32_scrobj_sct,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_36_mshta_inline_vbscript,ALERT,ALERT,TP (Bắt trúng),0.0015,True,DeepBlueCLI: PowerShell Download Cradle Pattern (regexes.txt)
+1,deepblue,case_b1_att_37_powersploit_portscan,ALERT,NORMAL,FN (Bỏ sót tấn công),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_38_wmic_process_create_cmd,ALERT,ALERT,TP (Bắt trúng),0.0016,True,DeepBlueCLI: PowerShell Download Cradle Pattern (regexes.txt)
+1,deepblue,case_b1_att_39_pwdump7_extract,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_40_secretsdump_remote,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_41_crackmapexec_exec,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_42_sharpup_audit,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_43_winpeas_enum,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_44_wsl_linpeas_exec,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_45_cobaltstrike_beacon_spawn,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_att_46_empire_stager_launch,ALERT,ALERT,TP (Bắt trúng),0.0018,True,DeepBlueCLI: PowerShell Download Cradle Pattern (regexes.txt); DeepBlueCLI: Obfuscated Base64 Encoded Command
+1,deepblue,case_b1_att_47_metasploit_rev_tcp,ALERT,ALERT,TP (Bắt trúng),0.0021,True,DeepBlueCLI: PowerShell Download Cradle Pattern (regexes.txt)
+1,deepblue,case_b1_att_48_mimikatz_sekurlsa_tickets,ALERT,ALERT,TP (Bắt trúng),0.0018,True,DeepBlueCLI: Mimikatz Credential Dumping Keywords (regexes.txt)
+1,deepblue,case_b1_att_49_powersploit_mimikatz_dump,ALERT,ALERT,TP (Bắt trúng),0.0023,True,DeepBlueCLI: PowerShell Download Cradle Pattern (regexes.txt); DeepBlueCLI: Mimikatz Credential Dumping Keywords (regexes.txt)
+1,deepblue,case_b1_att_50_wevtutil_clear_system,ALERT,ALERT,TP (Bắt trúng),0.0019,True,DeepBlueCLI: Security Event Log Cleared (Event 1102)
+1,deepblue,case_b1_norm_001_word_open,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_002_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_003_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_004_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_005_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_006_edge_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_007_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_008_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_009_zoom_join,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_010_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_011_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_012_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_013_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_014_cmd_ipconfig,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_015_cmd_ping_gateway,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_016_cmd_hostname,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_017_cmd_whoami,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_018_cmd_systeminfo,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_019_cmd_netstat_active,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_020_cmd_route_lan,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_021_cmd_arp_table,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_022_cmd_nslookup_dns,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_023_cmd_tasklist_sys,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_024_cmd_chkdsk_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_025_cmd_dism_health,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_026_cmd_sfc_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_027_cmd_gpupdate,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_028_cmd_robocopy_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_029_ps_get_process,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_030_ps_get_service,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_031_ps_get_date,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_032_ps_get_hotfix,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_033_ps_compress_zip,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_034_ps_test_connection,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_035_ps_get_disk,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_036_ps_get_eventlog_system,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_037_git_status,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_038_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_039_git_branch_list,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_040_node_version,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_041_python_version,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_042_pip_list,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_043_vscode_editor,NORMAL,NORMAL,TN (Đúng lành tính),0.0028,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_044_docker_ps,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_045_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_046_mvn_clean,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_047_cargo_build,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_048_go_build,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_049_dotnet_run,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_050_winget_search,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_051_word_open,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_052_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_053_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_054_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_055_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_056_edge_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_057_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_058_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_059_zoom_join,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_060_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_061_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_062_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_063_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_064_cmd_ipconfig,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_065_cmd_ping_gateway,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_066_cmd_hostname,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_067_cmd_whoami,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_068_cmd_systeminfo,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_069_cmd_netstat_active,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_070_cmd_route_lan,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_071_cmd_arp_table,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_072_cmd_nslookup_dns,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_073_cmd_tasklist_sys,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_074_cmd_chkdsk_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_075_cmd_dism_health,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_076_cmd_sfc_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_077_cmd_gpupdate,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_078_cmd_robocopy_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_079_ps_get_process,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_080_ps_get_service,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_081_ps_get_date,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_082_ps_get_hotfix,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_083_ps_compress_zip,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_084_ps_test_connection,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_085_ps_get_disk,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_086_ps_get_eventlog_system,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_087_git_status,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_088_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_089_git_branch_list,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_090_node_version,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_091_python_version,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_092_pip_list,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_093_vscode_editor,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_094_docker_ps,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_095_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_096_mvn_clean,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_097_cargo_build,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_098_go_build,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_099_dotnet_run,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_100_winget_search,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_101_word_open,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_102_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_103_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_104_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_105_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_106_edge_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_107_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_108_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_109_zoom_join,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_110_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_111_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_112_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_113_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_114_cmd_ipconfig,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_115_cmd_ping_gateway,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_116_cmd_hostname,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_117_cmd_whoami,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_118_cmd_systeminfo,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_119_cmd_netstat_active,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_120_cmd_route_lan,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_121_cmd_arp_table,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_122_cmd_nslookup_dns,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_123_cmd_tasklist_sys,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_124_cmd_chkdsk_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_125_cmd_dism_health,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_126_cmd_sfc_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_127_cmd_gpupdate,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_128_cmd_robocopy_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_129_ps_get_process,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_130_ps_get_service,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_131_ps_get_date,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_132_ps_get_hotfix,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_133_ps_compress_zip,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_134_ps_test_connection,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_135_ps_get_disk,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_136_ps_get_eventlog_system,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_137_git_status,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_138_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_139_git_branch_list,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_140_node_version,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_141_python_version,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_142_pip_list,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_143_vscode_editor,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_144_docker_ps,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_145_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_146_mvn_clean,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_147_cargo_build,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_148_go_build,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_149_dotnet_run,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,deepblue,case_b1_norm_150_winget_search,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_01_mimikatz_sekurlsa,ALERT,ALERT,TP (Bắt trúng),0.0022,True,Sigma [proc_creation_win_mimikatz]: Credential Dumping Tool Detected
+1,sigma,case_b1_att_02_procdump_lsass,ALERT,ALERT,TP (Bắt trúng),0.0015,True,Sigma [proc_creation_win_procdump_lsass]: LSASS Memory Dump via ProcDump
+1,sigma,case_b1_att_03_powershell_encoded_c2,ALERT,ALERT,TP (Bắt trúng),0.0014,True,Sigma [proc_creation_win_powershell_download_cradle]: Remote Download Cradle; Sigma [proc_creation_win_powershell_encoded]: Encoded PowerShe
+1,sigma,case_b1_att_04_disable_windefend,ALERT,ALERT,TP (Bắt trúng),0.0019,True,Sigma [proc_creation_win_defender_disable]: Tampering Defender Realtime Protection
+1,sigma,case_b1_att_05_clear_security_log,ALERT,ALERT,TP (Bắt trúng),0.0013,True,Sigma [win_security_clear_event_log]: Security Audit Log Cleared
+1,sigma,case_b1_att_06_kerberoasting_spn,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_07_pass_the_hash_cmd,ALERT,ALERT,TP (Bắt trúng),0.0017,True,Sigma [proc_creation_win_mimikatz]: Credential Dumping Tool Detected
+1,sigma,case_b1_att_08_vssadmin_delete_shadows,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_09_certutil_decode_exec,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_10_reg_save_sam_system,ALERT,NORMAL,FN (Bỏ sót tấn công),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_11_vaultcmd_theft,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_12_bitsadmin_download,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_13_curl_drop_exec,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_14_cipher_wipe_slack,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_15_reg_save_lsa_secrets,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_16_rubeus_asktgt,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_17_lazagne_all_passwords,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_18_net_user_backdoor_add,ALERT,ALERT,TP (Bắt trúng),0.0013,True,Sigma [win_security_net_user_add]: Backdoor Admin Account Created
+1,sigma,case_b1_att_19_reg_add_run_persistence,ALERT,ALERT,TP (Bắt trúng),0.0015,True,Sigma [proc_creation_win_registry_run_key]: Run Key Auto-Start Persistence
+1,sigma,case_b1_att_20_schtasks_create_backdoor,ALERT,ALERT,TP (Bắt trúng),0.0014,True,Sigma [proc_creation_win_schtasks_persistence]: Scheduled Task Persistence
+1,sigma,case_b1_att_21_wmic_shadowcopy_delete,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_22_wbadmin_delete_catalog,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_23_fsutil_usn_deletejournal,ALERT,NORMAL,FN (Bỏ sót tấn công),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_24_bcdedit_recovery_disable,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_25_attrib_hide_executable,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_26_icacls_deny_admin,ALERT,NORMAL,FN (Bỏ sót tấn công),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_27_net_stop_windefend,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_28_fltmc_unload_sysmon,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_29_sc_stop_wuauserv,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_30_netsh_firewall_disable,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_31_takeown_system_file,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_32_powershell_iex_download,ALERT,ALERT,TP (Bắt trúng),0.0019,True,Sigma [proc_creation_win_powershell_download_cradle]: Remote Download Cradle
+1,sigma,case_b1_att_33_certutil_urlcache_download,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_34_rundll32_advpack_inf,ALERT,NORMAL,FN (Bỏ sót tấn công),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_35_regsvr32_scrobj_sct,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_36_mshta_inline_vbscript,ALERT,ALERT,TP (Bắt trúng),0.0014,True,Sigma [proc_creation_win_powershell_download_cradle]: Remote Download Cradle
+1,sigma,case_b1_att_37_powersploit_portscan,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_38_wmic_process_create_cmd,ALERT,ALERT,TP (Bắt trúng),0.0017,True,Sigma [proc_creation_win_powershell_download_cradle]: Remote Download Cradle
+1,sigma,case_b1_att_39_pwdump7_extract,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_40_secretsdump_remote,ALERT,NORMAL,FN (Bỏ sót tấn công),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_41_crackmapexec_exec,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_42_sharpup_audit,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_43_winpeas_enum,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_44_wsl_linpeas_exec,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_45_cobaltstrike_beacon_spawn,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_46_empire_stager_launch,ALERT,ALERT,TP (Bắt trúng),0.0015,True,Sigma [proc_creation_win_powershell_download_cradle]: Remote Download Cradle; Sigma [proc_creation_win_powershell_encoded]: Encoded PowerShe
+1,sigma,case_b1_att_47_metasploit_rev_tcp,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_att_48_mimikatz_sekurlsa_tickets,ALERT,ALERT,TP (Bắt trúng),0.0016,True,Sigma [proc_creation_win_mimikatz]: Credential Dumping Tool Detected
+1,sigma,case_b1_att_49_powersploit_mimikatz_dump,ALERT,ALERT,TP (Bắt trúng),0.0014,True,Sigma [proc_creation_win_powershell_download_cradle]: Remote Download Cradle; Sigma [proc_creation_win_mimikatz]: Credential Dumping Tool De
+1,sigma,case_b1_att_50_wevtutil_clear_system,ALERT,ALERT,TP (Bắt trúng),0.0013,True,Sigma [win_security_clear_event_log]: Security Audit Log Cleared
+1,sigma,case_b1_norm_001_word_open,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_002_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_003_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_004_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_005_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_006_edge_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_007_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_008_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_009_zoom_join,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_010_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_011_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_012_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_013_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_014_cmd_ipconfig,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_015_cmd_ping_gateway,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_016_cmd_hostname,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_017_cmd_whoami,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_018_cmd_systeminfo,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_019_cmd_netstat_active,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_020_cmd_route_lan,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_021_cmd_arp_table,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_022_cmd_nslookup_dns,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_023_cmd_tasklist_sys,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_024_cmd_chkdsk_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_025_cmd_dism_health,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_026_cmd_sfc_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_027_cmd_gpupdate,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_028_cmd_robocopy_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_029_ps_get_process,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_030_ps_get_service,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_031_ps_get_date,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_032_ps_get_hotfix,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_033_ps_compress_zip,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_034_ps_test_connection,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_035_ps_get_disk,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_036_ps_get_eventlog_system,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_037_git_status,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_038_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_039_git_branch_list,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_040_node_version,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_041_python_version,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_042_pip_list,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_043_vscode_editor,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_044_docker_ps,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_045_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_046_mvn_clean,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_047_cargo_build,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_048_go_build,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_049_dotnet_run,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_050_winget_search,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_051_word_open,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_052_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_053_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_054_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_055_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_056_edge_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_057_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_058_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_059_zoom_join,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_060_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_061_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_062_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_063_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_064_cmd_ipconfig,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_065_cmd_ping_gateway,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_066_cmd_hostname,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_067_cmd_whoami,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_068_cmd_systeminfo,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_069_cmd_netstat_active,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_070_cmd_route_lan,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_071_cmd_arp_table,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_072_cmd_nslookup_dns,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_073_cmd_tasklist_sys,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_074_cmd_chkdsk_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_075_cmd_dism_health,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_076_cmd_sfc_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_077_cmd_gpupdate,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_078_cmd_robocopy_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_079_ps_get_process,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_080_ps_get_service,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_081_ps_get_date,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_082_ps_get_hotfix,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_083_ps_compress_zip,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_084_ps_test_connection,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_085_ps_get_disk,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_086_ps_get_eventlog_system,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_087_git_status,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_088_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_089_git_branch_list,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_090_node_version,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_091_python_version,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_092_pip_list,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_093_vscode_editor,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_094_docker_ps,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_095_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_096_mvn_clean,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_097_cargo_build,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_098_go_build,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_099_dotnet_run,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_100_winget_search,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_101_word_open,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_102_excel_calc,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_103_powerpoint_slide,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_104_outlook_mail,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_105_chrome_web,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_106_edge_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_107_acrobat_pdf,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_108_teams_chat,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_109_zoom_join,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_110_notepad_note,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_111_calc_tool,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_112_paint_draw,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_113_cmd_dir,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_114_cmd_ipconfig,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_115_cmd_ping_gateway,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_116_cmd_hostname,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_117_cmd_whoami,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_118_cmd_systeminfo,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_119_cmd_netstat_active,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_120_cmd_route_lan,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_121_cmd_arp_table,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_122_cmd_nslookup_dns,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_123_cmd_tasklist_sys,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_124_cmd_chkdsk_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_125_cmd_dism_health,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_126_cmd_sfc_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_127_cmd_gpupdate,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_128_cmd_robocopy_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_129_ps_get_process,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_130_ps_get_service,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_131_ps_get_date,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_132_ps_get_hotfix,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_133_ps_compress_zip,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_134_ps_test_connection,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_135_ps_get_disk,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_136_ps_get_eventlog_system,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_137_git_status,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_138_git_pull_main,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_139_git_branch_list,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_140_node_version,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_141_python_version,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_142_pip_list,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_143_vscode_editor,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_144_docker_ps,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_145_kubectl_pods,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_146_mvn_clean,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_147_cargo_build,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_148_go_build,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_149_dotnet_run,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+1,sigma,case_b1_norm_150_winget_search,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)

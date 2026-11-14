@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_21_wmic_shadowcopy_delete",
+  "category": "Impact",
+  "ground_truth": "ALERT",
+  "description": "Xóa Shadow Copies bằng tiện ích dòng lệnh WMIC.",
+  "mitre_technique": "T1490",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.171440"
+}

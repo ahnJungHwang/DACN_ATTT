@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_057_acrobat_pdf",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Mở tài liệu hợp đồng định dạng PDF bằng Adobe Acrobat Reader.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.265751"
+}

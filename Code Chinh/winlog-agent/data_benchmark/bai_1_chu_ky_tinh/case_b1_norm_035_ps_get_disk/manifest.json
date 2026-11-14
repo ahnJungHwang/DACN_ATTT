@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_035_ps_get_disk",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Kiểm tra dung lượng trống trên các ổ đĩa cứng máy trạm.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.244215"
+}

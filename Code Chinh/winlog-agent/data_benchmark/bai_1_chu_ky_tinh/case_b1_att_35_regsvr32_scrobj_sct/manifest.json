@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_35_regsvr32_scrobj_sct",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Tấn công Squiblydoo thực thi scriptlet SCT từ xa qua regsvr32.",
+  "mitre_technique": "T1218.010",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.187693"
+}

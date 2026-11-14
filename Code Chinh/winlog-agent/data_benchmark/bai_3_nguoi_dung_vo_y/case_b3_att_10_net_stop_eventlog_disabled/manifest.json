@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_10_net_stop_eventlog_disabled",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Dừng và vô hiệu hóa dịch vụ ghi nhật ký sự kiện Windows EventLog.",
+  "mitre_technique": "T1562.002",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.574852"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_15_printnightmare_spooler",
+  "category": "PrivilegeEscalation",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: Khai thác lỗ hổng PrintNightmare tải driver máy in độc hại leo quyền SYSTEM.",
+  "mitre_technique": "T1068",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.375655"
+}

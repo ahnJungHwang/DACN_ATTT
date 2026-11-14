@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_079_ps_get_process",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Lấy danh sách các tiến trình chiếm dụng CPU hàng đầu.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.290071"
+}

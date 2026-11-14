@@ -76,7 +76,9 @@
       "parameters": {
         "chatId": "6269241707",
         "text": "=🚨 CẢNH BÁO PHÁT HIỆN TẤN CÔNG (AI SOC)\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n🖥️ Máy trạm: {{ $json.hostname || $json.client_id || 'Endpoint-01' }}\n⚠️ Đánh giá: {{ $json.verdict.label }}\n🎯 Kỹ thuật: {{ $json.verdict.detected_stages ? $json.verdict.detected_stages.join(', ') : 'N/A' }}\n📝 Chi tiết: {{ $json.verdict.reason }}\n🔍 Bằng chứng: {{ $json.verdict.evidence_refs ? $json.verdict.evidence_refs.join(', ') : 'N/A' }}",
-        "additionalFields": {}
+        "additionalFields": {
+          "appendAttribution": false
+        }
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,

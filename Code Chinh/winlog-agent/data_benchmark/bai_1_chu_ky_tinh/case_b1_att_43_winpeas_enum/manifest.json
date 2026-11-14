@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_43_winpeas_enum",
+  "category": "Discovery",
+  "ground_truth": "ALERT",
+  "description": "WinPEAS: Quét tự động leo thang đặc quyền toàn diện hệ thống Windows.",
+  "mitre_technique": "T1082",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.197260"
+}

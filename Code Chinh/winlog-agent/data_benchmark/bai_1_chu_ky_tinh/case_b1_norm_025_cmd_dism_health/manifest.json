@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_025_cmd_dism_health",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Kiểm tra sức khỏe kho ảnh hệ thống Windows DISM.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.233610"
+}

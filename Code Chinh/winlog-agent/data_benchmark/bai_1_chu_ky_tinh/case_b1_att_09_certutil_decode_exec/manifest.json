@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_09_certutil_decode_exec",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Certutil Decode: Giải mã tệp văn bản Base64 thành payload thực thi exe.",
+  "mitre_technique": "T1140",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.157476"
+}

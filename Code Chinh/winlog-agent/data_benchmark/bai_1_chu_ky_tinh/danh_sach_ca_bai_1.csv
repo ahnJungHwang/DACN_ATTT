@@ -1,0 +1,201 @@
+case_id,category,ground_truth,description,mitre_technique,scenario,generated_at
+case_b1_att_01_mimikatz_sekurlsa,CredentialAccess,ALERT,Mimikatz: Trích xuất mật khẩu rõ từ LSASS qua sekurlsa::logonpasswords.,T1003.001,Bài 1,2026-11-13T09:54:15.149566
+case_b1_att_02_procdump_lsass,CredentialAccess,ALERT,Procdump: Dump bộ nhớ LSASS ra file dmp để trích xuất offline.,T1003.001,Bài 1,2026-11-13T09:54:15.150542
+case_b1_att_03_powershell_encoded_c2,Execution,ALERT,PowerShell Encoded Command: Thực thi lệnh nén Base64 ẩn danh.,T1059.001,Bài 1,2026-11-13T09:54:15.151371
+case_b1_att_04_disable_windefend,DefenseEvasion,ALERT,Vô hiệu hóa tính năng giám sát thời gian thực của Windows Defender.,T1562.001,Bài 1,2026-11-13T09:54:15.152206
+case_b1_att_05_clear_security_log,DefenseEvasion,ALERT,Xóa sạch toàn bộ nhật ký sự kiện Security qua wevtutil.,T1070.001,Bài 1,2026-11-13T09:54:15.153239
+case_b1_att_06_kerberoasting_spn,CredentialAccess,ALERT,Kerberoasting: Yêu cầu vé TGS SPN để bẻ khóa mật khẩu offline.,T1558.003,Bài 1,2026-11-13T09:54:15.154248
+case_b1_att_07_pass_the_hash_cmd,LateralMovement,ALERT,Pass-The-Hash: Thực thi Mimikatz sekurlsa::pth mở phiên dòng lệnh mới.,T1550.002,Bài 1,2026-11-13T09:54:15.155110
+case_b1_att_08_vssadmin_delete_shadows,Impact,ALERT,Ransomware: Xóa toàn bộ bản sao lưu Shadow Copies phục hồi hệ thống.,T1490,Bài 1,2026-11-13T09:54:15.156115
+case_b1_att_09_certutil_decode_exec,DefenseEvasion,ALERT,Certutil Decode: Giải mã tệp văn bản Base64 thành payload thực thi exe.,T1140,Bài 1,2026-11-13T09:54:15.157476
+case_b1_att_10_reg_save_sam_system,CredentialAccess,ALERT,Dump Hive SAM và SYSTEM nhằm trích xuất NTLM hash cục bộ.,T1003.002,Bài 1,2026-11-13T09:54:15.158516
+case_b1_att_11_vaultcmd_theft,CredentialAccess,ALERT,Thu thập danh sách chứng thư lưu trong Windows Credential Manager.,T1555.004,Bài 1,2026-11-13T09:54:15.159498
+case_b1_att_12_bitsadmin_download,Persistence,ALERT,BITSAdmin: Tạo job tải payload mã độc ngầm dưới nền hệ điều hành.,T1197,Bài 1,2026-11-13T09:54:15.161003
+case_b1_att_13_curl_drop_exec,Execution,ALERT,cURL Drop & Exec: Tải mã độc từ server điều khiển và kích hoạt ngầm.,T1105,Bài 1,2026-11-13T09:54:15.162442
+case_b1_att_14_cipher_wipe_slack,Impact,ALERT,Cipher Wipe: Tiêu hủy dữ liệu ổ đĩa bằng tiện ích cipher /w ghi đè vùng trống.,T1485,Bài 1,2026-11-13T09:54:15.163726
+case_b1_att_15_reg_save_lsa_secrets,CredentialAccess,ALERT,Trích xuất LSA Secrets nội bộ từ khóa Registry SECURITY.,T1003.002,Bài 1,2026-11-13T09:54:15.164969
+case_b1_att_16_rubeus_asktgt,CredentialAccess,ALERT,Rubeus: Yêu cầu Kerberos TGT ticket trực tiếp từ Domain Controller.,T1558.003,Bài 1,2026-11-13T09:54:15.165945
+case_b1_att_17_lazagne_all_passwords,CredentialAccess,ALERT,"LaZagne: Tự động vét toàn bộ mật khẩu trình duyệt, Wi-Fi và hệ thống.",T1555,Bài 1,2026-11-13T09:54:15.167184
+case_b1_att_18_net_user_backdoor_add,Persistence,ALERT,Tạo tài khoản quản trị bí mật net user hacker /add.,T1136.001,Bài 1,2026-11-13T09:54:15.168439
+case_b1_att_19_reg_add_run_persistence,Persistence,ALERT,Tạo khóa khởi động cùng hệ thống tại HKCU Run key.,T1547.001,Bài 1,2026-11-13T09:54:15.169481
+case_b1_att_20_schtasks_create_backdoor,Persistence,ALERT,Tạo tác vụ lập lịch Schtasks kích hoạt mã độc định kỳ 10 phút.,T1053.005,Bài 1,2026-11-13T09:54:15.170424
+case_b1_att_21_wmic_shadowcopy_delete,Impact,ALERT,Xóa Shadow Copies bằng tiện ích dòng lệnh WMIC.,T1490,Bài 1,2026-11-13T09:54:15.171440
+case_b1_att_22_wbadmin_delete_catalog,Impact,ALERT,Xóa Catalog sao lưu hệ thống bằng lệnh wbadmin.,T1490,Bài 1,2026-11-13T09:54:15.172486
+case_b1_att_23_fsutil_usn_deletejournal,DefenseEvasion,ALERT,Xóa nhật ký thay đổi tệp tin NTFS USN Journal để xóa dấu vết điều tra.,T1070,Bài 1,2026-11-13T09:54:15.173586
+case_b1_att_24_bcdedit_recovery_disable,Impact,ALERT,Vô hiệu hóa tính năng tự sửa lỗi Windows Recovery trong BCD.,T1490,Bài 1,2026-11-13T09:54:15.176746
+case_b1_att_25_attrib_hide_executable,DefenseEvasion,ALERT,Ẩn giấu tệp mã độc bằng thuộc tính System và Hidden qua attrib +h +s.,T1564.001,Bài 1,2026-11-13T09:54:15.177485
+case_b1_att_26_icacls_deny_admin,DefenseEvasion,ALERT,Chặn quyền truy cập của Quản trị viên vào thư mục mã độc bằng icacls deny.,T1222.001,Bài 1,2026-11-13T09:54:15.178223
+case_b1_att_27_net_stop_windefend,DefenseEvasion,ALERT,Dừng dịch vụ bảo vệ Microsoft Defender Antivirus bằng net stop.,T1562.001,Bài 1,2026-11-13T09:54:15.179222
+case_b1_att_28_fltmc_unload_sysmon,DefenseEvasion,ALERT,Gỡ driver giám sát Sysmon khỏi bộ nhớ qua fltmc unload.,T1562.001,Bài 1,2026-11-13T09:54:15.180190
+case_b1_att_29_sc_stop_wuauserv,DefenseEvasion,ALERT,Dừng và vô hiệu hóa dịch vụ cập nhật vá lỗi Windows Update.,T1562.001,Bài 1,2026-11-13T09:54:15.181663
+case_b1_att_30_netsh_firewall_disable,DefenseEvasion,ALERT,Tắt toàn bộ tường lửa Windows Firewall qua lệnh netsh advfirewall.,T1562.004,Bài 1,2026-11-13T09:54:15.183077
+case_b1_att_31_takeown_system_file,DefenseEvasion,ALERT,Chiếm quyền sở hữu tệp tin hệ thống nhạy cảm bằng takeown /f.,T1222.001,Bài 1,2026-11-13T09:54:15.184091
+case_b1_att_32_powershell_iex_download,Execution,ALERT,PowerShell IEX WebClient Download Cradle trực tiếp từ IP lạ.,T1059.001,Bài 1,2026-11-13T09:54:15.184900
+case_b1_att_33_certutil_urlcache_download,Execution,ALERT,Lợi dụng certutil urlcache để tải binary độc từ server C2.,T1105,Bài 1,2026-11-13T09:54:15.185838
+case_b1_att_34_rundll32_advpack_inf,DefenseEvasion,ALERT,LOLBAS: Thực thi tệp INF độc hại bằng rundll32 gọi advpack.dll.,T1218.011,Bài 1,2026-11-13T09:54:15.186821
+case_b1_att_35_regsvr32_scrobj_sct,DefenseEvasion,ALERT,Tấn công Squiblydoo thực thi scriptlet SCT từ xa qua regsvr32.,T1218.010,Bài 1,2026-11-13T09:54:15.187693
+case_b1_att_36_mshta_inline_vbscript,Execution,ALERT,Thực thi mã độc VBScript trực tiếp trong bộ nhớ qua mshta.exe.,T1218.005,Bài 1,2026-11-13T09:54:15.188914
+case_b1_att_37_powersploit_portscan,Discovery,ALERT,Thực thi module PowerSploit Invoke-Portscan quét dải mạng LAN.,T1046,Bài 1,2026-11-13T09:54:15.190295
+case_b1_att_38_wmic_process_create_cmd,Execution,ALERT,Khởi tạo tiến trình độc ngầm qua wmic process call create.,T1047,Bài 1,2026-11-13T09:54:15.191163
+case_b1_att_39_pwdump7_extract,CredentialAccess,ALERT,Pwdump7: Trích xuất trực tiếp mật khẩu băm từ SAM.,T1003.002,Bài 1,2026-11-13T09:54:15.192370
+case_b1_att_40_secretsdump_remote,CredentialAccess,ALERT,Impacket secretsdump: Trích xuất LSA secrets và cached domain credentials.,T1003.004,Bài 1,2026-11-13T09:54:15.193468
+case_b1_att_41_crackmapexec_exec,LateralMovement,ALERT,CrackMapExec: Quét xác thực SMB và thực thi lệnh từ xa.,T1021.002,Bài 1,2026-11-13T09:54:15.194269
+case_b1_att_42_sharpup_audit,PrivilegeEscalation,ALERT,SharpUp: Quét lỗ hổng cấu hình dịch vụ để leo thang đặc quyền.,T1068,Bài 1,2026-11-13T09:54:15.195935
+case_b1_att_43_winpeas_enum,Discovery,ALERT,WinPEAS: Quét tự động leo thang đặc quyền toàn diện hệ thống Windows.,T1082,Bài 1,2026-11-13T09:54:15.197260
+case_b1_att_44_wsl_linpeas_exec,DefenseEvasion,ALERT,Lợi dụng môi trường máy ảo WSL để chạy script độc linpeas.sh.,T1202,Bài 1,2026-11-13T09:54:15.198062
+case_b1_att_45_cobaltstrike_beacon_spawn,Execution,ALERT,CobaltStrike: Khởi tạo tiến trình Beacon ngầm từ rundll32.,T1059.001,Bài 1,2026-11-13T09:54:15.198819
+case_b1_att_46_empire_stager_launch,Execution,ALERT,PowerShell Empire: Nạp stager độc hại bằng scriptlet base64.,T1059.001,Bài 1,2026-11-13T09:54:15.199578
+case_b1_att_47_metasploit_rev_tcp,Execution,ALERT,Metasploit: Thực thi reverse TCP meterpreter payload trong powershell.,T1059.001,Bài 1,2026-11-13T09:54:15.200325
+case_b1_att_48_mimikatz_sekurlsa_tickets,CredentialAccess,ALERT,Mimikatz: Trích xuất toàn bộ vé Kerberos TGT/TGS trong RAM.,T1003.001,Bài 1,2026-11-13T09:54:15.201133
+case_b1_att_49_powersploit_mimikatz_dump,CredentialAccess,ALERT,Nạp reflective DLL Mimikatz trực tiếp vào bộ nhớ powershell.,T1003.001,Bài 1,2026-11-13T09:54:15.201959
+case_b1_att_50_wevtutil_clear_system,DefenseEvasion,ALERT,Xóa nhật ký sự kiện System và Application bằng wevtutil.,T1070.001,Bài 1,2026-11-13T09:54:15.202838
+case_b1_norm_001_word_open,Benign,NORMAL,Mở Microsoft Word soạn thảo tài liệu nội bộ.,-,Bài 1,2026-11-13T09:54:15.203909
+case_b1_norm_002_excel_calc,Benign,NORMAL,Mở bảng tính Microsoft Excel xử lý báo cáo tài chính.,-,Bài 1,2026-11-13T09:54:15.205497
+case_b1_norm_003_powerpoint_slide,Benign,NORMAL,Trình chiếu slide thuyết trình Microsoft PowerPoint.,-,Bài 1,2026-11-13T09:54:15.206445
+case_b1_norm_004_outlook_mail,Benign,NORMAL,Khởi chạy Microsoft Outlook đọc và phản hồi email.,-,Bài 1,2026-11-13T09:54:15.207398
+case_b1_norm_005_chrome_web,Benign,NORMAL,Duyệt web tra cứu tài liệu học tập bằng Google Chrome.,-,Bài 1,2026-11-13T09:54:15.208539
+case_b1_norm_006_edge_intranet,Benign,NORMAL,Truy cập cổng thông tin nội bộ công ty bằng Microsoft Edge.,-,Bài 1,2026-11-13T09:54:15.209740
+case_b1_norm_007_acrobat_pdf,Benign,NORMAL,Mở tài liệu hợp đồng định dạng PDF bằng Adobe Acrobat Reader.,-,Bài 1,2026-11-13T09:54:15.210569
+case_b1_norm_008_teams_chat,Benign,NORMAL,Đăng nhập và gửi tin nhắn trao đổi công việc trên Microsoft Teams.,-,Bài 1,2026-11-13T09:54:15.211430
+case_b1_norm_009_zoom_join,Benign,NORMAL,Tham gia cuộc họp trực tuyến phòng ban bằng ứng dụng Zoom.,-,Bài 1,2026-11-13T09:54:15.212380
+case_b1_norm_010_notepad_note,Benign,NORMAL,Mở Notepad ghi chép nhanh thông tin công việc hàng ngày.,-,Bài 1,2026-11-13T09:54:15.213493
+case_b1_norm_011_calc_tool,Benign,NORMAL,Sử dụng tiện ích Calculator tính toán số liệu văn phòng.,-,Bài 1,2026-11-13T09:54:15.214333
+case_b1_norm_012_paint_draw,Benign,NORMAL,Mở công cụ Paint chỉnh sửa ảnh chụp màn hình báo cáo.,-,Bài 1,2026-11-13T09:54:15.215595
+case_b1_norm_013_cmd_dir,Benign,NORMAL,Liệt kê danh sách tập tin trong thư mục Documents.,-,Bài 1,2026-11-13T09:54:15.216872
+case_b1_norm_014_cmd_ipconfig,Benign,NORMAL,Kiểm tra địa chỉ IP cấu hình card mạng máy tính cá nhân.,-,Bài 1,2026-11-13T09:54:15.217756
+case_b1_norm_015_cmd_ping_gateway,Benign,NORMAL,Kiểm tra kết nối mạng nội bộ tới Default Gateway.,-,Bài 1,2026-11-13T09:54:15.221293
+case_b1_norm_016_cmd_hostname,Benign,NORMAL,Xem tên định danh máy trạm trong mạng nội bộ.,-,Bài 1,2026-11-13T09:54:15.223506
+case_b1_norm_017_cmd_whoami,Benign,NORMAL,Kiểm tra tên tài khoản người dùng đang đăng nhập hiện tại.,-,Bài 1,2026-11-13T09:54:15.224523
+case_b1_norm_018_cmd_systeminfo,Benign,NORMAL,Xuất thông tin cấu hình phần cứng và phiên bản Windows.,-,Bài 1,2026-11-13T09:54:15.226296
+case_b1_norm_019_cmd_netstat_active,Benign,NORMAL,Xem danh sách các cổng kết nối TCP đang mở hợp lệ.,-,Bài 1,2026-11-13T09:54:15.227187
+case_b1_norm_020_cmd_route_lan,Benign,NORMAL,Kiểm tra bảng định tuyến mạng máy trạm.,-,Bài 1,2026-11-13T09:54:15.228163
+case_b1_norm_021_cmd_arp_table,Benign,NORMAL,Xem bảng ánh xạ địa chỉ IP và MAC Address mạng LAN.,-,Bài 1,2026-11-13T09:54:15.229704
+case_b1_norm_022_cmd_nslookup_dns,Benign,NORMAL,Truy vấn địa chỉ máy chủ DNS nội bộ domain công ty.,-,Bài 1,2026-11-13T09:54:15.230878
+case_b1_norm_023_cmd_tasklist_sys,Benign,NORMAL,Liệt kê danh sách các tiến trình dịch vụ đang hoạt động.,-,Bài 1,2026-11-13T09:54:15.231854
+case_b1_norm_024_cmd_chkdsk_verify,Benign,NORMAL,Kiểm tra tính toàn vẹn hệ thống tập tin NTFS phân vùng C:.,-,Bài 1,2026-11-13T09:54:15.232826
+case_b1_norm_025_cmd_dism_health,Benign,NORMAL,Kiểm tra sức khỏe kho ảnh hệ thống Windows DISM.,-,Bài 1,2026-11-13T09:54:15.233610
+case_b1_norm_026_cmd_sfc_verify,Benign,NORMAL,Quét kiểm tra chữ ký số các tệp tin hệ thống Windows.,-,Bài 1,2026-11-13T09:54:15.234511
+case_b1_norm_027_cmd_gpupdate,Benign,NORMAL,Cập nhật chính sách người dùng từ Active Directory.,-,Bài 1,2026-11-13T09:54:15.235375
+case_b1_norm_028_cmd_robocopy_docs,Benign,NORMAL,Sao chép đồng bộ tài liệu sang ổ đĩa sao lưu ngoài.,-,Bài 1,2026-11-13T09:54:15.236394
+case_b1_norm_029_ps_get_process,Benign,NORMAL,Lấy danh sách các tiến trình chiếm dụng CPU hàng đầu.,-,Bài 1,2026-11-13T09:54:15.238055
+case_b1_norm_030_ps_get_service,Benign,NORMAL,Kiểm tra trạng thái hoạt động của dịch vụ Print Spooler.,-,Bài 1,2026-11-13T09:54:15.238992
+case_b1_norm_031_ps_get_date,Benign,NORMAL,Lấy ngày giờ hiện tại định dạng chuẩn theo múi giờ máy trạm.,-,Bài 1,2026-11-13T09:54:15.239889
+case_b1_norm_032_ps_get_hotfix,Benign,NORMAL,Kiểm tra danh sách các gói cập nhật bảo mật KB đã cài đặt.,-,Bài 1,2026-11-13T09:54:15.240965
+case_b1_norm_033_ps_compress_zip,Benign,NORMAL,Nén thư mục báo cáo cuối tháng thành tệp tin zip.,-,Bài 1,2026-11-13T09:54:15.241781
+case_b1_norm_034_ps_test_connection,Benign,NORMAL,Kiểm tra kết nối cổng web nội bộ port 443 máy chủ ERP.,-,Bài 1,2026-11-13T09:54:15.242605
+case_b1_norm_035_ps_get_disk,Benign,NORMAL,Kiểm tra dung lượng trống trên các ổ đĩa cứng máy trạm.,-,Bài 1,2026-11-13T09:54:15.244215
+case_b1_norm_036_ps_get_eventlog_system,Benign,NORMAL,Xem 5 sự kiện nhật ký gần nhất trong System Event Log.,-,Bài 1,2026-11-13T09:54:15.245094
+case_b1_norm_037_git_status,Benign,NORMAL,Kiểm tra trạng thái các tệp tin mã nguồn trong kho Git.,-,Bài 1,2026-11-13T09:54:15.245849
+case_b1_norm_038_git_pull_main,Benign,NORMAL,Cập nhật mã nguồn mới nhất từ nhánh chính trên GitHub.,-,Bài 1,2026-11-13T09:54:15.246598
+case_b1_norm_039_git_branch_list,Benign,NORMAL,Xem danh sách các nhánh tính năng đang phát triển cục bộ.,-,Bài 1,2026-11-13T09:54:15.247361
+case_b1_norm_040_node_version,Benign,NORMAL,Kiểm tra phiên bản môi trường Node.js và npm cài đặt.,-,Bài 1,2026-11-13T09:54:15.248120
+case_b1_norm_041_python_version,Benign,NORMAL,Kiểm tra phiên bản trình thông dịch Python trong máy tính.,-,Bài 1,2026-11-13T09:54:15.248887
+case_b1_norm_042_pip_list,Benign,NORMAL,Xem danh sách các thư viện Python cài đặt trong môi trường ảo.,-,Bài 1,2026-11-13T09:54:15.249948
+case_b1_norm_043_vscode_editor,Benign,NORMAL,Khởi chạy trình soạn thảo mã nguồn Visual Studio Code.,-,Bài 1,2026-11-13T09:54:15.251258
+case_b1_norm_044_docker_ps,Benign,NORMAL,Xem danh sách các container Docker đang hoạt động cục bộ.,-,Bài 1,2026-11-13T09:54:15.252191
+case_b1_norm_045_kubectl_pods,Benign,NORMAL,Kiểm tra trạng thái các Pods trong cụm Kubernetes phát triển.,-,Bài 1,2026-11-13T09:54:15.253110
+case_b1_norm_046_mvn_clean,Benign,NORMAL,Dọn dẹp tệp tin tạm và biên dịch dự án Java Maven.,-,Bài 1,2026-11-13T09:54:15.254054
+case_b1_norm_047_cargo_build,Benign,NORMAL,Biên dịch dự án ngôn ngữ lập trình Rust release mode.,-,Bài 1,2026-11-13T09:54:15.255062
+case_b1_norm_048_go_build,Benign,NORMAL,Biên dịch mã nguồn ứng dụng Golang thành tệp nhị phân.,-,Bài 1,2026-11-13T09:54:15.256338
+case_b1_norm_049_dotnet_run,Benign,NORMAL,Chạy thử nghiệm dịch vụ web API nền tảng ASP.NET Core.,-,Bài 1,2026-11-13T09:54:15.257867
+case_b1_norm_050_winget_search,Benign,NORMAL,Tìm kiếm gói phần mềm tiện ích trong kho Microsoft Store.,-,Bài 1,2026-11-13T09:54:15.258995
+case_b1_norm_051_word_open,Benign,NORMAL,Mở Microsoft Word soạn thảo tài liệu nội bộ.,-,Bài 1,2026-11-13T09:54:15.259894
+case_b1_norm_052_excel_calc,Benign,NORMAL,Mở bảng tính Microsoft Excel xử lý báo cáo tài chính.,-,Bài 1,2026-11-13T09:54:15.260739
+case_b1_norm_053_powerpoint_slide,Benign,NORMAL,Trình chiếu slide thuyết trình Microsoft PowerPoint.,-,Bài 1,2026-11-13T09:54:15.261830
+case_b1_norm_054_outlook_mail,Benign,NORMAL,Khởi chạy Microsoft Outlook đọc và phản hồi email.,-,Bài 1,2026-11-13T09:54:15.262920
+case_b1_norm_055_chrome_web,Benign,NORMAL,Duyệt web tra cứu tài liệu học tập bằng Google Chrome.,-,Bài 1,2026-11-13T09:54:15.263905
+case_b1_norm_056_edge_intranet,Benign,NORMAL,Truy cập cổng thông tin nội bộ công ty bằng Microsoft Edge.,-,Bài 1,2026-11-13T09:54:15.264925
+case_b1_norm_057_acrobat_pdf,Benign,NORMAL,Mở tài liệu hợp đồng định dạng PDF bằng Adobe Acrobat Reader.,-,Bài 1,2026-11-13T09:54:15.265751
+case_b1_norm_058_teams_chat,Benign,NORMAL,Đăng nhập và gửi tin nhắn trao đổi công việc trên Microsoft Teams.,-,Bài 1,2026-11-13T09:54:15.266476
+case_b1_norm_059_zoom_join,Benign,NORMAL,Tham gia cuộc họp trực tuyến phòng ban bằng ứng dụng Zoom.,-,Bài 1,2026-11-13T09:54:15.267244
+case_b1_norm_060_notepad_note,Benign,NORMAL,Mở Notepad ghi chép nhanh thông tin công việc hàng ngày.,-,Bài 1,2026-11-13T09:54:15.268145
+case_b1_norm_061_calc_tool,Benign,NORMAL,Sử dụng tiện ích Calculator tính toán số liệu văn phòng.,-,Bài 1,2026-11-13T09:54:15.269023
+case_b1_norm_062_paint_draw,Benign,NORMAL,Mở công cụ Paint chỉnh sửa ảnh chụp màn hình báo cáo.,-,Bài 1,2026-11-13T09:54:15.270213
+case_b1_norm_063_cmd_dir,Benign,NORMAL,Liệt kê danh sách tập tin trong thư mục Documents.,-,Bài 1,2026-11-13T09:54:15.271071
+case_b1_norm_064_cmd_ipconfig,Benign,NORMAL,Kiểm tra địa chỉ IP cấu hình card mạng máy tính cá nhân.,-,Bài 1,2026-11-13T09:54:15.272288
+case_b1_norm_065_cmd_ping_gateway,Benign,NORMAL,Kiểm tra kết nối mạng nội bộ tới Default Gateway.,-,Bài 1,2026-11-13T09:54:15.273611
+case_b1_norm_066_cmd_hostname,Benign,NORMAL,Xem tên định danh máy trạm trong mạng nội bộ.,-,Bài 1,2026-11-13T09:54:15.274413
+case_b1_norm_067_cmd_whoami,Benign,NORMAL,Kiểm tra tên tài khoản người dùng đang đăng nhập hiện tại.,-,Bài 1,2026-11-13T09:54:15.275272
+case_b1_norm_068_cmd_systeminfo,Benign,NORMAL,Xuất thông tin cấu hình phần cứng và phiên bản Windows.,-,Bài 1,2026-11-13T09:54:15.276101
+case_b1_norm_069_cmd_netstat_active,Benign,NORMAL,Xem danh sách các cổng kết nối TCP đang mở hợp lệ.,-,Bài 1,2026-11-13T09:54:15.277133
+case_b1_norm_070_cmd_route_lan,Benign,NORMAL,Kiểm tra bảng định tuyến mạng máy trạm.,-,Bài 1,2026-11-13T09:54:15.278326
+case_b1_norm_071_cmd_arp_table,Benign,NORMAL,Xem bảng ánh xạ địa chỉ IP và MAC Address mạng LAN.,-,Bài 1,2026-11-13T09:54:15.279762
+case_b1_norm_072_cmd_nslookup_dns,Benign,NORMAL,Truy vấn địa chỉ máy chủ DNS nội bộ domain công ty.,-,Bài 1,2026-11-13T09:54:15.280657
+case_b1_norm_073_cmd_tasklist_sys,Benign,NORMAL,Liệt kê danh sách các tiến trình dịch vụ đang hoạt động.,-,Bài 1,2026-11-13T09:54:15.281865
+case_b1_norm_074_cmd_chkdsk_verify,Benign,NORMAL,Kiểm tra tính toàn vẹn hệ thống tập tin NTFS phân vùng C:.,-,Bài 1,2026-11-13T09:54:15.282921
+case_b1_norm_075_cmd_dism_health,Benign,NORMAL,Kiểm tra sức khỏe kho ảnh hệ thống Windows DISM.,-,Bài 1,2026-11-13T09:54:15.285170
+case_b1_norm_076_cmd_sfc_verify,Benign,NORMAL,Quét kiểm tra chữ ký số các tệp tin hệ thống Windows.,-,Bài 1,2026-11-13T09:54:15.286516
+case_b1_norm_077_cmd_gpupdate,Benign,NORMAL,Cập nhật chính sách người dùng từ Active Directory.,-,Bài 1,2026-11-13T09:54:15.287696
+case_b1_norm_078_cmd_robocopy_docs,Benign,NORMAL,Sao chép đồng bộ tài liệu sang ổ đĩa sao lưu ngoài.,-,Bài 1,2026-11-13T09:54:15.288903
+case_b1_norm_079_ps_get_process,Benign,NORMAL,Lấy danh sách các tiến trình chiếm dụng CPU hàng đầu.,-,Bài 1,2026-11-13T09:54:15.290071
+case_b1_norm_080_ps_get_service,Benign,NORMAL,Kiểm tra trạng thái hoạt động của dịch vụ Print Spooler.,-,Bài 1,2026-11-13T09:54:15.291021
+case_b1_norm_081_ps_get_date,Benign,NORMAL,Lấy ngày giờ hiện tại định dạng chuẩn theo múi giờ máy trạm.,-,Bài 1,2026-11-13T09:54:15.292620
+case_b1_norm_082_ps_get_hotfix,Benign,NORMAL,Kiểm tra danh sách các gói cập nhật bảo mật KB đã cài đặt.,-,Bài 1,2026-11-13T09:54:15.294189
+case_b1_norm_083_ps_compress_zip,Benign,NORMAL,Nén thư mục báo cáo cuối tháng thành tệp tin zip.,-,Bài 1,2026-11-13T09:54:15.295330
+case_b1_norm_084_ps_test_connection,Benign,NORMAL,Kiểm tra kết nối cổng web nội bộ port 443 máy chủ ERP.,-,Bài 1,2026-11-13T09:54:15.296155
+case_b1_norm_085_ps_get_disk,Benign,NORMAL,Kiểm tra dung lượng trống trên các ổ đĩa cứng máy trạm.,-,Bài 1,2026-11-13T09:54:15.297033
+case_b1_norm_086_ps_get_eventlog_system,Benign,NORMAL,Xem 5 sự kiện nhật ký gần nhất trong System Event Log.,-,Bài 1,2026-11-13T09:54:15.297886
+case_b1_norm_087_git_status,Benign,NORMAL,Kiểm tra trạng thái các tệp tin mã nguồn trong kho Git.,-,Bài 1,2026-11-13T09:54:15.299147
+case_b1_norm_088_git_pull_main,Benign,NORMAL,Cập nhật mã nguồn mới nhất từ nhánh chính trên GitHub.,-,Bài 1,2026-11-13T09:54:15.300292
+case_b1_norm_089_git_branch_list,Benign,NORMAL,Xem danh sách các nhánh tính năng đang phát triển cục bộ.,-,Bài 1,2026-11-13T09:54:15.301222
+case_b1_norm_090_node_version,Benign,NORMAL,Kiểm tra phiên bản môi trường Node.js và npm cài đặt.,-,Bài 1,2026-11-13T09:54:15.302255
+case_b1_norm_091_python_version,Benign,NORMAL,Kiểm tra phiên bản trình thông dịch Python trong máy tính.,-,Bài 1,2026-11-13T09:54:15.303018
+case_b1_norm_092_pip_list,Benign,NORMAL,Xem danh sách các thư viện Python cài đặt trong môi trường ảo.,-,Bài 1,2026-11-13T09:54:15.303779
+case_b1_norm_093_vscode_editor,Benign,NORMAL,Khởi chạy trình soạn thảo mã nguồn Visual Studio Code.,-,Bài 1,2026-11-13T09:54:15.304709
+case_b1_norm_094_docker_ps,Benign,NORMAL,Xem danh sách các container Docker đang hoạt động cục bộ.,-,Bài 1,2026-11-13T09:54:15.305744
+case_b1_norm_095_kubectl_pods,Benign,NORMAL,Kiểm tra trạng thái các Pods trong cụm Kubernetes phát triển.,-,Bài 1,2026-11-13T09:54:15.306733
+case_b1_norm_096_mvn_clean,Benign,NORMAL,Dọn dẹp tệp tin tạm và biên dịch dự án Java Maven.,-,Bài 1,2026-11-13T09:54:15.307696
+case_b1_norm_097_cargo_build,Benign,NORMAL,Biên dịch dự án ngôn ngữ lập trình Rust release mode.,-,Bài 1,2026-11-13T09:54:15.308552
+case_b1_norm_098_go_build,Benign,NORMAL,Biên dịch mã nguồn ứng dụng Golang thành tệp nhị phân.,-,Bài 1,2026-11-13T09:54:15.309426
+case_b1_norm_099_dotnet_run,Benign,NORMAL,Chạy thử nghiệm dịch vụ web API nền tảng ASP.NET Core.,-,Bài 1,2026-11-13T09:54:15.310391
+case_b1_norm_100_winget_search,Benign,NORMAL,Tìm kiếm gói phần mềm tiện ích trong kho Microsoft Store.,-,Bài 1,2026-11-13T09:54:15.311284
+case_b1_norm_101_word_open,Benign,NORMAL,Mở Microsoft Word soạn thảo tài liệu nội bộ.,-,Bài 1,2026-11-13T09:54:15.312101
+case_b1_norm_102_excel_calc,Benign,NORMAL,Mở bảng tính Microsoft Excel xử lý báo cáo tài chính.,-,Bài 1,2026-11-13T09:54:15.313577
+case_b1_norm_103_powerpoint_slide,Benign,NORMAL,Trình chiếu slide thuyết trình Microsoft PowerPoint.,-,Bài 1,2026-11-13T09:54:15.314426
+case_b1_norm_104_outlook_mail,Benign,NORMAL,Khởi chạy Microsoft Outlook đọc và phản hồi email.,-,Bài 1,2026-11-13T09:54:15.315312
+case_b1_norm_105_chrome_web,Benign,NORMAL,Duyệt web tra cứu tài liệu học tập bằng Google Chrome.,-,Bài 1,2026-11-13T09:54:15.316348
+case_b1_norm_106_edge_intranet,Benign,NORMAL,Truy cập cổng thông tin nội bộ công ty bằng Microsoft Edge.,-,Bài 1,2026-11-13T09:54:15.317476
+case_b1_norm_107_acrobat_pdf,Benign,NORMAL,Mở tài liệu hợp đồng định dạng PDF bằng Adobe Acrobat Reader.,-,Bài 1,2026-11-13T09:54:15.318458
+case_b1_norm_108_teams_chat,Benign,NORMAL,Đăng nhập và gửi tin nhắn trao đổi công việc trên Microsoft Teams.,-,Bài 1,2026-11-13T09:54:15.319257
+case_b1_norm_109_zoom_join,Benign,NORMAL,Tham gia cuộc họp trực tuyến phòng ban bằng ứng dụng Zoom.,-,Bài 1,2026-11-13T09:54:15.320330
+case_b1_norm_110_notepad_note,Benign,NORMAL,Mở Notepad ghi chép nhanh thông tin công việc hàng ngày.,-,Bài 1,2026-11-13T09:54:15.321198
+case_b1_norm_111_calc_tool,Benign,NORMAL,Sử dụng tiện ích Calculator tính toán số liệu văn phòng.,-,Bài 1,2026-11-13T09:54:15.322509
+case_b1_norm_112_paint_draw,Benign,NORMAL,Mở công cụ Paint chỉnh sửa ảnh chụp màn hình báo cáo.,-,Bài 1,2026-11-13T09:54:15.323537
+case_b1_norm_113_cmd_dir,Benign,NORMAL,Liệt kê danh sách tập tin trong thư mục Documents.,-,Bài 1,2026-11-13T09:54:15.324722
+case_b1_norm_114_cmd_ipconfig,Benign,NORMAL,Kiểm tra địa chỉ IP cấu hình card mạng máy tính cá nhân.,-,Bài 1,2026-11-13T09:54:15.325701
+case_b1_norm_115_cmd_ping_gateway,Benign,NORMAL,Kiểm tra kết nối mạng nội bộ tới Default Gateway.,-,Bài 1,2026-11-13T09:54:15.327033
+case_b1_norm_116_cmd_hostname,Benign,NORMAL,Xem tên định danh máy trạm trong mạng nội bộ.,-,Bài 1,2026-11-13T09:54:15.327917
+case_b1_norm_117_cmd_whoami,Benign,NORMAL,Kiểm tra tên tài khoản người dùng đang đăng nhập hiện tại.,-,Bài 1,2026-11-13T09:54:15.328693
+case_b1_norm_118_cmd_systeminfo,Benign,NORMAL,Xuất thông tin cấu hình phần cứng và phiên bản Windows.,-,Bài 1,2026-11-13T09:54:15.329452
+case_b1_norm_119_cmd_netstat_active,Benign,NORMAL,Xem danh sách các cổng kết nối TCP đang mở hợp lệ.,-,Bài 1,2026-11-13T09:54:15.330495
+case_b1_norm_120_cmd_route_lan,Benign,NORMAL,Kiểm tra bảng định tuyến mạng máy trạm.,-,Bài 1,2026-11-13T09:54:15.331297
+case_b1_norm_121_cmd_arp_table,Benign,NORMAL,Xem bảng ánh xạ địa chỉ IP và MAC Address mạng LAN.,-,Bài 1,2026-11-13T09:54:15.332173
+case_b1_norm_122_cmd_nslookup_dns,Benign,NORMAL,Truy vấn địa chỉ máy chủ DNS nội bộ domain công ty.,-,Bài 1,2026-11-13T09:54:15.332957
+case_b1_norm_123_cmd_tasklist_sys,Benign,NORMAL,Liệt kê danh sách các tiến trình dịch vụ đang hoạt động.,-,Bài 1,2026-11-13T09:54:15.333777
+case_b1_norm_124_cmd_chkdsk_verify,Benign,NORMAL,Kiểm tra tính toàn vẹn hệ thống tập tin NTFS phân vùng C:.,-,Bài 1,2026-11-13T09:54:15.334643
+case_b1_norm_125_cmd_dism_health,Benign,NORMAL,Kiểm tra sức khỏe kho ảnh hệ thống Windows DISM.,-,Bài 1,2026-11-13T09:54:15.335555
+case_b1_norm_126_cmd_sfc_verify,Benign,NORMAL,Quét kiểm tra chữ ký số các tệp tin hệ thống Windows.,-,Bài 1,2026-11-13T09:54:15.336337
+case_b1_norm_127_cmd_gpupdate,Benign,NORMAL,Cập nhật chính sách người dùng từ Active Directory.,-,Bài 1,2026-11-13T09:54:15.337115
+case_b1_norm_128_cmd_robocopy_docs,Benign,NORMAL,Sao chép đồng bộ tài liệu sang ổ đĩa sao lưu ngoài.,-,Bài 1,2026-11-13T09:54:15.338228
+case_b1_norm_129_ps_get_process,Benign,NORMAL,Lấy danh sách các tiến trình chiếm dụng CPU hàng đầu.,-,Bài 1,2026-11-13T09:54:15.339227
+case_b1_norm_130_ps_get_service,Benign,NORMAL,Kiểm tra trạng thái hoạt động của dịch vụ Print Spooler.,-,Bài 1,2026-11-13T09:54:15.340615
+case_b1_norm_131_ps_get_date,Benign,NORMAL,Lấy ngày giờ hiện tại định dạng chuẩn theo múi giờ máy trạm.,-,Bài 1,2026-11-13T09:54:15.341552
+case_b1_norm_132_ps_get_hotfix,Benign,NORMAL,Kiểm tra danh sách các gói cập nhật bảo mật KB đã cài đặt.,-,Bài 1,2026-11-13T09:54:15.342319
+case_b1_norm_133_ps_compress_zip,Benign,NORMAL,Nén thư mục báo cáo cuối tháng thành tệp tin zip.,-,Bài 1,2026-11-13T09:54:15.343224
+case_b1_norm_134_ps_test_connection,Benign,NORMAL,Kiểm tra kết nối cổng web nội bộ port 443 máy chủ ERP.,-,Bài 1,2026-11-13T09:54:15.344071
+case_b1_norm_135_ps_get_disk,Benign,NORMAL,Kiểm tra dung lượng trống trên các ổ đĩa cứng máy trạm.,-,Bài 1,2026-11-13T09:54:15.344817
+case_b1_norm_136_ps_get_eventlog_system,Benign,NORMAL,Xem 5 sự kiện nhật ký gần nhất trong System Event Log.,-,Bài 1,2026-11-13T09:54:15.345595
+case_b1_norm_137_git_status,Benign,NORMAL,Kiểm tra trạng thái các tệp tin mã nguồn trong kho Git.,-,Bài 1,2026-11-13T09:54:15.346637
+case_b1_norm_138_git_pull_main,Benign,NORMAL,Cập nhật mã nguồn mới nhất từ nhánh chính trên GitHub.,-,Bài 1,2026-11-13T09:54:15.347942
+case_b1_norm_139_git_branch_list,Benign,NORMAL,Xem danh sách các nhánh tính năng đang phát triển cục bộ.,-,Bài 1,2026-11-13T09:54:15.348856
+case_b1_norm_140_node_version,Benign,NORMAL,Kiểm tra phiên bản môi trường Node.js và npm cài đặt.,-,Bài 1,2026-11-13T09:54:15.349667
+case_b1_norm_141_python_version,Benign,NORMAL,Kiểm tra phiên bản trình thông dịch Python trong máy tính.,-,Bài 1,2026-11-13T09:54:15.350467
+case_b1_norm_142_pip_list,Benign,NORMAL,Xem danh sách các thư viện Python cài đặt trong môi trường ảo.,-,Bài 1,2026-11-13T09:54:15.351292
+case_b1_norm_143_vscode_editor,Benign,NORMAL,Khởi chạy trình soạn thảo mã nguồn Visual Studio Code.,-,Bài 1,2026-11-13T09:54:15.352000
+case_b1_norm_144_docker_ps,Benign,NORMAL,Xem danh sách các container Docker đang hoạt động cục bộ.,-,Bài 1,2026-11-13T09:54:15.353064
+case_b1_norm_145_kubectl_pods,Benign,NORMAL,Kiểm tra trạng thái các Pods trong cụm Kubernetes phát triển.,-,Bài 1,2026-11-13T09:54:15.354253
+case_b1_norm_146_mvn_clean,Benign,NORMAL,Dọn dẹp tệp tin tạm và biên dịch dự án Java Maven.,-,Bài 1,2026-11-13T09:54:15.355107
+case_b1_norm_147_cargo_build,Benign,NORMAL,Biên dịch dự án ngôn ngữ lập trình Rust release mode.,-,Bài 1,2026-11-13T09:54:15.356299
+case_b1_norm_148_go_build,Benign,NORMAL,Biên dịch mã nguồn ứng dụng Golang thành tệp nhị phân.,-,Bài 1,2026-11-13T09:54:15.357560
+case_b1_norm_149_dotnet_run,Benign,NORMAL,Chạy thử nghiệm dịch vụ web API nền tảng ASP.NET Core.,-,Bài 1,2026-11-13T09:54:15.358665
+case_b1_norm_150_winget_search,Benign,NORMAL,Tìm kiếm gói phần mềm tiện ích trong kho Microsoft Store.,-,Bài 1,2026-11-13T09:54:15.359661

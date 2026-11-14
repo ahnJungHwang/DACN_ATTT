@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_33_certutil_urlcache_download",
+  "category": "Execution",
+  "ground_truth": "ALERT",
+  "description": "Lợi dụng certutil urlcache để tải binary độc từ server C2.",
+  "mitre_technique": "T1105",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.185838"
+}

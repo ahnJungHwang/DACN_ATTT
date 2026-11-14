@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_036_powershell_profile_check",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.654644"
+}

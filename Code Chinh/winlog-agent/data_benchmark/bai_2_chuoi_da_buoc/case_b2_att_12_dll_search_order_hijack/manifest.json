@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_12_dll_search_order_hijack",
+  "category": "Persistence",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: Ghi đè DLL độc hại vào thư mục phần mềm nghiệp vụ để chiếm quyền khi ứng dụng mở.",
+  "mitre_technique": "T1574.001",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.373016"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_08_in_memory_reflection_net",
+  "category": "Execution",
+  "ground_truth": "ALERT",
+  "description": "Nạp reflective assembly .NET trực tiếp vào bộ nhớ RAM qua [System.Reflection.Assembly]::Load.",
+  "mitre_technique": "T1059.001",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.573352"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_01_mimikatz_sekurlsa",
+  "category": "CredentialAccess",
+  "ground_truth": "ALERT",
+  "description": "Mimikatz: Trích xuất mật khẩu rõ từ LSASS qua sekurlsa::logonpasswords.",
+  "mitre_technique": "T1003.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.149566"
+}

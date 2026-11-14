@@ -15,6 +15,25 @@ Các thư mục khác (`app/`, `web/backend/`, `blind_test/`, `eval_real/`) đ�
 | `generate_datasets.py` | Sinh bộ ca kiểm thử cơ bản vào `data/`. |
 | `generate_data01.py` | Sinh bộ chuẩn 40 ca vào `data01/` (10 lành tính, 10 tấn công đơn, 10 tấn công phức hợp, 10 ca biên). |
 | `generate_data100.py` | Sinh ngẫu nhiên bộ lớn (mặc định 100 ca) vào `data100/`, bằng cách ghép các khối log có sẵn. |
+| `alerting.py` | Server dùng khi chạy: **chống gửi trùng cảnh báo** (gom theo máy + kỹ thuật MITRE, cửa sổ `ALERT_DEDUP_MINUTES` phút) và **ghi độ trễ** từng lô vào `results/latency.csv`, `results/alerts_log.csv`. |
+| `latency_report.py` | Tổng hợp độ trễ sự kiện → Telegram và hiệu quả chống trùng → `results/LATENCY_REPORT.md`, `latency_summary.csv`, `latency_alerts.csv`. |
+| `build_labels.py` | Gộp nhãn mọi ca kiểm thử thành **một file CSV** → `labels/cases_labels.csv` + `labels/LABELS_SUMMARY.md` (tỉ lệ NORMAL/ALERT theo từng bộ). |
+| `rule_baselines.py` | Baseline **không dùng AI**: `deepblue` / `sigma` / `non_ai_baseline`. Đây là bản **mô phỏng** luật DeepBlueCLI / SigmaHQ bằng regex, không phải chạy công cụ thật (DeepBlue thật: `eval_real/run_deepblue.ps1`). |
+| `run_scenario_benchmark.py` | Đánh giá theo 3 bài trên benchmark 600 ca `data_benchmark/` → `results/benchmark600/`. |
+| `build_600_cases.py` | Sinh lại benchmark 600 ca (log tổng hợp) vào `data_benchmark/`. Cần `--force` nếu đã có dữ liệu. |
+| `event_store.py` | Cửa sổ sự kiện trượt bằng SQLite cho server (tắt mặc định, bật bằng `EVENT_WINDOW_SECONDS`). |
+
+## Chỉ số vận hành và nhãn
+
+```powershell
+.venv\Scripts\python.exe core\latency_report.py      # sau mỗi lần demo: báo cáo độ trễ + chống trùng
+.venv\Scripts\python.exe core\build_labels.py        # sau khi thêm/sửa ca: cập nhật CSV nhãn
+.venv\Scripts\python.exe core\build_labels.py --datasets data01 data_normal   # chỉ một số bộ
+```
+
+- `labels/cases_labels.csv`: mỗi ca một dòng gồm `dataset, case_id, ground_truth, category, techniques, source_type, description`, số sự kiện Security/PowerShell/System, khung thời gian, `anonymized`, `files_present`, `path`.
+- Nhãn lấy từ `manifest.json` của từng ca (`data`, `data01`, `data100`, `data_normal`) và từ `eval_real/labels.json`. Không gộp `blind_test/blind_set` (bản ẩn danh của data01) và `data/client_*_live` (log realtime chưa gán nhãn).
+- Log bình thường thật được thu bằng [`ps1/export_normal_logs.ps1`](../ps1/HUONG_DAN_SU_DUNG_ps1.md).
 
 ## Yêu cầu
 
@@ -99,3 +118,40 @@ Có thể chạy nhanh bằng [`bat/run_evaluation.bat`](../bat/run_evaluation.b
 
 - Không chạy script bằng cách `cd core` rồi gọi `python analyze.py`. Script vẫn chạy được, nhưng các đường dẫn tương đối truyền vào tham số sẽ khó đoán. Luôn đứng ở thư mục gốc.
 - Nếu đổi tên mô hình trong Ollama, sửa từ điển `MODELS` ở đầu `analyze.py`.
+
+## Gộp bản update 14/11/2026 (benchmark 600 ca, risk score)
+
+Kiến trúc quyết định **giữ nguyên**: luật MẠNH luôn `ALERT` (lưới an toàn), còn lại AI quyết định, có kiểm chứng bằng chứng và vòng tự thẩm định. Những gì được bổ sung:
+
+- **Brute force theo cửa sổ thời gian:** cùng tài khoản hoặc cùng IP, trong `CORRELATION_WINDOW_SECONDS` (mặc định 300 giây).
+  - Đăng nhập mạng (LogonType 3/10) cần ≥ `NETWORK_BRUTE_FORCE_THRESHOLD` lần sai (mặc định 3).
+  - Đăng nhập tại máy cần ≥ `INTERACTIVE_BRUTE_FORCE_THRESHOLD` lần sai (mặc định 5).
+  - Có ≥ 3 lần sai nhưng không dồn dập thì chỉ là tín hiệu yếu `Multiple Failed Logons`.
+- **Đăng nhập sau brute force (T1078):** phải khớp đúng tài khoản/IP và kiểu đăng nhập, trong vòng `POST_BRUTE_SUCCESS_WINDOW_SECONDS` (mặc định 600 giây).
+- **16 nhóm chữ ký MITRE (luật mạnh)** thay cho một stage "Malware Execution" cũ: credential dumping, impair defenses, persistence, inhibit recovery, LOLBAS, certutil decode, lateral movement, ingress transfer, exfiltration, ransomware, UAC bypass...
+  - Tải file từ URL nội bộ (IP private, `*.local`, `*.corp`...) **không** bị coi là C2.
+  - Tên công cụ được so khớp cả khi có đuôi `.exe` (`wevtutil.exe cl`).
+- **Event mới:** 4722 (bật tài khoản) và 4756 (thêm vào nhóm universal). `ps1/client_agent.ps1` đã thu thập thêm hai event này.
+- **Kết quả (`verdict`) có thêm:**
+  - `risk_score` (0–100, tham khảo), `confidence` (ước lượng theo nguồn quyết định), `detection_source` (bí danh của `decision_source`).
+  - Nhãn `REVIEW`: thay cho `UNKNOWN` khi AI không kết luận được nhưng luật có tín hiệu yếu với điểm ≥ `REVIEW_RISK_THRESHOLD` (mặc định 40).
+  - `ALERT` và `NORMAL` không bị đổi.
+- `evaluate.py`:
+  - Nhận thêm `--models deepblue,sigma,non_ai_baseline`.
+  - Đọc được cấu trúc phân tầng `data_benchmark/bai_X/`.
+  - Đếm `REVIEW` riêng: ca tấn công bị `REVIEW` vẫn tính là FN.
+  - Có thêm các cột `category, mitre_technique, classification, risk_score`, thêm vào **cuối** `comparison_details.csv`.
+
+```powershell
+.venv\Scripts\python.exe core\run_scenario_benchmark.py --models deepblue,sigma          # vài giây
+.venv\Scripts\python.exe core\run_scenario_benchmark.py --scenario 1 --models qwen --max-gpu-temp 75
+.venv\Scripts\python.exe core\evaluate.py --data-dir data_benchmark --models qwen,deepblue
+.venv\Scripts\python.exe -m unittest discover -s tests                                    # 25 test, không cần Ollama
+```
+
+- `run_scenario_benchmark.py` ghi vào `results/benchmark600/` và dùng file `comparison_details.csv` ở đó làm cache: ca nào đã chạy thì không chạy lại. Thêm `--force-rerun` để chạy lại toàn bộ.
+- Cột "Độ trễ toàn trình" trong benchmark là **ước lượng**: thời gian phân tích + 3,68 giây cố định. Độ trễ đo thật nằm ở `results/latency.csv` → `latency_report.py`.
+- `data_benchmark/` là **log tổng hợp** do `build_600_cases.py` sinh ra, không phải log thật. Khi viết báo cáo cần ghi rõ điều này.
+- Server (`app/app.py`): đặt `EVENT_WINDOW_SECONDS=600` trong `.env` để mỗi lô được gộp với các sự kiện của 600 giây gần nhất (lưu ở `data/winlog_events.db`), giúp tương quan được brute force kéo dài qua nhiều lô gửi.
+  - Mặc định là `0`, tức tắt: mỗi lô chỉ phân tích một lần như cũ.
+  - Khi bật, cùng một sự kiện được phân tích lại ở nhiều lô. Chống trùng `ALERT_DEDUP_MINUTES` sẽ chặn việc gửi Telegram lặp, nhưng AI phải chạy nhiều hơn.

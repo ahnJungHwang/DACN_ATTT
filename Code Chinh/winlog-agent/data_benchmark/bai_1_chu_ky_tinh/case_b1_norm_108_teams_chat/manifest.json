@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_108_teams_chat",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Đăng nhập và gửi tin nhắn trao đổi công việc trên Microsoft Teams.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.319257"
+}

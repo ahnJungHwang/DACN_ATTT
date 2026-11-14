@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_19_reg_add_run_persistence",
+  "category": "Persistence",
+  "ground_truth": "ALERT",
+  "description": "Tạo khóa khởi động cùng hệ thống tại HKCU Run key.",
+  "mitre_technique": "T1547.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.169481"
+}

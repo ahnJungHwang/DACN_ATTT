@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_01_bruteforce_to_backdoor",
+  "category": "MultiStage",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: Dò mật khẩu 8 lần -> Đăng nhập thành công -> Tạo tài khoản quản trị backdoor.",
+  "mitre_technique": "T1110 / T1078 / T1136",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.362091"
+}

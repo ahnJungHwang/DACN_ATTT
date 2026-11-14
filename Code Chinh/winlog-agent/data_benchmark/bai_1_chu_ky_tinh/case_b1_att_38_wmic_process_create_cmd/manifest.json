@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_38_wmic_process_create_cmd",
+  "category": "Execution",
+  "ground_truth": "ALERT",
+  "description": "Khởi tạo tiến trình độc ngầm qua wmic process call create.",
+  "mitre_technique": "T1047",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.191163"
+}

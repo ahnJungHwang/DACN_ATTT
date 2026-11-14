@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_30_netsh_firewall_disable",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Tắt toàn bộ tường lửa Windows Firewall qua lệnh netsh advfirewall.",
+  "mitre_technique": "T1562.004",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.183077"
+}

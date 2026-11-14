@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_033_certutil_hashfile_sha256",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.651652"
+}

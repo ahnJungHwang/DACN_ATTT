@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_11_sticky_keys_backdoor",
+  "category": "Persistence",
+  "ground_truth": "ALERT",
+  "description": "Gán cmd.exe vào sethc.exe để mở backdoor màn hình khóa Windows.",
+  "mitre_technique": "T1546.008",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.575588"
+}

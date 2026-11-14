@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_11_vaultcmd_theft",
+  "category": "CredentialAccess",
+  "ground_truth": "ALERT",
+  "description": "Thu thập danh sách chứng thư lưu trong Windows Credential Manager.",
+  "mitre_technique": "T1555.004",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.159498"
+}

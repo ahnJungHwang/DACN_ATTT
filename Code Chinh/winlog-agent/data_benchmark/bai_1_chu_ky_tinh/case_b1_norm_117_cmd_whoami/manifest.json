@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_117_cmd_whoami",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Kiểm tra tên tài khoản người dùng đang đăng nhập hiện tại.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.328693"
+}

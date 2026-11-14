@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_18_net_user_backdoor_add",
+  "category": "Persistence",
+  "ground_truth": "ALERT",
+  "description": "Tạo tài khoản quản trị bí mật net user hacker /add.",
+  "mitre_technique": "T1136.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.168439"
+}

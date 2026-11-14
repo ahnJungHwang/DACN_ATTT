@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_13_powerview_domain_trust",
+  "category": "Discovery",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: Sử dụng PowerView trinh sát quan hệ ủy thác Domain Trust và Forest Active Directory.",
+  "mitre_technique": "T1482",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.373917"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_053_powerpoint_slide",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Trình chiếu slide thuyết trình Microsoft PowerPoint.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.261830"
+}

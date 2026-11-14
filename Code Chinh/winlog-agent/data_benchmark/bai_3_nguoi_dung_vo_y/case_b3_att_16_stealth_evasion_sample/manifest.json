@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_16_stealth_evasion_sample",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Tấn công trốn tránh phát hiện nâng cao kịch bản 16: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.",
+  "mitre_technique": "T1562 / T1059",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.580318"
+}

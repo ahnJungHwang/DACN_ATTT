@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_14_ssh_tunneling_c2",
+  "category": "CommandAndControl",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: Thiết lập SSH Reverse Tunneling port 4444 vượt tường lửa nội bộ công ty.",
+  "mitre_technique": "T1572",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.374768"
+}

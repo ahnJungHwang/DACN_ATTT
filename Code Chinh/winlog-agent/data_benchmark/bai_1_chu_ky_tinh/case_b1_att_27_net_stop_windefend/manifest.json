@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_27_net_stop_windefend",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Dừng dịch vụ bảo vệ Microsoft Defender Antivirus bằng net stop.",
+  "mitre_technique": "T1562.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.179222"
+}

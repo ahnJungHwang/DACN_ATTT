@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_115_dism_restorehealth",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.734334"
+}

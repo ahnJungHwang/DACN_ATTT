@@ -58,3 +58,14 @@ Nếu server và client chạy trên cùng một máy, dùng `https://127.0.0.1:
 - Có 2 cách dừng client: chạy `stop_client.bat`, hoặc nhấn `Ctrl+C` / đóng cửa sổ `run_client.bat`.
 - Nếu agent đang chạy bằng quyền Admin, `stop_client.bat` cũng phải chạy bằng quyền Admin. Nếu không, Windows không cho tắt, và script sẽ báo lỗi kèm hướng dẫn.
 - Khi chép sang máy client, giữ nguyên 2 thư mục `bat\` và `ps1\` cạnh nhau, vì `run_client.bat` gọi `..\ps1\client_agent.ps1`.
+
+## Benchmark 600 ca và kịch bản demo (gộp từ bản update 14/11/2026)
+
+| File | Chức năng |
+|---|---|
+| `run_scenarios.bat` | Menu chạy [`core/run_scenario_benchmark.py`](../core/HUONG_DAN_SU_DUNG_core.md) trên 600 ca `data_benchmark/` (Qwen, Llama, DeepBlue/Sigma mô phỏng). Kết quả nằm ở `results\benchmark600\`. Lựa chọn [5] chỉ chạy 2 baseline luật, mất vài giây. |
+| `run_demo.bat` | Menu 7 kịch bản demo trong thư mục [`demos\`](../demos/README.md): lành tính, brute force, PowerShell C2, Mimikatz, backdoor admin, Registry Run, chuỗi APT đầy đủ. |
+
+> ⚠️ Các file trong `demos\` cũng **thay đổi máy thật** giống `simulate_attack.bat`. Cụ thể, chúng bật chính sách ghi log, tạo rồi xoá tài khoản `soc_backdoor_admin` / `soc_apt_backdoor` (có thêm vào nhóm Administrators), và ghi tạm rồi xoá khoá `HKCU\...\CurrentVersion\Run`. Chỉ chạy trên **máy ảo client**.
+
+- `run_client.bat` giờ **tự xin quyền Administrator** (UAC) nếu đang chạy bằng quyền thường.

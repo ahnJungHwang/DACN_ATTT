@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_38_apt_chain_step",
+  "category": "MultiStage",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi tấn công APT bước 38: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.",
+  "mitre_technique": "T1078 / T1059 / T1003",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.397835"
+}

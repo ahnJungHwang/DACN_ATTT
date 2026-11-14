@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_148_wireshark_dumpcap_diag",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.762978"
+}

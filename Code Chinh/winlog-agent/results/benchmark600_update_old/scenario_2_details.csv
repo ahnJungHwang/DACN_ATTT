@@ -1,0 +1,801 @@
+scenario,model_key,case_id,ground_truth,pred_label,classification,elapsed_seconds,json_valid,reason
+2,qwen,case_b2_att_01_bruteforce_to_backdoor,ALERT,ALERT,TP (Bắt trúng),7.402,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện 8 lần đăng nhập thất bại có tương quan trong 5 phút (Event 4625) nhằm vào tài khoản 'admin'. B...
+2,qwen,case_b2_att_02_recon_then_mimikatz,ALERT,ALERT,TP (Bắt trúng),5.102,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0004, E0005. - Phát hiện..."
+2,qwen,case_b2_att_03_c2_download_log_clear,ALERT,ALERT,TP (Bắt trúng),5.164,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+2,qwen,case_b2_att_04_rdp_after_hours_schtasks,ALERT,ALERT,TP (Bắt trúng),4.115,True,"Hành vi này bao gồm việc tạo một tác vụ Schtasks để thực thi payload tại thời điểm đăng nhập hệ thống, cho thấy sự cố gắng của kẻ tấn công n..."
+2,qwen,case_b2_att_05_bloodhound_kerberoast,ALERT,ALERT,TP (Bắt trúng),5.223,True,Hành vi này bao gồm việc sử dụng PowerShell để thực thi các script có thể lấy thông tin từ hệ thống (Reconnaissance) và tạo tệp cấu hình (OS...
+2,qwen,case_b2_att_06_psexec_remote_service,ALERT,ALERT,TP (Bắt trúng),3.988,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Lateral Movement / Remote Execution (MITRE T1569 / T1047 / T1021) từ bằng chứng có độ tin cậy ...
+2,qwen,case_b2_att_07_wmic_remote_exec,ALERT,ALERT,TP (Bắt trúng),4.563,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Lateral Movement / Remote Execution (MITRE T1569 / T1047 / T1021) từ bằng chứng có độ tin cậy ...
+2,qwen,case_b2_att_08_dcsync_ticket_theft,ALERT,ALERT,TP (Bắt trúng),4.3,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+2,qwen,case_b2_att_09_portscan_to_admin_share,ALERT,ALERT,TP (Bắt trúng),5.204,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Lateral Movement / Remote Execution (MITRE T1569 / T1047 / T1021) từ bằng chứng có độ tin cậy ...
+2,qwen,case_b2_att_10_tar_staging_dns_exfil,ALERT,ALERT,TP (Bắt trúng),4.642,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Data Collection & Exfiltration (MITRE T1560 / T1048) từ bằng chứng có độ tin cậy cao: E0001.
+2,qwen,case_b2_att_11_wmi_event_persistence,ALERT,ALERT,TP (Bắt trúng),4.014,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Persistence (MITRE T1547.001 / T1053.005) từ bằng chứng có độ tin cậy cao: E0001.
+2,qwen,case_b2_att_12_dll_search_order_hijack,ALERT,ALERT,TP (Bắt trúng),4.359,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Persistence (MITRE T1547.001 / T1053.005) từ bằng chứng có độ tin cậy cao: E0001.
+2,qwen,case_b2_att_13_powerview_domain_trust,ALERT,NORMAL,FN (Bỏ sót tấn công),3.895,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_att_14_ssh_tunneling_c2,ALERT,NORMAL,FN (Bỏ sót tấn công),4.089,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_att_15_printnightmare_spooler,ALERT,ALERT,TP (Bắt trúng),3.759,True,Hành vi này bao gồm việc thực thi tệp PowerShell chứa payload độc hại và tạo một khóa Registry để khởi động lại mã độc.
+2,qwen,case_b2_att_16_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.949,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi mã độc từ một máy chủ bên ngoài (CORP-DC01). Đây là hành động tin...
+2,qwen,case_b2_att_17_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.039,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tải & Thực thi mã độc.
+2,qwen,case_b2_att_18_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.121,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi tệp độc hại từ máy chủ nội bộ (CORP-DC01).
+2,qwen,case_b2_att_19_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.285,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_20_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.065,True,"Hành vi này bao gồm PowerShell thực thi tệp payload từ Internet với tham số bypass, xác nhận hành động tấn công."
+2,qwen,case_b2_att_21_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.076,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_22_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.501,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi tệp độc hại từ máy chủ nội bộ (CORP-DC01).
+2,qwen,case_b2_att_23_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.076,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_24_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.338,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tải & Thực thi mã độc.
+2,qwen,case_b2_att_25_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.083,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tải & Thực thi mã độc.
+2,qwen,case_b2_att_26_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.086,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi tệp độc hại từ máy chủ nội bộ (CORP-DC01).
+2,qwen,case_b2_att_27_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.508,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_28_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.433,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi tệp độc hại từ máy chủ nội bộ (CORP-DC01).
+2,qwen,case_b2_att_29_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.132,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi tệp độc hại từ máy chủ nội bộ (CORP-DC01).
+2,qwen,case_b2_att_30_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.169,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_31_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.031,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi tệp độc hại từ máy chủ nội bộ (CORP-DC01).
+2,qwen,case_b2_att_32_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.276,True,"Hành vi này bao gồm PowerShell thực thi tệp payload từ Internet với tham số bypass, xác nhận hành động tấn công."
+2,qwen,case_b2_att_33_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.016,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_34_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.503,True,"Hành vi PowerShell chứa tham số bypass và thực thi payload từ URL ngoài công ty, cùng với việc sử dụng Invoke-Stage -Step 34 để tải tệp cấu ..."
+2,qwen,case_b2_att_35_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.057,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_36_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.088,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_37_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.085,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_38_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.485,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_39_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.044,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_40_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.119,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi tệp độc hại từ máy chủ nội bộ (CORP-DC01).
+2,qwen,case_b2_att_41_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.04,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_42_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.508,True,"Hành vi PowerShell chứa tham số bypass và thực thi payload từ máy chủ CORP-DC01, xác định là hành vi tấn công tinh vi."
+2,qwen,case_b2_att_43_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.202,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi tệp độc hại từ máy chủ nội bộ (CORP-DC01).
+2,qwen,case_b2_att_44_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.181,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_45_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.2,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tải & Thực thi mã độc.
+2,qwen,case_b2_att_46_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),3.934,True,"Hành vi PowerShell chứa tham số bypass và thực thi tệp từ URL ngoài công ty, xác định là hành vi tấn công."
+2,qwen,case_b2_att_47_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),3.976,True,"Hành vi này bao gồm PowerShell thực thi tệp payload từ URL bên ngoài công ty với tham số bypass, xác nhận hành động tấn công."
+2,qwen,case_b2_att_48_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.066,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tấn công bằng cách sử dụng PowerShell.
+2,qwen,case_b2_att_49_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),3.989,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp từ Internet (CORP-DC01) là dấu hiệu của việc tải & Thực thi mã độc.
+2,qwen,case_b2_att_50_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.117,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi tệp độc hại từ máy chủ nội bộ (CORP-DC01).
+2,qwen,case_b2_norm_001_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.096,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_002_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.172,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_003_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.924,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_004_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),3.937,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_005_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.3,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_006_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),3.886,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_007_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.901,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_008_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),3.813,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_009_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.077,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_010_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.521,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_011_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.307,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_012_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.046,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_013_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.386,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_014_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),3.748,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_015_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),4.276,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_016_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),3.822,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_017_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.085,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_018_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.369,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_019_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.175,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_020_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),3.973,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_021_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.159,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_022_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),3.703,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_023_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),4.055,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_024_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.18,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_025_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.203,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_026_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.484,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_027_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.829,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_028_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),3.993,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_029_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.143,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_030_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.159,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_031_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.899,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_032_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),3.894,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_033_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),3.986,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_034_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.639,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_035_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.839,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_036_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.078,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_037_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.613,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_038_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.065,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_039_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.991,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_040_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),3.795,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_041_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.115,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_042_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.293,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_043_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.329,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_044_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.199,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_045_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.355,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_046_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),3.712,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_047_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.879,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_048_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),3.836,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_049_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.185,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_050_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.275,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_051_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.176,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_052_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.011,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_053_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.409,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_054_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.013,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_055_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.861,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_056_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),3.922,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_057_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),3.911,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_058_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.175,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_059_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.334,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_060_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.024,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_061_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.404,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_062_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.343,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_063_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.924,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_064_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.381,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_065_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),3.951,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_066_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.123,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_067_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.264,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_068_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.012,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_069_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.328,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_070_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),3.731,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_071_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.887,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_072_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.353,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_073_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),3.954,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_074_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.062,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_075_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),5.191,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_076_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.706,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_077_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.238,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_078_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.094,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_079_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.845,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_080_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.028,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_081_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.116,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_082_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.784,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_083_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.926,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_084_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),3.99,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_085_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.272,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_086_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),3.747,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_087_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),4.24,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_088_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),3.884,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_089_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.091,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_090_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.067,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_091_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.527,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_092_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),3.972,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_093_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.58,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_094_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),3.802,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_095_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),4.13,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_096_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),3.843,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_097_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),3.904,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_098_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.131,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_099_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.659,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_100_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.208,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_101_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.539,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_102_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.137,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_103_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.897,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_104_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.19,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_105_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),3.977,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_106_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.704,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_107_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.779,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_108_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.317,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_109_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.313,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_110_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.087,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_111_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.938,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_112_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.195,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_113_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.515,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_114_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.014,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_115_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),5.001,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_116_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.033,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_117_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.063,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_118_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),3.927,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_119_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.889,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_120_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),3.842,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_121_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.211,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_122_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.583,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_123_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.597,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_124_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),3.965,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_125_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.761,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_126_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),3.735,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_127_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.943,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_128_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),3.785,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_129_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.147,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_130_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.028,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_131_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.205,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_132_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.022,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_133_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.335,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_134_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),3.77,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_135_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.915,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_136_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),3.954,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_137_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.21,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_138_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.076,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_139_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.272,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_140_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.084,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_141_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.544,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_142_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),3.814,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_143_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),3.876,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_144_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.092,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_145_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.095,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_146_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.317,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_147_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),4.291,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_148_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.016,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_149_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.509,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,qwen,case_b2_norm_150_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.22,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_att_01_bruteforce_to_backdoor,ALERT,ALERT,TP (Bắt trúng),7.595,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện 8 lần đăng nhập thất bại có tương quan trong 5 phút (Event 4625) nhằm vào tài khoản 'admin'. B...
+2,llama,case_b2_att_02_recon_then_mimikatz,ALERT,ALERT,TP (Bắt trúng),6.22,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0004, E0005. - Phát hiện..."
+2,llama,case_b2_att_03_c2_download_log_clear,ALERT,ALERT,TP (Bắt trúng),5.542,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+2,llama,case_b2_att_04_rdp_after_hours_schtasks,ALERT,ALERT,TP (Bắt trúng),3.983,True,"Tài khoản admin đã đăng nhập thành công với quyền elevated, có thể là kết quả của một cuộc tấn công brute-force trước đó."
+2,llama,case_b2_att_05_bloodhound_kerberoast,ALERT,ALERT,TP (Bắt trúng),4.656,True,Hành vi tấn công được phát hiện khi có chuỗi các sự kiện liên quan đến việc sử dụng lệnh PowerShell để thực thi các lệnh Invoke-BloodHound v...
+2,llama,case_b2_att_06_psexec_remote_service,ALERT,ALERT,TP (Bắt trúng),4.0,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Lateral Movement / Remote Execution (MITRE T1569 / T1047 / T1021) từ bằng chứng có độ tin cậy ...
+2,llama,case_b2_att_07_wmic_remote_exec,ALERT,ALERT,TP (Bắt trúng),4.144,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Lateral Movement / Remote Execution (MITRE T1569 / T1047 / T1021) từ bằng chứng có độ tin cậy ...
+2,llama,case_b2_att_08_dcsync_ticket_theft,ALERT,ALERT,TP (Bắt trúng),4.566,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện OS Credential Dumping (MITRE T1003) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+2,llama,case_b2_att_09_portscan_to_admin_share,ALERT,ALERT,TP (Bắt trúng),4.064,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Lateral Movement / Remote Execution (MITRE T1569 / T1047 / T1021) từ bằng chứng có độ tin cậy ...
+2,llama,case_b2_att_10_tar_staging_dns_exfil,ALERT,ALERT,TP (Bắt trúng),4.821,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Data Collection & Exfiltration (MITRE T1560 / T1048) từ bằng chứng có độ tin cậy cao: E0001.
+2,llama,case_b2_att_11_wmi_event_persistence,ALERT,ALERT,TP (Bắt trúng),4.764,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Persistence (MITRE T1547.001 / T1053.005) từ bằng chứng có độ tin cậy cao: E0001.
+2,llama,case_b2_att_12_dll_search_order_hijack,ALERT,ALERT,TP (Bắt trúng),5.298,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Persistence (MITRE T1547.001 / T1053.005) từ bằng chứng có độ tin cậy cao: E0001.
+2,llama,case_b2_att_13_powerview_domain_trust,ALERT,ALERT,TP (Bắt trúng),4.403,True,Phát hiện chuỗi hành vi tấn công bằng cách dò mật khẩu và sử dụng PowerShell để thực thi mã độc. Bằng chứng từ Event 4625 và Event 4104 cho ...
+2,llama,case_b2_att_14_ssh_tunneling_c2,ALERT,ALERT,TP (Bắt trúng),4.329,True,Phát hiện hành vi tấn công bằng cách sử dụng mật khẩu brute force để đăng nhập vào hệ thống. Bằng chứng là sự kiện Event ID 4688 với Command...
+2,llama,case_b2_att_15_printnightmare_spooler,ALERT,ALERT,TP (Bắt trúng),4.346,True,Phát hiện chuỗi hành vi tấn công: Dò mật khẩu và trinh sát hệ thống. Bằng chứng từ Event 4625 và PowerShell Operational (Event ID 4104) cho ...
+2,llama,case_b2_att_16_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.466,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_17_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.328,True,"Phát hiện chuỗi hành vi tấn công, bao gồm dò mật khẩu và trinh sát hệ thống. Bằng chứng từ các sự kiện Event 4688 và Event 4104 cho thấy kẻ ..."
+2,llama,case_b2_att_18_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.868,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_19_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.489,True,"Phát hiện chuỗi hành vi tấn công, bao gồm dò mật khẩu và trinh sát hệ thống. Bằng chứng từ các sự kiện Event 4688 và Event 4104 cho thấy att..."
+2,llama,case_b2_att_20_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.641,True,Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với quyền elevated và lệnh Invoke-Stage được thực thi trong PowerShell. Bằng chứng...
+2,llama,case_b2_att_21_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.958,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_22_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.613,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_23_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.284,True,Tấn công mạng được phát hiện: Tác vụ brute-force đăng nhập và lệnh Invoke-Stage trong PowerShell. Bằng chứng từ các sự kiện Event 4688 và Ev...
+2,llama,case_b2_att_24_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.249,True,Tấn công mạng được phát hiện: Tác vụ brute-force đăng nhập và lệnh Invoke-Stage trong PowerShell. Bằng chứng từ các sự kiện Event 4688 và Ev...
+2,llama,case_b2_att_25_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.494,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_26_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.919,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_27_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.484,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_28_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.453,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_29_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.322,True,Tấn công mạng được phát hiện: Tác vụ brute-force đăng nhập và lệnh Invoke-Stage trong PowerShell. Bằng chứng từ các sự kiện Event 4688 và Ev...
+2,llama,case_b2_att_30_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.464,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_31_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.848,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_32_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.444,True,Tấn công mạng được phát hiện: Tác vụ brute-force đăng nhập và lệnh Invoke-Stage trong PowerShell. Bằng chứng từ các sự kiện Event 4688 và Ev...
+2,llama,case_b2_att_33_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.9,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_34_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.43,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_35_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.988,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_36_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.397,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_37_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.471,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_38_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.444,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_39_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.241,True,Tấn công mạng được phát hiện: Tác vụ brute-force đăng nhập và lệnh Invoke-Stage trong PowerShell. Bằng chứng từ các sự kiện Event 4688 và Ev...
+2,llama,case_b2_att_40_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.238,True,Tấn công mạng được phát hiện: Tác vụ brute-force đăng nhập và lệnh Invoke-Stage trong PowerShell. Bằng chứng từ các sự kiện Event 4688 và Ev...
+2,llama,case_b2_att_41_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.5,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_42_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.206,True,Tấn công mạng được phát hiện: Tác vụ brute-force đăng nhập và lệnh Invoke-Stage trong PowerShell. Bằng chứng từ các sự kiện Event 4688 và Ev...
+2,llama,case_b2_att_43_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.24,True,Tấn công mạng được phát hiện: Tác vụ brute-force đăng nhập và lệnh Invoke-Stage trong PowerShell. Bằng chứng từ các sự kiện Event 4688 và Ev...
+2,llama,case_b2_att_44_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.212,True,Tấn công mạng được phát hiện: Tác vụ brute-force đăng nhập và lệnh Invoke-Stage trong PowerShell. Bằng chứng từ các sự kiện Event 4688 và Ev...
+2,llama,case_b2_att_45_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.828,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_46_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.716,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_47_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.31,True,Tấn công mạng được phát hiện: Tác vụ brute-force đăng nhập và lệnh Invoke-Stage trong PowerShell. Bằng chứng từ các sự kiện Event 4688 và Ev...
+2,llama,case_b2_att_48_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.413,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_49_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.415,True,"Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với mật khẩu bị cố ý gõ sai, sau đó sử dụng PowerShell để thực thi lệnh Invoke-Sta..."
+2,llama,case_b2_att_50_apt_chain_step,ALERT,ALERT,TP (Bắt trúng),4.575,True,Tấn công mạng được phát hiện: Tác vụ đăng nhập thành công với quyền elevated và lệnh Invoke-Stage được thực thi trong PowerShell. Bằng chứng...
+2,llama,case_b2_norm_001_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),4.039,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, cho thấy hành vi tấn công có thật."
+2,llama,case_b2_norm_002_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.146,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_003_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),4.925,True,"Có sự cố đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu. Tuy nhiên, cần lưu ý rằng các sự ..."
+2,llama,case_b2_norm_004_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.77,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_005_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.212,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_006_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.221,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_007_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.226,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài. Điều này có thể là dấu hiệu..."
+2,llama,case_b2_norm_008_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.53,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_009_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),4.018,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, cho thấy hành vi tấn công có thật."
+2,llama,case_b2_norm_010_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.505,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_011_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.083,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_012_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.64,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_013_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.155,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_014_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.246,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_015_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.892,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài để thu thập thông tin về kết..."
+2,llama,case_b2_norm_016_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.536,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_017_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),4.077,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, cho thấy hành vi tấn công có thật."
+2,llama,case_b2_norm_018_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.257,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_019_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),4.886,True,"Có sự cố đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu brute force. Tuy nhiên, cần lưu ý ..."
+2,llama,case_b2_norm_020_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.553,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_021_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.325,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_022_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.251,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_023_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.414,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài công ty. Điều này có thể là ..."
+2,llama,case_b2_norm_024_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.464,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_025_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),5.047,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, và có thể là kết quả của hành vi tấn công Password Brute Force. Bằ..."
+2,llama,case_b2_norm_026_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.12,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_027_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.183,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_028_nessus_security_audit,NORMAL,ALERT,FP (Báo động giả),4.467,True,"Tài khoản người dùng đã thực hiện các lệnh truy cập thông tin về hệ thống, bao gồm việc lấy serial number của máy tính và thông tin về CPU."
+2,llama,case_b2_norm_029_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.24,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_030_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.289,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_031_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.563,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài công ty. Điều này có thể là ..."
+2,llama,case_b2_norm_032_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),5.016,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_033_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),4.083,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, cho thấy hành vi tấn công có thật."
+2,llama,case_b2_norm_034_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.107,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_035_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),4.852,True,"Có sự cố đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu. Tuy nhiên, cần lưu ý rằng các sự ..."
+2,llama,case_b2_norm_036_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.906,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_037_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.159,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_038_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.18,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_039_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.469,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài công ty. Điều này có thể là ..."
+2,llama,case_b2_norm_040_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.458,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_041_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),3.989,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, cho thấy hành vi tấn công có thật."
+2,llama,case_b2_norm_042_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.183,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_043_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.103,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_044_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.71,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_045_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.179,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_046_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.178,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_047_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.473,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài công ty. Điều này có thể là ..."
+2,llama,case_b2_norm_048_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.927,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_049_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),4.084,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, cho thấy hành vi tấn công có thật."
+2,llama,case_b2_norm_050_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.494,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_051_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),4.979,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_052_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.455,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_053_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.536,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_054_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.147,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_055_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.448,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài công ty. Điều này có thể là ..."
+2,llama,case_b2_norm_056_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.339,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_057_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),4.924,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, và có thể là kết quả của hành vi tấn công Password Brute Force. Bằ..."
+2,llama,case_b2_norm_058_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.196,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_059_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.078,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_060_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.658,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_061_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.672,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_062_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.301,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_063_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.196,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài, có thể là dấu hiệu của tấn ..."
+2,llama,case_b2_norm_064_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.723,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_065_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),4.972,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, và có thể là kết quả của hành vi tấn công Password Brute Force. Bằ..."
+2,llama,case_b2_norm_066_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.149,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_067_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.199,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_068_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.793,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_069_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.152,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_070_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.177,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_071_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.166,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài, có thể là dấu hiệu của tấn ..."
+2,llama,case_b2_norm_072_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.974,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_073_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),5.096,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, và có thể là kết quả của hành vi tấn công Password Brute Force. Bằ..."
+2,llama,case_b2_norm_074_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.158,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_075_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.108,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_076_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),5.202,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_077_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.133,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_078_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.15,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_079_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.506,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài công ty. Điều này có thể là ..."
+2,llama,case_b2_norm_080_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.526,True,"Phát hiện chuỗi hành vi đăng nhập thành công với nhiều lần sai mật khẩu, có thể là dấu hiệu tấn công Password Brute Force. Tuy nhiên, cần lư..."
+2,llama,case_b2_norm_081_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),4.118,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, cho thấy hành vi tấn công có thật."
+2,llama,case_b2_norm_082_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.499,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_083_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.147,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_084_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.582,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_085_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.134,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_086_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.298,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_087_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.415,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài công ty. Điều này có thể là ..."
+2,llama,case_b2_norm_088_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.306,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_089_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.381,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_090_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.193,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_091_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.099,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_092_nessus_security_audit,NORMAL,ALERT,FP (Báo động giả),4.219,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát hệ thống (wmic.exe) liên tiếp trong cùng phiên, có thể là dấu hiệu của tấn công Reconna..."
+2,llama,case_b2_norm_093_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.123,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_094_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.103,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_095_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.445,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài công ty. Điều này có thể là ..."
+2,llama,case_b2_norm_096_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.845,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_097_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.401,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_098_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.177,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_099_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.037,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_100_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.666,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_101_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.067,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_102_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.15,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_103_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.213,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài, có thể là dấu hiệu của tấn ..."
+2,llama,case_b2_norm_104_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.522,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_105_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.376,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_106_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.181,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_107_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.089,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_108_nessus_security_audit,NORMAL,ALERT,FP (Báo động giả),4.101,True,"Tài khoản người dùng đã thực hiện các lệnh truy cập thông tin về hệ thống, bao gồm việc lấy serial number của máy tính và thông tin về CPU."
+2,llama,case_b2_norm_109_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.459,True,"Có 3 sự kiện đăng nhập thất bại liên tiếp với LogonType = 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về vi..."
+2,llama,case_b2_norm_110_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.156,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_111_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.295,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài công ty. Điều này có thể là ..."
+2,llama,case_b2_norm_112_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.544,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_113_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.42,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_114_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.204,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_115_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.122,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_116_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),5.05,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_117_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.108,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_118_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),4.234,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_119_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.396,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài công ty. Điều này có thể là ..."
+2,llama,case_b2_norm_120_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.313,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_121_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),4.966,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, và có thể là kết quả của hành vi tấn công Password Brute Force. Bằ..."
+2,llama,case_b2_norm_122_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.133,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_123_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.136,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_124_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.843,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_125_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.34,True,"Có 3 sự kiện đăng nhập thất bại liên tiếp với LogonType = 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về vi..."
+2,llama,case_b2_norm_126_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.406,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_127_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.225,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài công ty. Điều này có thể là ..."
+2,llama,case_b2_norm_128_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.487,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_129_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),4.284,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, cho thấy hành vi tấn công có thật."
+2,llama,case_b2_norm_130_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.203,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_131_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.094,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_132_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.842,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_133_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.129,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_134_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.448,True,"Phát hiện chuỗi các sự kiện đăng nhập thành công và thực thi lệnh SQLcmd.exe, có thể là dấu hiệu tấn công Password Brute Force hoặc Reconnai..."
+2,llama,case_b2_norm_135_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.092,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài, có thể là dấu hiệu của tấn ..."
+2,llama,case_b2_norm_136_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.317,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_137_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),4.43,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_138_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.152,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_139_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.131,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_140_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),5.2,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_141_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),4.17,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_142_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.171,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,llama,case_b2_norm_143_network_monitoring,NORMAL,ALERT,FP (Báo động giả),4.296,True,"Tài khoản người dùng đã thực hiện các lệnh trinh sát mạng (tracert.exe, ping.exe) trên một địa chỉ IP bên ngoài. Điều này có thể là dấu hiệu..."
+2,llama,case_b2_norm_144_user_migration_flow,NORMAL,ALERT,FP (Báo động giả),4.461,True,"Phát hiện chuỗi các sự kiện đăng nhập thất bại và đăng nhập thành công sau đó, có thể là dấu hiệu của tấn công Password Brute Force. Tuy nhi..."
+2,llama,case_b2_norm_145_backup_pipeline,NORMAL,ALERT,FP (Báo động giả),4.877,True,"Tài khoản dev_pipeline đã đăng nhập thành công sau một chuỗi brute-force, và có thể là kết quả của hành vi tấn công Password Brute Force. Bằ..."
+2,llama,case_b2_norm_146_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),4.195,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_147_it_admin_remote_support,NORMAL,ALERT,FP (Báo động giả),5.032,True,Có sự cố tấn công Password Brute Force xảy ra khi người dùng corp_admin đăng nhập vào hệ thống với mật khẩu sai 3 lần liên tiếp. Các sự kiện...
+2,llama,case_b2_norm_148_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),4.579,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+2,llama,case_b2_norm_149_onedrive_sync_flow,NORMAL,ALERT,FP (Báo động giả),4.127,True,"Có sự cố khi gõ mật khẩu, nhưng sau đó đã đăng nhập thành công. Điều này có thể là một lỗi của người dùng hoặc một kỹ thuật tấn công Typo Lo..."
+2,llama,case_b2_norm_150_db_maintenance_sql,NORMAL,ALERT,FP (Báo động giả),4.142,True,"Tài khoản dev_pipeline đã đăng nhập thành công vào hệ thống bằng cách sử dụng mật khẩu, sau đó thực hiện một số lệnh SQL để kiểm tra và sửa ..."
+2,deepblue,case_b2_att_01_bruteforce_to_backdoor,ALERT,ALERT,TP (Bắt trúng),0.0048,True,DeepBlueCLI: Password Brute Force (8 failed logons - Event 4625); DeepBlueCLI: User Creation & Admin Group Escalation (Event 4720/4728)
+2,deepblue,case_b2_att_02_recon_then_mimikatz,ALERT,ALERT,TP (Bắt trúng),0.003,True,DeepBlueCLI: Mimikatz Credential Dumping Keywords (regexes.txt)
+2,deepblue,case_b2_att_03_c2_download_log_clear,ALERT,ALERT,TP (Bắt trúng),0.0028,True,DeepBlueCLI: PowerShell Download Cradle Pattern (regexes.txt); DeepBlueCLI: Security Event Log Cleared (Event 1102)
+2,deepblue,case_b2_att_04_rdp_after_hours_schtasks,ALERT,ALERT,TP (Bắt trúng),0.0023,True,DeepBlueCLI: Scheduled Task Persistence Pattern
+2,deepblue,case_b2_att_05_bloodhound_kerberoast,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_06_psexec_remote_service,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0054,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_07_wmic_remote_exec,ALERT,ALERT,TP (Bắt trúng),0.0012,True,DeepBlueCLI: PowerShell Download Cradle Pattern (regexes.txt)
+2,deepblue,case_b2_att_08_dcsync_ticket_theft,ALERT,ALERT,TP (Bắt trúng),0.0013,True,DeepBlueCLI: Mimikatz Credential Dumping Keywords (regexes.txt)
+2,deepblue,case_b2_att_09_portscan_to_admin_share,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_10_tar_staging_dns_exfil,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_11_wmi_event_persistence,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_12_dll_search_order_hijack,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_13_powerview_domain_trust,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_14_ssh_tunneling_c2,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_15_printnightmare_spooler,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_16_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_17_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_18_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0025,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_19_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_20_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_21_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0034,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_22_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_23_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_24_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_25_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_26_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_27_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_28_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_29_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_30_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_31_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_32_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_33_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_34_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_35_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0028,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_36_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_37_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_38_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_39_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_40_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_41_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_42_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_43_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_44_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_45_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_46_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_47_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_48_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_49_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_att_50_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_001_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_002_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_003_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_004_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_005_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_006_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_007_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_008_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_009_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_010_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_011_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_012_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_013_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_014_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_015_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_016_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_017_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_018_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_019_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_020_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_021_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_022_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_023_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_024_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_025_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0028,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_026_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_027_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0033,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_028_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_029_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_030_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_031_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_032_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_033_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0034,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_034_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_035_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0032,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_036_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_037_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_038_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_039_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_040_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_041_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_042_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_043_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_044_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_045_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_046_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_047_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_048_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_049_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_050_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_051_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0029,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_052_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_053_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_054_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_055_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_056_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_057_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_058_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_059_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_060_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_061_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_062_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_063_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_064_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_065_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_066_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_067_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_068_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_069_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_070_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_071_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_072_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_073_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_074_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0035,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_075_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0034,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_076_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_077_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_078_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_079_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_080_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_081_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_082_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_083_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_084_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_085_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_086_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_087_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_088_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_089_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_090_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_091_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_092_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0027,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_093_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_094_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_095_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_096_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_097_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_098_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_099_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_100_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_101_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_102_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_103_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_104_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_105_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0029,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_106_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_107_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_108_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_109_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_110_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_111_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_112_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_113_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0028,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_114_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_115_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_116_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_117_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_118_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_119_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_120_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_121_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_122_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_123_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_124_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_125_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_126_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_127_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_128_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_129_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_130_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_131_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.004,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_132_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_133_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_134_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_135_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_136_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_137_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_138_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_139_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_140_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_141_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_142_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_143_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_144_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_145_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0031,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_146_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_147_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_148_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_149_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,deepblue,case_b2_norm_150_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_01_bruteforce_to_backdoor,ALERT,ALERT,TP (Bắt trúng),0.005,True,Sigma [win_security_multiple_failed_logons]: 8 failed logons; Sigma [win_security_net_user_add]: Backdoor Admin Account Created
+2,sigma,case_b2_att_02_recon_then_mimikatz,ALERT,ALERT,TP (Bắt trúng),0.0025,True,Sigma [proc_creation_win_mimikatz]: Credential Dumping Tool Detected
+2,sigma,case_b2_att_03_c2_download_log_clear,ALERT,ALERT,TP (Bắt trúng),0.002,True,Sigma [proc_creation_win_powershell_download_cradle]: Remote Download Cradle; Sigma [win_security_clear_event_log]: Security Audit Log Clear
+2,sigma,case_b2_att_04_rdp_after_hours_schtasks,ALERT,ALERT,TP (Bắt trúng),0.0015,True,Sigma [proc_creation_win_schtasks_persistence]: Scheduled Task Persistence
+2,sigma,case_b2_att_05_bloodhound_kerberoast,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_06_psexec_remote_service,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_07_wmic_remote_exec,ALERT,ALERT,TP (Bắt trúng),0.0016,True,Sigma [proc_creation_win_powershell_download_cradle]: Remote Download Cradle
+2,sigma,case_b2_att_08_dcsync_ticket_theft,ALERT,ALERT,TP (Bắt trúng),0.0017,True,Sigma [proc_creation_win_mimikatz]: Credential Dumping Tool Detected
+2,sigma,case_b2_att_09_portscan_to_admin_share,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_10_tar_staging_dns_exfil,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_11_wmi_event_persistence,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_12_dll_search_order_hijack,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_13_powerview_domain_trust,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_14_ssh_tunneling_c2,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_15_printnightmare_spooler,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_16_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_17_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_18_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_19_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_20_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_21_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_22_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_23_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_24_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_25_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_26_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_27_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_28_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_29_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_30_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_31_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_32_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_33_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_34_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_35_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_36_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_37_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_38_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_39_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_40_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_41_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_42_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_43_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_44_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_45_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_46_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_47_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_48_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_49_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_att_50_apt_chain_step,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_001_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_002_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_003_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_004_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_005_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_006_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_007_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_008_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_009_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_010_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_011_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_012_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_013_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_014_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_015_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_016_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_017_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_018_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_019_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0028,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_020_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_021_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_022_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_023_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_024_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_025_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_026_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_027_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_028_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_029_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_030_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_031_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_032_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_033_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.003,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_034_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_035_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0029,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_036_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_037_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_038_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_039_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_040_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_041_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_042_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_043_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.003,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_044_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_045_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_046_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_047_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_048_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_049_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0031,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_050_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_051_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_052_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_053_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_054_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_055_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0029,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_056_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_057_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0029,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_058_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_059_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_060_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0032,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_061_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0029,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_062_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_063_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_064_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_065_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0032,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_066_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_067_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_068_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_069_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_070_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_071_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0044,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_072_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_073_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0032,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_074_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_075_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_076_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_077_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_078_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_079_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_080_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_081_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_082_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_083_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_084_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_085_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_086_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_087_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_088_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_089_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_090_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_091_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0028,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_092_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_093_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_094_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_095_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0047,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_096_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_097_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.005,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_098_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_099_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0029,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_100_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_101_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0028,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_102_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_103_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0027,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_104_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_105_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_106_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_107_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0028,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_108_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_109_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_110_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_111_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_112_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_113_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_114_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_115_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0029,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_116_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_117_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0028,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_118_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_119_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_120_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_121_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0029,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_122_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_123_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0031,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_124_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.003,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_125_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0038,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_126_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_127_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_128_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_129_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0027,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_130_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_131_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0027,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_132_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0029,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_133_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_134_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_135_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_136_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_137_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_138_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_139_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0035,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_140_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0031,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_141_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_142_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0027,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_143_network_monitoring,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_144_user_migration_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_145_backup_pipeline,NORMAL,NORMAL,TN (Đúng lành tính),0.0031,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_146_devops_deploy,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_147_it_admin_remote_support,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_148_nessus_security_audit,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_149_onedrive_sync_flow,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+2,sigma,case_b2_norm_150_db_maintenance_sql,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)

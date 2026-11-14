@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_040_node_version",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Kiểm tra phiên bản môi trường Node.js và npm cài đặt.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.248120"
+}

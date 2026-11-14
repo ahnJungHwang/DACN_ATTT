@@ -1,0 +1,201 @@
+case_id,category,ground_truth,description,mitre_technique,scenario,generated_at
+case_b2_att_01_bruteforce_to_backdoor,MultiStage,ALERT,Chuỗi: Dò mật khẩu 8 lần -> Đăng nhập thành công -> Tạo tài khoản quản trị backdoor.,T1110 / T1078 / T1136,Bài 2,2026-11-13T09:54:15.362091
+case_b2_att_02_recon_then_mimikatz,MultiStage,ALERT,Chuỗi: Trinh sát hệ thống whoami /priv -> nltest -> Dump LSASS bằng Mimikatz.,T1033 / T1003.001,Bài 2,2026-11-13T09:54:15.362892
+case_b2_att_03_c2_download_log_clear,MultiStage,ALERT,Chuỗi: Tải mã độc ngầm C2 qua WebClient -> Xóa sạch nhật ký Security 1102.,T1059.001 / T1070.001,Bài 2,2026-11-13T09:54:15.363849
+case_b2_att_04_rdp_after_hours_schtasks,MultiStage,ALERT,Chuỗi: RDP ngoài giờ làm việc (LogonType 10) từ IP lạ -> Cài đặt Schtasks Persistence.,T1078.002 / T1053.005,Bài 2,2026-11-13T09:54:15.364699
+case_b2_att_05_bloodhound_kerberoast,MultiStage,ALERT,Chuỗi: Chạy SharpHound thu thập đồ thị AD -> Yêu cầu vé TGS Kerberoasting.,T1087.002 / T1558.003,Bài 2,2026-11-13T09:54:15.365806
+case_b2_att_06_psexec_remote_service,LateralMovement,ALERT,Chuỗi: PsExec kết nối máy chủ quản trị -> Cài đặt remote service PSEXESVC -> Điều khiển.,T1569.002,Bài 2,2026-11-13T09:54:15.366897
+case_b2_att_07_wmic_remote_exec,LateralMovement,ALERT,Chuỗi: WMIC Remote Process Call tạo tiến trình ngầm trên máy chủ kế toán.,T1047,Bài 2,2026-11-13T09:54:15.367850
+case_b2_att_08_dcsync_ticket_theft,CredentialAccess,ALERT,Chuỗi: Tấn công DCSync mô phỏng Domain Controller qua DRSGetNCChanges lấy hash krbtgt.,T1003.006,Bài 2,2026-11-13T09:54:15.368924
+case_b2_att_09_portscan_to_admin_share,LateralMovement,ALERT,Chuỗi: Dò quét cổng SMB 445 -> Kết nối ổ đĩa ẩn C$ -> Thả trojan.exe.,T1046 / T1021.002,Bài 2,2026-11-13T09:54:15.369747
+case_b2_att_10_tar_staging_dns_exfil,Exfiltration,ALERT,Chuỗi: Thu thập tài liệu docx/xlsx thành tệp tar.gz -> Tuồn dữ liệu qua DNS Tunneling.,T1560 / T1048.003,Bài 2,2026-11-13T09:54:15.370808
+case_b2_att_11_wmi_event_persistence,Persistence,ALERT,Chuỗi: Đăng ký WMI Event Subscription (__EventFilter & __CommandLineEventConsumer) tự chạy ngầm.,T1546.003,Bài 2,2026-11-13T09:54:15.371811
+case_b2_att_12_dll_search_order_hijack,Persistence,ALERT,Chuỗi: Ghi đè DLL độc hại vào thư mục phần mềm nghiệp vụ để chiếm quyền khi ứng dụng mở.,T1574.001,Bài 2,2026-11-13T09:54:15.373016
+case_b2_att_13_powerview_domain_trust,Discovery,ALERT,Chuỗi: Sử dụng PowerView trinh sát quan hệ ủy thác Domain Trust và Forest Active Directory.,T1482,Bài 2,2026-11-13T09:54:15.373917
+case_b2_att_14_ssh_tunneling_c2,CommandAndControl,ALERT,Chuỗi: Thiết lập SSH Reverse Tunneling port 4444 vượt tường lửa nội bộ công ty.,T1572,Bài 2,2026-11-13T09:54:15.374768
+case_b2_att_15_printnightmare_spooler,PrivilegeEscalation,ALERT,Chuỗi: Khai thác lỗ hổng PrintNightmare tải driver máy in độc hại leo quyền SYSTEM.,T1068,Bài 2,2026-11-13T09:54:15.375655
+case_b2_att_16_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 16: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.376960
+case_b2_att_17_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 17: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.377835
+case_b2_att_18_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 18: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.378565
+case_b2_att_19_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 19: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.379389
+case_b2_att_20_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 20: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.380499
+case_b2_att_21_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 21: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.381480
+case_b2_att_22_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 22: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.382622
+case_b2_att_23_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 23: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.383471
+case_b2_att_24_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 24: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.385132
+case_b2_att_25_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 25: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.385976
+case_b2_att_26_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 26: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.386754
+case_b2_att_27_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 27: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.387905
+case_b2_att_28_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 28: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.389058
+case_b2_att_29_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 29: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.389938
+case_b2_att_30_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 30: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.390717
+case_b2_att_31_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 31: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.391591
+case_b2_att_32_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 32: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.392429
+case_b2_att_33_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 33: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.393348
+case_b2_att_34_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 34: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.394080
+case_b2_att_35_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 35: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.394832
+case_b2_att_36_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 36: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.395993
+case_b2_att_37_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 37: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.397021
+case_b2_att_38_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 38: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.397835
+case_b2_att_39_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 39: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.398667
+case_b2_att_40_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 40: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.399987
+case_b2_att_41_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 41: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.401737
+case_b2_att_42_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 42: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.403491
+case_b2_att_43_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 43: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.404715
+case_b2_att_44_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 44: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.405752
+case_b2_att_45_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 45: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.406807
+case_b2_att_46_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 46: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.407645
+case_b2_att_47_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 47: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.408399
+case_b2_att_48_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 48: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.409247
+case_b2_att_49_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 49: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.410633
+case_b2_att_50_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 50: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.411618
+case_b2_norm_001_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.412542
+case_b2_norm_002_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.413562
+case_b2_norm_003_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.414438
+case_b2_norm_004_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.415403
+case_b2_norm_005_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.416716
+case_b2_norm_006_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.417896
+case_b2_norm_007_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.418966
+case_b2_norm_008_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.420115
+case_b2_norm_009_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.421017
+case_b2_norm_010_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.422009
+case_b2_norm_011_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.422899
+case_b2_norm_012_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.424336
+case_b2_norm_013_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.425272
+case_b2_norm_014_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.426127
+case_b2_norm_015_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.426983
+case_b2_norm_016_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.429899
+case_b2_norm_017_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.431407
+case_b2_norm_018_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.432724
+case_b2_norm_019_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.433642
+case_b2_norm_020_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.434582
+case_b2_norm_021_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.435566
+case_b2_norm_022_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.436412
+case_b2_norm_023_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.437520
+case_b2_norm_024_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.438638
+case_b2_norm_025_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.439614
+case_b2_norm_026_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.440453
+case_b2_norm_027_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.441261
+case_b2_norm_028_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.442089
+case_b2_norm_029_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.443024
+case_b2_norm_030_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.444362
+case_b2_norm_031_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.445980
+case_b2_norm_032_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.446910
+case_b2_norm_033_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.447729
+case_b2_norm_034_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.448524
+case_b2_norm_035_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.449292
+case_b2_norm_036_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.450062
+case_b2_norm_037_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.450836
+case_b2_norm_038_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.452018
+case_b2_norm_039_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.453560
+case_b2_norm_040_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.454443
+case_b2_norm_041_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.455362
+case_b2_norm_042_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.456491
+case_b2_norm_043_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.457620
+case_b2_norm_044_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.458972
+case_b2_norm_045_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.460093
+case_b2_norm_046_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.460992
+case_b2_norm_047_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.461820
+case_b2_norm_048_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.462570
+case_b2_norm_049_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.463476
+case_b2_norm_050_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.464254
+case_b2_norm_051_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.465317
+case_b2_norm_052_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.466319
+case_b2_norm_053_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.467252
+case_b2_norm_054_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.470143
+case_b2_norm_055_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.471197
+case_b2_norm_056_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.472352
+case_b2_norm_057_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.473860
+case_b2_norm_058_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.474666
+case_b2_norm_059_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.475744
+case_b2_norm_060_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.476604
+case_b2_norm_061_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.477381
+case_b2_norm_062_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.478111
+case_b2_norm_063_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.479217
+case_b2_norm_064_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.480171
+case_b2_norm_065_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.481108
+case_b2_norm_066_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.482019
+case_b2_norm_067_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.484898
+case_b2_norm_068_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.485821
+case_b2_norm_069_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.487512
+case_b2_norm_070_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.488422
+case_b2_norm_071_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.489329
+case_b2_norm_072_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.490232
+case_b2_norm_073_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.491428
+case_b2_norm_074_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.492780
+case_b2_norm_075_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.494128
+case_b2_norm_076_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.495130
+case_b2_norm_077_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.496126
+case_b2_norm_078_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.496938
+case_b2_norm_079_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.497802
+case_b2_norm_080_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.498595
+case_b2_norm_081_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.499427
+case_b2_norm_082_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.501374
+case_b2_norm_083_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.502765
+case_b2_norm_084_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.503709
+case_b2_norm_085_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.504546
+case_b2_norm_086_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.505610
+case_b2_norm_087_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.506694
+case_b2_norm_088_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.508110
+case_b2_norm_089_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.509160
+case_b2_norm_090_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.510017
+case_b2_norm_091_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.510887
+case_b2_norm_092_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.511638
+case_b2_norm_093_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.512421
+case_b2_norm_094_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.513350
+case_b2_norm_095_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.514358
+case_b2_norm_096_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.515385
+case_b2_norm_097_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.516390
+case_b2_norm_098_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.517204
+case_b2_norm_099_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.517970
+case_b2_norm_100_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.518687
+case_b2_norm_101_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.519525
+case_b2_norm_102_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.520312
+case_b2_norm_103_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.521458
+case_b2_norm_104_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.522395
+case_b2_norm_105_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.523490
+case_b2_norm_106_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.524329
+case_b2_norm_107_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.525124
+case_b2_norm_108_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.525912
+case_b2_norm_109_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.526830
+case_b2_norm_110_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.528132
+case_b2_norm_111_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.529011
+case_b2_norm_112_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.529845
+case_b2_norm_113_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.530627
+case_b2_norm_114_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.531659
+case_b2_norm_115_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.532539
+case_b2_norm_116_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.533531
+case_b2_norm_117_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.534620
+case_b2_norm_118_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.535778
+case_b2_norm_119_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.536660
+case_b2_norm_120_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.537451
+case_b2_norm_121_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.538273
+case_b2_norm_122_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.539252
+case_b2_norm_123_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.540228
+case_b2_norm_124_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.541074
+case_b2_norm_125_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.542127
+case_b2_norm_126_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.543019
+case_b2_norm_127_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.543789
+case_b2_norm_128_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.544571
+case_b2_norm_129_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.545346
+case_b2_norm_130_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.546135
+case_b2_norm_131_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.546948
+case_b2_norm_132_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.547810
+case_b2_norm_133_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.549345
+case_b2_norm_134_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.550276
+case_b2_norm_135_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.551097
+case_b2_norm_136_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.551952
+case_b2_norm_137_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.552741
+case_b2_norm_138_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.553506
+case_b2_norm_139_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.554250
+case_b2_norm_140_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.554963
+case_b2_norm_141_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.556465
+case_b2_norm_142_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.557548
+case_b2_norm_143_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.558379
+case_b2_norm_144_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.559113
+case_b2_norm_145_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.559964
+case_b2_norm_146_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.560705
+case_b2_norm_147_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.561521
+case_b2_norm_148_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.562573
+case_b2_norm_149_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.564113
+case_b2_norm_150_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.565096

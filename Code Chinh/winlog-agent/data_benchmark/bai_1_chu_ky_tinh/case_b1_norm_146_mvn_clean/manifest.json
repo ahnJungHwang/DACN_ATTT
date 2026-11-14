@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_146_mvn_clean",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Dọn dẹp tệp tin tạm và biên dịch dự án Java Maven.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.355107"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_31_takeown_system_file",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Chiếm quyền sở hữu tệp tin hệ thống nhạy cảm bằng takeown /f.",
+  "mitre_technique": "T1222.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.184091"
+}

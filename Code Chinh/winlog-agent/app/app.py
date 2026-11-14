@@ -8,7 +8,7 @@ if sys.stderr and hasattr(sys.stderr, "reconfigure"):
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import RedirectResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 # Thư mục gốc winlog-agent (file này nằm trong app/) -> để import core/analyze.py, web/backend/siem.py, dashboard.py
 from pathlib import Path as _Path
@@ -22,6 +22,19 @@ import alerting  # core/alerting.py: chống trùng cảnh báo + đo độ tr�
 
 DEDUP = alerting.AlertDeduplicator()      # ALERT_DEDUP_MINUTES (mặc định 10 phút)
 LATENCY = alerting.LatencyRecorder()      # -> results/latency.csv
+
+import os
+import re
+
+# Cửa sổ sự kiện trượt (core/event_store.py, gộp từ bản update): > 0 -> mỗi lô được gộp với các sự kiện
+# của EVENT_WINDOW_SECONDS giây gần nhất trước khi phân tích, để tương quan chuỗi tấn công trải qua nhiều lô.
+# Mặc định 0 = TẮT: mỗi lô chỉ phân tích đúng sự kiện mới (hành vi cũ, không phân tích lặp lại).
+EVENT_WINDOW_SECONDS = int(os.getenv("EVENT_WINDOW_SECONDS", "0"))
+MAX_XML_CHARS = int(os.getenv("MAX_XML_CHARS", "5000000"))  # chặn payload quá lớn từ client
+EVENT_STORE = None
+if EVENT_WINDOW_SECONDS > 0:
+    from event_store import EventStore
+    EVENT_STORE = EventStore(ROOT / "data" / "winlog_events.db", EVENT_WINDOW_SECONDS)
 
 app = FastAPI(
     title="WinLog AI Agent",
@@ -77,6 +90,7 @@ def health():
         "status": "ok",
         "models": list(MODELS.keys()),
         "max_batch_chars": MAX_BATCH_CHARS,
+        "event_store": EVENT_STORE.stats() if EVENT_STORE else {"enabled": False},
     }
 
 
@@ -99,9 +113,9 @@ def list_cases():
 class IngestRequest(BaseModel):
     client_id: str = "unknown"
     hostname: str = "unknown"
-    security_xml: str = "<Events></Events>"
-    powershell_xml: str = "<Events></Events>"
-    system_xml: str = "<Events></Events>"  # 7045 / 104 (client mới)
+    security_xml: str = Field(default="<Events></Events>", max_length=MAX_XML_CHARS)
+    powershell_xml: str = Field(default="<Events></Events>", max_length=MAX_XML_CHARS)
+    system_xml: str = Field(default="<Events></Events>", max_length=MAX_XML_CHARS)  # 7045 / 104 (client mới)
     model: str = "qwen"
     client_sent_utc: str | None = None     # giờ client gửi (đồng hồ máy client) -> bù lệch đồng hồ khi đo độ trễ
 
@@ -206,7 +220,8 @@ def ingest_logs(req: IngestRequest, request: Request):
     import time
     from analyze import BASE, analyze_case, is_benign_noise, read_events
 
-    clean_client = req.client_id.replace(".", "_").replace(":", "_")
+    # Chỉ giữ chữ/số/_/- (IP 192.168.1.5 -> 192_168_1_5 như cũ; chặn ký tự lạ trong tên thư mục)
+    clean_client = re.sub(r"[^A-Za-z0-9_-]+", "_", req.client_id).strip("_") or "unknown"
     case_id = f"client_{clean_client}_live"
     case_dir = BASE / "data" / case_id
 
@@ -243,9 +258,22 @@ def ingest_logs(req: IngestRequest, request: Request):
 
         # Lưu XML thực tế từ Client vào disk cho phiên phân tích này
         case_dir.mkdir(parents=True, exist_ok=True)
-        (case_dir / "security.xml").write_text(clean_sec, encoding="utf-8")
-        (case_dir / "powershell.xml").write_text(clean_ps, encoding="utf-8")
-        (case_dir / "system.xml").write_text(clean_sys, encoding="utf-8")
+        window_counts = None
+        if EVENT_STORE is not None:
+            # Gộp lô mới vào cửa sổ trượt (chống trùng RecordId) rồi xuất cả cửa sổ ra disk
+            try:
+                for channel, xml, valid in (("security", clean_sec, sec_valid),
+                                            ("powershell", clean_ps, ps_valid),
+                                            ("system", clean_sys, sys_valid)):
+                    if valid:
+                        EVENT_STORE.ingest_xml(clean_client, channel, xml)
+                window_counts = EVENT_STORE.materialize_case(clean_client, case_dir)
+            except ValueError as exc:
+                raise HTTPException(status_code=400, detail=str(exc))
+        else:
+            (case_dir / "security.xml").write_text(clean_sec, encoding="utf-8")
+            (case_dir / "powershell.xml").write_text(clean_ps, encoding="utf-8")
+            (case_dir / "system.xml").write_text(clean_sys, encoding="utf-8")
 
         siem.record_events(req.client_id, req.hostname, clean_sec, clean_ps)
 
@@ -268,6 +296,8 @@ def ingest_logs(req: IngestRequest, request: Request):
         print(f"[+] [{now_str}] NHAN LOG TU CLIENT: {req.hostname} ({req.client_id})", flush=True)
         print(f"    * Tong so su kien : {total_events} (Security: {sec_count}, PowerShell: {ps_count}, System: {sys_count})", flush=True)
         print(f"    * Da luu vao disk : {case_dir.name}", flush=True)
+        if window_counts is not None:
+            print(f"    * Cua so tuong quan: {sum(window_counts.values())} su kien / {EVENT_WINDOW_SECONDS}s", flush=True)
         print(f"    * Dang chuyen tiep vao n8n Workflow de dieu phoi...", flush=True)
 
         success, n8n_resp = notify_n8n_clean(req.client_id, req.hostname, req.model)
@@ -404,6 +434,9 @@ def ingest_logs(req: IngestRequest, request: Request):
             "evidence_refs": verdict.get("evidence_refs", []),
             "decision_source": verdict.get("decision_source", ""),  # rule+ai / ai / rule (hien trong tin Telegram)
             "incident_ids": alert.get("incident_ids", []),
+            "risk_score": verdict.get("risk_score", 0),             # điểm rủi ro tham khảo 0-100
+            "confidence": verdict.get("confidence", 0.0),
+            "detection_source": verdict.get("detection_source", ""),
         },
     }, label, alert)
 

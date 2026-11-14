@@ -7,6 +7,31 @@ Dù file nằm trong `ps1/`, các file log và dữ liệu vẫn đọc/ghi ở 
 |---|---|---|
 | `client_agent.ps1` | Máy client | Agent thu thập Windows Event Log và gửi về AI Server. |
 | `stop_client.ps1` | Máy client | Tắt agent đang chạy. Được [`bat/stop_client.bat`](../bat/HUONG_DAN_SU_DUNG_bat.md) gọi. |
+| `export_normal_logs.ps1` | Máy thật / máy ảo | Xuất log **hoạt động bình thường** thành các ca có nhãn NORMAL trong `data_normal/` (đã ẩn danh). |
+
+## `export_normal_logs.ps1` – thu log bình thường để đánh giá
+
+Cần PowerShell **Run as administrator** (để đọc Security log), và đã chạy `bat\setup_client.bat` trước khi dùng máy, để Windows ghi 4688.
+
+```powershell
+# 30 phút vừa qua, chia 10 phút / ca
+powershell -NoProfile -ExecutionPolicy Bypass -File .\ps1\export_normal_logs.ps1 -Description "Học online, Word, Chrome"
+
+# Một buổi cụ thể, chia 15 phút / ca
+powershell -NoProfile -ExecutionPolicy Bypass -File .\ps1\export_normal_logs.ps1 -Start "2026-11-12 08:00" -End "2026-11-12 11:00" -WindowMinutes 15 -Description "Buổi sáng làm việc"
+```
+
+| Tham số | Mặc định | Ý nghĩa |
+|---|---|---|
+| `-Start`, `-End` | 30 phút vừa qua | Khoảng thời gian cần xuất. **Chỉ chọn khoảng chắc chắn không chạy kịch bản tấn công hay thử nghiệm.** |
+| `-WindowMinutes` | `10` | Độ dài mỗi ca. Cửa sổ không có sự kiện thì bỏ qua. |
+| `-Description` | — | Mô tả hoạt động, ghi vào `manifest.json`. |
+| `-OutDir` | `data_normal` | Thư mục xuất. |
+| `-NoAnonymize` | tắt | Mặc định script thay tên user, tên máy, thư mục hồ sơ bằng `LABUSER` / `LAB-PC01`. |
+
+- Chỉ lấy đúng các Event ID mà agent thu thập (Security 4624/4625/4648/4688/1102/4720/4728/4732/4698, PowerShell 4104, System 7045/104).
+- **Trước khi commit**: mở xem lại dòng lệnh trong 4688/4104 (có thể chứa đường dẫn riêng, URL, tham số nhạy cảm).
+- Sau khi xuất, chạy `core\build_labels.py` để cập nhật `labels/cases_labels.csv`, và `core\evaluate.py --data-dir data_normal` để đo báo động giả.
 | `extract_evtx_fragments.ps1` | Máy server | Chuyển các file `.evtx` tấn công thật thành các khối XML (fragment), dùng để sinh bộ dữ liệu `data100`. |
 
 ## `client_agent.ps1` – agent thu thập log

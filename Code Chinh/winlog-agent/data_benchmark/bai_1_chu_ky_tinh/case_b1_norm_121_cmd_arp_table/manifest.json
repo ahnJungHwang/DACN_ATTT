@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_121_cmd_arp_table",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Xem bảng ánh xạ địa chỉ IP và MAC Address mạng LAN.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.332173"
+}

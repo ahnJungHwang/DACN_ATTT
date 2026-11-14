@@ -1,0 +1,601 @@
+case_id,category,ground_truth,description,mitre_technique,scenario,generated_at
+case_b1_att_01_mimikatz_sekurlsa,CredentialAccess,ALERT,Mimikatz: Trích xuất mật khẩu rõ từ LSASS qua sekurlsa::logonpasswords.,T1003.001,Bài 1,2026-11-13T09:54:15.149566
+case_b1_att_02_procdump_lsass,CredentialAccess,ALERT,Procdump: Dump bộ nhớ LSASS ra file dmp để trích xuất offline.,T1003.001,Bài 1,2026-11-13T09:54:15.150542
+case_b1_att_03_powershell_encoded_c2,Execution,ALERT,PowerShell Encoded Command: Thực thi lệnh nén Base64 ẩn danh.,T1059.001,Bài 1,2026-11-13T09:54:15.151371
+case_b1_att_04_disable_windefend,DefenseEvasion,ALERT,Vô hiệu hóa tính năng giám sát thời gian thực của Windows Defender.,T1562.001,Bài 1,2026-11-13T09:54:15.152206
+case_b1_att_05_clear_security_log,DefenseEvasion,ALERT,Xóa sạch toàn bộ nhật ký sự kiện Security qua wevtutil.,T1070.001,Bài 1,2026-11-13T09:54:15.153239
+case_b1_att_06_kerberoasting_spn,CredentialAccess,ALERT,Kerberoasting: Yêu cầu vé TGS SPN để bẻ khóa mật khẩu offline.,T1558.003,Bài 1,2026-11-13T09:54:15.154248
+case_b1_att_07_pass_the_hash_cmd,LateralMovement,ALERT,Pass-The-Hash: Thực thi Mimikatz sekurlsa::pth mở phiên dòng lệnh mới.,T1550.002,Bài 1,2026-11-13T09:54:15.155110
+case_b1_att_08_vssadmin_delete_shadows,Impact,ALERT,Ransomware: Xóa toàn bộ bản sao lưu Shadow Copies phục hồi hệ thống.,T1490,Bài 1,2026-11-13T09:54:15.156115
+case_b1_att_09_certutil_decode_exec,DefenseEvasion,ALERT,Certutil Decode: Giải mã tệp văn bản Base64 thành payload thực thi exe.,T1140,Bài 1,2026-11-13T09:54:15.157476
+case_b1_att_10_reg_save_sam_system,CredentialAccess,ALERT,Dump Hive SAM và SYSTEM nhằm trích xuất NTLM hash cục bộ.,T1003.002,Bài 1,2026-11-13T09:54:15.158516
+case_b1_att_11_vaultcmd_theft,CredentialAccess,ALERT,Thu thập danh sách chứng thư lưu trong Windows Credential Manager.,T1555.004,Bài 1,2026-11-13T09:54:15.159498
+case_b1_att_12_bitsadmin_download,Persistence,ALERT,BITSAdmin: Tạo job tải payload mã độc ngầm dưới nền hệ điều hành.,T1197,Bài 1,2026-11-13T09:54:15.161003
+case_b1_att_13_curl_drop_exec,Execution,ALERT,cURL Drop & Exec: Tải mã độc từ server điều khiển và kích hoạt ngầm.,T1105,Bài 1,2026-11-13T09:54:15.162442
+case_b1_att_14_cipher_wipe_slack,Impact,ALERT,Cipher Wipe: Tiêu hủy dữ liệu ổ đĩa bằng tiện ích cipher /w ghi đè vùng trống.,T1485,Bài 1,2026-11-13T09:54:15.163726
+case_b1_att_15_reg_save_lsa_secrets,CredentialAccess,ALERT,Trích xuất LSA Secrets nội bộ từ khóa Registry SECURITY.,T1003.002,Bài 1,2026-11-13T09:54:15.164969
+case_b1_att_16_rubeus_asktgt,CredentialAccess,ALERT,Rubeus: Yêu cầu Kerberos TGT ticket trực tiếp từ Domain Controller.,T1558.003,Bài 1,2026-11-13T09:54:15.165945
+case_b1_att_17_lazagne_all_passwords,CredentialAccess,ALERT,"LaZagne: Tự động vét toàn bộ mật khẩu trình duyệt, Wi-Fi và hệ thống.",T1555,Bài 1,2026-11-13T09:54:15.167184
+case_b1_att_18_net_user_backdoor_add,Persistence,ALERT,Tạo tài khoản quản trị bí mật net user hacker /add.,T1136.001,Bài 1,2026-11-13T09:54:15.168439
+case_b1_att_19_reg_add_run_persistence,Persistence,ALERT,Tạo khóa khởi động cùng hệ thống tại HKCU Run key.,T1547.001,Bài 1,2026-11-13T09:54:15.169481
+case_b1_att_20_schtasks_create_backdoor,Persistence,ALERT,Tạo tác vụ lập lịch Schtasks kích hoạt mã độc định kỳ 10 phút.,T1053.005,Bài 1,2026-11-13T09:54:15.170424
+case_b1_att_21_wmic_shadowcopy_delete,Impact,ALERT,Xóa Shadow Copies bằng tiện ích dòng lệnh WMIC.,T1490,Bài 1,2026-11-13T09:54:15.171440
+case_b1_att_22_wbadmin_delete_catalog,Impact,ALERT,Xóa Catalog sao lưu hệ thống bằng lệnh wbadmin.,T1490,Bài 1,2026-11-13T09:54:15.172486
+case_b1_att_23_fsutil_usn_deletejournal,DefenseEvasion,ALERT,Xóa nhật ký thay đổi tệp tin NTFS USN Journal để xóa dấu vết điều tra.,T1070,Bài 1,2026-11-13T09:54:15.173586
+case_b1_att_24_bcdedit_recovery_disable,Impact,ALERT,Vô hiệu hóa tính năng tự sửa lỗi Windows Recovery trong BCD.,T1490,Bài 1,2026-11-13T09:54:15.176746
+case_b1_att_25_attrib_hide_executable,DefenseEvasion,ALERT,Ẩn giấu tệp mã độc bằng thuộc tính System và Hidden qua attrib +h +s.,T1564.001,Bài 1,2026-11-13T09:54:15.177485
+case_b1_att_26_icacls_deny_admin,DefenseEvasion,ALERT,Chặn quyền truy cập của Quản trị viên vào thư mục mã độc bằng icacls deny.,T1222.001,Bài 1,2026-11-13T09:54:15.178223
+case_b1_att_27_net_stop_windefend,DefenseEvasion,ALERT,Dừng dịch vụ bảo vệ Microsoft Defender Antivirus bằng net stop.,T1562.001,Bài 1,2026-11-13T09:54:15.179222
+case_b1_att_28_fltmc_unload_sysmon,DefenseEvasion,ALERT,Gỡ driver giám sát Sysmon khỏi bộ nhớ qua fltmc unload.,T1562.001,Bài 1,2026-11-13T09:54:15.180190
+case_b1_att_29_sc_stop_wuauserv,DefenseEvasion,ALERT,Dừng và vô hiệu hóa dịch vụ cập nhật vá lỗi Windows Update.,T1562.001,Bài 1,2026-11-13T09:54:15.181663
+case_b1_att_30_netsh_firewall_disable,DefenseEvasion,ALERT,Tắt toàn bộ tường lửa Windows Firewall qua lệnh netsh advfirewall.,T1562.004,Bài 1,2026-11-13T09:54:15.183077
+case_b1_att_31_takeown_system_file,DefenseEvasion,ALERT,Chiếm quyền sở hữu tệp tin hệ thống nhạy cảm bằng takeown /f.,T1222.001,Bài 1,2026-11-13T09:54:15.184091
+case_b1_att_32_powershell_iex_download,Execution,ALERT,PowerShell IEX WebClient Download Cradle trực tiếp từ IP lạ.,T1059.001,Bài 1,2026-11-13T09:54:15.184900
+case_b1_att_33_certutil_urlcache_download,Execution,ALERT,Lợi dụng certutil urlcache để tải binary độc từ server C2.,T1105,Bài 1,2026-11-13T09:54:15.185838
+case_b1_att_34_rundll32_advpack_inf,DefenseEvasion,ALERT,LOLBAS: Thực thi tệp INF độc hại bằng rundll32 gọi advpack.dll.,T1218.011,Bài 1,2026-11-13T09:54:15.186821
+case_b1_att_35_regsvr32_scrobj_sct,DefenseEvasion,ALERT,Tấn công Squiblydoo thực thi scriptlet SCT từ xa qua regsvr32.,T1218.010,Bài 1,2026-11-13T09:54:15.187693
+case_b1_att_36_mshta_inline_vbscript,Execution,ALERT,Thực thi mã độc VBScript trực tiếp trong bộ nhớ qua mshta.exe.,T1218.005,Bài 1,2026-11-13T09:54:15.188914
+case_b1_att_37_powersploit_portscan,Discovery,ALERT,Thực thi module PowerSploit Invoke-Portscan quét dải mạng LAN.,T1046,Bài 1,2026-11-13T09:54:15.190295
+case_b1_att_38_wmic_process_create_cmd,Execution,ALERT,Khởi tạo tiến trình độc ngầm qua wmic process call create.,T1047,Bài 1,2026-11-13T09:54:15.191163
+case_b1_att_39_pwdump7_extract,CredentialAccess,ALERT,Pwdump7: Trích xuất trực tiếp mật khẩu băm từ SAM.,T1003.002,Bài 1,2026-11-13T09:54:15.192370
+case_b1_att_40_secretsdump_remote,CredentialAccess,ALERT,Impacket secretsdump: Trích xuất LSA secrets và cached domain credentials.,T1003.004,Bài 1,2026-11-13T09:54:15.193468
+case_b1_att_41_crackmapexec_exec,LateralMovement,ALERT,CrackMapExec: Quét xác thực SMB và thực thi lệnh từ xa.,T1021.002,Bài 1,2026-11-13T09:54:15.194269
+case_b1_att_42_sharpup_audit,PrivilegeEscalation,ALERT,SharpUp: Quét lỗ hổng cấu hình dịch vụ để leo thang đặc quyền.,T1068,Bài 1,2026-11-13T09:54:15.195935
+case_b1_att_43_winpeas_enum,Discovery,ALERT,WinPEAS: Quét tự động leo thang đặc quyền toàn diện hệ thống Windows.,T1082,Bài 1,2026-11-13T09:54:15.197260
+case_b1_att_44_wsl_linpeas_exec,DefenseEvasion,ALERT,Lợi dụng môi trường máy ảo WSL để chạy script độc linpeas.sh.,T1202,Bài 1,2026-11-13T09:54:15.198062
+case_b1_att_45_cobaltstrike_beacon_spawn,Execution,ALERT,CobaltStrike: Khởi tạo tiến trình Beacon ngầm từ rundll32.,T1059.001,Bài 1,2026-11-13T09:54:15.198819
+case_b1_att_46_empire_stager_launch,Execution,ALERT,PowerShell Empire: Nạp stager độc hại bằng scriptlet base64.,T1059.001,Bài 1,2026-11-13T09:54:15.199578
+case_b1_att_47_metasploit_rev_tcp,Execution,ALERT,Metasploit: Thực thi reverse TCP meterpreter payload trong powershell.,T1059.001,Bài 1,2026-11-13T09:54:15.200325
+case_b1_att_48_mimikatz_sekurlsa_tickets,CredentialAccess,ALERT,Mimikatz: Trích xuất toàn bộ vé Kerberos TGT/TGS trong RAM.,T1003.001,Bài 1,2026-11-13T09:54:15.201133
+case_b1_att_49_powersploit_mimikatz_dump,CredentialAccess,ALERT,Nạp reflective DLL Mimikatz trực tiếp vào bộ nhớ powershell.,T1003.001,Bài 1,2026-11-13T09:54:15.201959
+case_b1_att_50_wevtutil_clear_system,DefenseEvasion,ALERT,Xóa nhật ký sự kiện System và Application bằng wevtutil.,T1070.001,Bài 1,2026-11-13T09:54:15.202838
+case_b1_norm_001_word_open,Benign,NORMAL,Mở Microsoft Word soạn thảo tài liệu nội bộ.,-,Bài 1,2026-11-13T09:54:15.203909
+case_b1_norm_002_excel_calc,Benign,NORMAL,Mở bảng tính Microsoft Excel xử lý báo cáo tài chính.,-,Bài 1,2026-11-13T09:54:15.205497
+case_b1_norm_003_powerpoint_slide,Benign,NORMAL,Trình chiếu slide thuyết trình Microsoft PowerPoint.,-,Bài 1,2026-11-13T09:54:15.206445
+case_b1_norm_004_outlook_mail,Benign,NORMAL,Khởi chạy Microsoft Outlook đọc và phản hồi email.,-,Bài 1,2026-11-13T09:54:15.207398
+case_b1_norm_005_chrome_web,Benign,NORMAL,Duyệt web tra cứu tài liệu học tập bằng Google Chrome.,-,Bài 1,2026-11-13T09:54:15.208539
+case_b1_norm_006_edge_intranet,Benign,NORMAL,Truy cập cổng thông tin nội bộ công ty bằng Microsoft Edge.,-,Bài 1,2026-11-13T09:54:15.209740
+case_b1_norm_007_acrobat_pdf,Benign,NORMAL,Mở tài liệu hợp đồng định dạng PDF bằng Adobe Acrobat Reader.,-,Bài 1,2026-11-13T09:54:15.210569
+case_b1_norm_008_teams_chat,Benign,NORMAL,Đăng nhập và gửi tin nhắn trao đổi công việc trên Microsoft Teams.,-,Bài 1,2026-11-13T09:54:15.211430
+case_b1_norm_009_zoom_join,Benign,NORMAL,Tham gia cuộc họp trực tuyến phòng ban bằng ứng dụng Zoom.,-,Bài 1,2026-11-13T09:54:15.212380
+case_b1_norm_010_notepad_note,Benign,NORMAL,Mở Notepad ghi chép nhanh thông tin công việc hàng ngày.,-,Bài 1,2026-11-13T09:54:15.213493
+case_b1_norm_011_calc_tool,Benign,NORMAL,Sử dụng tiện ích Calculator tính toán số liệu văn phòng.,-,Bài 1,2026-11-13T09:54:15.214333
+case_b1_norm_012_paint_draw,Benign,NORMAL,Mở công cụ Paint chỉnh sửa ảnh chụp màn hình báo cáo.,-,Bài 1,2026-11-13T09:54:15.215595
+case_b1_norm_013_cmd_dir,Benign,NORMAL,Liệt kê danh sách tập tin trong thư mục Documents.,-,Bài 1,2026-11-13T09:54:15.216872
+case_b1_norm_014_cmd_ipconfig,Benign,NORMAL,Kiểm tra địa chỉ IP cấu hình card mạng máy tính cá nhân.,-,Bài 1,2026-11-13T09:54:15.217756
+case_b1_norm_015_cmd_ping_gateway,Benign,NORMAL,Kiểm tra kết nối mạng nội bộ tới Default Gateway.,-,Bài 1,2026-11-13T09:54:15.221293
+case_b1_norm_016_cmd_hostname,Benign,NORMAL,Xem tên định danh máy trạm trong mạng nội bộ.,-,Bài 1,2026-11-13T09:54:15.223506
+case_b1_norm_017_cmd_whoami,Benign,NORMAL,Kiểm tra tên tài khoản người dùng đang đăng nhập hiện tại.,-,Bài 1,2026-11-13T09:54:15.224523
+case_b1_norm_018_cmd_systeminfo,Benign,NORMAL,Xuất thông tin cấu hình phần cứng và phiên bản Windows.,-,Bài 1,2026-11-13T09:54:15.226296
+case_b1_norm_019_cmd_netstat_active,Benign,NORMAL,Xem danh sách các cổng kết nối TCP đang mở hợp lệ.,-,Bài 1,2026-11-13T09:54:15.227187
+case_b1_norm_020_cmd_route_lan,Benign,NORMAL,Kiểm tra bảng định tuyến mạng máy trạm.,-,Bài 1,2026-11-13T09:54:15.228163
+case_b1_norm_021_cmd_arp_table,Benign,NORMAL,Xem bảng ánh xạ địa chỉ IP và MAC Address mạng LAN.,-,Bài 1,2026-11-13T09:54:15.229704
+case_b1_norm_022_cmd_nslookup_dns,Benign,NORMAL,Truy vấn địa chỉ máy chủ DNS nội bộ domain công ty.,-,Bài 1,2026-11-13T09:54:15.230878
+case_b1_norm_023_cmd_tasklist_sys,Benign,NORMAL,Liệt kê danh sách các tiến trình dịch vụ đang hoạt động.,-,Bài 1,2026-11-13T09:54:15.231854
+case_b1_norm_024_cmd_chkdsk_verify,Benign,NORMAL,Kiểm tra tính toàn vẹn hệ thống tập tin NTFS phân vùng C:.,-,Bài 1,2026-11-13T09:54:15.232826
+case_b1_norm_025_cmd_dism_health,Benign,NORMAL,Kiểm tra sức khỏe kho ảnh hệ thống Windows DISM.,-,Bài 1,2026-11-13T09:54:15.233610
+case_b1_norm_026_cmd_sfc_verify,Benign,NORMAL,Quét kiểm tra chữ ký số các tệp tin hệ thống Windows.,-,Bài 1,2026-11-13T09:54:15.234511
+case_b1_norm_027_cmd_gpupdate,Benign,NORMAL,Cập nhật chính sách người dùng từ Active Directory.,-,Bài 1,2026-11-13T09:54:15.235375
+case_b1_norm_028_cmd_robocopy_docs,Benign,NORMAL,Sao chép đồng bộ tài liệu sang ổ đĩa sao lưu ngoài.,-,Bài 1,2026-11-13T09:54:15.236394
+case_b1_norm_029_ps_get_process,Benign,NORMAL,Lấy danh sách các tiến trình chiếm dụng CPU hàng đầu.,-,Bài 1,2026-11-13T09:54:15.238055
+case_b1_norm_030_ps_get_service,Benign,NORMAL,Kiểm tra trạng thái hoạt động của dịch vụ Print Spooler.,-,Bài 1,2026-11-13T09:54:15.238992
+case_b1_norm_031_ps_get_date,Benign,NORMAL,Lấy ngày giờ hiện tại định dạng chuẩn theo múi giờ máy trạm.,-,Bài 1,2026-11-13T09:54:15.239889
+case_b1_norm_032_ps_get_hotfix,Benign,NORMAL,Kiểm tra danh sách các gói cập nhật bảo mật KB đã cài đặt.,-,Bài 1,2026-11-13T09:54:15.240965
+case_b1_norm_033_ps_compress_zip,Benign,NORMAL,Nén thư mục báo cáo cuối tháng thành tệp tin zip.,-,Bài 1,2026-11-13T09:54:15.241781
+case_b1_norm_034_ps_test_connection,Benign,NORMAL,Kiểm tra kết nối cổng web nội bộ port 443 máy chủ ERP.,-,Bài 1,2026-11-13T09:54:15.242605
+case_b1_norm_035_ps_get_disk,Benign,NORMAL,Kiểm tra dung lượng trống trên các ổ đĩa cứng máy trạm.,-,Bài 1,2026-11-13T09:54:15.244215
+case_b1_norm_036_ps_get_eventlog_system,Benign,NORMAL,Xem 5 sự kiện nhật ký gần nhất trong System Event Log.,-,Bài 1,2026-11-13T09:54:15.245094
+case_b1_norm_037_git_status,Benign,NORMAL,Kiểm tra trạng thái các tệp tin mã nguồn trong kho Git.,-,Bài 1,2026-11-13T09:54:15.245849
+case_b1_norm_038_git_pull_main,Benign,NORMAL,Cập nhật mã nguồn mới nhất từ nhánh chính trên GitHub.,-,Bài 1,2026-11-13T09:54:15.246598
+case_b1_norm_039_git_branch_list,Benign,NORMAL,Xem danh sách các nhánh tính năng đang phát triển cục bộ.,-,Bài 1,2026-11-13T09:54:15.247361
+case_b1_norm_040_node_version,Benign,NORMAL,Kiểm tra phiên bản môi trường Node.js và npm cài đặt.,-,Bài 1,2026-11-13T09:54:15.248120
+case_b1_norm_041_python_version,Benign,NORMAL,Kiểm tra phiên bản trình thông dịch Python trong máy tính.,-,Bài 1,2026-11-13T09:54:15.248887
+case_b1_norm_042_pip_list,Benign,NORMAL,Xem danh sách các thư viện Python cài đặt trong môi trường ảo.,-,Bài 1,2026-11-13T09:54:15.249948
+case_b1_norm_043_vscode_editor,Benign,NORMAL,Khởi chạy trình soạn thảo mã nguồn Visual Studio Code.,-,Bài 1,2026-11-13T09:54:15.251258
+case_b1_norm_044_docker_ps,Benign,NORMAL,Xem danh sách các container Docker đang hoạt động cục bộ.,-,Bài 1,2026-11-13T09:54:15.252191
+case_b1_norm_045_kubectl_pods,Benign,NORMAL,Kiểm tra trạng thái các Pods trong cụm Kubernetes phát triển.,-,Bài 1,2026-11-13T09:54:15.253110
+case_b1_norm_046_mvn_clean,Benign,NORMAL,Dọn dẹp tệp tin tạm và biên dịch dự án Java Maven.,-,Bài 1,2026-11-13T09:54:15.254054
+case_b1_norm_047_cargo_build,Benign,NORMAL,Biên dịch dự án ngôn ngữ lập trình Rust release mode.,-,Bài 1,2026-11-13T09:54:15.255062
+case_b1_norm_048_go_build,Benign,NORMAL,Biên dịch mã nguồn ứng dụng Golang thành tệp nhị phân.,-,Bài 1,2026-11-13T09:54:15.256338
+case_b1_norm_049_dotnet_run,Benign,NORMAL,Chạy thử nghiệm dịch vụ web API nền tảng ASP.NET Core.,-,Bài 1,2026-11-13T09:54:15.257867
+case_b1_norm_050_winget_search,Benign,NORMAL,Tìm kiếm gói phần mềm tiện ích trong kho Microsoft Store.,-,Bài 1,2026-11-13T09:54:15.258995
+case_b1_norm_051_word_open,Benign,NORMAL,Mở Microsoft Word soạn thảo tài liệu nội bộ.,-,Bài 1,2026-11-13T09:54:15.259894
+case_b1_norm_052_excel_calc,Benign,NORMAL,Mở bảng tính Microsoft Excel xử lý báo cáo tài chính.,-,Bài 1,2026-11-13T09:54:15.260739
+case_b1_norm_053_powerpoint_slide,Benign,NORMAL,Trình chiếu slide thuyết trình Microsoft PowerPoint.,-,Bài 1,2026-11-13T09:54:15.261830
+case_b1_norm_054_outlook_mail,Benign,NORMAL,Khởi chạy Microsoft Outlook đọc và phản hồi email.,-,Bài 1,2026-11-13T09:54:15.262920
+case_b1_norm_055_chrome_web,Benign,NORMAL,Duyệt web tra cứu tài liệu học tập bằng Google Chrome.,-,Bài 1,2026-11-13T09:54:15.263905
+case_b1_norm_056_edge_intranet,Benign,NORMAL,Truy cập cổng thông tin nội bộ công ty bằng Microsoft Edge.,-,Bài 1,2026-11-13T09:54:15.264925
+case_b1_norm_057_acrobat_pdf,Benign,NORMAL,Mở tài liệu hợp đồng định dạng PDF bằng Adobe Acrobat Reader.,-,Bài 1,2026-11-13T09:54:15.265751
+case_b1_norm_058_teams_chat,Benign,NORMAL,Đăng nhập và gửi tin nhắn trao đổi công việc trên Microsoft Teams.,-,Bài 1,2026-11-13T09:54:15.266476
+case_b1_norm_059_zoom_join,Benign,NORMAL,Tham gia cuộc họp trực tuyến phòng ban bằng ứng dụng Zoom.,-,Bài 1,2026-11-13T09:54:15.267244
+case_b1_norm_060_notepad_note,Benign,NORMAL,Mở Notepad ghi chép nhanh thông tin công việc hàng ngày.,-,Bài 1,2026-11-13T09:54:15.268145
+case_b1_norm_061_calc_tool,Benign,NORMAL,Sử dụng tiện ích Calculator tính toán số liệu văn phòng.,-,Bài 1,2026-11-13T09:54:15.269023
+case_b1_norm_062_paint_draw,Benign,NORMAL,Mở công cụ Paint chỉnh sửa ảnh chụp màn hình báo cáo.,-,Bài 1,2026-11-13T09:54:15.270213
+case_b1_norm_063_cmd_dir,Benign,NORMAL,Liệt kê danh sách tập tin trong thư mục Documents.,-,Bài 1,2026-11-13T09:54:15.271071
+case_b1_norm_064_cmd_ipconfig,Benign,NORMAL,Kiểm tra địa chỉ IP cấu hình card mạng máy tính cá nhân.,-,Bài 1,2026-11-13T09:54:15.272288
+case_b1_norm_065_cmd_ping_gateway,Benign,NORMAL,Kiểm tra kết nối mạng nội bộ tới Default Gateway.,-,Bài 1,2026-11-13T09:54:15.273611
+case_b1_norm_066_cmd_hostname,Benign,NORMAL,Xem tên định danh máy trạm trong mạng nội bộ.,-,Bài 1,2026-11-13T09:54:15.274413
+case_b1_norm_067_cmd_whoami,Benign,NORMAL,Kiểm tra tên tài khoản người dùng đang đăng nhập hiện tại.,-,Bài 1,2026-11-13T09:54:15.275272
+case_b1_norm_068_cmd_systeminfo,Benign,NORMAL,Xuất thông tin cấu hình phần cứng và phiên bản Windows.,-,Bài 1,2026-11-13T09:54:15.276101
+case_b1_norm_069_cmd_netstat_active,Benign,NORMAL,Xem danh sách các cổng kết nối TCP đang mở hợp lệ.,-,Bài 1,2026-11-13T09:54:15.277133
+case_b1_norm_070_cmd_route_lan,Benign,NORMAL,Kiểm tra bảng định tuyến mạng máy trạm.,-,Bài 1,2026-11-13T09:54:15.278326
+case_b1_norm_071_cmd_arp_table,Benign,NORMAL,Xem bảng ánh xạ địa chỉ IP và MAC Address mạng LAN.,-,Bài 1,2026-11-13T09:54:15.279762
+case_b1_norm_072_cmd_nslookup_dns,Benign,NORMAL,Truy vấn địa chỉ máy chủ DNS nội bộ domain công ty.,-,Bài 1,2026-11-13T09:54:15.280657
+case_b1_norm_073_cmd_tasklist_sys,Benign,NORMAL,Liệt kê danh sách các tiến trình dịch vụ đang hoạt động.,-,Bài 1,2026-11-13T09:54:15.281865
+case_b1_norm_074_cmd_chkdsk_verify,Benign,NORMAL,Kiểm tra tính toàn vẹn hệ thống tập tin NTFS phân vùng C:.,-,Bài 1,2026-11-13T09:54:15.282921
+case_b1_norm_075_cmd_dism_health,Benign,NORMAL,Kiểm tra sức khỏe kho ảnh hệ thống Windows DISM.,-,Bài 1,2026-11-13T09:54:15.285170
+case_b1_norm_076_cmd_sfc_verify,Benign,NORMAL,Quét kiểm tra chữ ký số các tệp tin hệ thống Windows.,-,Bài 1,2026-11-13T09:54:15.286516
+case_b1_norm_077_cmd_gpupdate,Benign,NORMAL,Cập nhật chính sách người dùng từ Active Directory.,-,Bài 1,2026-11-13T09:54:15.287696
+case_b1_norm_078_cmd_robocopy_docs,Benign,NORMAL,Sao chép đồng bộ tài liệu sang ổ đĩa sao lưu ngoài.,-,Bài 1,2026-11-13T09:54:15.288903
+case_b1_norm_079_ps_get_process,Benign,NORMAL,Lấy danh sách các tiến trình chiếm dụng CPU hàng đầu.,-,Bài 1,2026-11-13T09:54:15.290071
+case_b1_norm_080_ps_get_service,Benign,NORMAL,Kiểm tra trạng thái hoạt động của dịch vụ Print Spooler.,-,Bài 1,2026-11-13T09:54:15.291021
+case_b1_norm_081_ps_get_date,Benign,NORMAL,Lấy ngày giờ hiện tại định dạng chuẩn theo múi giờ máy trạm.,-,Bài 1,2026-11-13T09:54:15.292620
+case_b1_norm_082_ps_get_hotfix,Benign,NORMAL,Kiểm tra danh sách các gói cập nhật bảo mật KB đã cài đặt.,-,Bài 1,2026-11-13T09:54:15.294189
+case_b1_norm_083_ps_compress_zip,Benign,NORMAL,Nén thư mục báo cáo cuối tháng thành tệp tin zip.,-,Bài 1,2026-11-13T09:54:15.295330
+case_b1_norm_084_ps_test_connection,Benign,NORMAL,Kiểm tra kết nối cổng web nội bộ port 443 máy chủ ERP.,-,Bài 1,2026-11-13T09:54:15.296155
+case_b1_norm_085_ps_get_disk,Benign,NORMAL,Kiểm tra dung lượng trống trên các ổ đĩa cứng máy trạm.,-,Bài 1,2026-11-13T09:54:15.297033
+case_b1_norm_086_ps_get_eventlog_system,Benign,NORMAL,Xem 5 sự kiện nhật ký gần nhất trong System Event Log.,-,Bài 1,2026-11-13T09:54:15.297886
+case_b1_norm_087_git_status,Benign,NORMAL,Kiểm tra trạng thái các tệp tin mã nguồn trong kho Git.,-,Bài 1,2026-11-13T09:54:15.299147
+case_b1_norm_088_git_pull_main,Benign,NORMAL,Cập nhật mã nguồn mới nhất từ nhánh chính trên GitHub.,-,Bài 1,2026-11-13T09:54:15.300292
+case_b1_norm_089_git_branch_list,Benign,NORMAL,Xem danh sách các nhánh tính năng đang phát triển cục bộ.,-,Bài 1,2026-11-13T09:54:15.301222
+case_b1_norm_090_node_version,Benign,NORMAL,Kiểm tra phiên bản môi trường Node.js và npm cài đặt.,-,Bài 1,2026-11-13T09:54:15.302255
+case_b1_norm_091_python_version,Benign,NORMAL,Kiểm tra phiên bản trình thông dịch Python trong máy tính.,-,Bài 1,2026-11-13T09:54:15.303018
+case_b1_norm_092_pip_list,Benign,NORMAL,Xem danh sách các thư viện Python cài đặt trong môi trường ảo.,-,Bài 1,2026-11-13T09:54:15.303779
+case_b1_norm_093_vscode_editor,Benign,NORMAL,Khởi chạy trình soạn thảo mã nguồn Visual Studio Code.,-,Bài 1,2026-11-13T09:54:15.304709
+case_b1_norm_094_docker_ps,Benign,NORMAL,Xem danh sách các container Docker đang hoạt động cục bộ.,-,Bài 1,2026-11-13T09:54:15.305744
+case_b1_norm_095_kubectl_pods,Benign,NORMAL,Kiểm tra trạng thái các Pods trong cụm Kubernetes phát triển.,-,Bài 1,2026-11-13T09:54:15.306733
+case_b1_norm_096_mvn_clean,Benign,NORMAL,Dọn dẹp tệp tin tạm và biên dịch dự án Java Maven.,-,Bài 1,2026-11-13T09:54:15.307696
+case_b1_norm_097_cargo_build,Benign,NORMAL,Biên dịch dự án ngôn ngữ lập trình Rust release mode.,-,Bài 1,2026-11-13T09:54:15.308552
+case_b1_norm_098_go_build,Benign,NORMAL,Biên dịch mã nguồn ứng dụng Golang thành tệp nhị phân.,-,Bài 1,2026-11-13T09:54:15.309426
+case_b1_norm_099_dotnet_run,Benign,NORMAL,Chạy thử nghiệm dịch vụ web API nền tảng ASP.NET Core.,-,Bài 1,2026-11-13T09:54:15.310391
+case_b1_norm_100_winget_search,Benign,NORMAL,Tìm kiếm gói phần mềm tiện ích trong kho Microsoft Store.,-,Bài 1,2026-11-13T09:54:15.311284
+case_b1_norm_101_word_open,Benign,NORMAL,Mở Microsoft Word soạn thảo tài liệu nội bộ.,-,Bài 1,2026-11-13T09:54:15.312101
+case_b1_norm_102_excel_calc,Benign,NORMAL,Mở bảng tính Microsoft Excel xử lý báo cáo tài chính.,-,Bài 1,2026-11-13T09:54:15.313577
+case_b1_norm_103_powerpoint_slide,Benign,NORMAL,Trình chiếu slide thuyết trình Microsoft PowerPoint.,-,Bài 1,2026-11-13T09:54:15.314426
+case_b1_norm_104_outlook_mail,Benign,NORMAL,Khởi chạy Microsoft Outlook đọc và phản hồi email.,-,Bài 1,2026-11-13T09:54:15.315312
+case_b1_norm_105_chrome_web,Benign,NORMAL,Duyệt web tra cứu tài liệu học tập bằng Google Chrome.,-,Bài 1,2026-11-13T09:54:15.316348
+case_b1_norm_106_edge_intranet,Benign,NORMAL,Truy cập cổng thông tin nội bộ công ty bằng Microsoft Edge.,-,Bài 1,2026-11-13T09:54:15.317476
+case_b1_norm_107_acrobat_pdf,Benign,NORMAL,Mở tài liệu hợp đồng định dạng PDF bằng Adobe Acrobat Reader.,-,Bài 1,2026-11-13T09:54:15.318458
+case_b1_norm_108_teams_chat,Benign,NORMAL,Đăng nhập và gửi tin nhắn trao đổi công việc trên Microsoft Teams.,-,Bài 1,2026-11-13T09:54:15.319257
+case_b1_norm_109_zoom_join,Benign,NORMAL,Tham gia cuộc họp trực tuyến phòng ban bằng ứng dụng Zoom.,-,Bài 1,2026-11-13T09:54:15.320330
+case_b1_norm_110_notepad_note,Benign,NORMAL,Mở Notepad ghi chép nhanh thông tin công việc hàng ngày.,-,Bài 1,2026-11-13T09:54:15.321198
+case_b1_norm_111_calc_tool,Benign,NORMAL,Sử dụng tiện ích Calculator tính toán số liệu văn phòng.,-,Bài 1,2026-11-13T09:54:15.322509
+case_b1_norm_112_paint_draw,Benign,NORMAL,Mở công cụ Paint chỉnh sửa ảnh chụp màn hình báo cáo.,-,Bài 1,2026-11-13T09:54:15.323537
+case_b1_norm_113_cmd_dir,Benign,NORMAL,Liệt kê danh sách tập tin trong thư mục Documents.,-,Bài 1,2026-11-13T09:54:15.324722
+case_b1_norm_114_cmd_ipconfig,Benign,NORMAL,Kiểm tra địa chỉ IP cấu hình card mạng máy tính cá nhân.,-,Bài 1,2026-11-13T09:54:15.325701
+case_b1_norm_115_cmd_ping_gateway,Benign,NORMAL,Kiểm tra kết nối mạng nội bộ tới Default Gateway.,-,Bài 1,2026-11-13T09:54:15.327033
+case_b1_norm_116_cmd_hostname,Benign,NORMAL,Xem tên định danh máy trạm trong mạng nội bộ.,-,Bài 1,2026-11-13T09:54:15.327917
+case_b1_norm_117_cmd_whoami,Benign,NORMAL,Kiểm tra tên tài khoản người dùng đang đăng nhập hiện tại.,-,Bài 1,2026-11-13T09:54:15.328693
+case_b1_norm_118_cmd_systeminfo,Benign,NORMAL,Xuất thông tin cấu hình phần cứng và phiên bản Windows.,-,Bài 1,2026-11-13T09:54:15.329452
+case_b1_norm_119_cmd_netstat_active,Benign,NORMAL,Xem danh sách các cổng kết nối TCP đang mở hợp lệ.,-,Bài 1,2026-11-13T09:54:15.330495
+case_b1_norm_120_cmd_route_lan,Benign,NORMAL,Kiểm tra bảng định tuyến mạng máy trạm.,-,Bài 1,2026-11-13T09:54:15.331297
+case_b1_norm_121_cmd_arp_table,Benign,NORMAL,Xem bảng ánh xạ địa chỉ IP và MAC Address mạng LAN.,-,Bài 1,2026-11-13T09:54:15.332173
+case_b1_norm_122_cmd_nslookup_dns,Benign,NORMAL,Truy vấn địa chỉ máy chủ DNS nội bộ domain công ty.,-,Bài 1,2026-11-13T09:54:15.332957
+case_b1_norm_123_cmd_tasklist_sys,Benign,NORMAL,Liệt kê danh sách các tiến trình dịch vụ đang hoạt động.,-,Bài 1,2026-11-13T09:54:15.333777
+case_b1_norm_124_cmd_chkdsk_verify,Benign,NORMAL,Kiểm tra tính toàn vẹn hệ thống tập tin NTFS phân vùng C:.,-,Bài 1,2026-11-13T09:54:15.334643
+case_b1_norm_125_cmd_dism_health,Benign,NORMAL,Kiểm tra sức khỏe kho ảnh hệ thống Windows DISM.,-,Bài 1,2026-11-13T09:54:15.335555
+case_b1_norm_126_cmd_sfc_verify,Benign,NORMAL,Quét kiểm tra chữ ký số các tệp tin hệ thống Windows.,-,Bài 1,2026-11-13T09:54:15.336337
+case_b1_norm_127_cmd_gpupdate,Benign,NORMAL,Cập nhật chính sách người dùng từ Active Directory.,-,Bài 1,2026-11-13T09:54:15.337115
+case_b1_norm_128_cmd_robocopy_docs,Benign,NORMAL,Sao chép đồng bộ tài liệu sang ổ đĩa sao lưu ngoài.,-,Bài 1,2026-11-13T09:54:15.338228
+case_b1_norm_129_ps_get_process,Benign,NORMAL,Lấy danh sách các tiến trình chiếm dụng CPU hàng đầu.,-,Bài 1,2026-11-13T09:54:15.339227
+case_b1_norm_130_ps_get_service,Benign,NORMAL,Kiểm tra trạng thái hoạt động của dịch vụ Print Spooler.,-,Bài 1,2026-11-13T09:54:15.340615
+case_b1_norm_131_ps_get_date,Benign,NORMAL,Lấy ngày giờ hiện tại định dạng chuẩn theo múi giờ máy trạm.,-,Bài 1,2026-11-13T09:54:15.341552
+case_b1_norm_132_ps_get_hotfix,Benign,NORMAL,Kiểm tra danh sách các gói cập nhật bảo mật KB đã cài đặt.,-,Bài 1,2026-11-13T09:54:15.342319
+case_b1_norm_133_ps_compress_zip,Benign,NORMAL,Nén thư mục báo cáo cuối tháng thành tệp tin zip.,-,Bài 1,2026-11-13T09:54:15.343224
+case_b1_norm_134_ps_test_connection,Benign,NORMAL,Kiểm tra kết nối cổng web nội bộ port 443 máy chủ ERP.,-,Bài 1,2026-11-13T09:54:15.344071
+case_b1_norm_135_ps_get_disk,Benign,NORMAL,Kiểm tra dung lượng trống trên các ổ đĩa cứng máy trạm.,-,Bài 1,2026-11-13T09:54:15.344817
+case_b1_norm_136_ps_get_eventlog_system,Benign,NORMAL,Xem 5 sự kiện nhật ký gần nhất trong System Event Log.,-,Bài 1,2026-11-13T09:54:15.345595
+case_b1_norm_137_git_status,Benign,NORMAL,Kiểm tra trạng thái các tệp tin mã nguồn trong kho Git.,-,Bài 1,2026-11-13T09:54:15.346637
+case_b1_norm_138_git_pull_main,Benign,NORMAL,Cập nhật mã nguồn mới nhất từ nhánh chính trên GitHub.,-,Bài 1,2026-11-13T09:54:15.347942
+case_b1_norm_139_git_branch_list,Benign,NORMAL,Xem danh sách các nhánh tính năng đang phát triển cục bộ.,-,Bài 1,2026-11-13T09:54:15.348856
+case_b1_norm_140_node_version,Benign,NORMAL,Kiểm tra phiên bản môi trường Node.js và npm cài đặt.,-,Bài 1,2026-11-13T09:54:15.349667
+case_b1_norm_141_python_version,Benign,NORMAL,Kiểm tra phiên bản trình thông dịch Python trong máy tính.,-,Bài 1,2026-11-13T09:54:15.350467
+case_b1_norm_142_pip_list,Benign,NORMAL,Xem danh sách các thư viện Python cài đặt trong môi trường ảo.,-,Bài 1,2026-11-13T09:54:15.351292
+case_b1_norm_143_vscode_editor,Benign,NORMAL,Khởi chạy trình soạn thảo mã nguồn Visual Studio Code.,-,Bài 1,2026-11-13T09:54:15.352000
+case_b1_norm_144_docker_ps,Benign,NORMAL,Xem danh sách các container Docker đang hoạt động cục bộ.,-,Bài 1,2026-11-13T09:54:15.353064
+case_b1_norm_145_kubectl_pods,Benign,NORMAL,Kiểm tra trạng thái các Pods trong cụm Kubernetes phát triển.,-,Bài 1,2026-11-13T09:54:15.354253
+case_b1_norm_146_mvn_clean,Benign,NORMAL,Dọn dẹp tệp tin tạm và biên dịch dự án Java Maven.,-,Bài 1,2026-11-13T09:54:15.355107
+case_b1_norm_147_cargo_build,Benign,NORMAL,Biên dịch dự án ngôn ngữ lập trình Rust release mode.,-,Bài 1,2026-11-13T09:54:15.356299
+case_b1_norm_148_go_build,Benign,NORMAL,Biên dịch mã nguồn ứng dụng Golang thành tệp nhị phân.,-,Bài 1,2026-11-13T09:54:15.357560
+case_b1_norm_149_dotnet_run,Benign,NORMAL,Chạy thử nghiệm dịch vụ web API nền tảng ASP.NET Core.,-,Bài 1,2026-11-13T09:54:15.358665
+case_b1_norm_150_winget_search,Benign,NORMAL,Tìm kiếm gói phần mềm tiện ích trong kho Microsoft Store.,-,Bài 1,2026-11-13T09:54:15.359661
+case_b2_att_01_bruteforce_to_backdoor,MultiStage,ALERT,Chuỗi: Dò mật khẩu 8 lần -> Đăng nhập thành công -> Tạo tài khoản quản trị backdoor.,T1110 / T1078 / T1136,Bài 2,2026-11-13T09:54:15.362091
+case_b2_att_02_recon_then_mimikatz,MultiStage,ALERT,Chuỗi: Trinh sát hệ thống whoami /priv -> nltest -> Dump LSASS bằng Mimikatz.,T1033 / T1003.001,Bài 2,2026-11-13T09:54:15.362892
+case_b2_att_03_c2_download_log_clear,MultiStage,ALERT,Chuỗi: Tải mã độc ngầm C2 qua WebClient -> Xóa sạch nhật ký Security 1102.,T1059.001 / T1070.001,Bài 2,2026-11-13T09:54:15.363849
+case_b2_att_04_rdp_after_hours_schtasks,MultiStage,ALERT,Chuỗi: RDP ngoài giờ làm việc (LogonType 10) từ IP lạ -> Cài đặt Schtasks Persistence.,T1078.002 / T1053.005,Bài 2,2026-11-13T09:54:15.364699
+case_b2_att_05_bloodhound_kerberoast,MultiStage,ALERT,Chuỗi: Chạy SharpHound thu thập đồ thị AD -> Yêu cầu vé TGS Kerberoasting.,T1087.002 / T1558.003,Bài 2,2026-11-13T09:54:15.365806
+case_b2_att_06_psexec_remote_service,LateralMovement,ALERT,Chuỗi: PsExec kết nối máy chủ quản trị -> Cài đặt remote service PSEXESVC -> Điều khiển.,T1569.002,Bài 2,2026-11-13T09:54:15.366897
+case_b2_att_07_wmic_remote_exec,LateralMovement,ALERT,Chuỗi: WMIC Remote Process Call tạo tiến trình ngầm trên máy chủ kế toán.,T1047,Bài 2,2026-11-13T09:54:15.367850
+case_b2_att_08_dcsync_ticket_theft,CredentialAccess,ALERT,Chuỗi: Tấn công DCSync mô phỏng Domain Controller qua DRSGetNCChanges lấy hash krbtgt.,T1003.006,Bài 2,2026-11-13T09:54:15.368924
+case_b2_att_09_portscan_to_admin_share,LateralMovement,ALERT,Chuỗi: Dò quét cổng SMB 445 -> Kết nối ổ đĩa ẩn C$ -> Thả trojan.exe.,T1046 / T1021.002,Bài 2,2026-11-13T09:54:15.369747
+case_b2_att_10_tar_staging_dns_exfil,Exfiltration,ALERT,Chuỗi: Thu thập tài liệu docx/xlsx thành tệp tar.gz -> Tuồn dữ liệu qua DNS Tunneling.,T1560 / T1048.003,Bài 2,2026-11-13T09:54:15.370808
+case_b2_att_11_wmi_event_persistence,Persistence,ALERT,Chuỗi: Đăng ký WMI Event Subscription (__EventFilter & __CommandLineEventConsumer) tự chạy ngầm.,T1546.003,Bài 2,2026-11-13T09:54:15.371811
+case_b2_att_12_dll_search_order_hijack,Persistence,ALERT,Chuỗi: Ghi đè DLL độc hại vào thư mục phần mềm nghiệp vụ để chiếm quyền khi ứng dụng mở.,T1574.001,Bài 2,2026-11-13T09:54:15.373016
+case_b2_att_13_powerview_domain_trust,Discovery,ALERT,Chuỗi: Sử dụng PowerView trinh sát quan hệ ủy thác Domain Trust và Forest Active Directory.,T1482,Bài 2,2026-11-13T09:54:15.373917
+case_b2_att_14_ssh_tunneling_c2,CommandAndControl,ALERT,Chuỗi: Thiết lập SSH Reverse Tunneling port 4444 vượt tường lửa nội bộ công ty.,T1572,Bài 2,2026-11-13T09:54:15.374768
+case_b2_att_15_printnightmare_spooler,PrivilegeEscalation,ALERT,Chuỗi: Khai thác lỗ hổng PrintNightmare tải driver máy in độc hại leo quyền SYSTEM.,T1068,Bài 2,2026-11-13T09:54:15.375655
+case_b2_att_16_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 16: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.376960
+case_b2_att_17_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 17: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.377835
+case_b2_att_18_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 18: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.378565
+case_b2_att_19_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 19: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.379389
+case_b2_att_20_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 20: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.380499
+case_b2_att_21_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 21: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.381480
+case_b2_att_22_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 22: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.382622
+case_b2_att_23_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 23: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.383471
+case_b2_att_24_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 24: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.385132
+case_b2_att_25_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 25: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.385976
+case_b2_att_26_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 26: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.386754
+case_b2_att_27_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 27: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.387905
+case_b2_att_28_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 28: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.389058
+case_b2_att_29_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 29: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.389938
+case_b2_att_30_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 30: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.390717
+case_b2_att_31_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 31: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.391591
+case_b2_att_32_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 32: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.392429
+case_b2_att_33_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 33: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.393348
+case_b2_att_34_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 34: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.394080
+case_b2_att_35_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 35: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.394832
+case_b2_att_36_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 36: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.395993
+case_b2_att_37_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 37: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.397021
+case_b2_att_38_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 38: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.397835
+case_b2_att_39_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 39: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.398667
+case_b2_att_40_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 40: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.399987
+case_b2_att_41_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 41: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.401737
+case_b2_att_42_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 42: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.403491
+case_b2_att_43_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 43: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.404715
+case_b2_att_44_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 44: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.405752
+case_b2_att_45_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 45: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.406807
+case_b2_att_46_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 46: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.407645
+case_b2_att_47_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 47: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.408399
+case_b2_att_48_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 48: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.409247
+case_b2_att_49_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 49: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.410633
+case_b2_att_50_apt_chain_step,MultiStage,ALERT,Chuỗi tấn công APT bước 50: Trinh sát nội bộ kết hợp leo quyền và duy trì cơ chế xâm nhập.,T1078 / T1059 / T1003,Bài 2,2026-11-13T09:54:15.411618
+case_b2_norm_001_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.412542
+case_b2_norm_002_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.413562
+case_b2_norm_003_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.414438
+case_b2_norm_004_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.415403
+case_b2_norm_005_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.416716
+case_b2_norm_006_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.417896
+case_b2_norm_007_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.418966
+case_b2_norm_008_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.420115
+case_b2_norm_009_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.421017
+case_b2_norm_010_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.422009
+case_b2_norm_011_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.422899
+case_b2_norm_012_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.424336
+case_b2_norm_013_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.425272
+case_b2_norm_014_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.426127
+case_b2_norm_015_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.426983
+case_b2_norm_016_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.429899
+case_b2_norm_017_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.431407
+case_b2_norm_018_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.432724
+case_b2_norm_019_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.433642
+case_b2_norm_020_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.434582
+case_b2_norm_021_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.435566
+case_b2_norm_022_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.436412
+case_b2_norm_023_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.437520
+case_b2_norm_024_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.438638
+case_b2_norm_025_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.439614
+case_b2_norm_026_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.440453
+case_b2_norm_027_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.441261
+case_b2_norm_028_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.442089
+case_b2_norm_029_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.443024
+case_b2_norm_030_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.444362
+case_b2_norm_031_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.445980
+case_b2_norm_032_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.446910
+case_b2_norm_033_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.447729
+case_b2_norm_034_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.448524
+case_b2_norm_035_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.449292
+case_b2_norm_036_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.450062
+case_b2_norm_037_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.450836
+case_b2_norm_038_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.452018
+case_b2_norm_039_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.453560
+case_b2_norm_040_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.454443
+case_b2_norm_041_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.455362
+case_b2_norm_042_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.456491
+case_b2_norm_043_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.457620
+case_b2_norm_044_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.458972
+case_b2_norm_045_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.460093
+case_b2_norm_046_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.460992
+case_b2_norm_047_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.461820
+case_b2_norm_048_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.462570
+case_b2_norm_049_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.463476
+case_b2_norm_050_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.464254
+case_b2_norm_051_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.465317
+case_b2_norm_052_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.466319
+case_b2_norm_053_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.467252
+case_b2_norm_054_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.470143
+case_b2_norm_055_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.471197
+case_b2_norm_056_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.472352
+case_b2_norm_057_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.473860
+case_b2_norm_058_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.474666
+case_b2_norm_059_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.475744
+case_b2_norm_060_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.476604
+case_b2_norm_061_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.477381
+case_b2_norm_062_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.478111
+case_b2_norm_063_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.479217
+case_b2_norm_064_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.480171
+case_b2_norm_065_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.481108
+case_b2_norm_066_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.482019
+case_b2_norm_067_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.484898
+case_b2_norm_068_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.485821
+case_b2_norm_069_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.487512
+case_b2_norm_070_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.488422
+case_b2_norm_071_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.489329
+case_b2_norm_072_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.490232
+case_b2_norm_073_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.491428
+case_b2_norm_074_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.492780
+case_b2_norm_075_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.494128
+case_b2_norm_076_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.495130
+case_b2_norm_077_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.496126
+case_b2_norm_078_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.496938
+case_b2_norm_079_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.497802
+case_b2_norm_080_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.498595
+case_b2_norm_081_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.499427
+case_b2_norm_082_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.501374
+case_b2_norm_083_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.502765
+case_b2_norm_084_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.503709
+case_b2_norm_085_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.504546
+case_b2_norm_086_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.505610
+case_b2_norm_087_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.506694
+case_b2_norm_088_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.508110
+case_b2_norm_089_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.509160
+case_b2_norm_090_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.510017
+case_b2_norm_091_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.510887
+case_b2_norm_092_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.511638
+case_b2_norm_093_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.512421
+case_b2_norm_094_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.513350
+case_b2_norm_095_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.514358
+case_b2_norm_096_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.515385
+case_b2_norm_097_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.516390
+case_b2_norm_098_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.517204
+case_b2_norm_099_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.517970
+case_b2_norm_100_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.518687
+case_b2_norm_101_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.519525
+case_b2_norm_102_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.520312
+case_b2_norm_103_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.521458
+case_b2_norm_104_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.522395
+case_b2_norm_105_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.523490
+case_b2_norm_106_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.524329
+case_b2_norm_107_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.525124
+case_b2_norm_108_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.525912
+case_b2_norm_109_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.526830
+case_b2_norm_110_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.528132
+case_b2_norm_111_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.529011
+case_b2_norm_112_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.529845
+case_b2_norm_113_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.530627
+case_b2_norm_114_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.531659
+case_b2_norm_115_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.532539
+case_b2_norm_116_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.533531
+case_b2_norm_117_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.534620
+case_b2_norm_118_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.535778
+case_b2_norm_119_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.536660
+case_b2_norm_120_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.537451
+case_b2_norm_121_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.538273
+case_b2_norm_122_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.539252
+case_b2_norm_123_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.540228
+case_b2_norm_124_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.541074
+case_b2_norm_125_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.542127
+case_b2_norm_126_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.543019
+case_b2_norm_127_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.543789
+case_b2_norm_128_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.544571
+case_b2_norm_129_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.545346
+case_b2_norm_130_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.546135
+case_b2_norm_131_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.546948
+case_b2_norm_132_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.547810
+case_b2_norm_133_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.549345
+case_b2_norm_134_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.550276
+case_b2_norm_135_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.551097
+case_b2_norm_136_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.551952
+case_b2_norm_137_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.552741
+case_b2_norm_138_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.553506
+case_b2_norm_139_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.554250
+case_b2_norm_140_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.554963
+case_b2_norm_141_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.556465
+case_b2_norm_142_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.557548
+case_b2_norm_143_network_monitoring,Benign,NORMAL,Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.,-,Bài 2,2026-11-13T09:54:15.558379
+case_b2_norm_144_user_migration_flow,Benign,NORMAL,Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.,-,Bài 2,2026-11-13T09:54:15.559113
+case_b2_norm_145_backup_pipeline,Benign,NORMAL,Quy trình nén tệp tin sao lưu cơ sở dữ liệu và copy sang NAS.,-,Bài 2,2026-11-13T09:54:15.559964
+case_b2_norm_146_devops_deploy,Benign,NORMAL,Quy trình DevOps: Pull mã nguồn -> Build npm -> Khởi động Docker Compose.,-,Bài 2,2026-11-13T09:54:15.560705
+case_b2_norm_147_it_admin_remote_support,Benign,NORMAL,Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.,-,Bài 2,2026-11-13T09:54:15.561521
+case_b2_norm_148_nessus_security_audit,Benign,NORMAL,Quy trình quét kiểm kê tài sản hệ thống tự động qua WMI định kỳ.,-,Bài 2,2026-11-13T09:54:15.562573
+case_b2_norm_149_onedrive_sync_flow,Benign,NORMAL,Quy trình đồng bộ hóa dữ liệu đám mây OneDrive doanh nghiệp.,-,Bài 2,2026-11-13T09:54:15.564113
+case_b2_norm_150_db_maintenance_sql,Benign,NORMAL,Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.,-,Bài 2,2026-11-13T09:54:15.565096
+case_b3_att_01_amsi_bypass_patch,DefenseEvasion,ALERT,Vô hiệu hóa AMSI bằng in-memory patch AmsiUtils.amsiInitFailed.,T1562.001,Bài 3,2026-11-13T09:54:15.567121
+case_b3_att_02_cmstp_uac_bypass,PrivilegeEscalation,ALERT,Lợi dụng trình cài đặt mạng CMSTP.exe vượt qua UAC Leo quyền Administrator.,T1548.002,Bài 3,2026-11-13T09:54:15.567858
+case_b3_att_03_fodhelper_uac_bypass,PrivilegeEscalation,ALERT,Lợi dụng fodhelper.exe đọc khóa Registry ms-settings leo quyền UAC ngầm.,T1548.002,Bài 3,2026-11-13T09:54:15.568610
+case_b3_att_04_eventvwr_msc_hijack,PrivilegeEscalation,ALERT,Kỹ thuật UAC Bypass thông qua Eventvwr.exe hijack mscfile shell open.,T1548.002,Bài 3,2026-11-13T09:54:15.569386
+case_b3_att_05_regsvr32_squiblydoo_remote,DefenseEvasion,ALERT,Tấn công Squiblydoo nạp scriptlet từ domain c2 qua regsvr32.,T1218.010,Bài 3,2026-11-13T09:54:15.570721
+case_b3_att_06_mshta_vbscript_inline,Execution,ALERT,Thực thi payload VBScript inline thông qua tiện ích mshta.exe.,T1218.005,Bài 3,2026-11-13T09:54:15.571684
+case_b3_att_07_rundll32_advpack_inf_exec,DefenseEvasion,ALERT,Rundll32 gọi advpack.dll cài đặt payload thông qua INF file.,T1218.011,Bài 3,2026-11-13T09:54:15.572557
+case_b3_att_08_in_memory_reflection_net,Execution,ALERT,Nạp reflective assembly .NET trực tiếp vào bộ nhớ RAM qua [System.Reflection.Assembly]::Load.,T1059.001,Bài 3,2026-11-13T09:54:15.573352
+case_b3_att_09_ransomware_extension_loop,Impact,ALERT,Vòng lặp đổi tên hàng loạt tệp tin người dùng sang đuôi .locked tống tiền.,T1486,Bài 3,2026-11-13T09:54:15.574141
+case_b3_att_10_net_stop_eventlog_disabled,DefenseEvasion,ALERT,Dừng và vô hiệu hóa dịch vụ ghi nhật ký sự kiện Windows EventLog.,T1562.002,Bài 3,2026-11-13T09:54:15.574852
+case_b3_att_11_sticky_keys_backdoor,Persistence,ALERT,Gán cmd.exe vào sethc.exe để mở backdoor màn hình khóa Windows.,T1546.008,Bài 3,2026-11-13T09:54:15.575588
+case_b3_att_12_appcertdlls_persistence,Persistence,ALERT,Ghi tên DLL độc hại vào AppCertDlls để tự nạp cùng mọi tiến trình.,T1546.009,Bài 3,2026-11-13T09:54:15.576680
+case_b3_att_13_shim_sdbinst_install,Persistence,ALERT,Cài đặt cơ sở dữ liệu Shim tùy chỉnh qua sdbinst để hooking tiến trình.,T1546.011,Bài 3,2026-11-13T09:54:15.577487
+case_b3_att_14_com_hijack_clsid,Persistence,ALERT,COM Object Hijacking: Ghi đè InprocServer32 trong HKCU CLSID.,T1546.015,Bài 3,2026-11-13T09:54:15.578280
+case_b3_att_15_obfuscated_string_cradle,Execution,ALERT,PowerShell làm rối chuỗi bằng ký tự backtick và ghép chuỗi d`o`w`n`l`o`a`d.,T1059.001,Bài 3,2026-11-13T09:54:15.579255
+case_b3_att_16_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 16: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.580318
+case_b3_att_17_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 17: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.581186
+case_b3_att_18_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 18: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.582071
+case_b3_att_19_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 19: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.583209
+case_b3_att_20_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 20: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.584347
+case_b3_att_21_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 21: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.585206
+case_b3_att_22_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 22: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.585948
+case_b3_att_23_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 23: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.586705
+case_b3_att_24_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 24: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.587592
+case_b3_att_25_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 25: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.588333
+case_b3_att_26_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 26: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.589277
+case_b3_att_27_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 27: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.590165
+case_b3_att_28_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 28: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.591295
+case_b3_att_29_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 29: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.592228
+case_b3_att_30_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 30: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.593083
+case_b3_att_31_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 31: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.593925
+case_b3_att_32_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 32: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.595976
+case_b3_att_33_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 33: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.597304
+case_b3_att_34_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 34: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.598631
+case_b3_att_35_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 35: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.599476
+case_b3_att_36_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 36: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.600998
+case_b3_att_37_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 37: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.601914
+case_b3_att_38_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 38: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.602929
+case_b3_att_39_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 39: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.604444
+case_b3_att_40_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 40: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.605536
+case_b3_att_41_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 41: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.606467
+case_b3_att_42_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 42: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.607497
+case_b3_att_43_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 43: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.608700
+case_b3_att_44_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 44: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.609730
+case_b3_att_45_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 45: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.611434
+case_b3_att_46_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 46: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.612935
+case_b3_att_47_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 47: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.614086
+case_b3_att_48_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 48: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.614971
+case_b3_att_49_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 49: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.615795
+case_b3_att_50_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 50: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.616572
+case_b3_norm_001_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.617489
+case_b3_norm_002_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.619670
+case_b3_norm_003_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.620969
+case_b3_norm_004_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.622022
+case_b3_norm_005_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.622988
+case_b3_norm_006_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.623984
+case_b3_norm_007_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.625035
+case_b3_norm_008_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.626274
+case_b3_norm_009_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.627219
+case_b3_norm_010_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.628536
+case_b3_norm_011_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.629725
+case_b3_norm_012_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.630876
+case_b3_norm_013_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.632198
+case_b3_norm_014_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.633201
+case_b3_norm_015_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.634345
+case_b3_norm_016_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.635398
+case_b3_norm_017_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.636363
+case_b3_norm_018_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.637203
+case_b3_norm_019_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.638110
+case_b3_norm_020_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.639609
+case_b3_norm_021_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.640624
+case_b3_norm_022_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.641440
+case_b3_norm_023_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.642410
+case_b3_norm_024_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.643428
+case_b3_norm_025_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.644447
+case_b3_norm_026_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.645196
+case_b3_norm_027_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.646652
+case_b3_norm_028_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.647472
+case_b3_norm_029_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.648359
+case_b3_norm_030_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.649134
+case_b3_norm_031_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.650040
+case_b3_norm_032_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.650848
+case_b3_norm_033_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.651652
+case_b3_norm_034_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.652994
+case_b3_norm_035_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.653886
+case_b3_norm_036_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.654644
+case_b3_norm_037_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.655409
+case_b3_norm_038_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.656084
+case_b3_norm_039_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.656823
+case_b3_norm_040_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.657568
+case_b3_norm_041_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.658425
+case_b3_norm_042_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.659212
+case_b3_norm_043_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.660460
+case_b3_norm_044_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.661240
+case_b3_norm_045_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.661976
+case_b3_norm_046_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.663280
+case_b3_norm_047_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.664017
+case_b3_norm_048_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.664692
+case_b3_norm_049_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.665486
+case_b3_norm_050_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.666237
+case_b3_norm_051_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.667732
+case_b3_norm_052_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.668664
+case_b3_norm_053_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.669793
+case_b3_norm_054_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.670523
+case_b3_norm_055_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.671251
+case_b3_norm_056_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.672276
+case_b3_norm_057_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.673122
+case_b3_norm_058_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.674613
+case_b3_norm_059_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.675455
+case_b3_norm_060_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.676208
+case_b3_norm_061_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.677229
+case_b3_norm_062_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.678053
+case_b3_norm_063_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.678777
+case_b3_norm_064_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.679731
+case_b3_norm_065_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.680898
+case_b3_norm_066_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.681798
+case_b3_norm_067_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.682854
+case_b3_norm_068_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.683612
+case_b3_norm_069_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.684365
+case_b3_norm_070_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.685150
+case_b3_norm_071_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.688167
+case_b3_norm_072_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.689510
+case_b3_norm_073_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.690633
+case_b3_norm_074_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.691567
+case_b3_norm_075_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.693409
+case_b3_norm_076_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.694852
+case_b3_norm_077_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.695844
+case_b3_norm_078_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.696623
+case_b3_norm_079_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.698053
+case_b3_norm_080_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.699660
+case_b3_norm_081_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.700851
+case_b3_norm_082_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.702097
+case_b3_norm_083_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.703404
+case_b3_norm_084_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.704454
+case_b3_norm_085_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.705367
+case_b3_norm_086_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.706124
+case_b3_norm_087_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.706843
+case_b3_norm_088_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.707765
+case_b3_norm_089_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.709301
+case_b3_norm_090_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.710183
+case_b3_norm_091_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.711005
+case_b3_norm_092_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.712176
+case_b3_norm_093_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.713007
+case_b3_norm_094_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.713858
+case_b3_norm_095_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.714670
+case_b3_norm_096_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.716189
+case_b3_norm_097_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.717166
+case_b3_norm_098_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.718206
+case_b3_norm_099_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.719070
+case_b3_norm_100_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.719983
+case_b3_norm_101_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.720871
+case_b3_norm_102_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.721657
+case_b3_norm_103_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.722866
+case_b3_norm_104_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.724200
+case_b3_norm_105_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.725136
+case_b3_norm_106_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.726245
+case_b3_norm_107_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.727099
+case_b3_norm_108_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.728220
+case_b3_norm_109_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.729465
+case_b3_norm_110_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.730305
+case_b3_norm_111_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.731280
+case_b3_norm_112_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.732200
+case_b3_norm_113_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.732933
+case_b3_norm_114_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.733655
+case_b3_norm_115_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.734334
+case_b3_norm_116_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.735026
+case_b3_norm_117_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.735966
+case_b3_norm_118_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.737161
+case_b3_norm_119_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.737988
+case_b3_norm_120_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.738825
+case_b3_norm_121_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.739606
+case_b3_norm_122_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.740400
+case_b3_norm_123_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.741151
+case_b3_norm_124_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.742059
+case_b3_norm_125_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.742837
+case_b3_norm_126_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.743658
+case_b3_norm_127_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.744844
+case_b3_norm_128_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.745674
+case_b3_norm_129_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.746458
+case_b3_norm_130_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.747154
+case_b3_norm_131_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.747841
+case_b3_norm_132_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.748561
+case_b3_norm_133_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.749298
+case_b3_norm_134_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.750415
+case_b3_norm_135_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.751346
+case_b3_norm_136_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.752203
+case_b3_norm_137_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.753132
+case_b3_norm_138_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.754001
+case_b3_norm_139_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.754939
+case_b3_norm_140_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.755879
+case_b3_norm_141_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.756673
+case_b3_norm_142_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.757454
+case_b3_norm_143_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.758211
+case_b3_norm_144_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.759473
+case_b3_norm_145_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.760603
+case_b3_norm_146_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.761524
+case_b3_norm_147_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.762296
+case_b3_norm_148_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.762978
+case_b3_norm_149_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.763676
+case_b3_norm_150_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.764383

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_020_cmd_route_lan",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Kiểm tra bảng định tuyến mạng máy trạm.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.228163"
+}

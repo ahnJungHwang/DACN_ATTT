@@ -166,9 +166,10 @@ $lastSysRecord = [long]0
 
 # Ma su kien thu thap
 #  Security: 4624/4625/4648 dang nhap, 4688 tao tien trinh, 1102 xoa nhat ky,
-#            4720 tao tai khoan, 4728/4732 them vao nhom, 4698 tao scheduled task
+#            4720 tao / 4722 bat tai khoan, 4728/4732/4756 them vao nhom global/local/universal,
+#            4698 tao scheduled task
 #  System  : 7045 cai service moi, 104 xoa nhat ky System
-$SecurityIds = 4624, 4625, 4648, 4688, 1102, 4720, 4728, 4732, 4698
+$SecurityIds = 4624, 4625, 4648, 4688, 1102, 4720, 4722, 4728, 4732, 4756, 4698
 $SystemIds = 7045, 104
 
 $cycleCount = 0

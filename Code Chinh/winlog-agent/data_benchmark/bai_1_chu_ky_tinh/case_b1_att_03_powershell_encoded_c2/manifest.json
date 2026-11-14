@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_03_powershell_encoded_c2",
+  "category": "Execution",
+  "ground_truth": "ALERT",
+  "description": "PowerShell Encoded Command: Thực thi lệnh nén Base64 ẩn danh.",
+  "mitre_technique": "T1059.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.151371"
+}

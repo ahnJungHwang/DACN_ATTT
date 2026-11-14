@@ -42,14 +42,14 @@ SUPPORTED_EVENT_IDS = {
     4624, 4625, 4648, 4688, 4104,      # đăng nhập, tạo tiến trình, PowerShell
     1102, 104,                          # xoá nhật ký Security / System
     7045,                               # cài service mới (System)
-    4720, 4728, 4732,                   # tạo tài khoản, thêm vào nhóm global / local
+    4720, 4722, 4728, 4732, 4756,       # tạo / bật tài khoản, thêm vào nhóm global / local / universal
     4698,                               # tạo scheduled task
 }
 MAX_FIELD_CHARS = 2000  # cắt TaskContent (file XML định nghĩa task) để vừa context
 
 FIELDS = {
     "ServiceName", "ImagePath", "ServiceType", "StartType", "AccountName",   # 7045
-    "MemberName", "MemberSid", "TargetSid", "SamAccountName",                # 4720 / 4728 / 4732
+    "MemberName", "MemberSid", "TargetSid", "SamAccountName", "GroupName",   # 4720 / 4722 / 4728 / 4732 / 4756
     "TaskName", "TaskContent",                                               # 4698
     "Channel", "BackupPath",                                                 # 104 / 1102 (UserData)
     "SubjectUserSid",
@@ -93,14 +93,58 @@ NOISE_PROCESSES = {
     "winstore.app.exe", "mobsync.exe", "securityhealthhost.exe",
 }
 
+# Ngưỡng tương quan brute force theo cửa sổ thời gian (gộp từ bản update 13/11/2026).
+# Đăng nhập mạng (LogonType 3/10) sai liên tục nghi ngờ hơn gõ sai tại bàn phím nên ngưỡng thấp hơn.
+CORRELATION_WINDOW_SECONDS = int(os.getenv("CORRELATION_WINDOW_SECONDS", "300"))
+NETWORK_BRUTE_FORCE_THRESHOLD = int(os.getenv("NETWORK_BRUTE_FORCE_THRESHOLD", "3"))
+INTERACTIVE_BRUTE_FORCE_THRESHOLD = int(os.getenv("INTERACTIVE_BRUTE_FORCE_THRESHOLD", "5"))
+POST_BRUTE_SUCCESS_WINDOW_SECONDS = int(os.getenv("POST_BRUTE_SUCCESS_WINDOW_SECONDS", "600"))
+
+# Trọng số rủi ro theo giai đoạn (điểm tham khảo 0-100, cộng dồn rồi chặn trên 100).
+# Nhãn ALERT/NORMAL vẫn do cơ chế luật mạnh + AI quyết định; risk_score chỉ để xếp hạng / hiển thị.
+STAGE_RISK_WEIGHTS = {
+    "Password Brute Force (MITRE T1110)": 75,
+    "Multiple Failed Logons (MITRE T1110)": 30,
+    "Password Spraying (MITRE T1110.003)": 75,
+    "Successful Logon Post-Brute Force (MITRE T1078)": 25,
+    "Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098)": 90,
+    "Account Creation Command (MITRE T1136)": 30,
+    "PowerShell / Command and Scripting Interpreter (MITRE T1059.001)": 75,
+    "OS Credential Dumping (MITRE T1003)": 100,
+    "Impair Defenses (MITRE T1562.001)": 95,
+    "Indicator Removal: Clear Windows Event Logs (MITRE T1070.001)": 95,
+    "Persistence (MITRE T1547.001 / T1053.005)": 85,
+    "System Reconnaissance (MITRE T1033)": 40,
+    "Inhibit System Recovery (MITRE T1490)": 95,
+    "Accessibility Features / Sticky Keys Backdoor (MITRE T1546.008)": 90,
+    "In-Memory Assembly Execution (MITRE T1055)": 90,
+    "Credential Access / Kerberoasting (MITRE T1558.003)": 85,
+    "LOLBAS / Script Proxy Execution (MITRE T1218)": 90,
+    "Deobfuscate/Decode Files (MITRE T1140)": 85,
+    "Lateral Movement / Remote Execution (MITRE T1569 / T1047 / T1021)": 90,
+    "Network Discovery / Port Scanning (MITRE T1046)": 80,
+    "Ingress Tool Transfer (MITRE T1105 / T1197)": 85,
+    "Data Collection & Exfiltration (MITRE T1560 / T1048)": 85,
+    "Impact / Data Destruction & Ransomware (MITRE T1485 / T1486)": 95,
+    "UAC Bypass (MITRE T1548.002)": 90,
+    "Create or Modify System Process: Malicious Service (MITRE T1543.003 / T1569.002)": 95,
+    "New Service Installed (MITRE T1543.003)": 30,
+    "Create Account: Local Account (MITRE T1136.001)": 30,
+    "Account Manipulation: Add to Privileged Group (MITRE T1098)": 90,
+    "Scheduled Task Persistence (MITRE T1053.005)": 85,
+    "New Scheduled Task (MITRE T1053.005)": 25,
+}
+ALERT_RISK_THRESHOLD = int(os.getenv("ALERT_RISK_THRESHOLD", "70"))
+REVIEW_RISK_THRESHOLD = int(os.getenv("REVIEW_RISK_THRESHOLD", "40"))
+
 
 class BatchVerdict(BaseModel):
     """Schema Reasoning-First: Mô hình suy luận và liệt kê bằng chứng trước khi kết luận nhãn."""
     model_config = ConfigDict(extra="forbid")
 
     detected_stages: list[str] = Field(
-        max_length=5,
-        description="Danh sách các giai đoạn tấn công phát hiện được (ví dụ: Password Brute Force, Reconnaissance, Backdoor Creation, Privilege Escalation, Malware Execution)"
+        max_length=6,
+        description="Danh sách các giai đoạn tấn công phát hiện được (ví dụ: Password Brute Force, Reconnaissance, Backdoor Creation, Privilege Escalation, OS Credential Dumping, Malware Execution, Persistence)"
     )
     evidence_refs: list[str] = Field(
         max_length=30,
@@ -123,11 +167,16 @@ class Verdict(BaseModel):
     """Schema tổng hợp cuối cùng trả về cho client / API."""
     model_config = ConfigDict(extra="ignore")
 
-    label: Literal["ALERT", "NORMAL", "UNKNOWN"]
+    # REVIEW: AI không kết luận được nhưng bộ luật có tín hiệu yếu đủ điểm rủi ro -> chuyển chuyên gia xem
+    label: Literal["ALERT", "REVIEW", "NORMAL", "UNKNOWN"]
     reason: str = Field(min_length=1)
     evidence_refs: list[str]
     limitations: list[str]
     detected_stages: list[str] = Field(default_factory=list)
+    decision_source: str = ""                         # rule+ai / ai / rule / error
+    detection_source: str = ""                        # bí danh tương thích bản update (hybrid / rule / ai_model)
+    risk_score: int = Field(default=0, ge=0, le=100)  # điểm rủi ro tham khảo
+    confidence: float = Field(default=0.0, ge=0.0, le=1.0)
 
 
 def is_benign_noise(event: dict) -> bool:
@@ -175,16 +224,19 @@ def is_benign_noise(event: dict) -> bool:
 
 
 def read_events(case_dir: Path) -> list[dict]:
-    """Đọc các sự kiện được hỗ trợ từ security.xml, powershell.xml (bắt buộc) và system.xml (tuỳ chọn)."""
+    """Đọc các sự kiện được hỗ trợ từ security.xml, powershell.xml và system.xml.
+
+    Mỗi file đều tuỳ chọn (một ca có thể chỉ có 1 kênh log, vd chỉ powershell.xml); phải có ít nhất 1 file.
+    """
     events = []
+    found_files = 0
 
     for filename in ("security.xml", "powershell.xml", "system.xml"):
         path = case_dir / filename
 
         if not path.is_file():
-            if filename == "system.xml":
-                continue  # client cũ / ca cũ không có log System
-            raise ValueError(f"Missing file: {filename}")
+            continue  # ca / client cũ có thể không có kênh log này
+        found_files += 1
 
         try:
             root = ET.parse(path).getroot()
@@ -258,6 +310,9 @@ def read_events(case_dir: Path) -> list[dict]:
                 "data": data,
             })
 
+    if not found_files:
+        raise ValueError("Missing file: security.xml / powershell.xml / system.xml")
+
     if not events:
         raise ValueError("No supported events found")
 
@@ -279,144 +334,318 @@ def read_events(case_dir: Path) -> list[dict]:
     return events
 
 
+def _event_time(event: dict) -> datetime:
+    """Mốc thời gian (aware) của một sự kiện đã chuẩn hoá."""
+    return datetime.fromisoformat(event["time"].replace("Z", "+00:00"))
+
+
+def _clean_identity(value: str | None) -> str:
+    value = (value or "").strip().lower()
+    return "" if value in {"", "-", "::1", "127.0.0.1"} else value
+
+
+def _qualifying_clusters(grouped_events: dict[tuple[str, str], list[dict]]) -> list[dict]:
+    """Tìm chuỗi đăng nhập sai lặp lại của cùng một danh tính (tài khoản hoặc IP) trong cửa sổ trượt."""
+    clusters = []
+    for (kind, value), group in grouped_events.items():
+        ordered = sorted(group, key=_event_time)
+        for start in range(len(ordered)):
+            threshold = (
+                NETWORK_BRUTE_FORCE_THRESHOLD
+                if ordered[start]["data"].get("LogonType") in {"3", "10"}
+                else INTERACTIVE_BRUTE_FORCE_THRESHOLD
+            )
+            window = []
+            start_time = _event_time(ordered[start])
+            for event in ordered[start:]:
+                if (_event_time(event) - start_time).total_seconds() > CORRELATION_WINDOW_SECONDS:
+                    break
+                window.append(event)
+            if len(window) >= threshold:
+                clusters.append({"kind": kind, "value": value, "events": window})
+                break
+    return clusters
+
+
+ADMIN_GROUP_WORDS = ("administrators", "administratoren", "administrateurs")
+_EXE_SUFFIX_RE = re.compile(r"\.exe(?=[\s\"']|$)")
+
+# Host nội bộ: IP private, localhost, tên miền .local/.lan/.corp/.internal
+_URL_HOST_RE = re.compile(r"(?:https?|ftp)://([^/\s'\"\\:]+)", re.IGNORECASE)
+_INTERNAL_HOST_RE = re.compile(
+    r"^(?:localhost|127\.\d+\.\d+\.\d+|10\.\d+\.\d+\.\d+|192\.168\.\d+\.\d+|172\.(?:1[6-9]|2\d|3[01])\.\d+\.\d+"
+    r"|[^/]*\.(?:local|lan|corp|internal|intranet)|[^/]*\.corp\.[a-z.]+)$"
+)
+
+
+def _url_hosts(text: str) -> list[str]:
+    return [h.lower().rstrip(".") for h in _URL_HOST_RE.findall(text)]
+
+
+def _has_external_url(text: str) -> bool:
+    """True khi có ít nhất một URL trỏ ra ngoài mạng nội bộ."""
+    return any(not _INTERNAL_HOST_RE.match(h) for h in _url_hosts(text))
+
+
 def correlate_security_events(events: list[dict]) -> dict:
     """
-    Quy tắc phân tích chuỗi sự kiện bảo mật (Security Correlation Engine):
-    Phát hiện các giai đoạn tấn công kinh điển theo MITRE ATT&CK.
+    Bộ luật tương quan (Security Correlation Engine) theo MITRE ATT&CK.
+    - strong_stages: tín hiệu chắc chắn -> hệ thống luôn ALERT (lưới an toàn).
+    - các stage còn lại là tín hiệu YẾU: AI quyết định, luật chỉ gợi ý.
+    - risk_score: điểm rủi ro tham khảo (cộng trọng số STAGE_RISK_WEIGHTS, chặn 100).
+    Gộp 14/11/2026: brute force theo cửa sổ thời gian + đăng nhập sau brute force theo danh tính,
+    17 nhóm chữ ký MITRE chi tiết (thay cho 1 stage "Malware Execution" cũ), nhóm universal 4756.
     """
-    # strong_stages: tín hiệu chắc chắn -> luôn ALERT (lưới an toàn).
-    # Các stage còn lại là tín hiệu YẾU, mô hình AI sẽ quyết định.
     findings = {
         "stages": [],
         "strong_stages": [],
         "evidence_refs": [],
         "details": [],
+        "risk_score": 0,
+        "risk_factors": [],
     }
 
-    # 1. Phát hiện Dò mật khẩu (Password Brute Force - MITRE T1110)
-    failed_logons = [
-        e for e in events if e.get("event_id") == 4625
-    ]
-    if len(failed_logons) >= 3:
-        target_users = list(dict.fromkeys(
-            e["data"].get("TargetUserName") for e in failed_logons if e["data"].get("TargetUserName")
-        ))
-        refs = [e["event_ref"] for e in failed_logons]
-        user_str = ", ".join(target_users) if target_users else "unknown user"
-        findings["stages"].append("Password Brute Force (MITRE T1110)")
-        findings["strong_stages"].append("Password Brute Force (MITRE T1110)")
+    def add(stage: str, evs: list[dict], detail: str, strong: bool) -> None:
+        refs = list(dict.fromkeys(e["event_ref"] for e in evs))
+        if stage not in findings["stages"]:
+            findings["stages"].append(stage)
+        if strong and stage not in findings["strong_stages"]:
+            findings["strong_stages"].append(stage)
         findings["evidence_refs"].extend(refs)
-        findings["details"].append(
-            f"Phát hiện {len(failed_logons)} lần đăng nhập thất bại liên tiếp (Event 4625) nhằm vào tài khoản '{user_str}'. Bằng chứng: {', '.join(refs)}."
-        )
+        findings["details"].append(f"{detail} Bằng chứng: {', '.join(refs)}.")
 
-    # 1b. Password Spraying (MITRE T1110.003): một mật khẩu thử trên NHIỀU tài khoản khác nhau
-    #     (khác brute force dò một tài khoản). >=3 tài khoản khác nhau bị đăng nhập sai -> chắc chắn.
+    # 1. Dò mật khẩu (MITRE T1110): >= ngưỡng lần 4625 cùng tài khoản hoặc cùng IP trong cửa sổ thời gian
+    failed_logons = [e for e in events if e.get("event_id") == 4625]
+    grouped_failures: dict[tuple[str, str], list[dict]] = {}
+    for event in failed_logons:
+        data = event["data"]
+        user = _clean_identity(data.get("TargetUserName"))
+        source_ip = _clean_identity(data.get("IpAddress"))
+        logon_type = data.get("LogonType", "")
+        if user:
+            grouped_failures.setdefault(("user", f"{user}|{logon_type}"), []).append(event)
+        if source_ip:
+            # nhóm theo IP bắt được cả password spraying nhiều tài khoản từ một nguồn
+            grouped_failures.setdefault(("ip", f"{source_ip}|{logon_type}"), []).append(event)
+
+    brute_clusters = _qualifying_clusters(grouped_failures)
+    brute_events = sorted(
+        {e["event_ref"]: e for c in brute_clusters for e in c["events"]}.values(), key=_event_time
+    )
+    if brute_events:
+        target_users = list(dict.fromkeys(
+            e["data"].get("TargetUserName") for e in brute_events if e["data"].get("TargetUserName")
+        ))
+        add("Password Brute Force (MITRE T1110)", brute_events,
+            f"Phát hiện {len(brute_events)} lần đăng nhập thất bại có tương quan trong "
+            f"{CORRELATION_WINDOW_SECONDS // 60} phút (Event 4625) nhằm vào tài khoản "
+            f"'{', '.join(target_users) if target_users else 'unknown user'}'.", strong=True)
+    elif len(failed_logons) >= 3:
+        # Nhiều lần sai nhưng không dồn dập cùng tài khoản/IP trong cửa sổ -> tín hiệu yếu, để AI xét
+        add("Multiple Failed Logons (MITRE T1110)", failed_logons,
+            f"Có {len(failed_logons)} lần đăng nhập thất bại (Event 4625) nhưng không dồn dập cho cùng "
+            f"tài khoản/IP trong {CORRELATION_WINDOW_SECONDS // 60} phút - cần xét ngữ cảnh.", strong=False)
+
+    # 1b. Password Spraying (MITRE T1110.003): sai mật khẩu trên >= 3 tài khoản khác nhau
     sprayed_users = list(dict.fromkeys(
         (e["data"].get("TargetUserName") or "").lower() for e in failed_logons
         if (e["data"].get("TargetUserName") or "") not in ("", "-")
     ))
     if len(sprayed_users) >= 3:
-        refs = [e["event_ref"] for e in failed_logons]
-        findings["stages"].append("Password Spraying (MITRE T1110.003)")
-        findings["strong_stages"].append("Password Spraying (MITRE T1110.003)")
-        findings["evidence_refs"].extend(refs)
-        findings["details"].append(
+        add("Password Spraying (MITRE T1110.003)", failed_logons,
             f"Phát hiện đăng nhập thất bại (Event 4625) trên {len(sprayed_users)} tài khoản khác nhau "
-            f"({', '.join(sprayed_users[:8])}) -> dấu hiệu Password Spraying. Bằng chứng: {', '.join(refs)}."
-        )
+            f"({', '.join(sprayed_users[:8])}) -> dấu hiệu Password Spraying.", strong=True)
 
-    # 2. Phát hiện Đăng nhập thành công sau chuỗi dò quét (Valid Accounts - MITRE T1078)
-    if failed_logons:
-        last_failed_ref = failed_logons[-1]["event_ref"]
-        success_logons = [
-            e for e in events
-            if e.get("event_id") == 4624 and e["event_ref"] > last_failed_ref
-            and e["data"].get("LogonType") not in ("5", "")
-        ]
+    # 2. Đăng nhập thành công ngay sau chuỗi brute force, khớp đúng tài khoản/IP và kiểu đăng nhập (MITRE T1078)
+    if brute_clusters:
+        success_logons = []
+        for success in (e for e in events if e.get("event_id") == 4624):
+            s_user = _clean_identity(success["data"].get("TargetUserName"))
+            s_ip = _clean_identity(success["data"].get("IpAddress"))
+            s_type = success["data"].get("LogonType", "")
+            for cluster in brute_clusters:
+                delay = (_event_time(success) - _event_time(cluster["events"][-1])).total_seconds()
+                c_value, c_type = cluster["value"].rsplit("|", 1)
+                same_identity = (cluster["kind"] == "user" and s_user == c_value) or (
+                    cluster["kind"] == "ip" and s_ip == c_value)
+                if same_identity and s_type == c_type and 0 <= delay <= POST_BRUTE_SUCCESS_WINDOW_SECONDS:
+                    success_logons.append(success)
+                    break
         if success_logons:
-            refs = [e["event_ref"] for e in success_logons]
-            findings["stages"].append("Successful Logon Post-Brute Force (MITRE T1078)")
-            # Chỉ chắc chắn khi trước đó thật sự có brute force (>=3 lần sai); gõ sai 1-2 lần là tín hiệu yếu
-            if len(failed_logons) >= 3:
-                findings["strong_stages"].append("Successful Logon Post-Brute Force (MITRE T1078)")
-            findings["evidence_refs"].extend(refs)
-            findings["details"].append(
-                f"Phát hiện đăng nhập thành công (Event 4624) ngay sau chuỗi đăng nhập thất bại. Bằng chứng: {', '.join(refs)}."
-            )
+            add("Successful Logon Post-Brute Force (MITRE T1078)", success_logons,
+                "Phát hiện đăng nhập thành công (Event 4624) ngay sau chuỗi đăng nhập thất bại.", strong=True)
 
-    # 3. Phát hiện Tạo Backdoor / Leo thang đặc quyền (Backdoor / Account Manipulation - MITRE T1136, T1098)
-    backdoor_events = [
+    # 3. Tạo backdoor / leo thang (MITRE T1136 / T1098) qua dòng lệnh
+    account_cmds = [
         e for e in events
-        if e.get("event_id") == 4688 and (
-            "/add" in (e["data"].get("CommandLine") or "").lower() and
-            any(k in (e["data"].get("CommandLine") or "").lower() for k in ("net user", "net1 user", "net localgroup", "net1 localgroup"))
-        )
+        if e.get("event_id") == 4688
+        and "/add" in (e["data"].get("CommandLine") or "").lower()
+        and any(k in (e["data"].get("CommandLine") or "").lower()
+                for k in ("net user", "net1 user", "net localgroup", "net1 localgroup"))
     ]
-    if backdoor_events:
-        refs = [e["event_ref"] for e in backdoor_events]
-        findings["stages"].append("Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098)")
-        # Thêm vào nhóm Administrators là chắc chắn; chỉ tạo user có thể là IT tạo tài khoản -> để AI xét ngữ cảnh
-        if any("administrators" in (e["data"].get("CommandLine") or "").lower() for e in backdoor_events):
-            findings["strong_stages"].append("Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098)")
-        findings["evidence_refs"].extend(refs)
-        findings["details"].append(
-            f"Phát hiện lệnh tạo tài khoản hoặc gán quyền quản trị cục bộ (net user /add, net localgroup Administrators /add). Bằng chứng: {', '.join(refs)}."
-        )
+    if account_cmds:
+        def _privileged(e: dict) -> bool:
+            cmd = (e["data"].get("CommandLine") or "").lower()
+            # thêm vào nhóm Administrators, hoặc tạo tài khoản qua thực thi từ xa (wmic process call create)
+            return any(g in cmd for g in ADMIN_GROUP_WORDS) or ("wmic" in cmd and "process call create" in cmd)
+        privileged = [e for e in account_cmds if _privileged(e)]
+        if privileged:
+            add("Backdoor Creation / Privilege Escalation (MITRE T1136 / T1098)", account_cmds,
+                "Phát hiện lệnh tạo tài khoản và/hoặc gán quyền quản trị cục bộ "
+                "(net localgroup Administrators /add, hoặc net user /add qua wmic).", strong=True)
+        else:
+            # IT tạo tài khoản nhân viên trực tiếp là bình thường -> để AI xét ngữ cảnh
+            add("Account Creation Command (MITRE T1136)", account_cmds,
+                "Có lệnh tạo tài khoản (net user /add) không kèm nhóm đặc quyền - cần xét ngữ cảnh.", strong=False)
 
-    # 4. Phát hiện Tải & Thực thi mã độc (PowerShell Execution & C2 - MITRE T1059.001, T1547.001)
-    malware_events = []
+    # 4. Chữ ký kỹ thuật tấn công theo MITRE (đều là tín hiệu MẠNH)
+    threat_events: dict[str, list[dict]] = {s: [] for s in (
+        "PowerShell / Command and Scripting Interpreter (MITRE T1059.001)",
+        "OS Credential Dumping (MITRE T1003)",
+        "Impair Defenses (MITRE T1562.001)",
+        "Persistence (MITRE T1547.001 / T1053.005)",
+        "Inhibit System Recovery (MITRE T1490)",
+        "Accessibility Features / Sticky Keys Backdoor (MITRE T1546.008)",
+        "In-Memory Assembly Execution (MITRE T1055)",
+        "Credential Access / Kerberoasting (MITRE T1558.003)",
+        "LOLBAS / Script Proxy Execution (MITRE T1218)",
+        "Deobfuscate/Decode Files (MITRE T1140)",
+        "Lateral Movement / Remote Execution (MITRE T1569 / T1047 / T1021)",
+        "Network Discovery / Port Scanning (MITRE T1046)",
+        "Ingress Tool Transfer (MITRE T1105 / T1197)",
+        "Data Collection & Exfiltration (MITRE T1560 / T1048)",
+        "Impact / Data Destruction & Ransomware (MITRE T1485 / T1486)",
+        "UAC Bypass (MITRE T1548.002)",
+    )}
+    log_clear_cmds = []
     for e in events:
-        cmd = (e["data"].get("CommandLine") or "").lower()
+        raw_cmd = (e["data"].get("CommandLine") or "").lower()
+        # Bỏ đuôi .exe của tên công cụ để khớp cả "wevtutil.exe cl" lẫn "wevtutil cl" như log thật
+        cmd = _EXE_SUFFIX_RE.sub("", raw_cmd)
         script = (e["data"].get("ScriptBlockText") or "").lower()
-        if (
-            "downloadstring" in script or "mimikatz" in script or
-            "currentversion\\run" in script or "-encodedcommand" in cmd or
-            ("iex" in script and "http" in script)
-        ):
-            malware_events.append(e)
+        task = (e["data"].get("TaskContent") or "").lower()
+        combined = " ".join((cmd, script, task))
 
-    if malware_events:
-        refs = [e["event_ref"] for e in malware_events]
-        findings["stages"].append("Malware Execution / PowerShell Download Cradle (MITRE T1059.001)")
-        findings["strong_stages"].append("Malware Execution / PowerShell Download Cradle (MITRE T1059.001)")
-        findings["evidence_refs"].extend(refs)
-        findings["details"].append(
-            f"Phát hiện lệnh PowerShell tải mã độc từ xa (Download Cradle / Mimikatz / Registry Run Persistence). Bằng chứng: {', '.join(refs)}."
+        encoded_powershell = (
+            any(flag in cmd for flag in ("-encodedcommand", " -enc "))
+            and any(flag in cmd for flag in ("powershell", "-w hidden", "-windowstyle hidden", "-nop", "-noni", "bypass"))
         )
+        # Tải từ URL ngoài mạng nội bộ (tải file cấu hình từ intranet *.local / 192.168.x là bình thường)
+        download_cradle = _has_external_url(combined) and any(token in combined for token in (
+            "downloadstring", "downloadfile", "net.webclient", "invoke-webrequest", "start-bitstransfer",
+            "bitsadmin", "certutil", "mshta", "regsvr32",
+        ))
+        # DownloadString/DownloadFile mà không thấy URL nào (URL bị ghép chuỗi / biến) vẫn đáng ngờ
+        hidden_cradle = not _url_hosts(combined) and any(t in script for t in ("downloadstring", "downloadfile"))
+        remote_iex = "iex" in script and "http" in script and _has_external_url(script)
+        credential_dump = (
+            any(token in combined for token in ("mimikatz", "sekurlsa", "lsadump", "dcsync", "vaultcmd"))
+            or ("procdump" in combined and "lsass" in combined)
+            or ("comsvcs.dll" in combined and "minidump" in combined)
+            or ("reg" in cmd and " save " in f" {cmd} " and any(h in cmd for h in ("\\sam", "\\system", "\\security")))
+        )
+        impair_defenses = (
+            ("set-mppreference" in combined and "disable" in combined)
+            or "amsiinitfailed" in combined
+            or ("net" in cmd and "stop" in cmd and any(s in cmd for s in ("eventlog", "windefend")))
+            or ("sc" in cmd and "eventlog" in cmd and "disabled" in cmd)
+            or ("schtasks" in cmd and "windows defender" in cmd and "disable" in cmd)
+        )
+        if "wevtutil cl" in combined or "clear-eventlog" in combined:
+            log_clear_cmds.append(e)
+        persistence = (
+            ("currentversion\\run" in combined and any(t in combined for t in ("set-itemproperty", "new-itemproperty", "reg add")))
+            or ("schtasks" in combined and "/create" in combined and any(t in combined for t in ("powershell", "http", "-enc", "hidden")))
+            or "commandlineeventconsumer" in combined or "__eventfilter" in combined
+            or ("version.dll" in combined and "copy" in combined)
+        )
+        shadow_delete = (
+            ("vssadmin" in combined and "delete" in combined)
+            or ("shadowcopy" in combined and "delete" in combined)
+            or ("wbadmin" in combined and "delete" in combined)
+        )
+        sticky_keys = "image file execution options" in combined and any(t in combined for t in ("sethc", "utilman", "debugger"))
+        in_memory = any(t in combined for t in ("[system.reflection.assembly]::load", "loadassembly", "virtualalloc"))
+        kerberoast = "invoke-kerberoast" in combined or ("rubeus" in combined and "kerberoast" in combined)
+        lolbas_exec = (
+            ("rundll32" in cmd and "advpack.dll" in cmd)
+            or ("regsvr32" in cmd and "scrobj.dll" in cmd)
+            or ("mshta" in cmd and "vbscript" in cmd)
+        )
+        certutil_decode = "certutil" in cmd and "-decode" in cmd
+        lateral_remote = (
+            "psexec" in cmd
+            or ("wmic" in cmd and "process call create" in cmd and "node" in cmd)
+            or ("net" in cmd and " use " in f" {cmd} " and any(s in cmd for s in ("c$", "admin$")))
+        )
+        port_scan = "tcpclient" in script and "connect" in script and "1..254" in script
+        ingress_transfer = (
+            ("bitsadmin" in cmd and "/transfer" in cmd and _has_external_url(cmd))
+            or ("curl" in cmd and _has_external_url(raw_cmd)
+                and any(p in raw_cmd for p in (".exe", ".dll", "c:\\users\\public", "c:\\temp")))
+        )
+        data_exfil = (
+            ("tar" in cmd and any(ext in cmd for ext in (".docx", ".xlsx", ".pdf", "confidential")))
+            or ("resolve-dnsname" in script and "type txt" in script and any(k in script for k in ("base64", "tobase64string")))
+        )
+        impact_ransomware = (
+            ("cipher" in cmd and "/w:" in cmd)
+            or ("rename-item" in script and any(ext in script for ext in (".locked", ".crypted", ".crypto")))
+        )
+        uac_bypass = "fodhelper.exe" in cmd or "ms-settings\\shell\\open\\command" in cmd or "cmstp.exe" in cmd
 
-    # 5. Phát hiện Trinh sát hệ thống (System Discovery - MITRE T1033)
-    # whoami đứng một mình là lệnh quản trị thông thường; chỉ coi là Reconnaissance khi đi kèm chuỗi tấn công
+        checks = (
+            ("PowerShell / Command and Scripting Interpreter (MITRE T1059.001)",
+             encoded_powershell or download_cradle or hidden_cradle or remote_iex),
+            ("OS Credential Dumping (MITRE T1003)", credential_dump),
+            ("Impair Defenses (MITRE T1562.001)", impair_defenses),
+            ("Persistence (MITRE T1547.001 / T1053.005)", persistence),
+            ("Inhibit System Recovery (MITRE T1490)", shadow_delete),
+            ("Accessibility Features / Sticky Keys Backdoor (MITRE T1546.008)", sticky_keys),
+            ("In-Memory Assembly Execution (MITRE T1055)", in_memory),
+            ("Credential Access / Kerberoasting (MITRE T1558.003)", kerberoast),
+            ("LOLBAS / Script Proxy Execution (MITRE T1218)", lolbas_exec),
+            ("Deobfuscate/Decode Files (MITRE T1140)", certutil_decode),
+            ("Lateral Movement / Remote Execution (MITRE T1569 / T1047 / T1021)", lateral_remote),
+            ("Network Discovery / Port Scanning (MITRE T1046)", port_scan),
+            ("Ingress Tool Transfer (MITRE T1105 / T1197)", ingress_transfer),
+            ("Data Collection & Exfiltration (MITRE T1560 / T1048)", data_exfil),
+            ("Impact / Data Destruction & Ransomware (MITRE T1485 / T1486)", impact_ransomware),
+            ("UAC Bypass (MITRE T1548.002)", uac_bypass),
+        )
+        for stage, hit in checks:
+            if hit:
+                threat_events[stage].append(e)
+
+    malware_events = []
+    for stage, stage_events in threat_events.items():
+        if stage_events:
+            malware_events.extend(stage_events)
+            add(stage, stage_events, f"Phát hiện {stage} từ chữ ký có độ tin cậy cao.", strong=True)
+
+    # 5. Trinh sát (MITRE T1033) - tín hiệu YẾU: whoami/net user đơn lẻ là lệnh quản trị bình thường.
+    #    Chỉ ghi nhận khi đi kèm chuỗi tấn công khác hoặc >= 3 lệnh trinh sát trong cùng lô.
     recon_events = [
         e for e in events
         if e.get("event_id") == 4688 and any(
-            cmd in (e["data"].get("CommandLine") or "").lower() or
-            cmd in (e["data"].get("NewProcessName") or "").lower()
-            for cmd in ("whoami", "nltest", "net group", "systeminfo")
+            k in (e["data"].get("CommandLine") or "").lower() or k in (e["data"].get("NewProcessName") or "").lower()
+            for k in ("whoami", "nltest", "net group", "net user", "systeminfo")
         )
     ]
-    if recon_events and (failed_logons or backdoor_events or malware_events):
-        refs = [e["event_ref"] for e in recon_events]
-        findings["stages"].append("System Reconnaissance (MITRE T1033)")
-        findings["evidence_refs"].extend(refs)
-        findings["details"].append(
-            f"Phát hiện lệnh khám phá và trinh sát hệ thống (whoami/discovery) trong chuỗi tấn công. Bằng chứng: {', '.join(refs)}."
-        )
+    if recon_events and (brute_events or account_cmds or malware_events or len(recon_events) >= 3):
+        add("System Reconnaissance (MITRE T1033)", recon_events,
+            "Phát hiện chuỗi lệnh khám phá và trinh sát hệ thống (whoami, net user/group, nltest, systeminfo).",
+            strong=False)
 
-    def add(stage: str, evs: list[dict], detail: str, strong: bool) -> None:
-        refs = [e["event_ref"] for e in evs]
-        findings["stages"].append(stage)
-        if strong:
-            findings["strong_stages"].append(stage)
-        findings["evidence_refs"].extend(refs)
-        findings["details"].append(f"{detail} Bằng chứng: {', '.join(refs)}.")
-
-    # 6. Xoá nhật ký (Indicator Removal - MITRE T1070.001): 1102 (Security) / 104 (System)
-    cleared = [e for e in events if e.get("event_id") in (1102, 104)]
+    # 6. Xoá nhật ký (MITRE T1070.001): 1102 (Security) / 104 (System) hoặc lệnh wevtutil cl / Clear-EventLog
+    cleared = [e for e in events if e.get("event_id") in (1102, 104)] + log_clear_cmds
     if cleared:
-        logs = sorted({e["data"].get("Channel") or ("Security" if e["event_id"] == 1102 else "System") for e in cleared})
+        logs = sorted({
+            e["data"].get("Channel") or {1102: "Security", 104: "System"}.get(e["event_id"], "lệnh wevtutil/Clear-EventLog")
+            for e in cleared
+        })
         add("Indicator Removal: Clear Windows Event Logs (MITRE T1070.001)", cleared,
-            f"Phát hiện nhật ký Windows bị xoá ({', '.join(logs)}) - Event 1102/104.", strong=True)
+            f"Phát hiện nhật ký Windows bị xoá ({', '.join(logs)}) - Event 1102/104 hoặc lệnh xoá log.", strong=True)
 
     # 7. Cài service mới (MITRE T1543.003 / T1569.002): 7045; chắc chắn khi service chạy shell/script/file từ thư mục ghi được
     services = [e for e in events if e.get("event_id") == 7045]
@@ -441,17 +670,19 @@ def correlate_security_events(events: list[dict]) -> dict:
         add("Create Account: Local Account (MITRE T1136.001)", created,
             f"Tài khoản mới được tạo (Event 4720): {users}.", strong=False)
 
-    # 9. Thêm vào nhóm đặc quyền (MITRE T1098): 4728/4732 với nhóm Administrators / Domain Admins...
-    group_adds = [e for e in events if e.get("event_id") in (4728, 4732)]
+    # 9. Thêm vào nhóm đặc quyền (MITRE T1098): 4728/4732/4756 với Administrators / Domain Admins...
+    group_adds = [e for e in events if e.get("event_id") in (4728, 4732, 4756)]
     priv_adds = [
         e for e in group_adds
         if (e["data"].get("TargetSid") or "").upper() in PRIVILEGED_GROUP_SIDS
         or (e["data"].get("TargetUserName") or "").lower() in PRIVILEGED_GROUP_NAMES
+        or (e["data"].get("GroupName") or "").lower() in PRIVILEGED_GROUP_NAMES
     ]
     if priv_adds:
-        groups = ", ".join(dict.fromkeys(e["data"].get("TargetUserName", "?") for e in priv_adds))
+        groups = ", ".join(dict.fromkeys(
+            e["data"].get("TargetUserName") or e["data"].get("GroupName") or "?" for e in priv_adds))
         add("Account Manipulation: Add to Privileged Group (MITRE T1098)", priv_adds,
-            f"Tài khoản được thêm vào nhóm đặc quyền {groups} (Event 4728/4732).", strong=True)
+            f"Tài khoản được thêm vào nhóm đặc quyền {groups} (Event 4728/4732/4756).", strong=True)
 
     # 10. Scheduled task (MITRE T1053.005): 4698; chắc chắn khi task chạy script mã hoá / tải từ mạng / file trong thư mục ghi được
     tasks = [e for e in events if e.get("event_id") == 4698]
@@ -467,6 +698,11 @@ def correlate_security_events(events: list[dict]) -> dict:
                 "Có scheduled task mới (Event 4698) - cần xét ngữ cảnh.", strong=False)
 
     findings["evidence_refs"] = list(dict.fromkeys(findings["evidence_refs"]))
+    findings["risk_factors"] = [
+        {"stage": s, "score": STAGE_RISK_WEIGHTS.get(s, 50), "strong": s in findings["strong_stages"]}
+        for s in findings["stages"]
+    ]
+    findings["risk_score"] = min(100, sum(f["score"] for f in findings["risk_factors"]))
     return findings
 
 
@@ -532,8 +768,10 @@ EVENT_MEANING = {
     104: "Nhật ký System/ứng dụng BỊ XOÁ (xem Channel)",
     7045: "Service mới được cài (xem ServiceName, ImagePath)",
     4720: "Tài khoản người dùng mới được tạo (TargetUserName)",
+    4722: "Tài khoản người dùng được BẬT (enable) (TargetUserName)",
     4728: "Thành viên được thêm vào nhóm bảo mật global (TargetUserName = tên nhóm, MemberName/MemberSid = người được thêm)",
     4732: "Thành viên được thêm vào nhóm bảo mật local (TargetUserName = tên nhóm, MemberSid = người được thêm)",
+    4756: "Thành viên được thêm vào nhóm bảo mật universal (TargetUserName = tên nhóm, MemberName = người được thêm)",
     4698: "Scheduled task mới được tạo (TaskName, TaskContent)",
 }
 
@@ -548,8 +786,8 @@ EXTENDED_SIGNS = [
      "Service đáng ngờ (7045): ImagePath chạy cmd /c, powershell, %COMSPEC%, rundll32, file trong Temp/AppData/ADMIN$, "
      "hoặc file .exe tên ngẫu nhiên đặt thẳng trong C:\\Windows (dấu hiệu PsExec/Metasploit).",
      "Service/driver của phần mềm hợp lệ cài vào Program Files hoặc System32 (vd Windows Update, driver, phần mềm diệt virus)."),
-    ({4720, 4728, 4732},
-     "Tạo tài khoản (4720) rồi thêm vào nhóm đặc quyền như Administrators (4732/4728).",
+    ({4720, 4722, 4728, 4732, 4756},
+     "Tạo/bật tài khoản (4720/4722) rồi thêm vào nhóm đặc quyền như Administrators (4732/4728/4756).",
      "Tạo tài khoản / thêm vào nhóm thường (Users) khi cài đặt hoặc do bộ phận IT thực hiện, không kèm nhóm đặc quyền."),
     ({4698},
      "Scheduled task (4698) chạy PowerShell mã hoá, tải từ mạng hoặc file trong thư mục tạm.",
@@ -796,6 +1034,10 @@ def analyze_batch(
     return parsed.model_dump(), metadata
 
 
+CONFIDENCE_BY_SOURCE = {"rule+ai": 0.95, "rule": 0.9, "ai": 0.8, "error": 0.0}
+DETECTION_SOURCE_ALIAS = {"rule+ai": "hybrid", "rule": "rule", "ai": "ai_model", "error": "error"}
+
+
 def combine_batch_results(
     batch_results: list[dict],
     batch_count: int,
@@ -803,8 +1045,54 @@ def combine_batch_results(
     rule_findings: dict,
 ) -> tuple[str, dict]:
     """
+    Nhãn do _combine_core quyết định (luật mạnh + AI). Hàm này bổ sung:
+    - risk_score: điểm rủi ro tham khảo theo nhãn (ALERT >= ALERT_RISK_THRESHOLD, NORMAL < REVIEW_RISK_THRESHOLD).
+    - REVIEW: thay UNKNOWN khi bộ luật có tín hiệu yếu với điểm rủi ro >= REVIEW_RISK_THRESHOLD
+      -> đưa vào hàng chờ chuyên gia thay vì bỏ ngỏ. ALERT / NORMAL KHÔNG bị thay đổi.
+    - confidence (heuristic theo nguồn quyết định), detection_source (bí danh tương thích bản update).
+    """
+    rule_findings.setdefault("strong_stages", [])
+    status, verdict = _combine_core(batch_results, batch_count, errors, rule_findings)
+    rule_risk = int(rule_findings.get("risk_score", 0))
+    source = verdict.get("decision_source", "")
+    label = verdict["label"]
+
+    if label == "ALERT":
+        ai_alert = any(item["verdict"]["label"] == "ALERT" for item in batch_results)
+        risk = max(rule_risk, 85 if ai_alert else 0, ALERT_RISK_THRESHOLD)
+        confidence = CONFIDENCE_BY_SOURCE.get(source, 0.8)
+    elif label == "NORMAL":
+        risk = min(rule_risk, REVIEW_RISK_THRESHOLD - 1)
+        confidence = 0.9 if rule_risk == 0 else 0.75
+    elif source != "error" and rule_findings.get("stages") and rule_risk >= REVIEW_RISK_THRESHOLD:
+        label = verdict["label"] = "REVIEW"
+        verdict["reason"] = (
+            "AI chưa đủ căn cứ để kết luận; bộ luật có tín hiệu yếu ("
+            + "; ".join(rule_findings["stages"]) + ") -> chuyển chuyên gia xem xét."
+        )
+        verdict["detected_stages"] = list(rule_findings["stages"])
+        verdict["evidence_refs"] = list(dict.fromkeys(verdict["evidence_refs"] + rule_findings["evidence_refs"]))
+        risk = rule_risk
+        confidence = 0.5
+    else:
+        risk = rule_risk
+        confidence = 0.0 if source == "error" else 0.3
+
+    verdict["risk_score"] = int(min(100, risk))
+    verdict["confidence"] = confidence
+    verdict["detection_source"] = DETECTION_SOURCE_ALIAS.get(source, source)
+    return status, verdict
+
+
+def _combine_core(
+    batch_results: list[dict],
+    batch_count: int,
+    errors: list[str],
+    rule_findings: dict,
+) -> tuple[str, dict]:
+    """
     Hợp nhất kết quả AI + bộ luật (AI tham gia quyết định):
-    1. Luật MẠNH (brute force >=3, tải/thực thi mã độc, thêm vào Administrators) -> ALERT (lưới an toàn).
+    1. Luật MẠNH (brute force theo cửa sổ thời gian, chữ ký MITRE, thêm vào Administrators...) -> ALERT (lưới an toàn).
     2. Không có luật mạnh: nhãn do AI quyết định (đã qua kiểm chứng bằng chứng).
        - AI ALERT ở bất kỳ lô nào -> ALERT.
        - Tất cả lô NORMAL -> NORMAL (kể cả khi có tín hiệu luật YẾU, ghi chú lại).
@@ -837,7 +1125,8 @@ def combine_batch_results(
         stages: list[str] = list(strong)
         refs: list[str] = []
         reasons: list[str] = []
-        if strong:
+        # Khi AI xác nhận, mọi stage của luật (kể cả yếu) đều được giữ -> giữ luôn bằng chứng của chúng
+        if strong or ai_alerts:
             refs.extend(rule_findings["evidence_refs"])
         for v in ai_alerts:
             refs.extend(v.get("evidence_refs", []))
@@ -901,6 +1190,28 @@ def combine_batch_results(
     }
 
 
+def resolve_case_dir(case_id: str, data_dir: Path | str | None = None) -> Path:
+    """
+    Tìm thư mục ca: <data_dir>/<case_id> hoặc <data_dir>/<nhóm>/<case_id> (cấu trúc data_benchmark/bai_X/).
+    Không chỉ định data_dir -> tìm lần lượt data01/, data/, data_benchmark/ (thứ tự cũ được giữ).
+    Không tìm thấy -> trả về đường dẫn dự kiến (người gọi tự báo lỗi).
+    """
+    if data_dir is not None:
+        dpath = Path(data_dir)
+        bases = [dpath if dpath.is_absolute() else BASE / dpath]
+    else:
+        bases = [BASE / "data01", BASE / "data", BASE / "data_benchmark"]
+    for base in bases:
+        if not base.is_dir():
+            continue
+        if (base / case_id).is_dir():
+            return base / case_id
+        for sub in sorted(base.iterdir()):
+            if sub.is_dir() and (sub / case_id).is_dir():
+                return sub / case_id
+    return bases[0] / case_id if data_dir is not None else BASE / "data" / case_id
+
+
 def analyze_case(
     case_id: str,
     model_key: str = "qwen",
@@ -920,15 +1231,7 @@ def analyze_case(
     if model_key not in MODELS:
         raise ValueError(f"Unknown model: {model_key}")
 
-    if data_dir is not None:
-        dpath = Path(data_dir)
-        case_dir = dpath / case_id if dpath.is_absolute() else BASE / dpath / case_id
-    else:
-        if (BASE / "data01" / case_id).is_dir():
-            case_dir = BASE / "data01" / case_id
-        else:
-            case_dir = BASE / "data" / case_id
-
+    case_dir = resolve_case_dir(case_id, data_dir)
     if not case_dir.is_dir():
         raise ValueError(f"Case directory does not exist: {case_dir}")
 

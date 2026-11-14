@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_45_cobaltstrike_beacon_spawn",
+  "category": "Execution",
+  "ground_truth": "ALERT",
+  "description": "CobaltStrike: Khởi tạo tiến trình Beacon ngầm từ rundll32.",
+  "mitre_technique": "T1059.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.198819"
+}

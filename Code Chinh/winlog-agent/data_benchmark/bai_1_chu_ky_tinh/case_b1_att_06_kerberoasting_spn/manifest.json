@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_06_kerberoasting_spn",
+  "category": "CredentialAccess",
+  "ground_truth": "ALERT",
+  "description": "Kerberoasting: Yêu cầu vé TGS SPN để bẻ khóa mật khẩu offline.",
+  "mitre_technique": "T1558.003",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.154248"
+}

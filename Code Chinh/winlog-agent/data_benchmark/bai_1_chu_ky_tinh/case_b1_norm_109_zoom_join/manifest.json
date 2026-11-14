@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_109_zoom_join",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Tham gia cuộc họp trực tuyến phòng ban bằng ứng dụng Zoom.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.320330"
+}

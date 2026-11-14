@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_04_eventvwr_msc_hijack",
+  "category": "PrivilegeEscalation",
+  "ground_truth": "ALERT",
+  "description": "Kỹ thuật UAC Bypass thông qua Eventvwr.exe hijack mscfile shell open.",
+  "mitre_technique": "T1548.002",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.569386"
+}

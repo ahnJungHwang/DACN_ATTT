@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_09_portscan_to_admin_share",
+  "category": "LateralMovement",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: Dò quét cổng SMB 445 -> Kết nối ổ đĩa ẩn C$ -> Thả trojan.exe.",
+  "mitre_technique": "T1046 / T1021.002",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.369747"
+}

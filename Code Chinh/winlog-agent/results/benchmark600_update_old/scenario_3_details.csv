@@ -1,0 +1,801 @@
+scenario,model_key,case_id,ground_truth,pred_label,classification,elapsed_seconds,json_valid,reason
+3,qwen,case_b3_att_01_amsi_bypass_patch,ALERT,ALERT,TP (Bắt trúng),5.728,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện Impair Defenses (MITRE T1562.001) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+3,qwen,case_b3_att_02_cmstp_uac_bypass,ALERT,ALERT,TP (Bắt trúng),3.996,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện UAC Bypass (MITRE T1548.002) từ bằng chứng có độ tin cậy cao: E0001.
+3,qwen,case_b3_att_03_fodhelper_uac_bypass,ALERT,ALERT,TP (Bắt trúng),5.119,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện UAC Bypass (MITRE T1548.002) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+3,qwen,case_b3_att_04_eventvwr_msc_hijack,ALERT,NORMAL,FN (Bỏ sót tấn công),4.245,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_att_05_regsvr32_squiblydoo_remote,ALERT,ALERT,TP (Bắt trúng),4.29,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+3,qwen,case_b3_att_06_mshta_vbscript_inline,ALERT,ALERT,TP (Bắt trúng),4.496,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+3,qwen,case_b3_att_07_rundll32_advpack_inf_exec,ALERT,ALERT,TP (Bắt trúng),4.444,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện LOLBAS / Script Proxy Execution (MITRE T1218) từ bằng chứng có độ tin cậy cao: E0001.
+3,qwen,case_b3_att_08_in_memory_reflection_net,ALERT,ALERT,TP (Bắt trúng),4.27,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện In-Memory Assembly Execution (MITRE T1055) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+3,qwen,case_b3_att_09_ransomware_extension_loop,ALERT,ALERT,TP (Bắt trúng),4.617,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Impact / Data Destruction & Ransomware (MITRE T1485 / T1486) từ bằng chứng có độ tin cậy cao: ...
+3,qwen,case_b3_att_10_net_stop_eventlog_disabled,ALERT,ALERT,TP (Bắt trúng),4.704,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện Impair Defenses (MITRE T1562.001) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+3,qwen,case_b3_att_11_sticky_keys_backdoor,ALERT,ALERT,TP (Bắt trúng),4.653,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Accessibility Features / Sticky Keys Backdoor (MITRE T1546.008) từ bằng chứng có độ tin cậy ca...
+3,qwen,case_b3_att_12_appcertdlls_persistence,ALERT,NORMAL,FN (Bỏ sót tấn công),3.906,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_att_13_shim_sdbinst_install,ALERT,NORMAL,FN (Bỏ sót tấn công),3.921,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_att_14_com_hijack_clsid,ALERT,NORMAL,FN (Bỏ sót tấn công),3.748,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_att_15_obfuscated_string_cradle,ALERT,ALERT,TP (Bắt trúng),4.36,True,"Hành vi PowerShell chứa tham số IEX để tải tệp từ Internet và thực thi, kết hợp với việc sử dụng web client để tải tệp payload."
+3,qwen,case_b3_att_16_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.328,True,"Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi tệp độc hại, được xác định thông qua lệnh `Invoke-Evasion -Techni..."
+3,qwen,case_b3_att_17_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.795,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_18_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.782,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_19_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.845,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_20_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.095,True,Hành vi PowerShell chứa tham số bypass và thực thi script evasion technique.
+3,qwen,case_b3_att_21_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.146,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_22_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.994,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_23_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.837,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_24_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.809,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_25_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.103,True,"Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi mã độc, được xác nhận thông qua lệnh `Invoke-Evasion -Technique 2..."
+3,qwen,case_b3_att_26_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.799,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_27_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.225,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_28_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.921,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_29_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.209,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_30_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.182,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_31_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.964,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_32_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.071,True,"Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi mã độc, được xác nhận thông qua lệnh `Invoke-Evasion -Technique 3..."
+3,qwen,case_b3_att_33_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.901,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_34_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.123,True,"Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi mã độc, được xác nhận thông qua lệnh `Invoke-Evasion -Technique 3..."
+3,qwen,case_b3_att_35_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.159,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_36_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.815,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_37_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.2,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi mã độc (Invoke-Evasion -Technique 37).
+3,qwen,case_b3_att_38_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.856,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_39_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.158,True,"Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi mã độc, được xác nhận thông qua lệnh `Invoke-Evasion -Technique 3..."
+3,qwen,case_b3_att_40_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.815,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_41_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.095,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi mã độc (Invoke-Evasion -Technique 41).
+3,qwen,case_b3_att_42_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.802,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_43_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.384,True,"Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi tệp độc hại, được xác định thông qua lệnh `Invoke-Evasion -Techni..."
+3,qwen,case_b3_att_44_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.786,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_45_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.745,True,"Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi mã độc, được xác nhận thông qua lệnh `Invoke-Evasion -Technique 4..."
+3,qwen,case_b3_att_46_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.793,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_47_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),3.907,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_48_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.226,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_att_49_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.442,True,Hành vi này bao gồm việc sử dụng PowerShell với tham số bypass để thực thi mã độc (Invoke-Evasion -Technique 49).
+3,qwen,case_b3_att_50_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.04,True,Hành vi PowerShell chứa tham số bypass và thực thi tệp độc hại từ Internet.
+3,qwen,case_b3_norm_001_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),3.818,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_002_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),3.936,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_003_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),3.798,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_004_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),3.813,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_005_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),3.557,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_006_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),3.661,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_007_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),3.505,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_008_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),3.659,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_009_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),3.449,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_010_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),3.552,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_011_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),3.908,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_012_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.425,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_013_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),3.752,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_014_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),3.412,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_015_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.576,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_016_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),3.8,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_017_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),4.033,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_018_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),3.589,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_019_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),3.788,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_020_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),3.688,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_021_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),3.665,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_022_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),3.457,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_023_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),3.581,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_024_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),3.589,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_025_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),3.609,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_026_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),3.529,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_027_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.442,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_028_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),5.117,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_029_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),3.562,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_030_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.391,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_031_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),3.777,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_032_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),3.949,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_033_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),3.607,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_034_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),3.759,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_035_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),4.194,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_036_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),3.666,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_037_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),3.557,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_038_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),3.707,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_039_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),3.568,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_040_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),3.95,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_041_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),3.804,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_042_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.55,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_043_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),3.484,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_044_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),3.398,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_045_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.591,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_046_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),3.753,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_047_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),3.983,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_048_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),3.606,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_049_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),3.824,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_050_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),3.708,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_051_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),3.652,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_052_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),3.513,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_053_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),3.819,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_054_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),3.51,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_055_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),3.673,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_056_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),3.497,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_057_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.428,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_058_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),3.834,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_059_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),3.962,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_060_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.613,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_061_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),3.908,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_062_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),4.085,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_063_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),3.617,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_064_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),3.963,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_065_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),3.924,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_066_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),3.622,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_067_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),3.794,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_068_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),3.69,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_069_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),3.509,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_070_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),3.596,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_071_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),3.529,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_072_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.402,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_073_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),3.446,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_074_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),3.471,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_075_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.572,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_076_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),3.788,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_077_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),4.418,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_078_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),3.555,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_079_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),4.055,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_080_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),3.564,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_081_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),3.619,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_082_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),3.644,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_083_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),3.661,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_084_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),3.471,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_085_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),3.511,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_086_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),3.803,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_087_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.443,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_088_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),4.683,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_089_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),3.578,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_090_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.487,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_091_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),4.152,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_092_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),3.982,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_093_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),3.554,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_094_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),3.763,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_095_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),3.563,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_096_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),3.565,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_097_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),3.542,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_098_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),3.364,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_099_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),3.801,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_100_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),3.847,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_101_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),3.574,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_102_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.423,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_103_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),3.517,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_104_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),4.061,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_105_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.548,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_106_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),3.819,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_107_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),4.022,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_108_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),3.506,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_109_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),3.884,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_110_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),3.944,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_111_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),3.609,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_112_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),3.464,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_113_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),3.733,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_114_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),3.514,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_115_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),3.564,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_116_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),3.5,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_117_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.429,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_118_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),3.446,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_119_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),3.739,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_120_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.576,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_121_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),3.835,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_122_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),3.967,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_123_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),3.65,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_124_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),3.803,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_125_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),3.724,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_126_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),3.562,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_127_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),3.814,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_128_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),3.79,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_129_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),3.638,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_130_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),3.642,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_131_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),3.559,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_132_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.379,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_133_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),3.504,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_134_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),3.752,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_135_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.56,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_136_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),4.251,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_137_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),3.966,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_138_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),3.569,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_139_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),3.861,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_140_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),3.615,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_141_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),3.634,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_142_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),3.611,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_143_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),3.776,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_144_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),3.429,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_145_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),3.573,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_146_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),3.749,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_147_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.509,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_148_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),3.434,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_149_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),3.577,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,qwen,case_b3_norm_150_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.979,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_att_01_amsi_bypass_patch,ALERT,ALERT,TP (Bắt trúng),5.507,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện Impair Defenses (MITRE T1562.001) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+3,llama,case_b3_att_02_cmstp_uac_bypass,ALERT,ALERT,TP (Bắt trúng),3.808,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện UAC Bypass (MITRE T1548.002) từ bằng chứng có độ tin cậy cao: E0001.
+3,llama,case_b3_att_03_fodhelper_uac_bypass,ALERT,ALERT,TP (Bắt trúng),4.856,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện UAC Bypass (MITRE T1548.002) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+3,llama,case_b3_att_04_eventvwr_msc_hijack,ALERT,ALERT,TP (Bắt trúng),4.054,True,Phát hiện hành vi tấn công bằng cách sử dụng reg.exe để thêm mã độc vào registry. Bằng chứng là sự kiện event_ref E0001 có thể được liên kết...
+3,llama,case_b3_att_05_regsvr32_squiblydoo_remote,ALERT,ALERT,TP (Bắt trúng),4.505,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+3,llama,case_b3_att_06_mshta_vbscript_inline,ALERT,ALERT,TP (Bắt trúng),4.091,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện PowerShell / Command and Scripting Interpreter (MITRE T1059.001) từ bằng chứng có độ tin cậy c...
+3,llama,case_b3_att_07_rundll32_advpack_inf_exec,ALERT,ALERT,TP (Bắt trúng),4.354,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện LOLBAS / Script Proxy Execution (MITRE T1218) từ bằng chứng có độ tin cậy cao: E0001.
+3,llama,case_b3_att_08_in_memory_reflection_net,ALERT,ALERT,TP (Bắt trúng),4.408,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện In-Memory Assembly Execution (MITRE T1055) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+3,llama,case_b3_att_09_ransomware_extension_loop,ALERT,ALERT,TP (Bắt trúng),4.727,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Impact / Data Destruction & Ransomware (MITRE T1485 / T1486) từ bằng chứng có độ tin cậy cao: ...
+3,llama,case_b3_att_10_net_stop_eventlog_disabled,ALERT,ALERT,TP (Bắt trúng),4.606,True,"Phát hiện chuỗi hành vi tấn công: - Phát hiện Impair Defenses (MITRE T1562.001) từ bằng chứng có độ tin cậy cao: E0001, E0002."
+3,llama,case_b3_att_11_sticky_keys_backdoor,ALERT,ALERT,TP (Bắt trúng),4.597,True,Phát hiện chuỗi hành vi tấn công: - Phát hiện Accessibility Features / Sticky Keys Backdoor (MITRE T1546.008) từ bằng chứng có độ tin cậy ca...
+3,llama,case_b3_att_12_appcertdlls_persistence,ALERT,ALERT,TP (Bắt trúng),4.207,True,Phát hiện hành vi tấn công bằng cách sử dụng mật khẩu brute force để đăng nhập vào hệ thống. Bằng chứng là sự kiện Event ID 4688 với Command...
+3,llama,case_b3_att_13_shim_sdbinst_install,ALERT,ALERT,TP (Bắt trúng),3.632,True,Phát hiện hành vi tấn công bằng cách brute-force mật khẩu trong thời gian ngắn
+3,llama,case_b3_att_14_com_hijack_clsid,ALERT,ALERT,TP (Bắt trúng),4.11,True,Phát hiện hành vi tấn công bằng cách sử dụng mật khẩu brute force để đăng nhập vào hệ thống. Bằng chứng là sự kiện 4688 với LogonType = 2 và...
+3,llama,case_b3_att_15_obfuscated_string_cradle,ALERT,ALERT,TP (Bắt trúng),4.388,True,"Phát hiện chuỗi hành vi tấn công bằng cách sử dụng brute-force để đăng nhập vào hệ thống, sau đó tải và thực thi mã độc từ Internet. Bằng ch..."
+3,llama,case_b3_att_16_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.353,True,"Phát hiện chuỗi hành vi tấn công bằng cách sử dụng brute-force để đăng nhập vào hệ thống, sau đó thực hiện lệnh PowerShell để chạy mã độc. B..."
+3,llama,case_b3_att_17_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.172,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm việc sử dụng powershell.exe để thực thi lệnh Invoke-Evasion -Technique 17. Điều ..."
+3,llama,case_b3_att_18_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.212,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 18...."
+3,llama,case_b3_att_19_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.299,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng kỹ thuật Invoke-Evasion -Technique 19 trong PowerShell. Đ..."
+3,llama,case_b3_att_20_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.232,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm việc sử dụng powershell.exe để thực thi lệnh Invoke-Evasion -Technique 20. Điều ..."
+3,llama,case_b3_att_21_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.806,True,"Phát hiện chuỗi hành vi tấn công bằng cách sử dụng brute-force để đăng nhập vào hệ thống, sau đó thực hiện lệnh PowerShell để chạy mã độc. B..."
+3,llama,case_b3_att_22_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.419,True,"Phát hiện chuỗi hành vi tấn công bằng cách sử dụng brute-force để đăng nhập vào hệ thống, sau đó thực hiện lệnh PowerShell để chạy mã độc. B..."
+3,llama,case_b3_att_23_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.158,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng kỹ thuật Invoke-Evasion -Technique 23 trong lệnh PowerShe..."
+3,llama,case_b3_att_24_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.218,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm việc sử dụng powershell.exe để thực thi lệnh Invoke-Evasion -Technique 24. Điều ..."
+3,llama,case_b3_att_25_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.224,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng kỹ thuật Invoke-Evasion -Technique 25 trong lệnh PowerShe..."
+3,llama,case_b3_att_26_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.23,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng kỹ thuật Invoke-Evasion -Technique 26 trong PowerShell. Đ..."
+3,llama,case_b3_att_27_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.188,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 27...."
+3,llama,case_b3_att_28_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.171,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 28...."
+3,llama,case_b3_att_29_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.154,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng kỹ thuật Invoke-Evasion -Technique 29 trong lệnh PowerShe..."
+3,llama,case_b3_att_30_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.296,True,Phát hiện chuỗi hành vi tấn công bằng cách sử dụng brute-force để đăng nhập vào hệ thống. Bằng chứng cho thấy sự kiện 4688 và 4104 có liên q...
+3,llama,case_b3_att_31_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.252,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 31...."
+3,llama,case_b3_att_32_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.791,True,"Phát hiện sự kiện PowerShell thực thi lệnh Invoke-Evasion -Technique 32, một kỹ thuật tấn công để tránh phát hiện của hệ thống bảo mật. Sự k..."
+3,llama,case_b3_att_33_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.196,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 33...."
+3,llama,case_b3_att_34_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.261,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 34...."
+3,llama,case_b3_att_35_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.241,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 35...."
+3,llama,case_b3_att_36_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.495,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 36...."
+3,llama,case_b3_att_37_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.175,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm việc sử dụng powershell.exe để thực thi lệnh Invoke-Evasion -Technique 37. Điều ..."
+3,llama,case_b3_att_38_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.264,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 38...."
+3,llama,case_b3_att_39_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.571,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm việc sử dụng powershell.exe để thực thi lệnh Invoke-Evasion -Technique 39. Điều ..."
+3,llama,case_b3_att_40_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.179,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm việc sử dụng powershell.exe để thực thi lệnh Invoke-Evasion -Technique 40. Điều ..."
+3,llama,case_b3_att_41_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.236,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 41...."
+3,llama,case_b3_att_42_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.26,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 42...."
+3,llama,case_b3_att_43_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.148,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 43...."
+3,llama,case_b3_att_44_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.212,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 44...."
+3,llama,case_b3_att_45_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.192,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng kỹ thuật Invoke-Evasion -Technique 45 trong PowerShell. Đ..."
+3,llama,case_b3_att_46_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.232,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 46...."
+3,llama,case_b3_att_47_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.513,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 47...."
+3,llama,case_b3_att_48_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.282,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 48...."
+3,llama,case_b3_att_49_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.175,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 49...."
+3,llama,case_b3_att_50_stealth_evasion_sample,ALERT,ALERT,TP (Bắt trúng),4.225,True,"Phát hiện chuỗi hành vi từ các bằng chứng tìm thấy, bao gồm dò mật khẩu và sử dụng PowerShell để thực thi lệnh Invoke-Evasion -Technique 50...."
+3,llama,case_b3_norm_001_typo_logon_once,NORMAL,ALERT,FP (Báo động giả),4.578,True,Phát hiện 2 sự kiện đăng nhập thất bại (Event ID: 4625) và Event ID: 4624 thành công ngay sau đó. Điều này có thể là do gõ sai mật khẩu một ...
+3,llama,case_b3_norm_002_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),4.609,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_003_certutil_hashfile_sha256,NORMAL,ALERT,FP (Báo động giả),3.963,True,"Phát hiện sự kiện đăng nhập thành công với mật khẩu sai (Typo login) sau 3 lần đăng nhập thất bại, có thể là dấu hiệu tấn công Password Brut..."
+3,llama,case_b3_norm_004_it_create_new_employee,NORMAL,ALERT,FP (Báo động giả),3.919,True,"Tài khoản mới được tạo với mật khẩu mạnh, có thể là dấu hiệu của tấn công brute-force."
+3,llama,case_b3_norm_005_powershell_curl_intranet,NORMAL,ALERT,FP (Báo động giả),5.097,True,"Tài khoản người dùng đã đăng nhập thành công bằng cách sử dụng mã hóa Web, có thể là một dấu hiệu của tấn công mạng. Ngoài ra, sự kiện này c..."
+3,llama,case_b3_norm_006_powershell_profile_check,NORMAL,ALERT,FP (Báo động giả),4.118,True,"Phát hiện chuỗi brute-force đăng nhập với 1 lần thất bại, sau đó sử dụng lệnh powershell.exe để thực thi lệnh Test-Path $PROFILE. Điều này c..."
+3,llama,case_b3_norm_007_scheduled_task_file_not_found,NORMAL,ALERT,FP (Báo động giả),3.613,True,Phát hiện hành vi tấn công bằng cách brute-force mật khẩu trong thời gian ngắn
+3,llama,case_b3_norm_008_bitlocker_status_query,NORMAL,ALERT,FP (Báo động giả),3.996,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_009_sfc_system_verify,NORMAL,ALERT,FP (Báo động giả),3.887,True,"Tập tin hệ thống bị hư hỏng, hệ thống đã thực hiện scan để sửa chữa. Có thể là dấu hiệu của phần mềm độc hại hoặc virus."
+3,llama,case_b3_norm_010_dism_restorehealth,NORMAL,ALERT,FP (Báo động giả),4.09,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_011_gpupdate_force,NORMAL,ALERT,FP (Báo động giả),3.607,True,Sự kiện LogonType = 2 và CommandLine = gpupdate.exe /force
+3,llama,case_b3_norm_012_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),4.089,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_013_wireshark_dumpcap_diag,NORMAL,ALERT,FP (Báo động giả),3.756,True,"Sự kiện DumpCap.exe được thực hiện trên WORKSTATION-SOC, có thể là một phần của hoạt động trinh sát hệ thống."
+3,llama,case_b3_norm_014_sevenzip_compress_docs,NORMAL,ALERT,FP (Báo động giả),3.836,True,Sự kiện đăng nhập thành công với mật khẩu sai (Event ID 4688) và sự kiện tạo tệp zip (Event ID E0001).
+3,llama,case_b3_norm_015_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.992,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_016_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),4.777,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_017_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),4.459,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_018_certutil_hashfile_sha256,NORMAL,ALERT,FP (Báo động giả),3.913,True,"Phát hiện sự kiện certutil.exe -hashfile C:\Downloads\ubuntu-22.04.iso SHA256, có thể là dấu hiệu tấn công Password Brute Force"
+3,llama,case_b3_norm_019_it_create_new_employee,NORMAL,ALERT,FP (Báo động giả),3.938,True,"Tài khoản mới được tạo với mật khẩu mạnh, có thể là dấu hiệu của tấn công brute-force."
+3,llama,case_b3_norm_020_powershell_curl_intranet,NORMAL,ALERT,FP (Báo động giả),4.073,True,"Tài khoản người dùng đã thực hiện lệnh Invoke-WebRequest để tải tệp cấu hình VPN từ intranet.corp.local, có thể là dấu hiệu tấn công reconna..."
+3,llama,case_b3_norm_021_powershell_profile_check,NORMAL,ALERT,FP (Báo động giả),4.474,True,"Phát hiện chuỗi brute-force đăng nhập với 4 lần thất bại từ cùng IP hoặc tài khoản, sau đó có một lệnh PowerShell thực thi lệnh Test-Path $P..."
+3,llama,case_b3_norm_022_scheduled_task_file_not_found,NORMAL,ALERT,FP (Báo động giả),4.181,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu (Password Brute Force) trên hệ thống. Bằng chứng là sự kiện 4688 với LogonType = 2 và Comma...
+3,llama,case_b3_norm_023_bitlocker_status_query,NORMAL,ALERT,FP (Báo động giả),4.012,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_024_sfc_system_verify,NORMAL,ALERT,FP (Báo động giả),4.306,True,"Tập tin hệ thống bị hư hỏng, hệ thống đã thực hiện scan để sửa chữa. Có thể là dấu hiệu của phần mềm độc hại hoặc virus."
+3,llama,case_b3_norm_025_dism_restorehealth,NORMAL,ALERT,FP (Báo động giả),3.742,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_026_gpupdate_force,NORMAL,ALERT,FP (Báo động giả),3.826,True,"Sự kiện LogonType=2 với IpAddress=- và WorkstationName=WORKSTATION-SOC, có thể là một hành vi tấn công"
+3,llama,case_b3_norm_027_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),4.101,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_028_wireshark_dumpcap_diag,NORMAL,ALERT,FP (Báo động giả),3.963,True,"Sự kiện DumpCap.exe được thực hiện trên WORKSTATION-SOC, có thể là một phần của hoạt động trinh sát hệ thống."
+3,llama,case_b3_norm_029_sevenzip_compress_docs,NORMAL,ALERT,FP (Báo động giả),4.35,True,Sự kiện đăng nhập thành công với mật khẩu sai (Event ID 4688) và sự kiện dò mật khẩu trước đó (Event ID 4625) cho thấy hành vi tấn công có t...
+3,llama,case_b3_norm_030_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),4.138,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_031_typo_logon_once,NORMAL,ALERT,FP (Báo động giả),4.437,True,"Có sự cố đăng nhập thất bại từ IP 192.168.1.45 với 2 lần đăng nhập thất bại trong vòng 10 giây, sau đó có 2 lần đăng nhập thành công ngay sa..."
+3,llama,case_b3_norm_032_typo_admin_twice,NORMAL,ALERT,FP (Báo động giả),4.455,True,Có 2 sự kiện đăng nhập thất bại với LogonType = 2 (một lần) và sau đó một sự kiện đăng nhập thành công. Điều này có thể là do lỗi gõ mật khẩ...
+3,llama,case_b3_norm_033_certutil_hashfile_sha256,NORMAL,ALERT,FP (Báo động giả),4.017,True,"Phát hiện sự kiện certutil.exe tải tệp ubuntu-22.04.iso SHA256 từ địa chỉ C:\Downloads\ubuntu-22.04.iso, có thể là dấu hiệu tấn công Passwor..."
+3,llama,case_b3_norm_034_it_create_new_employee,NORMAL,ALERT,FP (Báo động giả),3.883,True,"Tài khoản mới được tạo với mật khẩu mạnh, có thể là dấu hiệu của tấn công brute-force."
+3,llama,case_b3_norm_035_powershell_curl_intranet,NORMAL,ALERT,FP (Báo động giả),4.049,True,"Tài khoản người dùng đã thực hiện lệnh Invoke-WebRequest để tải tệp cấu hình VPN từ intranet.corp.local, có thể là dấu hiệu tấn công reconna..."
+3,llama,case_b3_norm_036_powershell_profile_check,NORMAL,ALERT,FP (Báo động giả),4.53,True,"Phát hiện chuỗi brute-force đăng nhập với nhiều lần thất bại từ cùng IP hoặc tài khoản, sau đó sử dụng lệnh powershell.exe để thực thi lệnh ..."
+3,llama,case_b3_norm_037_scheduled_task_file_not_found,NORMAL,ALERT,FP (Báo động giả),4.084,True,Phát hiện hành vi tấn công bằng cách brute-force mật khẩu trong thời gian ngắn
+3,llama,case_b3_norm_038_bitlocker_status_query,NORMAL,ALERT,FP (Báo động giả),3.889,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_039_sfc_system_verify,NORMAL,ALERT,FP (Báo động giả),4.148,True,"Tập tin hệ thống bị hư hỏng, hệ thống đã thực hiện scan để sửa chữa. Có thể là dấu hiệu của phần mềm độc hại hoặc virus."
+3,llama,case_b3_norm_040_dism_restorehealth,NORMAL,ALERT,FP (Báo động giả),4.427,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin cụ thể về vi..."
+3,llama,case_b3_norm_041_gpupdate_force,NORMAL,ALERT,FP (Báo động giả),3.838,True,"Sự kiện LogonType=2 với IpAddress=- và WorkstationName=WORKSTATION-SOC, có thể là một hành vi tấn công"
+3,llama,case_b3_norm_042_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),4.116,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_043_wireshark_dumpcap_diag,NORMAL,ALERT,FP (Báo động giả),3.815,True,"Sự kiện DumpCap.exe được thực hiện trên WORKSTATION-SOC, có thể là một phần của hoạt động trinh sát hệ thống."
+3,llama,case_b3_norm_044_sevenzip_compress_docs,NORMAL,ALERT,FP (Báo động giả),4.322,True,Sự kiện đăng nhập thành công với mật khẩu sai (Event ID 4688) và sự kiện dò mật khẩu trước đó (Event ID 4625) cho thấy hành vi tấn công có t...
+3,llama,case_b3_norm_045_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),4.23,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_046_typo_logon_once,NORMAL,ALERT,FP (Báo động giả),4.566,True,Phát hiện 2 sự kiện đăng nhập thất bại (Event ID: 4625) và Event ID: 4624 thành công ngay sau đó. Điều này có thể là do gõ sai mật khẩu một ...
+3,llama,case_b3_norm_047_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),4.227,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_048_certutil_hashfile_sha256,NORMAL,ALERT,FP (Báo động giả),4.001,True,"Phát hiện sự kiện certutil.exe tải tệp ubuntu-22.04.iso SHA256 từ địa chỉ C:\Downloads\ubuntu-22.04.iso, có thể là dấu hiệu tấn công Passwor..."
+3,llama,case_b3_norm_049_it_create_new_employee,NORMAL,ALERT,FP (Báo động giả),3.823,True,"Tài khoản mới được tạo với mật khẩu mạnh, có thể là dấu hiệu của tấn công brute-force."
+3,llama,case_b3_norm_050_powershell_curl_intranet,NORMAL,ALERT,FP (Báo động giả),4.54,True,"Tài khoản người dùng đã đăng nhập thành công bằng cách sử dụng mã hóa Web, có thể là một dấu hiệu của tấn công mạng. Ngoài ra, sự kiện này c..."
+3,llama,case_b3_norm_051_powershell_profile_check,NORMAL,ALERT,FP (Báo động giả),5.075,True,"Phát hiện chuỗi brute-force đăng nhập với 4 lần thất bại từ cùng IP hoặc tài khoản, sau đó có một lệnh PowerShell thực thi lệnh Test-Path $P..."
+3,llama,case_b3_norm_052_scheduled_task_file_not_found,NORMAL,ALERT,FP (Báo động giả),4.127,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu (Password Brute Force) trên hệ thống. Bằng chứng là sự kiện 4688 với LogonType = 2 và Comma...
+3,llama,case_b3_norm_053_bitlocker_status_query,NORMAL,ALERT,FP (Báo động giả),3.736,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_054_sfc_system_verify,NORMAL,ALERT,FP (Báo động giả),3.925,True,"Tập tin hệ thống bị hư hỏng, hệ thống đã thực hiện scan để sửa chữa. Có thể là dấu hiệu của phần mềm độc hại hoặc virus."
+3,llama,case_b3_norm_055_dism_restorehealth,NORMAL,ALERT,FP (Báo động giả),3.808,True,"Tài khoản it_admin đã đăng nhập thành công sau khi thực hiện dò mật khẩu, cho thấy có khả năng tấn công Password Brute Force đang diễn ra."
+3,llama,case_b3_norm_056_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),4.26,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_057_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),4.141,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_058_wireshark_dumpcap_diag,NORMAL,ALERT,FP (Báo động giả),3.882,True,"Sự kiện DumpCap.exe được thực hiện trên WORKSTATION-SOC, có thể là một phần của hoạt động trinh sát hệ thống."
+3,llama,case_b3_norm_059_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),3.814,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_060_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),3.997,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_061_typo_logon_once,NORMAL,ALERT,FP (Báo động giả),4.827,True,"Có sự cố đăng nhập thất bại từ IP 192.168.1.45 với 4 lần đăng nhập thất bại liên tiếp, sau đó có một chuỗi brute-force đã xác nhận và tạo tà..."
+3,llama,case_b3_norm_062_typo_admin_twice,NORMAL,ALERT,FP (Báo động giả),4.561,True,"Có 4 sự kiện đăng nhập thất bại với LogonType = 2 (một trong số đó là Event ID 4625) từ cùng IP và tài khoản, sau đó có một chuỗi brute-forc..."
+3,llama,case_b3_norm_063_certutil_hashfile_sha256,NORMAL,ALERT,FP (Báo động giả),4.546,True,"Phát hiện sự kiện certutil.exe tải tệp ubuntu-22.04.iso SHA256 từ địa chỉ C:\Downloads\ubuntu-22.04.iso, có thể là dấu hiệu tấn công Passwor..."
+3,llama,case_b3_norm_064_it_create_new_employee,NORMAL,ALERT,FP (Báo động giả),3.821,True,"Tài khoản mới được tạo với mật khẩu mạnh, có thể là kết quả của một cuộc tấn công brute-force."
+3,llama,case_b3_norm_065_powershell_curl_intranet,NORMAL,ALERT,FP (Báo động giả),4.376,True,"Tài khoản người dùng đã cố gắng đăng nhập bằng mật khẩu sai, sau đó sử dụng lệnh Invoke-WebRequest để tải tệp cấu hình VPN từ intranet.corp...."
+3,llama,case_b3_norm_066_powershell_profile_check,NORMAL,ALERT,FP (Báo động giả),4.506,True,"Phát hiện chuỗi brute-force đăng nhập với 4 lần thất bại từ cùng IP và tài khoản, sau đó có một lệnh PowerShell thực thi lệnh Test-Path $PRO..."
+3,llama,case_b3_norm_067_scheduled_task_file_not_found,NORMAL,ALERT,FP (Báo động giả),4.652,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu (Password Brute Force) trên hệ thống. Bằng chứng là sự kiện 4688 với LogonType = 2 và Comma...
+3,llama,case_b3_norm_068_bitlocker_status_query,NORMAL,ALERT,FP (Báo động giả),3.744,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_069_sfc_system_verify,NORMAL,ALERT,FP (Báo động giả),4.319,True,"Tập tin hệ thống bị hư hỏng, hệ thống đã thực hiện scan để sửa chữa. Có thể là dấu hiệu của phần mềm độc hại hoặc virus."
+3,llama,case_b3_norm_070_dism_restorehealth,NORMAL,ALERT,FP (Báo động giả),4.008,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_071_gpupdate_force,NORMAL,ALERT,FP (Báo động giả),3.627,True,Sự kiện LogonType = 2 và CommandLine = gpupdate.exe /force
+3,llama,case_b3_norm_072_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.85,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_073_wireshark_dumpcap_diag,NORMAL,ALERT,FP (Báo động giả),3.741,True,"Sự kiện DumpCap.exe được thực hiện trên WORKSTATION-SOC, có thể là một phần của hoạt động trinh sát hệ thống."
+3,llama,case_b3_norm_074_sevenzip_compress_docs,NORMAL,ALERT,FP (Báo động giả),4.068,True,"Sự kiện đăng nhập thất bại (Event ID 4625) với nhiều lần cố gắng từ cùng IP hoặc tài khoản, sau đó sự kiện đăng nhập thành công (Event ID 46..."
+3,llama,case_b3_norm_075_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),4.032,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_076_typo_logon_once,NORMAL,ALERT,FP (Báo động giả),4.409,True,"Có sự cố đăng nhập thất bại từ IP 192.168.1.45 với 4 lần đăng nhập thất bại liên tiếp, sau đó có một chuỗi brute-force đã xác nhận và tạo tà..."
+3,llama,case_b3_norm_077_typo_admin_twice,NORMAL,ALERT,FP (Báo động giả),4.475,True,Có 2 sự kiện đăng nhập thất bại với LogonType = 2 (một lần) và sau đó một sự kiện đăng nhập thành công. Điều này có thể là do lỗi gõ mật khẩ...
+3,llama,case_b3_norm_078_certutil_hashfile_sha256,NORMAL,ALERT,FP (Báo động giả),4.222,True,"Phát hiện sự kiện certutil.exe tải tệp ubuntu-22.04.iso SHA256 từ địa chỉ C:\Downloads\ubuntu-22.04.iso, có thể là dấu hiệu tấn công Passwor..."
+3,llama,case_b3_norm_079_it_create_new_employee,NORMAL,ALERT,FP (Báo động giả),3.889,True,"Tài khoản mới được tạo với mật khẩu mạnh, có thể là dấu hiệu của tấn công brute-force."
+3,llama,case_b3_norm_080_powershell_curl_intranet,NORMAL,ALERT,FP (Báo động giả),4.601,True,"Tài khoản người dùng đã đăng nhập thành công bằng cách sử dụng mã hóa Web, có thể là một dấu hiệu của tấn công mạng. Ngoài ra, sự kiện này c..."
+3,llama,case_b3_norm_081_powershell_profile_check,NORMAL,ALERT,FP (Báo động giả),4.258,True,"Phát hiện chuỗi brute-force đăng nhập với 4 lần thất bại từ cùng IP hoặc tài khoản, sau đó sử dụng lệnh powershell.exe để thực thi lệnh Test..."
+3,llama,case_b3_norm_082_scheduled_task_file_not_found,NORMAL,ALERT,FP (Báo động giả),4.104,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu (Password Brute Force) trên hệ thống. Bằng chứng là sự kiện 4688 với LogonType = 2 và Comma...
+3,llama,case_b3_norm_083_bitlocker_status_query,NORMAL,ALERT,FP (Báo động giả),4.418,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_084_sfc_system_verify,NORMAL,ALERT,FP (Báo động giả),3.976,True,"Tập tin hệ thống bị hư hỏng, hệ thống đã thực hiện scan để sửa chữa. Có thể là dấu hiệu của phần mềm độc hại hoặc virus."
+3,llama,case_b3_norm_085_dism_restorehealth,NORMAL,ALERT,FP (Báo động giả),3.685,True,Tài khoản 'it_admin' đã đăng nhập thành công sau một chuỗi brute-force thất bại
+3,llama,case_b3_norm_086_gpupdate_force,NORMAL,ALERT,FP (Báo động giả),3.989,True,Sự kiện LogonType 2 (đăng nhập từ xa) và CommandLine gpupdate.exe /force (cập nhật chính sách Windows) được phát hiện trong thời gian gần đâ...
+3,llama,case_b3_norm_087_netsh_firewall_add_rule,NORMAL,ALERT,FP (Báo động giả),4.142,True,"Tính năng 'netsh.exe' được sử dụng để thêm một quy tắc cho tường lửa nội bộ, cho phép kết nối đến máy chủ in nhà. Điều này có thể là dấu hiệ..."
+3,llama,case_b3_norm_088_wireshark_dumpcap_diag,NORMAL,ALERT,FP (Báo động giả),3.73,True,"Sự kiện DumpCap.exe được thực hiện trên WORKSTATION-SOC, có thể là một phần của hoạt động trinh sát hệ thống."
+3,llama,case_b3_norm_089_sevenzip_compress_docs,NORMAL,ALERT,FP (Báo động giả),4.182,True,"Sự kiện đăng nhập thất bại (Event ID 4625) với nhiều lần cố gắng từ cùng IP hoặc tài khoản, sau đó sự kiện đăng nhập thành công (Event ID 46..."
+3,llama,case_b3_norm_090_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),4.073,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_091_typo_logon_once,NORMAL,ALERT,FP (Báo động giả),4.454,True,"Có sự cố đăng nhập thất bại từ IP 192.168.1.45 với 4 lần đăng nhập thất bại liên tiếp, sau đó có một chuỗi brute-force đã xác nhận và tạo tà..."
+3,llama,case_b3_norm_092_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),5.131,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_093_certutil_hashfile_sha256,NORMAL,ALERT,FP (Báo động giả),4.044,True,"Phát hiện sự kiện certutil.exe tải tệp ubuntu-22.04.iso SHA256 từ địa chỉ C:\Downloads\ubuntu-22.04.iso, có thể là dấu hiệu tấn công Passwor..."
+3,llama,case_b3_norm_094_it_create_new_employee,NORMAL,ALERT,FP (Báo động giả),4.656,True,Tài khoản backdoor được tạo và đăng nhập thành công sau dò mật khẩu. Bằng chứng: Event 4625 (net.exe user nv_kinhdoanh_05 P@ssw0rd2026!) và ...
+3,llama,case_b3_norm_095_powershell_curl_intranet,NORMAL,ALERT,FP (Báo động giả),4.424,True,"Tài khoản người dùng đã cố gắng đăng nhập bằng mật khẩu sai, sau đó sử dụng lệnh Invoke-WebRequest để tải tệp cấu hình VPN từ intranet.corp...."
+3,llama,case_b3_norm_096_powershell_profile_check,NORMAL,ALERT,FP (Báo động giả),4.19,True,"Phát hiện chuỗi brute-force đăng nhập với 4 lần thất bại từ cùng IP hoặc tài khoản, sau đó sử dụng lệnh powershell.exe để thực thi lệnh Test..."
+3,llama,case_b3_norm_097_scheduled_task_file_not_found,NORMAL,ALERT,FP (Báo động giả),4.173,True,"Phát hiện hành vi tấn công bằng cách dò mật khẩu (Password Brute Force) trên hệ thống. Bằng chứng là sự kiện 4688 với event_ref E0001, trong..."
+3,llama,case_b3_norm_098_bitlocker_status_query,NORMAL,ALERT,FP (Báo động giả),3.77,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_099_sfc_system_verify,NORMAL,ALERT,FP (Báo động giả),3.928,True,"Tập tin hệ thống bị hư hỏng, hệ thống đã thực hiện scan để sửa chữa. Có thể là dấu hiệu của phần mềm độc hại hoặc virus."
+3,llama,case_b3_norm_100_dism_restorehealth,NORMAL,ALERT,FP (Báo động giả),3.852,True,"Tài khoản it_admin đã đăng nhập thành công sau khi thực hiện dò mật khẩu, cho thấy có khả năng tấn công Password Brute Force đang diễn ra."
+3,llama,case_b3_norm_101_gpupdate_force,NORMAL,ALERT,FP (Báo động giả),3.938,True,Sự kiện LogonType = 2 và CommandLine = gpupdate.exe /force
+3,llama,case_b3_norm_102_netsh_firewall_add_rule,NORMAL,ALERT,FP (Báo động giả),4.186,True,"Tính năng 'netsh.exe' được sử dụng để thêm một quy tắc cho tường lửa nội bộ, cho phép kết nối đến máy in nội bộ trên cổng 9100. Điều này có ..."
+3,llama,case_b3_norm_103_wireshark_dumpcap_diag,NORMAL,ALERT,FP (Báo động giả),3.796,True,"Sự kiện DumpCap.exe được thực hiện trên WORKSTATION-SOC, có thể là một phần của hoạt động trinh sát hệ thống."
+3,llama,case_b3_norm_104_sevenzip_compress_docs,NORMAL,ALERT,FP (Báo động giả),4.049,True,"Sự kiện đăng nhập thất bại (Event ID 4625) với nhiều lần cố gắng từ cùng IP hoặc tài khoản, sau đó sự kiện đăng nhập thành công (Event ID 46..."
+3,llama,case_b3_norm_105_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),4.001,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_106_typo_logon_once,NORMAL,ALERT,FP (Báo động giả),4.415,True,"Có sự cố đăng nhập thất bại từ IP 192.168.1.45 với 4 lần đăng nhập thất bại liên tiếp, sau đó có một chuỗi brute-force đã xác nhận và tạo tà..."
+3,llama,case_b3_norm_107_typo_admin_twice,NORMAL,ALERT,FP (Báo động giả),4.534,True,"Có 4 sự kiện đăng nhập thất bại với LogonType = 2 (một lần) từ cùng IP và tài khoản, sau đó một sự kiện đăng nhập thành công (Event ID 4624)..."
+3,llama,case_b3_norm_108_certutil_hashfile_sha256,NORMAL,ALERT,FP (Báo động giả),3.964,True,"Phát hiện sự kiện certutil.exe tải tệp ubuntu-22.04.iso SHA256 từ địa chỉ C:\Downloads\ubuntu-22.04.iso, có thể là dấu hiệu tấn công Passwor..."
+3,llama,case_b3_norm_109_it_create_new_employee,NORMAL,ALERT,FP (Báo động giả),4.781,True,Tài khoản backdoor được tạo và đăng nhập thành công sau dò mật khẩu. Bằng chứng: Event 4688 (net.exe user) và Event 4720 (LogonType = 2).
+3,llama,case_b3_norm_110_powershell_curl_intranet,NORMAL,ALERT,FP (Báo động giả),4.355,True,"Tài khoản người dùng đã cố gắng đăng nhập bằng mật khẩu sai, sau đó sử dụng lệnh Invoke-WebRequest để tải tệp cấu hình VPN từ intranet.corp...."
+3,llama,case_b3_norm_111_powershell_profile_check,NORMAL,ALERT,FP (Báo động giả),4.088,True,"Phát hiện chuỗi brute-force đăng nhập với 4 lần thất bại từ cùng IP hoặc tài khoản, sau đó login thành công ngay sau đó. Điều này cho thấy c..."
+3,llama,case_b3_norm_112_scheduled_task_file_not_found,NORMAL,ALERT,FP (Báo động giả),4.307,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu (Password Brute Force) trên hệ thống. Bằng chứng là sự kiện 4688 với LogonType = 2 và Comma...
+3,llama,case_b3_norm_113_bitlocker_status_query,NORMAL,ALERT,FP (Báo động giả),3.796,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_114_sfc_system_verify,NORMAL,ALERT,FP (Báo động giả),3.883,True,"Tập tin hệ thống bị hư hỏng, hệ thống đã thực hiện scan để sửa chữa. Có thể là dấu hiệu của phần mềm độc hại hoặc virus."
+3,llama,case_b3_norm_115_dism_restorehealth,NORMAL,ALERT,FP (Báo động giả),4.001,True,"Sự kiện đăng nhập thành công với mật khẩu sai (Event ID 4625) sau nhiều lần thử nghiệm thất bại, có thể là dấu hiệu của tấn công Password Br..."
+3,llama,case_b3_norm_116_gpupdate_force,NORMAL,ALERT,FP (Báo động giả),3.637,True,Sự kiện LogonType = 2 và CommandLine = gpupdate.exe /force
+3,llama,case_b3_norm_117_netsh_firewall_add_rule,NORMAL,ALERT,FP (Báo động giả),4.65,True,"Tính năng 'netsh.exe' được sử dụng để thêm một quy tắc cho tường lửa nội bộ, cho phép kết nối đến máy in nội bộ trên cổng 9100. Điều này có ..."
+3,llama,case_b3_norm_118_wireshark_dumpcap_diag,NORMAL,ALERT,FP (Báo động giả),3.732,True,"Sự kiện DumpCap.exe được thực hiện trên WORKSTATION-SOC, có thể là một phần của hoạt động trinh sát hệ thống."
+3,llama,case_b3_norm_119_sevenzip_compress_docs,NORMAL,ALERT,FP (Báo động giả),3.725,True,Sự kiện đăng nhập thành công với mật khẩu sai (Event ID 4688) sau một chuỗi brute-force đã xác nhận.
+3,llama,case_b3_norm_120_auditpol_inspect_settings,NORMAL,ALERT,FP (Báo động giả),3.78,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_121_typo_logon_once,NORMAL,ALERT,FP (Báo động giả),4.389,True,"Có sự cố đăng nhập thất bại từ IP 192.168.1.45 với 4 lần đăng nhập thất bại liên tiếp, sau đó có một chuỗi brute-force đã xác nhận và tạo tà..."
+3,llama,case_b3_norm_122_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),4.395,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_123_certutil_hashfile_sha256,NORMAL,ALERT,FP (Báo động giả),4.06,True,"Phát hiện sự kiện certutil.exe tải tệp ubuntu-22.04.iso SHA256 từ địa chỉ C:\Downloads\ubuntu-22.04.iso, có thể là dấu hiệu tấn công Passwor..."
+3,llama,case_b3_norm_124_it_create_new_employee,NORMAL,ALERT,FP (Báo động giả),4.214,True,"Tài khoản mới được tạo với mật khẩu mạnh, có thể là kết quả của một cuộc tấn công brute-force."
+3,llama,case_b3_norm_125_powershell_curl_intranet,NORMAL,ALERT,FP (Báo động giả),4.545,True,"Tài khoản người dùng đã đăng nhập thành công bằng cách sử dụng mã hóa Web, có thể là một dấu hiệu của tấn công mạng. Ngoài ra, sự kiện này c..."
+3,llama,case_b3_norm_126_powershell_profile_check,NORMAL,ALERT,FP (Báo động giả),4.237,True,"Phát hiện chuỗi brute-force đăng nhập với 4 lần thất bại từ cùng IP hoặc tài khoản, sau đó sử dụng lệnh powershell.exe để thực thi lệnh Test..."
+3,llama,case_b3_norm_127_scheduled_task_file_not_found,NORMAL,ALERT,FP (Báo động giả),4.123,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu (Password Brute Force) trên hệ thống. Bằng chứng là sự kiện 4688 với LogonType = 2 và Comma...
+3,llama,case_b3_norm_128_bitlocker_status_query,NORMAL,ALERT,FP (Báo động giả),4.384,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_129_sfc_system_verify,NORMAL,ALERT,FP (Báo động giả),3.925,True,"Tập tin hệ thống bị hư hỏng, hệ thống đã thực hiện scan để sửa chữa. Có thể là dấu hiệu của phần mềm độc hại hoặc virus."
+3,llama,case_b3_norm_130_dism_restorehealth,NORMAL,ALERT,FP (Báo động giả),3.829,True,"Tài khoản it_admin đã đăng nhập thành công sau khi thực hiện dò mật khẩu, cho thấy có khả năng tấn công Password Brute Force đang diễn ra."
+3,llama,case_b3_norm_131_gpupdate_force,NORMAL,ALERT,FP (Báo động giả),3.807,True,"Sự kiện LogonType=2 với IpAddress=- và WorkstationName=WORKSTATION-SOC, có thể là một hành vi tấn công"
+3,llama,case_b3_norm_132_netsh_firewall_add_rule,NORMAL,ALERT,FP (Báo động giả),4.28,True,"Tính năng 'netsh.exe' được sử dụng để thêm một quy tắc cho tường lửa nội bộ, cho phép kết nối đến máy in nội bộ trên cổng 9100. Điều này có ..."
+3,llama,case_b3_norm_133_wireshark_dumpcap_diag,NORMAL,ALERT,FP (Báo động giả),3.745,True,"Sự kiện DumpCap.exe được thực hiện trên WORKSTATION-SOC, có thể là một phần của hoạt động trinh sát hệ thống."
+3,llama,case_b3_norm_134_sevenzip_compress_docs,NORMAL,ALERT,FP (Báo động giả),3.717,True,Sự kiện đăng nhập thành công với mật khẩu sai (Event ID 4688) sau một chuỗi brute-force đã xác nhận.
+3,llama,case_b3_norm_135_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),4.498,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_136_typo_logon_once,NORMAL,ALERT,FP (Báo động giả),4.55,True,"Có sự cố đăng nhập thất bại từ IP 192.168.1.45 với 4 lần đăng nhập thất bại liên tiếp, sau đó có một chuỗi brute-force đã xác nhận và tạo tà..."
+3,llama,case_b3_norm_137_typo_admin_twice,NORMAL,ALERT,FP (Báo động giả),4.409,True,Có 2 sự kiện đăng nhập thất bại với LogonType = 2 (một lần) và sau đó một sự kiện đăng nhập thành công. Điều này có thể là do lỗi gõ mật khẩ...
+3,llama,case_b3_norm_138_certutil_hashfile_sha256,NORMAL,ALERT,FP (Báo động giả),3.996,True,"Phát hiện sự kiện certutil.exe tải tệp ubuntu-22.04.iso SHA256 từ địa chỉ C:\Downloads\ubuntu-22.04.iso, có thể là dấu hiệu tấn công Passwor..."
+3,llama,case_b3_norm_139_it_create_new_employee,NORMAL,ALERT,FP (Báo động giả),4.516,True,Tài khoản backdoor được tạo và đăng nhập thành công sau dò mật khẩu. Bằng chứng: Event 4625 (net.exe user nv_kinhdoanh_05 P@ssw0rd2026!) và ...
+3,llama,case_b3_norm_140_powershell_curl_intranet,NORMAL,ALERT,FP (Báo động giả),4.378,True,"Tài khoản người dùng đã cố gắng đăng nhập bằng mật khẩu sai, sau đó sử dụng lệnh Invoke-WebRequest để tải tệp cấu hình VPN từ intranet.corp...."
+3,llama,case_b3_norm_141_powershell_profile_check,NORMAL,ALERT,FP (Báo động giả),4.16,True,"Phát hiện chuỗi brute-force đăng nhập với 1 lần thất bại, sau đó sử dụng lệnh powershell.exe để thực thi lệnh Test-Path $PROFILE. Điều này c..."
+3,llama,case_b3_norm_142_scheduled_task_file_not_found,NORMAL,ALERT,FP (Báo động giả),4.174,True,Phát hiện hành vi tấn công bằng cách dò mật khẩu (Password Brute Force) trên hệ thống. Bằng chứng là sự kiện 4688 với LogonType = 2 và Comma...
+3,llama,case_b3_norm_143_bitlocker_status_query,NORMAL,ALERT,FP (Báo động giả),3.798,True,"Phát hiện hành vi đăng nhập thất bại nhiều lần từ cùng IP hoặc tài khoản, có thể là dấu hiệu của tấn công mật khẩu"
+3,llama,case_b3_norm_144_sfc_system_verify,NORMAL,ALERT,FP (Báo động giả),3.915,True,"Tập tin hệ thống bị hư hỏng, hệ thống đã thực hiện scan để sửa chữa. Có thể là dấu hiệu của phần mềm độc hại hoặc virus."
+3,llama,case_b3_norm_145_dism_restorehealth,NORMAL,ALERT,FP (Báo động giả),4.407,True,"Phát hiện sự kiện đăng nhập thất bại với LogonType 2, có thể là do mật khẩu sai hoặc brute-force. Tuy nhiên, không có thông tin về việc sử d..."
+3,llama,case_b3_norm_146_gpupdate_force,NORMAL,ALERT,FP (Báo động giả),4.053,True,"Sự kiện LogonType=2 với IpAddress=- và WorkstationName=WORKSTATION-SOC, kết hợp với sự kiện CommandLine=gpupdate.exe /force, có thể là một h..."
+3,llama,case_b3_norm_147_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),3.797,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,llama,case_b3_norm_148_wireshark_dumpcap_diag,NORMAL,ALERT,FP (Báo động giả),3.834,True,"Sự kiện DumpCap.exe được thực hiện trên WORKSTATION-SOC, có thể là một phần của hoạt động trinh sát hệ thống."
+3,llama,case_b3_norm_149_sevenzip_compress_docs,NORMAL,ALERT,FP (Báo động giả),3.819,True,Sự kiện đăng nhập thành công với mật khẩu sai (Event ID 4688) và sự kiện tạo tệp zip (Event ID E0001).
+3,llama,case_b3_norm_150_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),4.229,True,"Các sự kiện log chỉ bao gồm hoạt động hệ thống và tác vụ quản trị thông thường, không phát hiện dấu hiệu độc hại."
+3,deepblue,case_b3_att_01_amsi_bypass_patch,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_02_cmstp_uac_bypass,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_03_fodhelper_uac_bypass,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_04_eventvwr_msc_hijack,ALERT,NORMAL,FN (Bỏ sót tấn công),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_05_regsvr32_squiblydoo_remote,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_06_mshta_vbscript_inline,ALERT,ALERT,TP (Bắt trúng),0.0013,True,DeepBlueCLI: PowerShell Download Cradle Pattern (regexes.txt)
+3,deepblue,case_b3_att_07_rundll32_advpack_inf_exec,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_08_in_memory_reflection_net,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_09_ransomware_extension_loop,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_10_net_stop_eventlog_disabled,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_11_sticky_keys_backdoor,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_12_appcertdlls_persistence,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_13_shim_sdbinst_install,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_14_com_hijack_clsid,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_15_obfuscated_string_cradle,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_16_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_17_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0024,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_18_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_19_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_20_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_21_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_22_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_23_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_24_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_25_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_26_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_27_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_28_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_29_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_30_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_31_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_32_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_33_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_34_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0031,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_35_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_36_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_37_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0025,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_38_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_39_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_40_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_41_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_42_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_43_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_44_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_45_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_46_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_47_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0025,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_48_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_49_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_att_50_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_001_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_002_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_003_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_004_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_005_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_006_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_007_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_008_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_009_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_010_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_011_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_012_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_013_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_014_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_015_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_016_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_017_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_018_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_019_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_020_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_021_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_022_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_023_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_024_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_025_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_026_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_027_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_028_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_029_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_030_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_031_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_032_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_033_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_034_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_035_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_036_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_037_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_038_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_039_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_040_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_041_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0032,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_042_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_043_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_044_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0031,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_045_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_046_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0037,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_047_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_048_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_049_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.003,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_050_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_051_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_052_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_053_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_054_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_055_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_056_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_057_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_058_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_059_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_060_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_061_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_062_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_063_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_064_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_065_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_066_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_067_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_068_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_069_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_070_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_071_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_072_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_073_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_074_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_075_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_076_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_077_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_078_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_079_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_080_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_081_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_082_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_083_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_084_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_085_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_086_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_087_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_088_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_089_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_090_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_091_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0025,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_092_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_093_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_094_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_095_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_096_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_097_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_098_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_099_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_100_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_101_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_102_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_103_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_104_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_105_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_106_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_107_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_108_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_109_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_110_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_111_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_112_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_113_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_114_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_115_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_116_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_117_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_118_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_119_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_120_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_121_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_122_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0031,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_123_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_124_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0034,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_125_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_126_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_127_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_128_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_129_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_130_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_131_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_132_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_133_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_134_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_135_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0031,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_136_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_137_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_138_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_139_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_140_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_141_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_142_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_143_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_144_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_145_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_146_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_147_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_148_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_149_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,deepblue,case_b3_norm_150_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,DeepBlueCLI: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_01_amsi_bypass_patch,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_02_cmstp_uac_bypass,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_03_fodhelper_uac_bypass,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_04_eventvwr_msc_hijack,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_05_regsvr32_squiblydoo_remote,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_06_mshta_vbscript_inline,ALERT,ALERT,TP (Bắt trúng),0.0012,True,Sigma [proc_creation_win_powershell_download_cradle]: Remote Download Cradle
+3,sigma,case_b3_att_07_rundll32_advpack_inf_exec,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_08_in_memory_reflection_net,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_09_ransomware_extension_loop,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_10_net_stop_eventlog_disabled,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_11_sticky_keys_backdoor,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_12_appcertdlls_persistence,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_13_shim_sdbinst_install,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_14_com_hijack_clsid,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_15_obfuscated_string_cradle,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_16_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_17_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_18_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_19_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_20_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_21_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_22_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_23_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_24_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_25_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_26_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_27_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_28_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_29_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_30_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_31_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_32_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_33_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_34_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_35_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_36_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_37_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_38_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_39_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_40_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_41_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_42_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_43_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_44_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_45_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_46_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_47_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_48_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_49_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_att_50_stealth_evasion_sample,ALERT,NORMAL,FN (Bỏ sót tấn công),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_001_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_002_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_003_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_004_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_005_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_006_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_007_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_008_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_009_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_010_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_011_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_012_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_013_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_014_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_015_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_016_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_017_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_018_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_019_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_020_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_021_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_022_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_023_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_024_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_025_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_026_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_027_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_028_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_029_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_030_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_031_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_032_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_033_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_034_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_035_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_036_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_037_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_038_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_039_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_040_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_041_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_042_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_043_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_044_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_045_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_046_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_047_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_048_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_049_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_050_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_051_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_052_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_053_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_054_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_055_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_056_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_057_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_058_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_059_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_060_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_061_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_062_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_063_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_064_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_065_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_066_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0021,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_067_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_068_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_069_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_070_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_071_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_072_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_073_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_074_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0009,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_075_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_076_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_077_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_078_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_079_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_080_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_081_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_082_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0024,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_083_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_084_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_085_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_086_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_087_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_088_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_089_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_090_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_091_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_092_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_093_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_094_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_095_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_096_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_097_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_098_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_099_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_100_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_101_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_102_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_103_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_104_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_105_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_106_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_107_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0023,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_108_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_109_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_110_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0022,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_111_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_112_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_113_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0026,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_114_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_115_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_116_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_117_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_118_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_119_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_120_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_121_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_122_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_123_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_124_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_125_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_126_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_127_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_128_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_129_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_130_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_131_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_132_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0018,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_133_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.001,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_134_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0014,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_135_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_136_typo_logon_once,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_137_typo_admin_twice,NORMAL,NORMAL,TN (Đúng lành tính),0.002,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_138_certutil_hashfile_sha256,NORMAL,NORMAL,TN (Đúng lành tính),0.0011,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_139_it_create_new_employee,NORMAL,NORMAL,TN (Đúng lành tính),0.0015,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_140_powershell_curl_intranet,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_141_powershell_profile_check,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_142_scheduled_task_file_not_found,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_143_bitlocker_status_query,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_144_sfc_system_verify,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_145_dism_restorehealth,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_146_gpupdate_force,NORMAL,NORMAL,TN (Đúng lành tính),0.0012,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_147_netsh_firewall_add_rule,NORMAL,NORMAL,TN (Đúng lành tính),0.0016,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_148_wireshark_dumpcap_diag,NORMAL,NORMAL,TN (Đúng lành tính),0.0013,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_149_sevenzip_compress_docs,NORMAL,NORMAL,TN (Đúng lành tính),0.0019,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)
+3,sigma,case_b3_norm_150_auditpol_inspect_settings,NORMAL,NORMAL,TN (Đúng lành tính),0.0017,True,Sigma Rules: An toàn (Không khớp quy tắc nghi vấn)

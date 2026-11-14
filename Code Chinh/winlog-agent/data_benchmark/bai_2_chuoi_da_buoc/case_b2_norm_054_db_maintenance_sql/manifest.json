@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_norm_054_db_maintenance_sql",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Quy trình bảo trì CSDL SQL Server: Shrink log -> Checkdb -> Index rebuild.",
+  "mitre_technique": "-",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.470143"
+}

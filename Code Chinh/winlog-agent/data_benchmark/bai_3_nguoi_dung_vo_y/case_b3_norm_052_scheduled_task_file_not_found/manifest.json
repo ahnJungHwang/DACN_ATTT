@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_052_scheduled_task_file_not_found",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.668664"
+}

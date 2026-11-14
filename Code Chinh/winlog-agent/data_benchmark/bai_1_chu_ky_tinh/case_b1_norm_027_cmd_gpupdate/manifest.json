@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_027_cmd_gpupdate",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Cập nhật chính sách người dùng từ Active Directory.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.235375"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_03_c2_download_log_clear",
+  "category": "MultiStage",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: Tải mã độc ngầm C2 qua WebClient -> Xóa sạch nhật ký Security 1102.",
+  "mitre_technique": "T1059.001 / T1070.001",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.363849"
+}

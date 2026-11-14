@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_norm_111_network_monitoring",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Quy trình kiểm tra định tuyến và tình trạng card mạng máy chủ.",
+  "mitre_technique": "-",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.529011"
+}

@@ -13,7 +13,7 @@ Hệ thống được thiết kế theo mô hình **SOC / EDR phân tán**:
 ┌──────────────────────────────────────┐             ┌──────────────────────────────────────────────────┐
 │     MÁY CLIENT (192.168.153.147)     │             │            MÁY SERVER (192.168.153.1)            │
 │                                      │             │                                                  │
-│  [Windows Event Log: Security + PS]  │             │   [FastAPI Server - app/app.py (Port 8000/9443)] │
+│  [Windows Event Log: Security + PS]  │             │   [FastAPI Server - app/app.py (Port 8000/8443)] │
 │                  │                   │             │                      │                           │
 │       (Định kỳ 5-15s/lần)            │             │                      ▼                           │
 │                  ▼                   │             │   [Correlation Engine + Ollama Local SLM]        │
@@ -58,11 +58,15 @@ Máy Server cần cài đặt môi trường AI và ứng dụng phân tích tru
 
 ---
 
-### 3. Mở cổng tường lửa Windows (Firewall Port 8000)
-Để máy Client (`192.168.147.136`) có thể đẩy log sang Server qua cổng `8000`, mở PowerShell với quyền **Administrator** trên Server và chạy lệnh:
+### 3. Mở cổng tường lửa Windows (Firewall Port 8443 / 8000)
+Để máy Client (`192.168.147.136`) có thể đẩy log sang Server, mở PowerShell với quyền **Administrator** trên Server và chạy lệnh:
 ```powershell
+# Cổng HTTPS 8443: bat\run_server_https.bat (HTTPS_PORT trong .env). run_client.bat và n8n đều dùng cổng này.
+New-NetFirewallRule -DisplayName "WinLog Agent Server (Port 8443)" -Direction Inbound -LocalPort 8443 -Protocol TCP -Action Allow
+# (Tùy chọn) Cổng HTTP 8000 nếu dùng bat\run_server.bat
 New-NetFirewallRule -DisplayName "WinLog Agent Server (Port 8000)" -Direction Inbound -LocalPort 8000 -Protocol TCP -Action Allow
 ```
+Nếu đổi `HTTPS_PORT` trong `.env`, cần mở đúng cổng mới, đồng thời sửa `SERVER_URL` trong `bat\run_client.bat` và URL `host.docker.internal:<cổng>` trong workflow n8n.
 
 ---
 
@@ -70,7 +74,7 @@ New-NetFirewallRule -DisplayName "WinLog Agent Server (Port 8000)" -Direction In
 
 Hệ thống sử dụng **n8n Workflow Automation** làm trung tâm điều phối và gửi cảnh báo tới Telegram:
 
-1. Click đúp vào file: 👉 **`run_n8n.bat`** (hoặc gõ `docker compose up -d`).
+1. Gõ `docker compose up -d` tại thư mục gốc, hoặc click đúp **`bat\import_n8n_image.bat`** nếu đã có file `winlog-n8n-docker.tar`.
 2. Mở trình duyệt web truy cập: **`http://localhost:5679`**
 3. Nếu là lần đầu mở n8n, hãy tạo tài khoản Admin (Email & Password tùy ý).
 4. Tại thanh menu bên trái, vào mục **Workflows** ➔ Bấm nút **`Add workflow`** (hoặc biểu tượng `...` góc phải) ➔ Chọn **`Import from file`**.
@@ -79,15 +83,34 @@ Hệ thống sử dụng **n8n Workflow Automation** làm trung tâm điều ph�
 
 ---
 
-### 5. Khởi động AI Server qua HTTPS (Port 9443)
-Do Workflow trong n8n kết nối tới API Server qua địa chỉ `https://host.docker.internal:9443/ingest`, trên máy Server bạn hãy khởi chạy bằng file HTTPS:
-👉 Click đúp vào file: **`bat\run_server_https.bat`**
+### 5. Khởi động AI Server qua HTTPS (Port 8443)
+Do Workflow trong n8n kết nối tới API Server qua địa chỉ `https://host.docker.internal:8443/ingest`, trên máy Server bạn hãy khởi chạy bằng file HTTPS:
+👉 Click đúp vào file: **`bat\run_server_https.bat`** (cổng lấy từ `HTTPS_PORT` trong `.env`, mặc định `8443`)
 
 Cửa sổ sẽ hiện lên và giữ nguyên trạng thái lắng nghe:
 ```text
-INFO:     Uvicorn running on https://0.0.0.0:9443 (Press CTRL+C to quit)
+INFO:     Uvicorn running on https://0.0.0.0:8443 (Press CTRL+C to quit)
 ```
 *(Server đã sẵn sàng nhận log từ Client, tự động chuyển tiếp vào n8n Webhook `windows-log` và phân tích AI khi n8n gọi lại).*
+
+> `bat\run_server_https1.bat` chạy cổng **9443** và tự tạo `.venv` khi mang sang máy mới. Nếu dùng file này, phải mở firewall 9443 và sửa URL trong `run_client.bat` / workflow n8n sang 9443.
+
+Chỉ nhãn `ALERT` mới đi qua nhánh Telegram. `REVIEW` (AI chưa kết luận được nhưng bộ luật có tín hiệu yếu) và `NORMAL` không gửi Telegram; xem các nhãn này trên SIEM dashboard.
+
+Các biến môi trường có thể đặt trong `.env` trước khi chạy server (không bắt buộc):
+
+| Biến | Mặc định | Ý nghĩa |
+|---|---:|---|
+| `HTTPS_PORT` | `8443` | Cổng HTTPS của `run_server_https.bat` |
+| `ALERT_DEDUP_MINUTES` | `10` | Cùng máy + cùng kỹ thuật MITRE trong khoảng này chỉ gửi Telegram 1 lần |
+| `EVENT_WINDOW_SECONDS` | `0` (tắt) | > 0: gộp mỗi lô với các sự kiện của N giây gần nhất (`data/winlog_events.db`) để tương quan qua nhiều lô. Khi bật, sự kiện bị phân tích lặp lại nên AI chạy nhiều hơn |
+| `CORRELATION_WINDOW_SECONDS` | `300` | Cửa sổ thời gian gom các lần đăng nhập sai thành brute force |
+| `NETWORK_BRUTE_FORCE_THRESHOLD` | `3` | Số lần sai qua mạng (LogonType 3/10) cùng tài khoản/IP để xác nhận brute force |
+| `INTERACTIVE_BRUTE_FORCE_THRESHOLD` | `5` | Ngưỡng cho đăng nhập tại máy, cao hơn để tránh báo nhầm khi gõ sai mật khẩu |
+| `POST_BRUTE_SUCCESS_WINDOW_SECONDS` | `600` | Đăng nhập thành công trong khoảng này sau brute force -> cảnh báo T1078 |
+| `ALERT_RISK_THRESHOLD` | `70` | Điểm rủi ro tối thiểu gán cho kết quả `ALERT` (chỉ để hiển thị, không quyết định nhãn) |
+| `REVIEW_RISK_THRESHOLD` | `40` | Điểm tín hiệu yếu tối thiểu để chuyển `UNKNOWN` thành `REVIEW` |
+| `MAX_XML_CHARS` | `5000000` | Giới hạn kích thước mỗi khối XML client gửi lên |
 
 ---
 
@@ -132,7 +155,7 @@ Windows mặc định không ghi lại chi tiết dòng lệnh và PowerShell. �
    ======================================================================
     - Client Hostname    : WINLAB
     - Client IP          : 192.168.147.136
-    - AI Server URL      : http://192.168.147.1:8000/ingest
+    - AI Server URL      : https://192.168.147.1:8443/ingest
     - Chu ky quet        : 15 giay/lan
    ----------------------------------------------------------------------
    [*] Dang ket noi thu toi AI Server...
@@ -167,7 +190,7 @@ Trong khi cửa sổ `bat\run_client.bat` vẫn đang chạy:
 Trong vòng 15 giây, Agent phát hiện log và đẩy sang Server:
 ```text
 [07:11:15] [PHAT HIEN SU KIEN] Security: 10 | PowerShell: 9
-  -> Dang dong goi va gui ve AI Server (http://192.168.147.1:8000/ingest)...
+  -> Dang dong goi va gui ve AI Server (https://192.168.147.1:8443/ingest)...
   [OK] Da day 19 su kien log len AI Server thanh cong!
 ```
 
@@ -207,7 +230,7 @@ Trên giao diện `http://localhost:5679`, bạn sẽ thấy các node sáng đ�
 
 | Tình trạng | Nguyên nhân | Cách xử lý |
 |---|---|---|
-| **Client báo: `[!] CANH BAO: Chua ket noi duoc toi AI Server`** | Tường lửa trên Server chặn cổng 8000 hoặc Server chưa bật. | 1. Đảm bảo file `bat\run_server.bat` đang chạy trên Server.<br>2. Chạy lệnh mở cổng 8000 trong PowerShell Admin trên Server (xem Bước 1.3). |
+| **Client báo: `[!] CANH BAO: Chua ket noi duoc toi AI Server`** | Tường lửa trên Server chặn cổng 8443 (hoặc 8000 nếu dùng HTTP) hoặc Server chưa bật. | 1. Đảm bảo file `bat\run_server_https.bat` đang chạy trên Server.<br>2. Chạy lệnh mở cổng 8443 trong PowerShell Admin trên Server (xem Bước 1.3).<br>3. Kiểm tra `SERVER_URL` trong `bat\run_client.bat` đúng IP và cổng Server. |
 | **Server báo: `[!] Khong the ket noi toi n8n Webhook`** | Container n8n chưa bật hoặc workflow n8n chưa được Active. | 1. Chạy `run_n8n.bat` để bật Docker n8n.<br>2. Truy cập `http://localhost:5679` và kiểm tra công tắc **Active** của workflow đã bật màu xanh chưa. |
 | **Cửa sổ CMD trên Client đứng yên, không quét tiếp** | Người dùng click chuột vào cửa sổ CMD gây ra chế độ **Select/QuickEdit** (Windows đóng băng tiến trình). | Bấm vào cửa sổ CMD và ấn phím **`ENTER`** (hoặc click chuột phải) để thoát trạng thái bôi đen. |
 | **Telegram không nhận được tin nhắn** | Tài khoản Telegram chưa bấm `START` với bot. | Mở cuộc trò chuyện với con Bot của bạn và bấm nút **START** (hoặc gửi tin nhắn bất kỳ cho bot). |
@@ -228,7 +251,7 @@ Trên giao diện `http://localhost:5679`, bạn sẽ thấy các node sáng đ�
 | **`core/evaluate.py`** | Server | Script tự động chạy benchmark so sánh Qwen và Llama, tính Precision/Recall/F1. |
 | **`bat/run_evaluation.bat`** | Server | File 1-click khởi chạy đánh giá so sánh và xuất báo cáo CSV/Markdown. |
 | **`bat/run_server.bat`** | Server | File 1-click khởi động Server API cổng 8000. |
-| **`bat/run_server_https.bat`** | Server | File 1-click khởi động Server API bảo mật HTTPS cổng 9443. |
+| **`bat/run_server_https.bat`** | Server | File 1-click khởi động Server API bảo mật HTTPS cổng 8443 (`HTTPS_PORT` trong `.env`). |
 | **`bat/setup_client.bat`** | Client | File 1-click bật chính sách Windows Audit (Process Creation, PowerShell). |
 | **`bat/run_client.bat`** | Client | File 1-click khởi chạy Agent thu gom log. |
 | **`ps1/client_agent.ps1`** | Client | Script quét Windows Event Log mỗi 5-15s và đẩy sang Server. |

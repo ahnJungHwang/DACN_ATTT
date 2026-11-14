@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_112_paint_draw",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Mở công cụ Paint chỉnh sửa ảnh chụp màn hình báo cáo.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.323537"
+}

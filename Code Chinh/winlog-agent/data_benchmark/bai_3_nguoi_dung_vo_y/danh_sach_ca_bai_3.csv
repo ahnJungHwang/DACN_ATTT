@@ -1,0 +1,201 @@
+case_id,category,ground_truth,description,mitre_technique,scenario,generated_at
+case_b3_att_01_amsi_bypass_patch,DefenseEvasion,ALERT,Vô hiệu hóa AMSI bằng in-memory patch AmsiUtils.amsiInitFailed.,T1562.001,Bài 3,2026-11-13T09:54:15.567121
+case_b3_att_02_cmstp_uac_bypass,PrivilegeEscalation,ALERT,Lợi dụng trình cài đặt mạng CMSTP.exe vượt qua UAC Leo quyền Administrator.,T1548.002,Bài 3,2026-11-13T09:54:15.567858
+case_b3_att_03_fodhelper_uac_bypass,PrivilegeEscalation,ALERT,Lợi dụng fodhelper.exe đọc khóa Registry ms-settings leo quyền UAC ngầm.,T1548.002,Bài 3,2026-11-13T09:54:15.568610
+case_b3_att_04_eventvwr_msc_hijack,PrivilegeEscalation,ALERT,Kỹ thuật UAC Bypass thông qua Eventvwr.exe hijack mscfile shell open.,T1548.002,Bài 3,2026-11-13T09:54:15.569386
+case_b3_att_05_regsvr32_squiblydoo_remote,DefenseEvasion,ALERT,Tấn công Squiblydoo nạp scriptlet từ domain c2 qua regsvr32.,T1218.010,Bài 3,2026-11-13T09:54:15.570721
+case_b3_att_06_mshta_vbscript_inline,Execution,ALERT,Thực thi payload VBScript inline thông qua tiện ích mshta.exe.,T1218.005,Bài 3,2026-11-13T09:54:15.571684
+case_b3_att_07_rundll32_advpack_inf_exec,DefenseEvasion,ALERT,Rundll32 gọi advpack.dll cài đặt payload thông qua INF file.,T1218.011,Bài 3,2026-11-13T09:54:15.572557
+case_b3_att_08_in_memory_reflection_net,Execution,ALERT,Nạp reflective assembly .NET trực tiếp vào bộ nhớ RAM qua [System.Reflection.Assembly]::Load.,T1059.001,Bài 3,2026-11-13T09:54:15.573352
+case_b3_att_09_ransomware_extension_loop,Impact,ALERT,Vòng lặp đổi tên hàng loạt tệp tin người dùng sang đuôi .locked tống tiền.,T1486,Bài 3,2026-11-13T09:54:15.574141
+case_b3_att_10_net_stop_eventlog_disabled,DefenseEvasion,ALERT,Dừng và vô hiệu hóa dịch vụ ghi nhật ký sự kiện Windows EventLog.,T1562.002,Bài 3,2026-11-13T09:54:15.574852
+case_b3_att_11_sticky_keys_backdoor,Persistence,ALERT,Gán cmd.exe vào sethc.exe để mở backdoor màn hình khóa Windows.,T1546.008,Bài 3,2026-11-13T09:54:15.575588
+case_b3_att_12_appcertdlls_persistence,Persistence,ALERT,Ghi tên DLL độc hại vào AppCertDlls để tự nạp cùng mọi tiến trình.,T1546.009,Bài 3,2026-11-13T09:54:15.576680
+case_b3_att_13_shim_sdbinst_install,Persistence,ALERT,Cài đặt cơ sở dữ liệu Shim tùy chỉnh qua sdbinst để hooking tiến trình.,T1546.011,Bài 3,2026-11-13T09:54:15.577487
+case_b3_att_14_com_hijack_clsid,Persistence,ALERT,COM Object Hijacking: Ghi đè InprocServer32 trong HKCU CLSID.,T1546.015,Bài 3,2026-11-13T09:54:15.578280
+case_b3_att_15_obfuscated_string_cradle,Execution,ALERT,PowerShell làm rối chuỗi bằng ký tự backtick và ghép chuỗi d`o`w`n`l`o`a`d.,T1059.001,Bài 3,2026-11-13T09:54:15.579255
+case_b3_att_16_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 16: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.580318
+case_b3_att_17_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 17: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.581186
+case_b3_att_18_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 18: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.582071
+case_b3_att_19_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 19: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.583209
+case_b3_att_20_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 20: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.584347
+case_b3_att_21_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 21: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.585206
+case_b3_att_22_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 22: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.585948
+case_b3_att_23_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 23: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.586705
+case_b3_att_24_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 24: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.587592
+case_b3_att_25_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 25: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.588333
+case_b3_att_26_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 26: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.589277
+case_b3_att_27_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 27: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.590165
+case_b3_att_28_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 28: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.591295
+case_b3_att_29_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 29: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.592228
+case_b3_att_30_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 30: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.593083
+case_b3_att_31_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 31: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.593925
+case_b3_att_32_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 32: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.595976
+case_b3_att_33_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 33: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.597304
+case_b3_att_34_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 34: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.598631
+case_b3_att_35_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 35: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.599476
+case_b3_att_36_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 36: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.600998
+case_b3_att_37_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 37: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.601914
+case_b3_att_38_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 38: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.602929
+case_b3_att_39_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 39: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.604444
+case_b3_att_40_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 40: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.605536
+case_b3_att_41_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 41: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.606467
+case_b3_att_42_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 42: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.607497
+case_b3_att_43_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 43: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.608700
+case_b3_att_44_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 44: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.609730
+case_b3_att_45_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 45: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.611434
+case_b3_att_46_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 46: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.612935
+case_b3_att_47_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 47: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.614086
+case_b3_att_48_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 48: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.614971
+case_b3_att_49_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 49: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.615795
+case_b3_att_50_stealth_evasion_sample,DefenseEvasion,ALERT,Tấn công trốn tránh phát hiện nâng cao kịch bản 50: Che giấu hành vi và vô hiệu hóa cơ chế cảnh báo.,T1562 / T1059,Bài 3,2026-11-13T09:54:15.616572
+case_b3_norm_001_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.617489
+case_b3_norm_002_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.619670
+case_b3_norm_003_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.620969
+case_b3_norm_004_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.622022
+case_b3_norm_005_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.622988
+case_b3_norm_006_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.623984
+case_b3_norm_007_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.625035
+case_b3_norm_008_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.626274
+case_b3_norm_009_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.627219
+case_b3_norm_010_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.628536
+case_b3_norm_011_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.629725
+case_b3_norm_012_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.630876
+case_b3_norm_013_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.632198
+case_b3_norm_014_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.633201
+case_b3_norm_015_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.634345
+case_b3_norm_016_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.635398
+case_b3_norm_017_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.636363
+case_b3_norm_018_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.637203
+case_b3_norm_019_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.638110
+case_b3_norm_020_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.639609
+case_b3_norm_021_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.640624
+case_b3_norm_022_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.641440
+case_b3_norm_023_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.642410
+case_b3_norm_024_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.643428
+case_b3_norm_025_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.644447
+case_b3_norm_026_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.645196
+case_b3_norm_027_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.646652
+case_b3_norm_028_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.647472
+case_b3_norm_029_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.648359
+case_b3_norm_030_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.649134
+case_b3_norm_031_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.650040
+case_b3_norm_032_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.650848
+case_b3_norm_033_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.651652
+case_b3_norm_034_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.652994
+case_b3_norm_035_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.653886
+case_b3_norm_036_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.654644
+case_b3_norm_037_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.655409
+case_b3_norm_038_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.656084
+case_b3_norm_039_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.656823
+case_b3_norm_040_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.657568
+case_b3_norm_041_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.658425
+case_b3_norm_042_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.659212
+case_b3_norm_043_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.660460
+case_b3_norm_044_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.661240
+case_b3_norm_045_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.661976
+case_b3_norm_046_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.663280
+case_b3_norm_047_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.664017
+case_b3_norm_048_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.664692
+case_b3_norm_049_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.665486
+case_b3_norm_050_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.666237
+case_b3_norm_051_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.667732
+case_b3_norm_052_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.668664
+case_b3_norm_053_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.669793
+case_b3_norm_054_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.670523
+case_b3_norm_055_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.671251
+case_b3_norm_056_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.672276
+case_b3_norm_057_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.673122
+case_b3_norm_058_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.674613
+case_b3_norm_059_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.675455
+case_b3_norm_060_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.676208
+case_b3_norm_061_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.677229
+case_b3_norm_062_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.678053
+case_b3_norm_063_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.678777
+case_b3_norm_064_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.679731
+case_b3_norm_065_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.680898
+case_b3_norm_066_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.681798
+case_b3_norm_067_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.682854
+case_b3_norm_068_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.683612
+case_b3_norm_069_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.684365
+case_b3_norm_070_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.685150
+case_b3_norm_071_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.688167
+case_b3_norm_072_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.689510
+case_b3_norm_073_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.690633
+case_b3_norm_074_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.691567
+case_b3_norm_075_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.693409
+case_b3_norm_076_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.694852
+case_b3_norm_077_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.695844
+case_b3_norm_078_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.696623
+case_b3_norm_079_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.698053
+case_b3_norm_080_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.699660
+case_b3_norm_081_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.700851
+case_b3_norm_082_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.702097
+case_b3_norm_083_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.703404
+case_b3_norm_084_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.704454
+case_b3_norm_085_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.705367
+case_b3_norm_086_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.706124
+case_b3_norm_087_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.706843
+case_b3_norm_088_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.707765
+case_b3_norm_089_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.709301
+case_b3_norm_090_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.710183
+case_b3_norm_091_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.711005
+case_b3_norm_092_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.712176
+case_b3_norm_093_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.713007
+case_b3_norm_094_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.713858
+case_b3_norm_095_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.714670
+case_b3_norm_096_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.716189
+case_b3_norm_097_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.717166
+case_b3_norm_098_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.718206
+case_b3_norm_099_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.719070
+case_b3_norm_100_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.719983
+case_b3_norm_101_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.720871
+case_b3_norm_102_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.721657
+case_b3_norm_103_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.722866
+case_b3_norm_104_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.724200
+case_b3_norm_105_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.725136
+case_b3_norm_106_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.726245
+case_b3_norm_107_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.727099
+case_b3_norm_108_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.728220
+case_b3_norm_109_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.729465
+case_b3_norm_110_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.730305
+case_b3_norm_111_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.731280
+case_b3_norm_112_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.732200
+case_b3_norm_113_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.732933
+case_b3_norm_114_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.733655
+case_b3_norm_115_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.734334
+case_b3_norm_116_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.735026
+case_b3_norm_117_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.735966
+case_b3_norm_118_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.737161
+case_b3_norm_119_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.737988
+case_b3_norm_120_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.738825
+case_b3_norm_121_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.739606
+case_b3_norm_122_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.740400
+case_b3_norm_123_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.741151
+case_b3_norm_124_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.742059
+case_b3_norm_125_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.742837
+case_b3_norm_126_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.743658
+case_b3_norm_127_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.744844
+case_b3_norm_128_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.745674
+case_b3_norm_129_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.746458
+case_b3_norm_130_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.747154
+case_b3_norm_131_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.747841
+case_b3_norm_132_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.748561
+case_b3_norm_133_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.749298
+case_b3_norm_134_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.750415
+case_b3_norm_135_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.751346
+case_b3_norm_136_typo_logon_once,HardNegative,NORMAL,Người dùng vô ý gõ nhầm mật khẩu 1 lần rồi đăng nhập thành công ngay sau đó.,-,Bài 3,2026-11-13T09:54:15.752203
+case_b3_norm_137_typo_admin_twice,HardNegative,NORMAL,Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.,-,Bài 3,2026-11-13T09:54:15.753132
+case_b3_norm_138_certutil_hashfile_sha256,HardNegative,NORMAL,Kỹ sư dùng certutil.exe tính mã hash SHA256 để kiểm tra toàn vẹn tệp tin ISO.,-,Bài 3,2026-11-13T09:54:15.754001
+case_b3_norm_139_it_create_new_employee,HardNegative,NORMAL,Quản trị IT tạo tài khoản nhân viên mới hợp lệ theo yêu cầu phiếu hỗ trợ ticket.,-,Bài 3,2026-11-13T09:54:15.754939
+case_b3_norm_140_powershell_curl_intranet,HardNegative,NORMAL,PowerShell tải file cấu hình VPN nội bộ từ máy chủ mạng LAN an toàn.,-,Bài 3,2026-11-13T09:54:15.755879
+case_b3_norm_141_powershell_profile_check,HardNegative,NORMAL,Hệ thống kiểm tra sự tồn tại của tệp hồ sơ cá nhân PowerShell profile.ps1.,-,Bài 3,2026-11-13T09:54:15.756673
+case_b3_norm_142_scheduled_task_file_not_found,HardNegative,NORMAL,Tác vụ lập lịch định kỳ thất bại do không tìm thấy file script đích (lỗi cú pháp vô hại).,-,Bài 3,2026-11-13T09:54:15.757454
+case_b3_norm_143_bitlocker_status_query,HardNegative,NORMAL,Quản trị viên kiểm tra trạng thái mã hóa ổ đĩa BitLocker bằng manage-bde.,-,Bài 3,2026-11-13T09:54:15.758211
+case_b3_norm_144_sfc_system_verify,HardNegative,NORMAL,Chạy tiện ích System File Checker quét và khôi phục tệp hệ thống bị hỏng.,-,Bài 3,2026-11-13T09:54:15.759473
+case_b3_norm_145_dism_restorehealth,HardNegative,NORMAL,Chạy công cụ DISM sửa chữa kho ảnh hệ thống từ Windows Update.,-,Bài 3,2026-11-13T09:54:15.760603
+case_b3_norm_146_gpupdate_force,HardNegative,NORMAL,Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.,-,Bài 3,2026-11-13T09:54:15.761524
+case_b3_norm_147_netsh_firewall_add_rule,HardNegative,NORMAL,Thêm quy tắc tường lửa cho phép phần mềm máy in nội bộ giao tiếp port 9100.,-,Bài 3,2026-11-13T09:54:15.762296
+case_b3_norm_148_wireshark_dumpcap_diag,HardNegative,NORMAL,Kỹ sư mạng bắt gói tin nội bộ qua loopback để chẩn đoán lỗi phần mềm.,-,Bài 3,2026-11-13T09:54:15.762978
+case_b3_norm_149_sevenzip_compress_docs,HardNegative,NORMAL,Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.,-,Bài 3,2026-11-13T09:54:15.763676
+case_b3_norm_150_auditpol_inspect_settings,HardNegative,NORMAL,Kiểm tra chính sách ghi nhật ký sự kiện Windows Audit Policy hiện tại.,-,Bài 3,2026-11-13T09:54:15.764383

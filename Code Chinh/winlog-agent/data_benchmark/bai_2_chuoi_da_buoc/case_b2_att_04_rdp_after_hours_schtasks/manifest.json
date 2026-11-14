@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_04_rdp_after_hours_schtasks",
+  "category": "MultiStage",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: RDP ngoài giờ làm việc (LogonType 10) từ IP lạ -> Cài đặt Schtasks Persistence.",
+  "mitre_technique": "T1078.002 / T1053.005",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.364699"
+}

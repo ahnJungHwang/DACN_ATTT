@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_001_word_open",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Mở Microsoft Word soạn thảo tài liệu nội bộ.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.203909"
+}

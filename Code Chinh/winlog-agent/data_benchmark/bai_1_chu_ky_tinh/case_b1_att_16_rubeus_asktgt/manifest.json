@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_16_rubeus_asktgt",
+  "category": "CredentialAccess",
+  "ground_truth": "ALERT",
+  "description": "Rubeus: Yêu cầu Kerberos TGT ticket trực tiếp từ Domain Controller.",
+  "mitre_technique": "T1558.003",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.165945"
+}

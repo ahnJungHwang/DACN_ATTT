@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_092_typo_admin_twice",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "Quản trị viên gõ nhầm pass 2 lần do bật nhầm CapsLock rồi đăng nhập đúng.",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.712176"
+}

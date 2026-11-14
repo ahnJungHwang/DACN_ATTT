@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_07_wmic_remote_exec",
+  "category": "LateralMovement",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: WMIC Remote Process Call tạo tiến trình ngầm trên máy chủ kế toán.",
+  "mitre_technique": "T1047",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.367850"
+}

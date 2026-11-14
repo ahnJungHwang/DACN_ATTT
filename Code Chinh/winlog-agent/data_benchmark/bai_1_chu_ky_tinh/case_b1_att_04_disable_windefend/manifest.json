@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_04_disable_windefend",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Vô hiệu hóa tính năng giám sát thời gian thực của Windows Defender.",
+  "mitre_technique": "T1562.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.152206"
+}

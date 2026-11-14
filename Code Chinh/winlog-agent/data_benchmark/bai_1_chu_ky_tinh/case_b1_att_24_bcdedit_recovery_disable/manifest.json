@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_24_bcdedit_recovery_disable",
+  "category": "Impact",
+  "ground_truth": "ALERT",
+  "description": "Vô hiệu hóa tính năng tự sửa lỗi Windows Recovery trong BCD.",
+  "mitre_technique": "T1490",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.176746"
+}

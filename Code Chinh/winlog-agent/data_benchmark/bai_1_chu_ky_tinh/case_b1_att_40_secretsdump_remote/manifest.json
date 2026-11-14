@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_40_secretsdump_remote",
+  "category": "CredentialAccess",
+  "ground_truth": "ALERT",
+  "description": "Impacket secretsdump: Trích xuất LSA secrets và cached domain credentials.",
+  "mitre_technique": "T1003.004",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.193468"
+}

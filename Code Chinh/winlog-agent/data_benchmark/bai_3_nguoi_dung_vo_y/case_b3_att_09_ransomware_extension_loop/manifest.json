@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_09_ransomware_extension_loop",
+  "category": "Impact",
+  "ground_truth": "ALERT",
+  "description": "Vòng lặp đổi tên hàng loạt tệp tin người dùng sang đuôi .locked tống tiền.",
+  "mitre_technique": "T1486",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.574141"
+}

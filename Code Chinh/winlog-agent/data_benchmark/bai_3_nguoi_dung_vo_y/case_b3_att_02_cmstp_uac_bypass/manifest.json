@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_02_cmstp_uac_bypass",
+  "category": "PrivilegeEscalation",
+  "ground_truth": "ALERT",
+  "description": "Lợi dụng trình cài đặt mạng CMSTP.exe vượt qua UAC Leo quyền Administrator.",
+  "mitre_technique": "T1548.002",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.567858"
+}

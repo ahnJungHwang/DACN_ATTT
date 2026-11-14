@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_39_pwdump7_extract",
+  "category": "CredentialAccess",
+  "ground_truth": "ALERT",
+  "description": "Pwdump7: Trích xuất trực tiếp mật khẩu băm từ SAM.",
+  "mitre_technique": "T1003.002",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.192370"
+}

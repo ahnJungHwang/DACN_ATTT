@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_014_sevenzip_compress_docs",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "Nhân viên dùng 7-Zip nén tài liệu cá nhân để gửi email cho đối tác.",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.633201"
+}

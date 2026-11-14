@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_081_ps_get_date",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Lấy ngày giờ hiện tại định dạng chuẩn theo múi giờ máy trạm.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.292620"
+}

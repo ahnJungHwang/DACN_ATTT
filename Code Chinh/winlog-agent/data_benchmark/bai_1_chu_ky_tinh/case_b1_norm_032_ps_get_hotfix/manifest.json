@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_032_ps_get_hotfix",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Kiểm tra danh sách các gói cập nhật bảo mật KB đã cài đặt.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.240965"
+}

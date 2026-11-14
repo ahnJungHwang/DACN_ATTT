@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_norm_098_go_build",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Biên dịch mã nguồn ứng dụng Golang thành tệp nhị phân.",
+  "mitre_technique": "-",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.309426"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_norm_120_user_migration_flow",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Quy trình di chuyển hồ sơ người dùng máy tính cũ sang máy mới.",
+  "mitre_technique": "-",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.537451"
+}

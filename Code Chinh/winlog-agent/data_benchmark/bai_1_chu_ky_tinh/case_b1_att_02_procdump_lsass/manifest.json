@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_02_procdump_lsass",
+  "category": "CredentialAccess",
+  "ground_truth": "ALERT",
+  "description": "Procdump: Dump bộ nhớ LSASS ra file dmp để trích xuất offline.",
+  "mitre_technique": "T1003.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.150542"
+}

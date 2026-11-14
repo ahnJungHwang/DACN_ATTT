@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_32_powershell_iex_download",
+  "category": "Execution",
+  "ground_truth": "ALERT",
+  "description": "PowerShell IEX WebClient Download Cradle trực tiếp từ IP lạ.",
+  "mitre_technique": "T1059.001",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.184900"
+}

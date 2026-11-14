@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_att_11_wmi_event_persistence",
+  "category": "Persistence",
+  "ground_truth": "ALERT",
+  "description": "Chuỗi: Đăng ký WMI Event Subscription (__EventFilter & __CommandLineEventConsumer) tự chạy ngầm.",
+  "mitre_technique": "T1546.003",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.371811"
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_att_07_rundll32_advpack_inf_exec",
+  "category": "DefenseEvasion",
+  "ground_truth": "ALERT",
+  "description": "Rundll32 gọi advpack.dll cài đặt payload thông qua INF file.",
+  "mitre_technique": "T1218.011",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.572557"
+}

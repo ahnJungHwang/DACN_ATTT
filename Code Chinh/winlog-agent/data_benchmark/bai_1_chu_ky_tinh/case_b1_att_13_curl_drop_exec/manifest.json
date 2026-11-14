@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b1_att_13_curl_drop_exec",
+  "category": "Execution",
+  "ground_truth": "ALERT",
+  "description": "cURL Drop & Exec: Tải mã độc từ server điều khiển và kích hoạt ngầm.",
+  "mitre_technique": "T1105",
+  "scenario": "Bài 1",
+  "generated_at": "2026-11-13T09:54:15.162442"
+}

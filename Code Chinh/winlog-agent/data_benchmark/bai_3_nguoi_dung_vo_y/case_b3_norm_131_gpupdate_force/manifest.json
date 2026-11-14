@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b3_norm_131_gpupdate_force",
+  "category": "HardNegative",
+  "ground_truth": "NORMAL",
+  "description": "Thực hiện ép buộc cập nhật Group Policy máy trạm từ Active Directory.",
+  "mitre_technique": "-",
+  "scenario": "Bài 3",
+  "generated_at": "2026-11-13T09:54:15.747841"
+}

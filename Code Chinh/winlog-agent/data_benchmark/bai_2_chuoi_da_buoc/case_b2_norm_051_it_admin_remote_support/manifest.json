@@ -1,0 +1,9 @@
+{
+  "case_id": "case_b2_norm_051_it_admin_remote_support",
+  "category": "Benign",
+  "ground_truth": "NORMAL",
+  "description": "Quy trình IT Support: Kết nối RDP giờ hành chính -> Mở Compmgmt -> Restart Spooler.",
+  "mitre_technique": "-",
+  "scenario": "Bài 2",
+  "generated_at": "2026-11-13T09:54:15.465317"
+}
