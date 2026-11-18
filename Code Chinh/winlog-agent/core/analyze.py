@@ -592,7 +592,7 @@ def correlate_security_events(events: list[dict]) -> dict:
             ("cipher" in cmd and "/w:" in cmd)
             or ("rename-item" in script and any(ext in script for ext in (".locked", ".crypted", ".crypto")))
         )
-        uac_bypass = "fodhelper.exe" in cmd or "ms-settings\\shell\\open\\command" in cmd or "cmstp.exe" in cmd
+        uac_bypass = "fodhelper" in cmd or "ms-settings\\shell\\open\\command" in cmd or "cmstp" in cmd  # cmd đã bỏ đuôi .exe
 
         checks = (
             ("PowerShell / Command and Scripting Interpreter (MITRE T1059.001)",

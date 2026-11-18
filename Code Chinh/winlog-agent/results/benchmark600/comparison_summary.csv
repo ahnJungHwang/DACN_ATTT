@@ -1,9 +1,17 @@
 scenario,model_key,model_name,total_cases,tp,tn,fp,fn,review,unknown,errors,precision,recall,f1,accuracy,fpr,avg_inference_latency,e2e_latency_estimate
+Bài 1,qwen,Qwen 2.5 3B (Local SLM),200,30,150,0,20,0,0,0,100.0,60.0,0.75,90.0,0.0,8.96,12.64
+Bài 1,llama,Llama 3.2 3B (Local SLM),200,32,111,0,18,0,47,0,100.0,64.0,0.78,71.5,0.0,10.84,14.52
 Bài 1,deepblue,DeepBlueCLI (mô phỏng luật regex),200,16,150,0,34,0,0,0,100.0,32.0,0.485,83.0,0.0,0.0,3.68
 Bài 1,sigma,Sigma Rules (mô phỏng luật regex),200,16,150,0,34,0,0,0,100.0,32.0,0.485,83.0,0.0,0.0,3.68
+Bài 2,qwen,Qwen 2.5 3B (Local SLM),200,28,150,0,22,0,0,0,100.0,56.0,0.718,89.0,0.0,9.98,13.66
+Bài 2,llama,Llama 3.2 3B (Local SLM),200,16,125,0,34,0,49,0,100.0,32.0,0.485,70.5,0.0,12.95,16.63
 Bài 2,deepblue,DeepBlueCLI (mô phỏng luật regex),200,6,150,0,44,0,0,0,100.0,12.0,0.214,78.0,0.0,0.0,3.68
 Bài 2,sigma,Sigma Rules (mô phỏng luật regex),200,6,150,0,44,0,0,0,100.0,12.0,0.214,78.0,0.0,0.0,3.68
+Bài 3,qwen,Qwen 2.5 3B (Local SLM),200,14,146,3,36,0,15,0,82.4,28.0,0.418,80.0,2.0,9.18,12.86
+Bài 3,llama,Llama 3.2 3B (Local SLM),200,11,129,0,39,0,50,0,100.0,22.0,0.361,70.0,0.0,13.01,16.69
 Bài 3,deepblue,DeepBlueCLI (mô phỏng luật regex),200,1,150,0,49,0,0,0,100.0,2.0,0.039,75.5,0.0,0.0,3.68
 Bài 3,sigma,Sigma Rules (mô phỏng luật regex),200,1,150,0,49,0,0,0,100.0,2.0,0.039,75.5,0.0,0.0,3.68
+TỔNG THỂ 600 CA,qwen,Qwen 2.5 3B (Local SLM),600,72,446,3,78,0,15,0,96.0,48.0,0.64,86.3,0.7,9.37,13.05
+TỔNG THỂ 600 CA,llama,Llama 3.2 3B (Local SLM),600,59,365,0,91,0,146,0,100.0,39.3,0.565,70.7,0.0,12.27,15.95
 TỔNG THỂ 600 CA,deepblue,DeepBlueCLI (mô phỏng luật regex),600,23,450,0,127,0,0,0,100.0,15.3,0.266,78.8,0.0,0.0,3.68
 TỔNG THỂ 600 CA,sigma,Sigma Rules (mô phỏng luật regex),600,23,450,0,127,0,0,0,100.0,15.3,0.266,78.8,0.0,0.0,3.68
