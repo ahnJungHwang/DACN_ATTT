@@ -77,6 +77,7 @@
 - [x] 07/11 — AI tham gia quyết định: prompt trung lập, kiểm chứng bằng chứng, tự thẩm định, luật mạnh/yếu
 - [x] 07/11 — Đánh giá trên log thật (DeepBlueCLI + EVTX-to-MITRE), nhãn chốt trước, lặp 3 lần, KTC95%
 - [x] 07/11 — Mở rộng thu thập (1102/104/7045/4720/4728/4732/4698) + prompt động → 9/16 → 11/16
+- [x] 20/11 — (#5) Chuẩn hoá dòng lệnh trước mọi luật (bỏ đường dẫn + `.exe`: trước đây `"C:\...\net.exe" user /add` và `"C:\...\wevtutil.exe" cl` lọt luật) + chữ ký công cụ tấn công (Rubeus, LaZagne, SharpHound, winPEAS, PrintNightmare, tắt firewall/Sysmon, bcdedit, hijack registry, reverse shell, tunnel...). Riêng luật: luật mạnh bắt 49 → 77/150 ca tấn công của benchmark 600 ca, 9 → 10/21 ca log thật (Sliver C2), 0 báo nhầm trên 688 ca bình thường. Benchmark 600 ca đã dùng để tìm lỗi nên không còn là tập kiểm tra độc lập. Chạy lại Qwen (20/11, `results/benchmark600_luat_20112026/`, `eval_real/real_log_results_qwen_20112026.csv`): benchmark recall 48% → 72% (108/150; tấn công thật 51 → 79/80, ca giả lập Invoke-Stage/Invoke-Evasion 21 → 29/70), báo nhầm 3 → 0/450, UNKNOWN 15 → 5; log thật hệ thống 9 → 10/14. Test: `tests/test_signatures.py`.
 
 ## Bài học đã rút ra (giữ để không lặp lại)
 1. Dữ liệu tự sinh cho 97.5–100%, log thật chỉ 64–69%: luôn kiểm tra trên log thật.

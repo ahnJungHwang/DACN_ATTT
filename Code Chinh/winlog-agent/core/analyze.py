@@ -127,6 +127,12 @@ STAGE_RISK_WEIGHTS = {
     "Data Collection & Exfiltration (MITRE T1560 / T1048)": 85,
     "Impact / Data Destruction & Ransomware (MITRE T1485 / T1486)": 95,
     "UAC Bypass (MITRE T1548.002)": 90,
+    "Offensive Tooling: Discovery & Privilege Escalation Audit (MITRE T1087 / T1069 / T1482)": 85,
+    "Exploitation for Privilege Escalation (MITRE T1068)": 95,
+    "Indicator Removal / Hide Artifacts (MITRE T1070 / T1564.001)": 85,
+    "File Permission Tampering (MITRE T1222.001)": 80,
+    "Hijack Execution Flow (MITRE T1546 / T1574)": 90,
+    "Reverse Shell / Protocol Tunneling (MITRE T1095 / T1572)": 90,
     "Create or Modify System Process: Malicious Service (MITRE T1543.003 / T1569.002)": 95,
     "New Service Installed (MITRE T1543.003)": 30,
     "Create Account: Local Account (MITRE T1136.001)": 30,
@@ -370,6 +376,24 @@ def _qualifying_clusters(grouped_events: dict[tuple[str, str], list[dict]]) -> l
 ADMIN_GROUP_WORDS = ("administrators", "administratoren", "administrateurs")
 _EXE_SUFFIX_RE = re.compile(r"\.exe(?=[\s\"']|$)")
 
+
+def _norm_cmd(raw: str | None) -> str:
+    """Chuẩn hoá CommandLine cho luật: chữ thường, gộp khoảng trắng, bỏ đường dẫn + đuôi .exe của chương trình.
+    '"C:\\Windows\\system32\\net.exe" user x /add' -> 'net user x /add' (log thật hay ghi đủ đường dẫn)."""
+    cmd = " ".join((raw or "").lower().split())
+    if cmd.startswith('"'):
+        exe, _, rest = cmd[1:].partition('"')
+    else:
+        exe, _, rest = cmd.partition(" ")
+    exe = exe.rsplit("\\", 1)[-1]
+    return _EXE_SUFFIX_RE.sub("", f"{exe} {rest.strip()}".strip())
+
+
+# Thư mục mọi người dùng đều ghi được: file thực thi chạy từ đây là dấu hiệu quen thuộc của mã độc
+_WRITABLE_DIRS = ("\\users\\public\\", "\\windows\\temp\\", "\\appdata\\local\\temp\\", "c:\\temp\\", "\\downloads\\")
+# Dịch vụ bảo mật / ghi log: tắt chúng là Impair Defenses
+_SECURITY_SERVICES = ("windefend", "sense", "wdnissvc", "mpssvc", "wscsvc", "eventlog", "sysmon")
+
 # Host nội bộ: IP private, localhost, tên miền .local/.lan/.corp/.internal
 _URL_HOST_RE = re.compile(r"(?:https?|ftp)://([^/\s'\"\\:]+)", re.IGNORECASE)
 _INTERNAL_HOST_RE = re.compile(
@@ -479,13 +503,13 @@ def correlate_security_events(events: list[dict]) -> dict:
     account_cmds = [
         e for e in events
         if e.get("event_id") == 4688
-        and "/add" in (e["data"].get("CommandLine") or "").lower()
-        and any(k in (e["data"].get("CommandLine") or "").lower()
+        and "/add" in _norm_cmd(e["data"].get("CommandLine"))
+        and any(k in _norm_cmd(e["data"].get("CommandLine"))
                 for k in ("net user", "net1 user", "net localgroup", "net1 localgroup"))
     ]
     if account_cmds:
         def _privileged(e: dict) -> bool:
-            cmd = (e["data"].get("CommandLine") or "").lower()
+            cmd = _norm_cmd(e["data"].get("CommandLine"))
             # thêm vào nhóm Administrators, hoặc tạo tài khoản qua thực thi từ xa (wmic process call create)
             return any(g in cmd for g in ADMIN_GROUP_WORDS) or ("wmic" in cmd and "process call create" in cmd)
         privileged = [e for e in account_cmds if _privileged(e)]
@@ -516,12 +540,18 @@ def correlate_security_events(events: list[dict]) -> dict:
         "Data Collection & Exfiltration (MITRE T1560 / T1048)",
         "Impact / Data Destruction & Ransomware (MITRE T1485 / T1486)",
         "UAC Bypass (MITRE T1548.002)",
+        "Offensive Tooling: Discovery & Privilege Escalation Audit (MITRE T1087 / T1069 / T1482)",
+        "Exploitation for Privilege Escalation (MITRE T1068)",
+        "Indicator Removal / Hide Artifacts (MITRE T1070 / T1564.001)",
+        "File Permission Tampering (MITRE T1222.001)",
+        "Hijack Execution Flow (MITRE T1546 / T1574)",
+        "Reverse Shell / Protocol Tunneling (MITRE T1095 / T1572)",
     )}
     log_clear_cmds = []
     for e in events:
         raw_cmd = (e["data"].get("CommandLine") or "").lower()
-        # Bỏ đuôi .exe của tên công cụ để khớp cả "wevtutil.exe cl" lẫn "wevtutil cl" như log thật
-        cmd = _EXE_SUFFIX_RE.sub("", raw_cmd)
+        # Bỏ đường dẫn + đuôi .exe để khớp cả "C:\...\wevtutil.exe cl" lẫn "wevtutil cl" như log thật
+        cmd = _norm_cmd(raw_cmd)
         script = (e["data"].get("ScriptBlockText") or "").lower()
         task = (e["data"].get("TaskContent") or "").lower()
         combined = " ".join((cmd, script, task))
@@ -542,6 +572,7 @@ def correlate_security_events(events: list[dict]) -> dict:
             any(token in combined for token in ("mimikatz", "sekurlsa", "lsadump", "dcsync", "vaultcmd"))
             or ("procdump" in combined and "lsass" in combined)
             or ("comsvcs.dll" in combined and "minidump" in combined)
+            or any(tool in combined for tool in ("lazagne", "pwdump", "secretsdump"))
             or ("reg" in cmd and " save " in f" {cmd} " and any(h in cmd for h in ("\\sam", "\\system", "\\security")))
         )
         impair_defenses = (
@@ -550,6 +581,11 @@ def correlate_security_events(events: list[dict]) -> dict:
             or ("net" in cmd and "stop" in cmd and any(s in cmd for s in ("eventlog", "windefend")))
             or ("sc" in cmd and "eventlog" in cmd and "disabled" in cmd)
             or ("schtasks" in cmd and "windows defender" in cmd and "disable" in cmd)
+            or (cmd.startswith("netsh") and "firewall" in cmd
+                and any(t in cmd for t in ("state off", "opmode mode=disable", "opmode disable")))
+            or (cmd.startswith("fltmc") and " unload " in f" {cmd} ")
+            or (cmd.startswith("sc ") and " config " in cmd and "disabled" in cmd
+                and any(f" {svc} " in f" {cmd} " for svc in _SECURITY_SERVICES))
         )
         if "wevtutil cl" in combined or "clear-eventlog" in combined:
             log_clear_cmds.append(e)
@@ -558,19 +594,27 @@ def correlate_security_events(events: list[dict]) -> dict:
             or ("schtasks" in combined and "/create" in combined and any(t in combined for t in ("powershell", "http", "-enc", "hidden")))
             or "commandlineeventconsumer" in combined or "__eventfilter" in combined
             or ("version.dll" in combined and "copy" in combined)
+            # task chạy file trong thư mục ai cũng ghi được, hoặc netcat (reverse shell định kỳ)
+            or (cmd.startswith("schtasks") and "/create" in cmd
+                and (any(d in raw_cmd for d in _WRITABLE_DIRS) or any(t in raw_cmd for t in ("nc.exe", "ncat", "netcat"))))
         )
         shadow_delete = (
             ("vssadmin" in combined and "delete" in combined)
             or ("shadowcopy" in combined and "delete" in combined)
             or ("wbadmin" in combined and "delete" in combined)
+            or (cmd.startswith("bcdedit") and any(t in cmd for t in ("recoveryenabled no", "ignoreallfailures")))
         )
         sticky_keys = "image file execution options" in combined and any(t in combined for t in ("sethc", "utilman", "debugger"))
         in_memory = any(t in combined for t in ("[system.reflection.assembly]::load", "loadassembly", "virtualalloc"))
-        kerberoast = "invoke-kerberoast" in combined or ("rubeus" in combined and "kerberoast" in combined)
+        kerberoast = (
+            any(t in combined for t in ("invoke-kerberoast", "rubeus", "kerberosrequestorsecuritytoken", "get-domainspnticket"))
+            or ("get-domainuser" in combined and "-spn" in combined)
+        )
         lolbas_exec = (
             ("rundll32" in cmd and "advpack.dll" in cmd)
             or ("regsvr32" in cmd and "scrobj.dll" in cmd)
             or ("mshta" in cmd and "vbscript" in cmd)
+            or (cmd.startswith("rundll32") and any(d in raw_cmd for d in _WRITABLE_DIRS))
         )
         certutil_decode = "certutil" in cmd and "-decode" in cmd
         lateral_remote = (
@@ -578,7 +622,7 @@ def correlate_security_events(events: list[dict]) -> dict:
             or ("wmic" in cmd and "process call create" in cmd and "node" in cmd)
             or ("net" in cmd and " use " in f" {cmd} " and any(s in cmd for s in ("c$", "admin$")))
         )
-        port_scan = "tcpclient" in script and "connect" in script and "1..254" in script
+        port_scan = ("tcpclient" in script and "connect" in script and "1..254" in script) or "invoke-portscan" in combined
         ingress_transfer = (
             ("bitsadmin" in cmd and "/transfer" in cmd and _has_external_url(cmd))
             or ("curl" in cmd and _has_external_url(raw_cmd)
@@ -592,7 +636,40 @@ def correlate_security_events(events: list[dict]) -> dict:
             ("cipher" in cmd and "/w:" in cmd)
             or ("rename-item" in script and any(ext in script for ext in (".locked", ".crypted", ".crypto")))
         )
-        uac_bypass = "fodhelper" in cmd or "ms-settings\\shell\\open\\command" in cmd or "cmstp" in cmd  # cmd đã bỏ đuôi .exe
+        uac_bypass = (
+            "fodhelper" in cmd or "ms-settings\\shell\\open\\command" in cmd or "cmstp" in cmd  # cmd đã bỏ đuôi .exe
+            or "mscfile\\shell\\open\\command" in combined  # eventvwr.msc hijack
+        )
+        offensive_tooling = any(t in combined for t in (
+            "sharphound", "bloodhound", "powerview", "get-netdomaintrust", "get-domaintrust", "get-netforest",
+            "seatbelt", "winpeas", "sharpup", "powerup.ps1", "invoke-allchecks", "privesccheck",
+        ))
+        privesc_exploit = any(t in combined for t in (
+            "invoke-nightmare", "printnightmare", "cve-2021-1675", "cve-2021-34527",
+            "juicypotato", "printspoofer", "godpotato", "sweetpotato",
+        ))
+        hide_artifacts = (
+            (cmd.startswith("fsutil") and "usn" in cmd and "deletejournal" in cmd)
+            or (cmd.startswith("attrib ") and "+h" in cmd
+                and any(ext in raw_cmd for ext in (".exe", ".dll", ".ps1", ".bat", ".vbs")))
+        )
+        perm_tamper = (
+            (cmd.startswith("icacls ") and "/deny" in cmd
+             and any(p in cmd for p in ("system", "administrators", "everyone", "*s-1-5-18", "*s-1-5-32-544")))
+            or (cmd.startswith("takeown ") and "\\windows\\system32\\" in cmd)
+        )
+        registry_write = cmd.startswith("reg add") or any(t in script for t in ("set-itemproperty", "new-itemproperty", "new-item "))
+        hijack = (
+            (registry_write and any(k in combined for k in ("appcertdlls", "appinit_dlls")))
+            or (registry_write and "hkcu" in combined and "\\classes\\clsid\\" in combined and "inprocserver32" in combined)
+            or cmd.startswith("sdbinst")
+        )
+        reverse_shell = (
+            ("net.sockets.tcpclient" in combined and "getstream" in combined
+             and any(t in combined for t in ("iex", "invoke-expression", "out-string")))
+            or (cmd.startswith(("plink", "ssh ")) and " -r " in f" {cmd} ")
+            or cmd.startswith("chisel") or any(f"\\{t}" in raw_cmd for t in ("chisel.exe", "ngrok.exe"))
+        )
 
         checks = (
             ("PowerShell / Command and Scripting Interpreter (MITRE T1059.001)",
@@ -612,6 +689,12 @@ def correlate_security_events(events: list[dict]) -> dict:
             ("Data Collection & Exfiltration (MITRE T1560 / T1048)", data_exfil),
             ("Impact / Data Destruction & Ransomware (MITRE T1485 / T1486)", impact_ransomware),
             ("UAC Bypass (MITRE T1548.002)", uac_bypass),
+            ("Offensive Tooling: Discovery & Privilege Escalation Audit (MITRE T1087 / T1069 / T1482)", offensive_tooling),
+            ("Exploitation for Privilege Escalation (MITRE T1068)", privesc_exploit),
+            ("Indicator Removal / Hide Artifacts (MITRE T1070 / T1564.001)", hide_artifacts),
+            ("File Permission Tampering (MITRE T1222.001)", perm_tamper),
+            ("Hijack Execution Flow (MITRE T1546 / T1574)", hijack),
+            ("Reverse Shell / Protocol Tunneling (MITRE T1095 / T1572)", reverse_shell),
         )
         for stage, hit in checks:
             if hit:
@@ -628,7 +711,7 @@ def correlate_security_events(events: list[dict]) -> dict:
     recon_events = [
         e for e in events
         if e.get("event_id") == 4688 and any(
-            k in (e["data"].get("CommandLine") or "").lower() or k in (e["data"].get("NewProcessName") or "").lower()
+            k in _norm_cmd(e["data"].get("CommandLine")) or k in (e["data"].get("NewProcessName") or "").lower()
             for k in ("whoami", "nltest", "net group", "net user", "systeminfo")
         )
     ]
