@@ -349,6 +349,7 @@ def record_verdict(client_id: str, hostname: str, verdict: dict, *, status: str 
             "reason": (verdict or {}).get("reason", ""),
             "stages": (verdict or {}).get("detected_stages", []) or [],
             "evidence": (verdict or {}).get("evidence_refs", []) or [],
+            "source": (verdict or {}).get("decision_source", ""),  # rule / ai / rule+ai
             "elapsed": elapsed,
             "model": model,
         }
