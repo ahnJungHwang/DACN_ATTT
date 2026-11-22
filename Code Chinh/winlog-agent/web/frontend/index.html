@@ -149,7 +149,7 @@ tr.fresh{animation:fresh 2.5s ease-out}
 .cardmeta{color:var(--mute);font-size:13px;margin-bottom:12px}
 .mitreline{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:10px;font-size:13px;color:var(--mute)}
 .mitreline b{font-family:var(--mono);color:var(--text);font-weight:700}
-.lead dd{margin:0;color:#c4cad3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lead dd{margin:0;color:#c4cad3;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .lead dd.a{color:#f5f7fa;font-size:16.5px;font-weight:500}   /* nhận định của AI là dòng chính */
 .lead dd.ax{color:#a7afbb;font-style:italic}
 .lead .more{color:var(--mute);font-size:14px}
@@ -163,7 +163,7 @@ tr.fresh{animation:fresh 2.5s ease-out}
 .alertcard details ul{margin:8px 0 0;padding-left:20px;font-size:14px;color:#c4cad3}
 .alertcard details li{margin:3px 0}
 .alertcard .meta{margin-top:8px;font-size:13px;color:var(--mute)}
-.toast .msg{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.toast .msg{display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .term{background:rgba(9,11,15,.82);border:1px solid var(--line);border-radius:12px;font-family:var(--mono);font-size:13.5px;height:calc(100vh - 190px);overflow:auto;padding:10px 14px}
 .term.mini{height:260px}
 .term div{white-space:pre-wrap;word-break:break-word;padding:1px 0}
@@ -457,7 +457,7 @@ function renderOverview(){
   bars($("#topUser"),topN(E,e=>e.user));
   bars($("#topIp"),topN(E,e=>e.ip));
   const seen=new Set(),ra=[...A].reverse().filter(a=>{const k=a.host+"|"+a.reason;if(a.label!=="ALERT"||seen.has(k))return false;seen.add(k);return true}).slice(0,4);
-  $("#recentAlerts").innerHTML=ra.length?ra.map(a=>`<div style="margin-bottom:14px">${srcBadge(a)}<b>${esc(a.host)}</b>${orgTag(a)} <span style="color:var(--mute)">· ${ago(a.ts)}</span><div class="msg" style="font-size:14px;margin-top:4px;color:#d2d7de;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${esc(leadText(a))}</div>${(a.stages||[]).filter(s=>parseStage(s).ids.length).length?`<div class="mitreline" style="margin-top:4px">${mitreIds(a).map(p=>`<span><b>${esc(p.ids.join(" · "))}</b></span>`).join("")}</div>`:""}</div>`).join(""):`<div class="empty">${A.length?"Chưa phát hiện tấn công trong các lượt phân tích":"Chưa có cảnh báo. Kết luận đầu tiên sẽ hiện ở đây."}</div>`;
+  $("#recentAlerts").innerHTML=ra.length?ra.map(a=>`<div style="margin-bottom:14px">${srcBadge(a)}<b>${esc(a.host)}</b>${orgTag(a)} <span style="color:var(--mute)">· ${ago(a.ts)}</span><div class="msg" style="font-size:14px;margin-top:4px;color:#d2d7de;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${esc(leadText(a))}</div>${(a.stages||[]).filter(s=>parseStage(s).ids.length).length?`<div class="mitreline" style="margin-top:4px">${mitreIds(a).map(p=>`<span><b>${esc(p.ids.join(" · "))}</b></span>`).join("")}</div>`:""}</div>`).join(""):`<div class="empty">${A.length?"Chưa phát hiện tấn công trong các lượt phân tích":"Chưa có cảnh báo. Kết luận đầu tiên sẽ hiện ở đây."}</div>`;
   renderPipe();
   // terminal nhỏ bỏ log truy cập của chính trang này (uvicorn in "INFO:" và dòng request thành 2 dòng)
   const own=/"(GET|HEAD) \/(\s|(api\/(state|stream)|dashboard|favicon\.ico|docs|openapi\.json)\b)/;
