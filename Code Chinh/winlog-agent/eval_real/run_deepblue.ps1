@@ -44,6 +44,10 @@ $cases = @(
         foreach ($f in Get-ChildItem -LiteralPath $NormalDir -Filter *.evtx) {
             New-Case ('normal_' + $f.BaseName) 'lab_vm' 'normal_session' 'NORMAL' $f.FullName
         }
+        # Thu muc con = mot ca gom nhieu evtx (Security + PowerShell cua cung cua so, tao boi build_normal_cases.ps1)
+        foreach ($d in Get-ChildItem -LiteralPath $NormalDir -Directory) {
+            New-Case $d.Name 'real_machine' 'normal_session' 'NORMAL' @((Get-ChildItem -LiteralPath $d.FullName -Filter *.evtx).FullName)
+        }
     }
 )
 
@@ -52,15 +56,17 @@ $rows = foreach ($c in $cases) {
     $sw = [Diagnostics.Stopwatch]::StartNew()
     Push-Location $ToolDir   # DeepBlue.ps1 doc regexes.txt / safelist.txt o thu muc hien tai
     try {
-        if (-not (Test-Path -LiteralPath $c.evtx)) { throw "Khong thay file evtx" }
-        $found = @(& $deepblue -file $c.evtx 6>$null | Where-Object { $_.Message })
+        foreach ($file in @($c.evtx)) {
+            if (-not (Test-Path -LiteralPath $file)) { throw "Khong thay file evtx" }
+            $found += @(& $deepblue -file $file 6>$null | Where-Object { $_.Message })
+        }
     } catch { $err = $_.Exception.Message } finally { Pop-Location }
     $sw.Stop()
     $pred = if ($err) { 'ERROR' } elseif ($found.Count -gt 0) { 'ALERT' } else { 'NORMAL' }
     $msgs = @($found | ForEach-Object { $_.Message } | Select-Object -Unique)
     Write-Host ("{0,-42} {1,-7} -> {2,-6} ({3} phat hien, {4:n1}s) {5}" -f $c.case_id, $c.ground_truth, $pred, $found.Count, $sw.Elapsed.TotalSeconds, $err)
     [pscustomobject]@{
-        case_id = $c.case_id; source = $c.source; file = (Split-Path $c.evtx -Leaf); category = $c.category
+        case_id = $c.case_id; source = $c.source; file = ((@($c.evtx) | ForEach-Object { Split-Path $_ -Leaf }) -join '+'); category = $c.category
         ground_truth = $c.ground_truth; pred_label = $pred
         is_correct = ($pred -eq $c.ground_truth)
         detections = $found.Count

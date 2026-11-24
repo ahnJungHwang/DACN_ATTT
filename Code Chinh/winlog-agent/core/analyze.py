@@ -194,6 +194,10 @@ def is_benign_noise(event: dict) -> bool:
         proc = data.get("NewProcessName", "").lower()
         base_proc = proc.split("\\")[-1]
         cmd = data.get("CommandLine", "").strip()
+        # Chỉ tin tên tiến trình khi file nằm trong thư mục hệ thống; mã độc đặt tên dllhost.exe /
+        # svchost.exe ở C:\Users\... (T1036 Masquerading) không được coi là nhiễu.
+        if not proc.startswith(("c:\\windows\\", "c:\\program files\\", "c:\\program files (x86)\\")):
+            return False
 
         # Tiến trình telemetry / updater đã biết
         if base_proc in NOISE_PROCESSES:
@@ -221,7 +225,13 @@ def is_benign_noise(event: dict) -> bool:
     elif eid == 4104:
         # Lọc bỏ các đoạn script nội bộ của PowerShell engine (Prompt, formatter)
         txt = data.get("ScriptBlockText", "")
-        if "Set-StrictMode" in txt or txt.strip() == "$global:?" or (
+        # Module CDXML do PowerShell tự sinh (header "#requires -version 3.0" + Cmdletization).
+        # Không lọc theo riêng chữ "Set-StrictMode": kẻ tấn công chỉ cần thêm dòng đó để giấu script.
+        # Giả header vẫn bị giữ lại nếu luật thấy dấu hiệu tấn công trong khối.
+        if (txt.lstrip().lower().startswith("#requires -version 3.0") and "Cmdletization" in txt
+                and not correlate_security_events([event])["stages"]):
+            return True
+        if txt.strip() == "$global:?" or (
             "prompt" in txt.lower() and len(txt) < 50
         ):
             return True
