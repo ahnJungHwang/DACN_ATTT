@@ -6,7 +6,7 @@
 
 **Kiến trúc:** dữ liệu cắt và ẩn danh trên laptop (PowerShell + Python) → gói zip → Colab (Ollama + `run_combined_eval.py`) ghi CSV vào Drive → tải về → DeepBlueCLI / Hayabusa chạy trên laptop → báo cáo gộp. `core/analyze.py` chỉ được cộng thêm; ca 12 ID cũ cho kết quả y như trước.
 
-**Công nghệ:** Python 3 (.venv, unittest), PowerShell 5.1, Ollama, Google Colab Pro (GPU T4), Claude in Chrome.
+**Công nghệ:** Python 3 (.venv, unittest), PowerShell 5.1, Ollama, Google Colab Pro (GPU T4).
 
 **Thiết kế:** `md/THIET_KE_TEST_TOAN_BO_LOG_25112026.md` (đã duyệt 25/11/2026). Đọc cả hai file.
 
@@ -168,7 +168,7 @@
 **Files:** có thể sửa `core/analyze.py` (chỉ câu chữ `EXTENDED_SIGNS` nhóm mới); Create `eval_real/prompt_freeze.json`
 
 - [ ] **Bước 1: Cổng:** người dùng xác nhận Lâm đồng ý đưa log ẩn danh lên Google. Chưa có → dừng.
-- [ ] **Bước 2:** đọc skill `anthropic-skills:chrome-browser`; mở tab mới `https://colab.research.google.com`, tạo notebook từ `colab_run.ipynb` (tải lên), chọn runtime GPU T4. Người dùng bấm cho phép Drive.
+- [ ] **Bước 2:** mở tab mới `https://colab.research.google.com`, tạo notebook từ `colab_run.ipynb` (tải lên), chọn runtime GPU T4. Người dùng bấm cho phép Drive.
 - [ ] **Bước 3:** tải `colab_pack.zip` lên `/content`, chạy ô 1–6. Mã model phải khớp.
 - [ ] **Bước 4: Vòng 1:** ô 7 với `SPLIT=dev, TOOLS=qwen,llama, TAG=full_dev1, NOISE_GUIDANCE=1`. Bị ngắt → chạy lại ô 3–7.
 - [ ] **Bước 5:** tải CSV về (hỏi người dùng trước khi tải), đọc ca dev bị ALERT / UNKNOWN cùng sự kiện của nó. Sửa câu chữ hướng dẫn **tổng quát** (không tên phần mềm, không chuỗi riêng của ca). Chạy lại test Task 2.

@@ -97,7 +97,7 @@
 
 Thời gian trên laptop (có chờ nguội, ~1 phút/ca): tổng khoảng 10–15 tiếng. Trên Colab T4 (không chờ nguội): ước chừng 3–5 tiếng cho cả dev + kiểm tra + đối chứng + ca tấn công. Script chạy tiếp từ chỗ dừng nên chia nhiều phiên được.
 
-## 7b. Chạy trên Google Colab (giao diện web, điều khiển qua Claude in Chrome)
+## 7b. Chạy trên Google Colab
 
 | Bước | Chạy ở |
 |---|---|

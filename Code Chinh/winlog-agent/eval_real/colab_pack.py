@@ -2,7 +2,7 @@
 Đóng gói ca + code để chạy Qwen / Llama trên Google Colab (md/THIET_KE_TEST_TOAN_BO_LOG_25112026.md, mục 7b).
 
 - Ca lam_full_* (log thật của thành viên nhóm) được ẨN DANH thêm trước khi rời máy:
-  tên tài khoản -> USER01, USER02... (thay ở MỌI chỗ trong XML, kể cả trong script / dòng lệnh),
+  tên tài khoản -> tên giả giống thật (minhanh, quocbao...; tài khoản dịch vụ -> svcapp01...) (thay ở MỌI chỗ trong XML, kể cả trong script / dòng lệnh),
   SID S-1-5-21-a-b-c-RID -> S-1-5-21-0-0-0-RID (giữ RID: 500 = Administrator dựng sẵn).
   Giữ nguyên tài khoản hệ thống / dựng sẵn / tên nhóm để luật vẫn chạy đúng.
 - Ca tấn công <id>_full là dữ liệu công khai (DeepBlueCLI, EVTX-to-MITRE) -> chép nguyên.
@@ -49,8 +49,24 @@ def _skip(name: str, sid: str) -> bool:
             or sid.startswith(("S-1-5-32-", "S-1-5-18", "S-1-5-19", "S-1-5-20", "S-1-5-90-", "S-1-5-96-")))
 
 
+# Tên giả giống tài khoản cục bộ thật (USER03 trông lạ, có thể làm mô hình nghi ngờ hơn - báo cáo full_test mục 6)
+PEOPLE = ("minhanh", "quocbao", "thuha", "ductrung", "hoanglong", "ngoclan", "vanhung", "thanhtam", "kimngan", "giahuy",
+          "baochau", "tuananh", "phuongthao", "hailong", "myduyen", "trungkien", "thuytien", "quanghuy", "lananh",
+          "ducminh", "hongnhung", "vietcuong", "thanhha", "khanhlinh", "minhquan")
+SERVICE_LIKE = re.compile(r"svc|service|sql|docker|iis|backup|update|admin|user|group|\d{3,}|[0-9a-f]{8}-", re.I)
+
+
+def pseudonyms(names: list[str]) -> dict[str, str]:
+    """Tài khoản người -> tên trong PEOPLE; tài khoản dịch vụ / phần mềm -> svcapp01, svcapp02...
+    Không trùng tên thật nào và không trùng tên giữ nguyên (KEEP_NAMES)."""
+    taken = set(names) | KEEP_NAMES
+    people = (p for i in range(1, 100) for p in (PEOPLE if i == 1 else (f"{q}{i}" for q in PEOPLE)) if p not in taken)
+    svc = (f"svcapp{i:02d}" for i in range(1, 1000) if f"svcapp{i:02d}" not in taken)
+    return {n: next(svc) if SERVICE_LIKE.search(n) else next(people) for n in names}
+
+
 def build_name_map(case_dirs: list[Path]) -> dict[str, str]:
-    """Tên tài khoản thật trong các ca -> USER01, USER02... (theo thứ tự chữ cái, không phân biệt hoa thường)."""
+    """Tên tài khoản thật trong các ca -> tên giả (theo thứ tự chữ cái, không phân biệt hoa thường)."""
     names = set()
     for d in case_dirs:
         for f in XML_FILES:
@@ -64,7 +80,7 @@ def build_name_map(case_dirs: list[Path]) -> dict[str, str]:
                     sid = next((fields[k] for k in SID_FIELDS.get(key, ()) if fields.get(k)), "")
                     if value and not _skip(value, sid):
                         names.add(value.strip().lower())
-    return {n: f"USER{i:02d}" for i, n in enumerate(sorted(names), start=1)}
+    return pseudonyms(sorted(names))
 
 
 UNNAMED = re.compile(r"<Data>([^<]*)</Data>")

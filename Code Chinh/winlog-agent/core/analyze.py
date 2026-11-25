@@ -59,7 +59,16 @@ NEW_EVENT_IDS = {
     4103,               # PowerShell module logging
     400, 800,           # Windows PowerShell (cổ điển): engine bật (HostApplication), pipeline
 }
-SUPPORTED_EVENT_IDS |= NEW_EVENT_IDS
+
+
+def supported_event_ids() -> set[int]:
+    """ID hệ thống đọc. Nhóm ID mới chỉ bật khi ENABLE_EXTENDED_IDS=1 (thí nghiệm toàn bộ log, --set full):
+    thí nghiệm 25/11 cho thấy chúng làm báo nhầm tăng mà không bắt thêm tấn công -> hệ thống thật mặc định tắt."""
+    if os.getenv("ENABLE_EXTENDED_IDS", "0") == "1":
+        return SUPPORTED_EVENT_IDS | NEW_EVENT_IDS
+    return set(SUPPORTED_EVENT_IDS)
+
+
 MAX_FIELD_CHARS = 2000  # cắt TaskContent (file XML định nghĩa task) để vừa context
 # Trường chỉ lấy cho NEW_EVENT_IDS (4720 cũng có PrivilegeList / UAC... -> không đổi dữ liệu của ca cũ)
 NEW_FIELDS = {
@@ -294,6 +303,7 @@ def read_events(case_dir: Path) -> list[dict]:
     """
     events = []
     found_files = 0
+    supported = supported_event_ids()
 
     for filename in ("security.xml", "powershell.xml", "system.xml"):
         path = case_dir / filename
@@ -327,7 +337,7 @@ def read_events(case_dir: Path) -> list[dict]:
                     f"Invalid EventID in {filename}: {event_id_text!r}"
                 ) from exc
 
-            if event_id not in SUPPORTED_EVENT_IDS:
+            if event_id not in supported:
                 continue
             if event_id in NEW_EVENT_IDS and system_text("Channel") != NEW_ID_CHANNEL.get(event_id, "Security"):
                 continue
@@ -499,7 +509,7 @@ def correlate_security_events(events: list[dict]) -> dict:
     }
 
     def add(stage: str, evs: list[dict], detail: str, strong: bool) -> None:
-        refs = list(dict.fromkeys(e["event_ref"] for e in evs))
+        refs = list(dict.fromkeys(e["event_ref"] for e in evs if e.get("event_ref")))  # is_benign_noise gọi với 1 sự kiện lẻ
         if stage not in findings["stages"]:
             findings["stages"].append(stage)
         if strong and stage not in findings["strong_stages"]:
@@ -1019,7 +1029,7 @@ def build_system_prompt(schema: dict, correlation_hints: str = "", event_ids: se
       lô chỉ có sự kiện cơ bản nhận prompt y hệt phiên bản trước khi mở rộng thu thập.
       event_ids=None -> đưa đầy đủ mọi phần.
     """
-    present = set(SUPPORTED_EVENT_IDS) if event_ids is None else set(event_ids)
+    present = supported_event_ids() if event_ids is None else set(event_ids)
     if correlation_hints:
         hints_text = (
             "\nTÍN HIỆU TỪ BỘ LUẬT (chỉ là gợi ý, BẮT BUỘC tự xác minh lại với dữ liệu; có thể là báo động giả):\n"
@@ -1078,7 +1088,7 @@ def build_system_prompt(schema: dict, correlation_hints: str = "", event_ids: se
 def prompt_fingerprint() -> str:
     """SHA-256 của prompt đầy đủ (mọi loại sự kiện) - ghi vào báo cáo khi khoá prompt."""
     import hashlib
-    prompt = build_system_prompt(BatchVerdict.model_json_schema(), "", set(SUPPORTED_EVENT_IDS))
+    prompt = build_system_prompt(BatchVerdict.model_json_schema(), "", supported_event_ids())
     return hashlib.sha256(prompt.encode()).hexdigest()
 
 

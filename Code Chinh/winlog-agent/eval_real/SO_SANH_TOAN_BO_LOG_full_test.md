@@ -7,7 +7,8 @@
 - UNKNOWN / REVIEW: với ca tấn công tính là bỏ sót; với ca bình thường không tính là báo nhầm (ghi riêng).
 - Đối chứng (`NOISE_GUIDANCE=0`) chỉ bỏ cột "hoạt động bình thường" của nhóm ID mới. Cột dấu hiệu tấn công vẫn giữ các điều kiện đã chỉnh trên phần dev (4798/4799 chỉ là đọc; -w hidden / -ExecutionPolicy Bypass chỉ đáng ngờ khi đi cùng dấu hiệu khác; 4647 tự nó không phải tấn công) -> đây không phải lượt "không có hướng dẫn".
 - Ca bình thường chỉ toàn nhiễu (không gọi mô hình, không tính cho công cụ nào): 11. Ca tấn công bị bộ lọc nhiễu bỏ hết sự kiện (giữ lại, tính là bỏ sót nếu được chấm): `dbc_mimikatz_tokenelevate`.
-- Mọi công cụ được chấm trên cùng tập ca. Loại 9 ca có công cụ lỗi / bị antivirus chặn: `dbc_metasploit_psexec_powershell`, `dbc_metasploit_psexec_powershell_system`, `dbc_obfuscation_encoding`, `dbc_obfuscation_many`, `lam_full_20261123_0820`, `lam_full_20261123_0830`, `lam_full_20261123_1110`, `lam_full_20261123_1830`, `lam_full_20261123_1840`
+- Bảng chính chấm trên ca có kết quả của mọi công cụ; công cụ lỗi trên ca nào thì tính là công cụ đó không báo (cột "Lỗi"). Thiếu 4 ca không dựng được (antivirus chặn / công cụ không có dữ liệu): `dbc_metasploit_psexec_powershell`, `dbc_metasploit_psexec_powershell_system`, `dbc_obfuscation_encoding`, `dbc_obfuscation_many`.
+- Bảng phụ (cuối mục 1) bỏ thêm 0 ca có công cụ lỗi: không có.
 
 ## 0. Phễu số liệu và prompt đã khoá
 
@@ -20,99 +21,135 @@
 | Còn lại sau bộ lọc nhiễu (luật / AI thấy) | 659 | 1,299 |
 | Cửa sổ 10 phút (= số ca) | 98 | 62 |
 
-- Prompt khoá lúc 2026-11-25T05:16:01+00:00 (commit `e9e3c8b`, sha tính trên bản checkout Windows CRLF): SHA-256 `analyze.py` `97582d4c557fb035a53301cfecc29fcdf7b41106ab59aa2ce4cb1f7b19f75b6c`, prompt `97393994e65506db2b79787c7aaf31606ed1c8873d364b80bfe2b6d41b9d8637`, prompt đối chứng `e196f062e8286e5ec3b54547c2d472b332dfa6f1827304d90d92e3005a553636`; Ollama ollama version is 0.40.18, GPU Tesla T4.
+- Prompt khoá lúc 2026-11-25T05:16:01+00:00 (commit `e9e3c8b`, sha tính trên bản checkout Windows CRLF): SHA-256 `analyze.py` `97582d4c557fb035a53301cfecc29fcdf7b41106ab59aa2ce4cb1f7b19f75b6c`, prompt `97393994e65506db2b79787c7aaf31606ed1c8873d364b80bfe2b6d41b9d8637`, prompt đối chứng `e196f062e8286e5ec3b54547c2d472b332dfa6f1827304d90d92e3005a553636`; Ollama 0.40.18, GPU Tesla T4.
 
 ## 1. Tổng hợp (phần kiểm tra)
 
-| Công cụ | Bắt tấn công `scored` | Bắt `coverage` | Báo nhầm trên ca bình thường | REVIEW/UNKNOWN (bình thường) | Precision | F1 | TG trung vị/ca |
-|---|---|---|---|:---:|:---:|:---:|:---:|
-| Qwen 2.5 3B (luật + AI) | 69.2% (9/13; KTC95% 42%–87%) | 2/2 | 15.2% (7/46; KTC95% 8%–28%) | 0 | 61.1% | 0.667 | 8.61s |
-| Llama 3.2 3B (luật + AI) | 69.2% (9/13; KTC95% 42%–87%) | 2/2 | 28.3% (13/46; KTC95% 17%–43%) | 9 | 45.8% | 0.564 | 11.63s |
-| Qwen 2.5 3B — đối chứng (bỏ cột bình thường) | 69.2% (9/13; KTC95% 42%–87%) | 2/2 | 15.2% (7/46; KTC95% 8%–28%) | 2 | 61.1% | 0.667 | 8.59s |
-| Llama 3.2 3B — đối chứng (bỏ cột bình thường) | 76.9% (10/13; KTC95% 50%–92%) | 2/2 | 23.9% (11/46; KTC95% 14%–38%) | 11 | 52.2% | 0.632 | 11.73s |
-| Luật của nhóm (không AI) | 61.5% (8/13; KTC95% 36%–82%) | 2/2 | 0.0% (0/46; KTC95% 0%–8%) | 0 | 100.0% | 0.800 | 0.01s |
-| DeepBlueCLI (công cụ thật) | 76.9% (10/13; KTC95% 50%–92%) | 2/2 | 28.3% (13/46; KTC95% 17%–43%) | 0 | 48.0% | 0.600 | 0.22s |
-| Hayabusa + Sigma (công cụ thật, mức >= medium) | 76.9% (10/13; KTC95% 50%–92%) | 2/2 | 21.7% (10/46; KTC95% 12%–36%) | 0 | 54.5% | 0.649 | 8.30s |
-| Sigma mô phỏng (regex) | 53.8% (7/13; KTC95% 29%–77%) | 1/2 | 2.2% (1/46; KTC95% 0%–11%) | 0 | 88.9% | 0.667 | 0.01s |
+| Công cụ | Bắt tấn công `scored` | Bắt `coverage` | Báo nhầm trên ca bình thường | REVIEW/UNKNOWN (bình thường) | Lỗi | Precision | F1 | TG trung vị/ca |
+|---|---|---|---|:---:|:---:|:---:|:---:|:---:|
+| Qwen 2.5 3B (luật + AI) | 69.2% (9/13; KTC95% 42%–87%) | 2/2 | 19.6% (10/51; KTC95% 11%–32%) | 1 | 0 | 52.4% | 0.611 | 8.95s |
+| Llama 3.2 3B (luật + AI) | 69.2% (9/13; KTC95% 42%–87%) | 2/2 | 33.3% (17/51; KTC95% 22%–47%) | 10 | 0 | 39.3% | 0.512 | 11.97s |
+| Qwen 2.5 3B — đối chứng (bỏ cột bình thường) | 69.2% (9/13; KTC95% 42%–87%) | 2/2 | 19.6% (10/51; KTC95% 11%–32%) | 3 | 0 | 52.4% | 0.611 | 9.06s |
+| Llama 3.2 3B — đối chứng (bỏ cột bình thường) | 76.9% (10/13; KTC95% 50%–92%) | 2/2 | 27.5% (14/51; KTC95% 17%–41%) | 13 | 0 | 46.2% | 0.585 | 14.48s |
+| Luật của nhóm (không AI) | 61.5% (8/13; KTC95% 36%–82%) | 2/2 | 0.0% (0/51; KTC95% 0%–7%) | 0 | 0 | 100.0% | 0.800 | 0.01s |
+| DeepBlueCLI (công cụ thật) | 76.9% (10/13; KTC95% 50%–92%) | 2/2 | 35.3% (18/51; KTC95% 24%–49%) | 0 | 0 | 40.0% | 0.533 | 0.23s |
+| Hayabusa + Sigma (công cụ thật, mức >= medium) | 76.9% (10/13; KTC95% 50%–92%) | 2/2 | 29.4% (15/51; KTC95% 19%–43%) | 0 | 0 | 44.4% | 0.571 | 0.16s |
+| Sigma mô phỏng (regex) | 53.8% (7/13; KTC95% 29%–77%) | 1/2 | 11.8% (6/51; KTC95% 6%–23%) | 0 | 0 | 57.1% | 0.552 | 0.01s |
+
+**Bảng phụ: chỉ ca mọi công cụ chạy không lỗi** (cách chấm của các báo cáo trước)
+
+| Công cụ | Bắt tấn công `scored` | Bắt `coverage` | Báo nhầm trên ca bình thường | REVIEW/UNKNOWN (bình thường) | Lỗi | Precision | F1 | TG trung vị/ca |
+|---|---|---|---|:---:|:---:|:---:|:---:|:---:|
+| Qwen 2.5 3B (luật + AI) | 69.2% (9/13; KTC95% 42%–87%) | 2/2 | 19.6% (10/51; KTC95% 11%–32%) | 1 | 0 | 52.4% | 0.611 | 8.95s |
+| Llama 3.2 3B (luật + AI) | 69.2% (9/13; KTC95% 42%–87%) | 2/2 | 33.3% (17/51; KTC95% 22%–47%) | 10 | 0 | 39.3% | 0.512 | 11.97s |
+| Qwen 2.5 3B — đối chứng (bỏ cột bình thường) | 69.2% (9/13; KTC95% 42%–87%) | 2/2 | 19.6% (10/51; KTC95% 11%–32%) | 3 | 0 | 52.4% | 0.611 | 9.06s |
+| Llama 3.2 3B — đối chứng (bỏ cột bình thường) | 76.9% (10/13; KTC95% 50%–92%) | 2/2 | 27.5% (14/51; KTC95% 17%–41%) | 13 | 0 | 46.2% | 0.585 | 14.48s |
+| Luật của nhóm (không AI) | 61.5% (8/13; KTC95% 36%–82%) | 2/2 | 0.0% (0/51; KTC95% 0%–7%) | 0 | 0 | 100.0% | 0.800 | 0.01s |
+| DeepBlueCLI (công cụ thật) | 76.9% (10/13; KTC95% 50%–92%) | 2/2 | 35.3% (18/51; KTC95% 24%–49%) | 0 | 0 | 40.0% | 0.533 | 0.23s |
+| Hayabusa + Sigma (công cụ thật, mức >= medium) | 76.9% (10/13; KTC95% 50%–92%) | 2/2 | 29.4% (15/51; KTC95% 19%–43%) | 0 | 0 | 44.4% | 0.571 | 0.16s |
+| Sigma mô phỏng (regex) | 53.8% (7/13; KTC95% 29%–77%) | 1/2 | 11.8% (6/51; KTC95% 6%–23%) | 0 | 0 | 57.1% | 0.552 | 0.01s |
 
 ## 2. Ca bình thường bị báo nhầm
 
-**Qwen 2.5 3B (luật + AI):** `lam_full_20261122_1350`, `lam_full_20261122_1410`, `lam_full_20261122_2050`, `lam_full_20261123_0730`, `lam_full_20261123_1820`, `lam_full_20261124_1910`, `lam_full_20261124_1920`
+**Qwen 2.5 3B (luật + AI):** `lam_full_20261122_1350`, `lam_full_20261122_1410`, `lam_full_20261122_2050`, `lam_full_20261123_0730`, `lam_full_20261123_1110`, `lam_full_20261123_1820`, `lam_full_20261123_1830`, `lam_full_20261123_1840`, `lam_full_20261124_1910`, `lam_full_20261124_1920`
   - `lam_full_20261122_1350`: Credential Access Attempt; Privilege Escalation; Persistence Mechanism Creation
   - `lam_full_20261122_1410`: 
   - `lam_full_20261122_2050`: 
   - `lam_full_20261123_0730`: OS Credential Dumping
+  - `lam_full_20261123_1110`: Privilege Escalation; Persistence; PowerShell ScriptBlock Execution
   - `lam_full_20261123_1820`: 
+  - `lam_full_20261123_1830`: PowerShell ScriptBlock Execution
+  - `lam_full_20261123_1840`: NORMAL; PowerShell ScriptBlock Execution
   - `lam_full_20261124_1910`: 
   - `lam_full_20261124_1920`: OS Credential Dumping
 
-**Llama 3.2 3B (luật + AI):** `lam_full_20261122_1340`, `lam_full_20261122_1420`, `lam_full_20261122_1450`, `lam_full_20261123_0730`, `lam_full_20261123_0800`, `lam_full_20261123_0840`, `lam_full_20261123_0850`, `lam_full_20261123_0920`, `lam_full_20261123_0950`, `lam_full_20261123_1810`, `lam_full_20261123_1820`, `lam_full_20261123_1850`, `lam_full_20261124_1910`
+**Llama 3.2 3B (luật + AI):** `lam_full_20261122_1340`, `lam_full_20261122_1420`, `lam_full_20261122_1450`, `lam_full_20261123_0730`, `lam_full_20261123_0800`, `lam_full_20261123_0820`, `lam_full_20261123_0830`, `lam_full_20261123_0840`, `lam_full_20261123_0850`, `lam_full_20261123_0920`, `lam_full_20261123_0950`, `lam_full_20261123_1810`, `lam_full_20261123_1820`, `lam_full_20261123_1830`, `lam_full_20261123_1840`, `lam_full_20261123_1850`, `lam_full_20261124_1910`
   - `lam_full_20261122_1340`: 
   - `lam_full_20261122_1420`: 
   - `lam_full_20261122_1450`: 
   - `lam_full_20261123_0730`: 
   - `lam_full_20261123_0800`: 
+  - `lam_full_20261123_0820`: 
+  - `lam_full_20261123_0830`: 
   - `lam_full_20261123_0840`: 
   - `lam_full_20261123_0850`: 
   - `lam_full_20261123_0920`: 
   - `lam_full_20261123_0950`: 
   - `lam_full_20261123_1810`: 
   - `lam_full_20261123_1820`: 
-  - `lam_full_20261123_1850`: 
-  - `lam_full_20261124_1910`: 
+  - `lam_full_20261123_1830`: 
+  - `lam_full_20261123_1840`: 
 
-**Qwen 2.5 3B — đối chứng (bỏ cột bình thường):** `lam_full_20261122_1350`, `lam_full_20261122_2050`, `lam_full_20261123_0730`, `lam_full_20261123_1000`, `lam_full_20261123_1820`, `lam_full_20261124_1910`, `lam_full_20261124_1920`
+**Qwen 2.5 3B — đối chứng (bỏ cột bình thường):** `lam_full_20261122_1350`, `lam_full_20261122_2050`, `lam_full_20261123_0730`, `lam_full_20261123_0820`, `lam_full_20261123_1000`, `lam_full_20261123_1110`, `lam_full_20261123_1820`, `lam_full_20261123_1830`, `lam_full_20261124_1910`, `lam_full_20261124_1920`
   - `lam_full_20261122_1350`: Credential Access Attempt; Privilege Escalation; Persistence Mechanism Creation
   - `lam_full_20261122_2050`: 
   - `lam_full_20261123_0730`: OS Credential Dumping
+  - `lam_full_20261123_0820`: Persistence
   - `lam_full_20261123_1000`: 
+  - `lam_full_20261123_1110`: Persistence; PowerShell Execution
   - `lam_full_20261123_1820`: OS Credential Dumping
+  - `lam_full_20261123_1830`: PowerShell ScriptBlock Execution
   - `lam_full_20261124_1910`: 
   - `lam_full_20261124_1920`: OS Credential Dumping; Malware Execution
 
-**Llama 3.2 3B — đối chứng (bỏ cột bình thường):** `lam_full_20261122_1340`, `lam_full_20261122_1400`, `lam_full_20261122_1450`, `lam_full_20261122_1940`, `lam_full_20261123_0730`, `lam_full_20261123_0840`, `lam_full_20261123_0850`, `lam_full_20261123_1000`, `lam_full_20261123_1100`, `lam_full_20261123_1810`, `lam_full_20261124_1910`
+**Llama 3.2 3B — đối chứng (bỏ cột bình thường):** `lam_full_20261122_1340`, `lam_full_20261122_1400`, `lam_full_20261122_1450`, `lam_full_20261122_1940`, `lam_full_20261123_0730`, `lam_full_20261123_0820`, `lam_full_20261123_0830`, `lam_full_20261123_0840`, `lam_full_20261123_0850`, `lam_full_20261123_1000`, `lam_full_20261123_1100`, `lam_full_20261123_1110`, `lam_full_20261123_1810`, `lam_full_20261124_1910`
   - `lam_full_20261122_1340`: 
   - `lam_full_20261122_1400`: 
   - `lam_full_20261122_1450`: 
   - `lam_full_20261122_1940`: 
   - `lam_full_20261123_0730`: 
+  - `lam_full_20261123_0820`: 
+  - `lam_full_20261123_0830`: 
   - `lam_full_20261123_0840`: 
   - `lam_full_20261123_0850`: 
   - `lam_full_20261123_1000`: 
   - `lam_full_20261123_1100`: 
+  - `lam_full_20261123_1110`: 
   - `lam_full_20261123_1810`: 
   - `lam_full_20261124_1910`: 
 
 **Luật của nhóm (không AI):** không có
 
-**DeepBlueCLI (công cụ thật):** `lam_full_20261122_1350`, `lam_full_20261122_1400`, `lam_full_20261122_1450`, `lam_full_20261122_1940`, `lam_full_20261123_0730`, `lam_full_20261123_0740`, `lam_full_20261123_0900`, `lam_full_20261123_0940`, `lam_full_20261123_0950`, `lam_full_20261123_1820`, `lam_full_20261124_1910`, `lam_full_20261124_1920`, `lam_full_20261124_1930`
+**DeepBlueCLI (công cụ thật):** `lam_full_20261122_1350`, `lam_full_20261122_1400`, `lam_full_20261122_1450`, `lam_full_20261122_1940`, `lam_full_20261123_0730`, `lam_full_20261123_0740`, `lam_full_20261123_0820`, `lam_full_20261123_0830`, `lam_full_20261123_0900`, `lam_full_20261123_0940`, `lam_full_20261123_0950`, `lam_full_20261123_1110`, `lam_full_20261123_1820`, `lam_full_20261123_1830`, `lam_full_20261123_1840`, `lam_full_20261124_1910`, `lam_full_20261124_1920`, `lam_full_20261124_1930`
   - `lam_full_20261122_1350`: Suspicious Command Line; Multiple admin logons for one account
   - `lam_full_20261122_1400`: Suspicious Command Line; Multiple admin logons for one account
   - `lam_full_20261122_1450`: Multiple admin logons for one account
   - `lam_full_20261122_1940`: Suspicious Command Line; Multiple admin logons for one account
   - `lam_full_20261123_0730`: Suspicious Command Line; Multiple admin logons for one account
   - `lam_full_20261123_0740`: Multiple admin logons for one account
+  - `lam_full_20261123_0820`: Suspicious Command Line
+  - `lam_full_20261123_0830`: Suspicious Command Line
   - `lam_full_20261123_0900`: Multiple admin logons for one account
   - `lam_full_20261123_0940`: Multiple admin logons for one account
   - `lam_full_20261123_0950`: Multiple admin logons for one account
+  - `lam_full_20261123_1110`: Suspicious Command Line
   - `lam_full_20261123_1820`: Suspicious Command Line; Multiple admin logons for one account
-  - `lam_full_20261124_1910`: Multiple admin logons for one account
-  - `lam_full_20261124_1920`: Suspicious Command Line
-  - `lam_full_20261124_1930`: Suspicious Command Line
+  - `lam_full_20261123_1830`: Suspicious Command Line
+  - `lam_full_20261123_1840`: Suspicious Command Line
 
-**Hayabusa + Sigma (công cụ thật, mức >= medium):** `lam_full_20261122_1350`, `lam_full_20261122_1400`, `lam_full_20261122_1410`, `lam_full_20261122_1940`, `lam_full_20261123_0730`, `lam_full_20261123_0810`, `lam_full_20261123_1820`, `lam_full_20261123_1900`, `lam_full_20261124_1920`, `lam_full_20261124_1930`
+**Hayabusa + Sigma (công cụ thật, mức >= medium):** `lam_full_20261122_1350`, `lam_full_20261122_1400`, `lam_full_20261122_1410`, `lam_full_20261122_1940`, `lam_full_20261123_0730`, `lam_full_20261123_0810`, `lam_full_20261123_0820`, `lam_full_20261123_0830`, `lam_full_20261123_1110`, `lam_full_20261123_1820`, `lam_full_20261123_1830`, `lam_full_20261123_1840`, `lam_full_20261123_1900`, `lam_full_20261124_1920`, `lam_full_20261124_1930`
   - `lam_full_20261122_1350`: [med] Potentially Malicious PwSh
   - `lam_full_20261122_1400`: [med] Potentially Malicious PwSh
   - `lam_full_20261122_1410`: [med] Suspicious Non PowerShell WSMAN COM Provider; [med] Uncommon PowerShell Hosts
   - `lam_full_20261122_1940`: [med] Potentially Malicious PwSh
   - `lam_full_20261123_0730`: [med] Potentially Malicious PwSh
   - `lam_full_20261123_0810`: [med] Potentially Malicious PwSh
+  - `lam_full_20261123_0820`: [med] Potentially Malicious PwSh
+  - `lam_full_20261123_0830`: [med] Potentially Malicious PwSh
+  - `lam_full_20261123_1110`: [med] Potentially Malicious PwSh
   - `lam_full_20261123_1820`: [med] Potentially Malicious PwSh
+  - `lam_full_20261123_1830`: [med] Potentially Malicious PwSh
+  - `lam_full_20261123_1840`: [med] Potentially Malicious PwSh
   - `lam_full_20261123_1900`: [med] Potentially Malicious PwSh
   - `lam_full_20261124_1920`: [med] Potentially Malicious PwSh
   - `lam_full_20261124_1930`: [med] Potentially Malicious PwSh
 
-**Sigma mô phỏng (regex):** `lam_full_20261124_1930`
+**Sigma mô phỏng (regex):** `lam_full_20261123_0820`, `lam_full_20261123_0830`, `lam_full_20261123_1110`, `lam_full_20261123_1830`, `lam_full_20261123_1840`, `lam_full_20261124_1930`
+  - `lam_full_20261123_0820`: Sigma [proc_creation_win_powershell_encoded]: Encoded PowerShell Command Line
+  - `lam_full_20261123_0830`: Sigma [proc_creation_win_powershell_encoded]: Encoded PowerShell Command Line
+  - `lam_full_20261123_1110`: Sigma [proc_creation_win_powershell_encoded]: Encoded PowerShell Command Line
+  - `lam_full_20261123_1830`: Sigma [proc_creation_win_powershell_encoded]: Encoded PowerShell Command Line
+  - `lam_full_20261123_1840`: Sigma [proc_creation_win_powershell_encoded]: Encoded PowerShell Command Line
   - `lam_full_20261124_1930`: Sigma [proc_creation_win_schtasks_persistence]: Scheduled Task Persistence
 
 ## 3. Từng ca tấn công
@@ -146,22 +183,17 @@ Không tính vào bảng trên: log agent thu không đủ dấu vết để gá
 | `dbc_many_events_security` | unlabeled | UNKNOWN | ALERT | ALERT | ALERT | ALERT | ALERT | ALERT | ALERT | ALERT |
 | `dbc_many_events_system` | unlabeled | UNKNOWN | – | – | – | – | – | ALERT | ALERT | – |
 
-## 4. Nhận xét (viết tay 25/11 — `--report` không sinh mục 4–6, chạy lại `--report` thì chép lại)
+<!-- VIET_TAY: phần từ dòng này trở xuống viết tay, chạy lại --report vẫn giữ nguyên -->
+
+## 4. Nhận xét (viết tay; `--report` giữ nguyên mục 4–6)
 
 **Bỏ cột "hoạt động bình thường" không làm kết quả khác đi.**
-- Qwen: báo nhầm 7/46 ở cả hai lượt (UNKNOWN 0 so với 2).
-- Llama: báo nhầm 13/46 khi có cột này, 11/46 khi bỏ; bắt tấn công 9/13 so với 10/13.
-- Chênh 1–2 ca nằm trong mức dao động khi chạy lại (mục 5), nên coi như không khác.
+- Qwen: báo nhầm 10/51 ở cả hai lượt (UNKNOWN 1 so với 3).
+- Llama: báo nhầm 17/51 khi có cột này, 14/51 khi bỏ; bắt tấn công 9/13 so với 10/13.
+- Chênh của Llama (3/51) chỉ hơi lớn hơn mức dao động khi chạy lại (khoảng 1/24, mục 5), và lại theo hướng bỏ cột thì báo nhầm ít hơn. Chưa đủ để nói cột này có tác dụng.
 - Lượt đối chứng vẫn giữ các điều kiện lọc đã chỉnh trên dev trong cột dấu hiệu tấn công (xem đầu báo cáo). Vì vậy kết quả chỉ nói được: phần mô tả "hoạt động bình thường" không có tác dụng thêm. Chưa đo prompt hoàn toàn không có hướng dẫn.
 
-**Tỉ lệ báo nhầm ở mục 1 thấp hơn thực tế.** Mục 1 chấm trên cùng tập ca nên bỏ 5 cửa sổ bình thường mà DeepBlueCLI lỗi (lỗi giải mã base64, tức các cửa sổ có nhiều PowerShell mã hoá). Các cửa sổ này chứa nhiều báo nhầm của AI. Tính mỗi công cụ trên đủ 51 cửa sổ bình thường (bỏ 11 cửa sổ chỉ toàn nhiễu):
-
-| Báo nhầm trên 51 cửa sổ | Có cột bình thường | Đối chứng |
-|---|:---:|:---:|
-| Qwen 2.5 3B | 10/51 (19.6%) | 10/51 (19.6%) |
-| Llama 3.2 3B | 17/51 (33.3%) | 14/51 (27.5%) |
-| Luật của nhóm | 0/51 | — |
-| Sigma mô phỏng | 6/51 (11.8%) | — |
+**Cách chấm mục 1 đã sửa (26/11).** Báo cáo cũ bỏ 5 cửa sổ bình thường có nhiều PowerShell mã hoá vì DeepBlueCLI "lỗi". Thật ra script chạy thử của nhóm (`run_deepblue.ps1`) đã dừng DeepBlueCLI ngay ở lỗi giải mã base64 đầu tiên; chạy đúng cách thì DeepBlueCLI báo ALERT cả 5 cửa sổ. Sau khi sửa, mọi công cụ chạy được trên đủ 51 cửa sổ nên bảng chính và bảng phụ giống nhau. Báo nhầm của DeepBlueCLI là 18/51, cao nhất trong các công cụ; 5 cửa sổ này cũng chứa nhiều báo nhầm của AI, Hayabusa và Sigma mô phỏng.
 
 **Thêm nhóm Event ID mới làm báo nhầm tăng mạnh.** So với lượt 24/11 (chỉ 12 ID agent thu, chạy trên laptop) trên đúng 55 cửa sổ 10 phút có ở cả hai lượt (22–24/11, đã bỏ 5 ca công cụ lỗi):
 
@@ -191,13 +223,21 @@ Không tính vào bảng trên: log agent thu không đủ dấu vết để gá
 
 ## 6. Hạn chế
 
-- Người viết hướng dẫn đã xem thống kê tổng (số lượng theo Event ID, tiến trình gọi 4798/4799) của cả 4 ngày trước khi chia. Danh sách nhiễu dựa trên tài liệu, nhưng không loại trừ hoàn toàn ảnh hưởng.
-- Đối chứng chỉ bỏ cột "hoạt động bình thường", không phải prompt không có hướng dẫn (mục 4).
-- Mục 1 bỏ 5 cửa sổ DeepBlueCLI lỗi, làm tỉ lệ báo nhầm của AI trông thấp hơn (số đủ 51 cửa sổ ở mục 4).
-- Log của một máy, một người dùng, 4 ngày, không có tấn công. Ca tấn công chỉ 13 ca chấm điểm → khoảng tin cậy rộng.
-- Agent thật chưa thu các ID mới → đây là thí nghiệm offline.
-- Mô hình chạy trên Colab (Tesla T4), khác máy với lượt 24/11 (laptop).
-- Trước khi lên Colab, ca bình thường đã đổi 22 tên tài khoản / nhóm thành `USERxx`; lượt 24/11 giữ tên thật. Tên lạ kiểu `USER03` có thể làm mô hình nghi ngờ hơn. So với 24/11 đổi cùng lúc máy, bộ ID và tên nên không tách riêng được; dao động do chạy lại (1/24) nhỏ hơn nhiều so với mức tăng báo nhầm (1 → 12 ca).
-- Bỏ 5379: không thấy được kiểu đánh cắp Credential Manager chỉ để lại 5379.
-- Mỗi cấu hình chạy một lần (xem mục 5).
-- Sau lượt này `analyze.py` đã sửa thêm 3 chỗ: bộ lọc 4798/4799 chỉ tin file ngay trong System32 / SysWOW64, ID mới chỉ đọc từ đúng kênh log, hướng dẫn coi `net localgroup administrators` đứng một mình là trinh sát. Trên 308 ca, phần luật / AI thấy không đổi; chỉ câu chữ hướng dẫn 4798/4799 khác. Số liệu ở trên là của bản khoá (commit `e9e3c8b`).
+Khi đọc số liệu ở trên cần nhớ các điểm sau. Cột cuối là cách sửa đã chốt ngày 25/11.
+
+| # | Hạn chế | Ảnh hưởng tới kết luận | Cách sửa |
+|---|---|---|---|
+| 1 | Người viết hướng dẫn đã xem thống kê tổng của cả 4 ngày (số lượng theo Event ID, tiến trình gọi 4798/4799) trước khi chia dev / test. | Phần kiểm tra không hoàn toàn "chưa nhìn thấy". Danh sách nhiễu viết theo tài liệu Microsoft / MITRE nên ảnh hưởng nhỏ, nhưng không loại trừ được. | Lượt sau thu log **sau** khi khoá prompt, từ máy khác (laptop thành viên khác hoặc máy ảo lab). |
+| 2 | Lượt đối chứng chỉ bỏ cột "hoạt động bình thường"; cột dấu hiệu tấn công vẫn giữ điều kiện đã chỉnh trên dev. | Chỉ kết luận được: cột "bình thường" không có tác dụng thêm. Chưa đo prompt hoàn toàn không có hướng dẫn. | Thêm nhánh bỏ hẳn hướng dẫn của nhóm ID mới, khoá lại, chạy cùng lượt bản gốc của đợt fine-tune. |
+| 3 | Log bình thường của một máy, một người, 4 ngày; chỉ 13 ca tấn công được chấm điểm. | Khoảng tin cậy rộng (bắt tấn công 42–87%). Chênh 1–2 ca giữa hai công cụ không có ý nghĩa. | Kiểm tra thêm trên EVTX-ATTACK-SAMPLES (chưa dùng lần nào); thu khoảng 10 phiên log bình thường trên máy ảo. |
+| 4 | So với lượt 24/11 đổi cùng lúc 3 thứ: bộ Event ID, máy chạy (Colab T4 thay laptop), tên tài khoản (`USERxx` thay tên thật). | Mức tăng báo nhầm (55 cửa sổ chung: Qwen 2 → 7, Llama 1 → 12) không gán hết được cho bộ ID, dù lớn hơn nhiều so với dao động khi chạy lại (1/24). | Chạy bản 12 ID trên Colab T4 với cùng ca đã ẩn danh, để chỉ còn khác bộ ID. Từ lần đóng gói sau, `colab_pack.py` dùng tên giả giống thật (tài khoản dịch vụ thành `svcappNN`). |
+| 5 | Mỗi cấu hình chạy một lần. Chạy lại y hệt vẫn lệch khoảng 1/24 nhãn (mục 5). | Mỗi con số có sai số khoảng ±1 ca trên 24. | Lượt so sánh cuối của đợt fine-tune chạy 3 lần, báo trung bình và khoảng dao động. |
+| 6 | Agent thật chỉ thu 12 ID; nhóm ID mới mới có trong thí nghiệm offline. | Kết quả chưa phản ánh hệ thống đang chạy. | Giữ agent 12 ID. Chỉ khi bản fine-tune đọc ID mới mà không tăng báo nhầm thì mới bàn với Lâm sửa `client_agent.ps1`. |
+| 7 | Bỏ 5379 (đọc Credential Manager) vì quá nhiều và không có tên tiến trình, chỉ có PID. | Không thấy được kiểu đánh cắp Credential Manager chỉ để lại 5379. | Ghép 5379 với 4688 cùng PID để biết tên tiến trình; coi nhiều 5379 trong thời gian ngắn do tiến trình lạ là tín hiệu yếu (REVIEW). Cần dữ liệu tấn công thật để kiểm. |
+| 8 | Chỉ 4/19 ca tấn công có sự kiện thuộc nhóm ID mới (4672 ở `dbc_sliver_c2`, `e2m_openssh_bruteforce_nonexist`; 4103 ở hai ca OpenSSH). Không ca nào có 4798/4799, 400/800, 4738, 4797, 5382, 4616, 1100, 4719. | Thí nghiệm chỉ đo được tác động của nhóm ID mới lên báo nhầm, **không kiểm được** chúng có giúp bắt tấn công hay không. Riêng 2 ca OpenSSH bị ngập 4103 làm Llama chuyển ALERT → UNKNOWN. | Kiểm tra trên EVTX-ATTACK-SAMPLES / Mordor, chọn ca có những ID này (trinh sát nhóm → 4798/4799, đổi chính sách audit → 4719, đổi giờ hệ thống → 4616), chốt nhãn trước khi chạy. |
+
+**Thay đổi sau lượt này.** Số liệu ở trên là của bản khoá (commit `e9e3c8b`); các thay đổi dưới đây không làm đổi số đó.
+- `analyze.py`: bộ lọc 4798/4799 chỉ tin file nằm ngay trong System32 / SysWOW64; ID mới chỉ đọc từ đúng kênh log; hướng dẫn coi `net localgroup administrators` đứng một mình là trinh sát. Trên 308 ca, phần luật / AI thấy không đổi, chỉ câu chữ hướng dẫn 4798/4799 khác.
+- Báo cáo: bảng chính chấm đủ 51 cửa sổ (công cụ lỗi tính là không báo); bảng phụ giữ cách chấm cũ (46 cửa sổ).
+- `run_deepblue.ps1` (26/11): không bọc DeepBlueCLI trong `try` + `Stop` nữa. Chạy lại DeepBlueCLI trên máy: 5 cửa sổ trước kia "lỗi" đều ALERT, các ca khác giữ nguyên nhãn. Hayabusa chạy lại không đổi nhãn nào; cột thời gian giờ là thời gian trên mỗi ca (0,16 s) thay vì tổng thời gian cả thư mục (8,3 s).
+- Hệ thống thật mặc định tắt nhóm ID mới (`ENABLE_EXTENDED_IDS=0`); `run_combined_eval.py --set full` tự bật.

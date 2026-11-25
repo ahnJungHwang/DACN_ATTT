@@ -43,7 +43,7 @@ $cases = @(
     }
     if (Test-Path -LiteralPath $NormalDir) {
         foreach ($f in Get-ChildItem -LiteralPath $NormalDir -Filter *.evtx) {
-            New-Case ('normal_' + $f.BaseName) 'lab_vm' 'normal_session' 'NORMAL' $f.FullName
+            New-Case ('normal_' + $f.BaseName) 'lab_vm' $NormalCategory 'NORMAL' $f.FullName
         }
         # Thu muc con = mot ca gom nhieu evtx (Security + PowerShell cua cung cua so, tao boi build_normal_cases.ps1)
         foreach ($d in Get-ChildItem -LiteralPath $NormalDir -Directory) {
@@ -53,16 +53,31 @@ $cases = @(
     }
 )
 
+function Invoke-DeepBlue([string]$file) {
+    # Chay DeepBlue.ps1 nhu khi dung doc lap: loi giai ma base64 o MOT su kien chi bo qua su kien do.
+    # KHONG dat trong try va KHONG de 'Stop': truoc 26/11 lenh nam trong try + 'Stop' nen loi dau tien
+    # lam dung ca file -> 5 cua so bi ERROR gia (DeepBlue chay rieng van ra phat hien).
+    $ErrorActionPreference = 'Continue'
+    $Error.Clear()
+    $out = @(& $deepblue -file $file 6>$null 2>$null | Where-Object { $_.Message })
+    # Vo hai: base64 hong o 1 su kien; Get-WinEvent -ErrorAction SilentlyContinue khong thay su kien (van ghi vao $Error)
+    $fatal = @($Error | Where-Object { "$_" -notmatch 'FromBase64String|No events were found' })
+    [pscustomobject]@{ found = $out; skipped = $Error.Count - $fatal.Count; fatal = $fatal }
+}
+
 $rows = foreach ($c in $cases) {
-    $found = @(); $err = ''
+    $found = @(); $err = ''; $skipped = 0
     $sw = [Diagnostics.Stopwatch]::StartNew()
     Push-Location $ToolDir   # DeepBlue.ps1 doc regexes.txt / safelist.txt o thu muc hien tai
-    try {
-        foreach ($file in @($c.evtx)) {
-            if (-not (Test-Path -LiteralPath $file)) { throw "Khong thay file evtx" }
-            $found += @(& $deepblue -file $file 6>$null | Where-Object { $_.Message })
-        }
-    } catch { $err = $_.Exception.Message } finally { Pop-Location }
+    if (@($c.evtx).Count -eq 0) { $err = 'Khong co file evtx DeepBlue doc duoc' }
+    foreach ($file in @($c.evtx)) {
+        if ($err) { break }
+        if (-not (Test-Path -LiteralPath $file)) { $err = 'Khong thay file evtx'; break }
+        $r = Invoke-DeepBlue $file
+        $found += $r.found; $skipped += $r.skipped
+        if ($r.found.Count -eq 0 -and $r.fatal.Count -gt 0) { $err = "$($r.fatal[-1])" }
+    }
+    Pop-Location
     $sw.Stop()
     $pred = if ($err) { 'ERROR' } elseif ($found.Count -gt 0) { 'ALERT' } else { 'NORMAL' }
     $msgs = @($found | ForEach-Object { $_.Message } | Select-Object -Unique)
@@ -75,6 +90,7 @@ $rows = foreach ($c in $cases) {
         log_clear_only = ($msgs.Count -gt 0 -and @($msgs | Where-Object { $_ -notmatch 'Log Clear' }).Count -eq 0)
         messages = ($msgs -join '; ')
         elapsed_seconds = [math]::Round($sw.Elapsed.TotalSeconds, 2); error = $err
+        skipped_base64_errors = $skipped   # su kien DeepBlue bo qua vi base64 hong (khong phai loi cua ca)
     }
 }
 $rows | Export-Csv -LiteralPath $OutCsv -NoTypeInformation -Encoding UTF8

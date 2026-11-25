@@ -49,6 +49,15 @@ def case_list(labels: dict, normal: Path, normal_category: str = "normal_session
     return cases
 
 
+def per_case_seconds(secs_by_dir: dict, cases: list[dict]) -> dict:
+    """Hayabusa quét cả thư mục một lần -> thời gian / ca = tổng thời gian thư mục / số ca trong thư mục
+    (gồm cả chi phí nạp luật chia đều). Trước 26/11 ghi tổng cả thư mục vào từng ca nên trung vị sai ~60 lần."""
+    n = {}
+    for c in cases:
+        n[c["dir"]] = n.get(c["dir"], 0) + 1
+    return {d: round(s / n[d], 2) for d, s in secs_by_dir.items() if n.get(d)}
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--exe", default=str(next((HERE.parent / "tools_rule_baseline").glob("hayabusa-*/app/hayabusa-*.exe"), "")))
@@ -92,7 +101,7 @@ def main() -> None:
                     hits_by_key[(d, key)].append(h)
             print(f"[hayabusa] {d} -> {secs_by_dir[d]}s", flush=True)
 
-    rows = []
+    rows, per_case = [], per_case_seconds(secs_by_dir, cases)
     for c in cases:
         hits = hits_by_key[(c["dir"], c["key"])]
         serious = [h for h in hits if level(h) >= min_idx]
@@ -103,8 +112,7 @@ def main() -> None:
                      "detections": len(serious), "all_detections": len(hits),
                      "max_level": LEVELS[max(map(level, hits))] if hits else "",
                      "messages": "; ".join(dict.fromkeys(f"[{h['Level']}] {h['RuleTitle']}" for h in serious))[:1500],
-                     # thời gian quét cả thư mục, không tách được theo ca
-                     "elapsed_seconds": secs_by_dir.get(c["dir"], ""), "error": err})
+                     "elapsed_seconds": per_case.get(c["dir"], ""), "error": err})
         print(f"{c['case_id']:42} {c['ground_truth']:7} -> {rows[-1]['pred_label']:6} "
               f"({len(serious)} >= {args.alert_level}, {len(hits)} tong)", flush=True)
 

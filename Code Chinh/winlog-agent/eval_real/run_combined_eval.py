@@ -36,6 +36,7 @@ CASES_DIR = HERE / "cases"
 FIELDS = ["tool", "case_id", "category", "ground_truth", "pred", "ai_only", "decision_source",
           "risk_score", "stages", "seconds", "gpu_before", "gpu_after", "error", "noise_guidance", "prompt_fingerprint"]
 LABELS = {"ALERT", "NORMAL", "UNKNOWN", "REVIEW", "NOISE_ONLY", "ERROR"}
+MANUAL_MARKER = "<!-- VIET_TAY: phần từ dòng này trở xuống viết tay, chạy lại --report vẫn giữ nguyên -->"
 UNSCORED_CATS = ("insufficient_evidence", "unlabeled")
 NORMAL_CATS = ("normal_session", "normal_full")
 NEED = ("manifest.json", "security.xml", "powershell.xml", "system.xml")
@@ -85,7 +86,8 @@ def events_after_noise(case_dirs: list[Path]) -> int:
 
 def complete(row: dict) -> bool:
     """Dòng CSV ghi đủ: đủ cột (DictReader để None ở cột thiếu / thừa) và nhãn hợp lệ (bỏ dòng cắt dở kiểu 'ALE')."""
-    return None not in row and None not in row.values() and row.get("pred") in LABELS
+    return (None not in row and None not in row.values() and row.get("pred") in LABELS
+            and len(row.get("prompt_fingerprint") or "") in (0, 64))  # cắt ngay trong cột cuối
 
 
 def load_done(path: Path) -> set[tuple[str, str]]:
@@ -116,9 +118,11 @@ class GpuGuard:
 
     def wait(self):
         t = gpu_temp()
-        if t >= self.abort:
-            raise SystemExit(f"[!] GPU {t}°C >= {self.abort}°C -> dừng để bảo vệ máy.")
-        while t > self.limit:
+        while True:
+            if t >= self.abort:  # kiểm cả trong lúc chờ: GPU vẫn có thể nóng lên khi không gọi mô hình
+                raise SystemExit(f"[!] GPU {t}°C >= {self.abort}°C -> dừng để bảo vệ máy.")
+            if t <= self.limit:
+                return
             time.sleep(3)
             t = gpu_temp()
 
@@ -209,6 +213,8 @@ def run(args) -> None:
     finally:
         if sampler:
             sampler.terminate()
+            sampler.wait()
+            log.close()
 
 
 def funnel_section() -> list[str]:
@@ -233,7 +239,7 @@ def funnel_section() -> list[str]:
                + f": SHA-256 `analyze.py` `{f.get('analyze_sha256', '?')}`, "
                f"prompt `{f.get('prompt_fingerprint', '?')}`"
                + (f", prompt đối chứng `{f['prompt_fingerprint_baseline']}`" if f.get("prompt_fingerprint_baseline") else "")
-               + f"; Ollama {f.get('ollama_colab', '?')}, GPU {f.get('gpu', '?')}.", ""]
+               + f"; Ollama {f.get('ollama_colab', '?').removeprefix('ollama version is ')}, GPU {f.get('gpu', '?')}.", ""]
     else:
         md += ["- (chưa có `prompt_freeze.json`)", ""]
     return md
@@ -257,6 +263,31 @@ def unscored_section(rows: list[dict], order: list[str], names: dict[str, str]) 
     return md
 
 
+def summary_table(rows: list[dict], order: list[str], names: dict[str, str]) -> tuple[list[str], dict[str, list]]:
+    """Bảng tổng hợp; ERROR != ALERT nên tự tính là không báo (bỏ sót với ca tấn công, không báo nhầm với ca thường)."""
+    md = ["| Công cụ | Bắt tấn công `scored` | Bắt `coverage` | Báo nhầm trên ca bình thường | REVIEW/UNKNOWN (bình thường) "
+          "| Lỗi | Precision | F1 | TG trung vị/ca |", "|---|---|---|---|:---:|:---:|:---:|:---:|:---:|"]
+    fps = {}
+    for t in order:
+        tr = [r for r in rows if r["tool"] == t]
+        sc = [r for r in tr if r["category"] == "scored" and r["ground_truth"] == "ALERT"]
+        cv = [r for r in tr if r["category"] == "coverage" and r["ground_truth"] == "ALERT"]
+        nm = [r for r in tr if r["category"] in NORMAL_CATS]
+        att = sc + cv
+        tp = sum(r["pred"] == "ALERT" for r in att)
+        fps[t] = fp = [r for r in nm if r["pred"] == "ALERT"]
+        prec = tp / (tp + len(fp)) if tp + len(fp) else 0
+        rec = tp / len(att) if att else 0
+        f1 = 2 * prec * rec / (prec + rec) if prec + rec else 0
+        unsure = sum(r["pred"] in ("REVIEW", "UNKNOWN") for r in nm)
+        errors = sum(r["pred"] == "ERROR" for r in att + nm)
+        secs = [float(r["seconds"]) for r in tr if r.get("seconds")]
+        md.append(f"| {names[t]} | {wilson(sum(r['pred'] == 'ALERT' for r in sc), len(sc))} | "
+                  f"{sum(r['pred'] == 'ALERT' for r in cv)}/{len(cv)} | {wilson(len(fp), len(nm))} | {unsure} | "
+                  f"{errors} | {prec:.1%} | {f1:.3f} | {statistics.median(secs) if secs else 0:.2f}s |")
+    return md, fps
+
+
 def report(args) -> None:
     with open(args.out, encoding="utf-8") as f:
         rows = [r for r in csv.DictReader(f) if complete(r)]  # bỏ dòng ghi dở
@@ -277,6 +308,12 @@ def report(args) -> None:
     full = args.set == "full"
     if full:  # CSV DeepBlueCLI / Hayabusa dùng tên ca gốc -> bỏ hậu tố _full để ghép
         rows = [r | {"case_id": r["case_id"].removesuffix("_full")} for r in rows]
+    by_key = {(r["tool"], r["case_id"]): r for r in rows}  # trùng (ghép / chạy lại) -> giữ dòng sau cùng
+    if len(by_key) < len(rows):
+        print(f"[!] {len(rows) - len(by_key)} dòng trùng (công cụ, ca) -> giữ dòng sau cùng")
+    rows = list(by_key.values())
+    if not rows:
+        sys.exit(f"{args.out}: không có dòng kết quả hợp lệ nào")
     names = {"qwen": "Qwen 2.5 3B (luật + AI)", "llama": "Llama 3.2 3B (luật + AI)", "rules": "Luật của nhóm (không AI)",
              "sigma": "Sigma mô phỏng (regex)", "deepblue": "DeepBlueCLI (công cụ thật)",
              "hayabusa": "Hayabusa + Sigma (công cụ thật, mức >= medium)",
@@ -286,13 +323,20 @@ def report(args) -> None:
              if any(r["tool"] == t for r in rows)]
     # Ca bình thường chỉ toàn nhiễu không được tính cho công cụ nào; ca tấn công bị lọc hết vẫn tính (bỏ sót)
     rows, noise_only, attack_noise = split_noise_only(rows)
-    # So sánh trên CÙNG một tập ca: ca mọi công cụ đều chạy được (không ERROR, không bị antivirus chặn)
-    ok = [{r["case_id"] for r in rows if r["tool"] == t and r["pred"] != "ERROR"} for t in order]
-    common = set.intersection(*ok)
-    dropped = sorted({r["case_id"] for r in rows if r["category"] in ("scored", "coverage", *NORMAL_CATS)} - common)
+    # Bảng chính: ca có kết quả của MỌI công cụ (ca thiếu = không dựng được, vd antivirus chặn -> bỏ cho mọi công cụ);
+    # công cụ lỗi (ERROR) trên ca có thật = công cụ đó không báo. Bảng phụ: chỉ ca mọi công cụ chạy không lỗi.
+    relevant = {r["case_id"] for r in rows if r["category"] in ("scored", "coverage", *NORMAL_CATS)}
+    present = set.intersection(*[{r["case_id"] for r in rows if r["tool"] == t} for t in order])
+    common = set.intersection(*[{r["case_id"] for r in rows if r["tool"] == t and r["pred"] != "ERROR"} for t in order])
+    missing, errored = sorted(relevant - present), sorted((relevant & present) - common)
     unscored = [r for r in rows if r["category"] in UNSCORED_CATS]  # giữ cả ca thiếu dòng của công cụ nào đó
     prompts = {t: sorted({r.get("prompt_fingerprint") or "" for r in rows if r["tool"] == t} - {""}) for t in order}
-    rows = [r for r in rows if r["case_id"] in common]
+    rows = [r for r in rows if r["case_id"] in present]
+    scope = [f"- Bảng chính chấm trên ca có kết quả của mọi công cụ; công cụ lỗi trên ca nào thì tính là công cụ đó không "
+             f"báo (cột \"Lỗi\"). Thiếu {len(missing)} ca không dựng được (antivirus chặn / công cụ không có dữ liệu): "
+             + (", ".join(f"`{c}`" for c in missing) or "không có") + ".",
+             f"- Bảng phụ (cuối mục 1) bỏ thêm {len(errored)} ca có công cụ lỗi: "
+             + (", ".join(f"`{c}`" for c in errored) or "không có") + ".", ""]
 
     if full:
         md = [f"# Test toàn bộ log máy thật, có hướng dẫn nhận biết nhiễu ({datetime.now():%d/%m/%Y})", "",
@@ -310,16 +354,12 @@ def report(args) -> None:
               "ngờ khi đi cùng dấu hiệu khác; 4647 tự nó không phải tấn công) -> đây không phải lượt \"không có hướng dẫn\".",
               f"- Ca bình thường chỉ toàn nhiễu (không gọi mô hình, không tính cho công cụ nào): {len(noise_only)}."
               + (" Ca tấn công bị bộ lọc nhiễu bỏ hết sự kiện (giữ lại, tính là bỏ sót nếu được chấm): "
-                 + ", ".join(f"`{c}`" for c in attack_noise) + "." if attack_noise else ""),
-              f"- Mọi công cụ được chấm trên cùng tập ca. Loại {len(dropped)} ca có công cụ lỗi / bị antivirus chặn: "
-              + (", ".join(f"`{c}`" for c in dropped) or "không có"), ""]
+                 + ", ".join(f"`{c}`" for c in attack_noise) + "." if attack_noise else "")] + scope
         md += funnel_section()
         if any(prompts.values()):  # CSV mới ghi prompt từng dòng
             md += ["- Prompt theo từng dòng CSV: " + "; ".join(f"{names[t]} " + ", ".join(f"`{p[:12]}…`" for p in ps)
                                                            for t, ps in prompts.items() if ps) + ".", ""]
-        md += ["## 1. Tổng hợp (phần kiểm tra)", "",
-               "| Công cụ | Bắt tấn công `scored` | Bắt `coverage` | Báo nhầm trên ca bình thường | REVIEW/UNKNOWN (bình thường) | Precision | F1 | TG trung vị/ca |",
-               "|---|---|---|---|:---:|:---:|:---:|:---:|"]
+        md += ["## 1. Tổng hợp (phần kiểm tra)", ""]
     else:
         md = None
     md = md or [f"# So sánh công cụ trên bộ log thật gộp ({datetime.now():%d/%m/%Y})", "",
@@ -331,30 +371,11 @@ def report(args) -> None:
           "Sigma ở đây là bản **mô phỏng bằng regex** (`core/rule_baselines.py`), không phải engine Sigma thật.",
           "- UNKNOWN / REVIEW: với ca tấn công tính là bỏ sót; với ca bình thường không tính là báo nhầm (ghi riêng).",
           "- DeepBlueCLI và Hayabusa đọc **toàn bộ** file evtx (cả sự kiện agent không thu); Qwen / Llama / luật nhóm chỉ thấy "
-          "sự kiện agent thu (4624/4625/4648/4688/1102/4720/4728/4732/4698/4104/7045/104).",
-          f"- Mọi công cụ được chấm trên cùng tập ca. Loại {len(dropped)} ca có công cụ lỗi / bị antivirus chặn: "
-          + (", ".join(f"`{c}`" for c in dropped) or "không có"), "",
-          "## 1. Tổng hợp", "",
-          "| Công cụ | Bắt tấn công `scored` | Bắt `coverage` | Báo nhầm trên ca bình thường | REVIEW/UNKNOWN (bình thường) | Precision | F1 | TG trung vị/ca |",
-          "|---|---|---|---|:---:|:---:|:---:|:---:|"]
-    fps = {}
-    for t in order:
-        tr = [r for r in rows if r["tool"] == t]
-        sc = [r for r in tr if r["category"] == "scored" and r["ground_truth"] == "ALERT"]
-        cv = [r for r in tr if r["category"] == "coverage" and r["ground_truth"] == "ALERT"]
-        nm = [r for r in tr if r["category"] in NORMAL_CATS]
-        att = sc + cv
-        tp = sum(r["pred"] == "ALERT" for r in att)
-        fp = [r for r in nm if r["pred"] == "ALERT"]
-        fps[t] = fp
-        prec = tp / (tp + len(fp)) if tp + len(fp) else 0
-        rec = tp / len(att) if att else 0
-        f1 = 2 * prec * rec / (prec + rec) if prec + rec else 0
-        unsure = sum(r["pred"] in ("REVIEW", "UNKNOWN") for r in nm)
-        secs = [float(r["seconds"]) for r in tr if r.get("seconds")]
-        md.append(f"| {names[t]} | {wilson(sum(r['pred'] == 'ALERT' for r in sc), len(sc))} | "
-                  f"{sum(r['pred'] == 'ALERT' for r in cv)}/{len(cv)} | {wilson(len(fp), len(nm))} | {unsure} | "
-                  f"{prec:.1%} | {f1:.3f} | {statistics.median(secs) if secs else 0:.2f}s |")
+          "sự kiện agent thu (4624/4625/4648/4688/1102/4720/4728/4732/4698/4104/7045/104).", *scope,
+          "## 1. Tổng hợp", ""]
+    main_lines, fps = summary_table(rows, order, names)
+    md += main_lines + ["", "**Bảng phụ: chỉ ca mọi công cụ chạy không lỗi** (cách chấm của các báo cáo trước)", ""]
+    md += summary_table([r for r in rows if r["case_id"] in common], order, names)[0]
 
     md += ["", "## 2. Ca bình thường bị báo nhầm", ""]
     for t in order:
@@ -376,10 +397,12 @@ def report(args) -> None:
     if gpu.exists():
         temps = [float(x.split(",")[1]) for x in gpu.read_text(encoding="utf-8").splitlines() if x.count(",") >= 2 and x.split(",")[1].strip().replace(".", "", 1).isdigit()]
         if temps:
-            md += ["", "## 4. Nhiệt độ GPU khi chạy mô hình", "",
+            md += ["", "## 3c. Nhiệt độ GPU khi chạy mô hình", "",
                    f"- Mẫu mỗi giây: {len(temps)} · cao nhất **{max(temps)}°C** · trung bình {statistics.mean(temps):.1f}°C · "
                    f"số giây >= 60°C: {sum(t >= 60 for t in temps)}"]
-    Path(args.md).write_text("\n".join(md) + "\n", encoding="utf-8")
+    old = Path(args.md).read_text(encoding="utf-8") if Path(args.md).exists() else ""
+    manual = old[old.index(MANUAL_MARKER):] if MANUAL_MARKER in old else ""  # phần viết tay: giữ nguyên
+    Path(args.md).write_text("\n".join(md) + "\n" + ("\n" + manual if manual else ""), encoding="utf-8")
     print(f"Đã ghi {args.md}")
 
 
@@ -402,6 +425,8 @@ if __name__ == "__main__":
     a = ap.parse_args()
     if a.cases_dir:
         CASES_DIR = Path(a.cases_dir).resolve()
+    if a.set == "full":  # thí nghiệm toàn bộ log: bật nhóm ID mới (hệ thống thật mặc định tắt)
+        os.environ.setdefault("ENABLE_EXTENDED_IDS", "1")
     a.out = a.out or str(HERE / f"combined_results_{a.tag}.csv")
     a.md = a.md or str(HERE / (f"SO_SANH_TOAN_BO_LOG_{a.tag}.md" if a.set == "full" else f"SO_SANH_CONG_CU_GOP_{a.tag}.md"))
     report(a) if a.report else run(a)

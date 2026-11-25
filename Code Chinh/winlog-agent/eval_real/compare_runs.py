@@ -22,8 +22,16 @@ def load(path: str) -> dict:
         return {(r["tool"], r["case_id"]): r for r in csv.DictReader(f) if r.get("pred")}
 
 
+def coverage(ref: dict, new: dict) -> tuple[int, int]:
+    """(số ca của file gốc có trong file mới, tổng số ca file gốc)."""
+    ref_cases, new_cases = {k[1] for k in ref}, {k[1] for k in new}
+    return len(ref_cases & new_cases), len(ref_cases)
+
+
 def compare(ref: dict, new: dict) -> list[str]:
-    diffs = []
+    new_cases = {k[1] for k in new}
+    # ca có trong lượt mới nhưng thiếu dòng của một công cụ (ca ngoài lượt chạy lại 1 phần thì không tính)
+    diffs = [f"{k[0]} {k[1]}: thiếu trong file mới" for k in ref if k[1] in new_cases and k not in new]
     for key, row in new.items():
         if key not in ref:
             diffs.append(f"{key[0]} {key[1]}: không có trong file gốc")
@@ -49,7 +57,8 @@ def same_reasons(results_dir: Path, case_id: str, tool: str) -> bool | None:
 def main(ref_path: str, new_path: str) -> int:
     ref, new = load(ref_path), load(new_path)
     diffs = compare(ref, new)
-    print(f"{len(new)} dòng so sánh, {len(diffs)} dòng khác ở CSV")
+    have, total = coverage(ref, new)
+    print(f"File mới có {have}/{total} ca của file gốc; {len(new)} dòng so sánh, {len(diffs)} dòng khác ở CSV")
     for d in diffs:
         print("  ", d)
     texts = {k: same_reasons(ROOT / "results", k[1], k[0]) for k in new if new[k]["pred"] != "NOISE_ONLY"}
@@ -62,4 +71,6 @@ def main(ref_path: str, new_path: str) -> int:
 
 
 if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        sys.exit("Cách dùng: python eval_real/compare_runs.py <gốc.csv> <mới.csv>")
     sys.exit(main(sys.argv[1], sys.argv[2]))

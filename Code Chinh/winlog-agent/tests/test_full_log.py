@@ -13,6 +13,7 @@ from unittest import mock
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "core"))
+os.environ.setdefault("ENABLE_EXTENDED_IDS", "1")  # file này test nhóm ID mới (hệ thống thật mặc định tắt)
 
 import analyze as A  # noqa: E402
 from analyze import is_benign_noise, read_events  # noqa: E402
@@ -54,6 +55,19 @@ class FullLogReadTests(unittest.TestCase):
             events = read_events(Path(d))
         self.assertEqual(1, len(events))
         self.assertNotIn("HostApplication", events[0]["data"])
+
+    def test_extended_ids_off_by_default_in_production(self):
+        group = event_xml(4799, "Security", "<Data Name='TargetUserName'>Administrators</Data>")
+        with case_with("security.xml", group, SYSTEM_LOGON) as d:
+            with mock.patch.dict(os.environ, {"ENABLE_EXTENDED_IDS": "0"}):
+                self.assertEqual([4624], [e["event_id"] for e in read_events(Path(d))])
+            with mock.patch.dict(os.environ, {"ENABLE_EXTENDED_IDS": "1"}):
+                self.assertEqual([4799, 4624], [e["event_id"] for e in read_events(Path(d))])
+
+    def test_fake_cdxml_header_without_event_ref_does_not_crash(self):
+        e = {"event_id": 4104, "time": "t", "data": {
+            "ScriptBlockText": "#requires -version 3.0\n# Cmdletization\nInvoke-Mimikatz -DumpCreds", "ScriptBlockId": "x"}}
+        self.assertFalse(is_benign_noise(e))
 
     def test_new_ids_only_from_their_channel(self):
         """Kernel-PnP 400 (kênh System) trùng số với PowerShell 400 -> không được đọc thành 'PowerShell engine khởi động'."""
@@ -275,6 +289,76 @@ class FullLogRunnerTests(unittest.TestCase):
         self.assertIn("insufficient_evidence", text.split("## 3b.")[1])
         self.assertIn("`i1`", text.split("## 3b.")[1])
 
+    def test_main_table_counts_tool_error_as_no_alert(self):
+        """Bảng chính: ca thiếu (không dựng được) bỏ cho mọi công cụ; công cụ lỗi trên ca có thật = không báo.
+        Bảng phụ: chỉ ca mọi công cụ chạy không lỗi."""
+        import argparse
+        pad = "," * (len(RCE.FIELDS) - 5)
+        lines = [f"qwen,a1,scored,ALERT,ALERT{pad}", f"qwen,n1,normal_session,NORMAL,NORMAL{pad}",
+                 f"qwen,n2,normal_session,NORMAL,ALERT{pad}", f"qwen,x1,scored,ALERT,ALERT{pad}",
+                 f"deepblue,a1,scored,ALERT,ALERT{pad}", f"deepblue,n1,normal_session,NORMAL,NORMAL{pad}",
+                 f"deepblue,n2,normal_session,NORMAL,ERROR{pad}"]
+        with tempfile.TemporaryDirectory() as d:
+            p, md = Path(d, "r.csv"), Path(d, "r.md")
+            p.write_text(",".join(RCE.FIELDS) + "\n" + "\n".join(lines) + "\n", encoding="utf-8")
+            RCE.report(argparse.Namespace(out=str(p), baseline="", deepblue="", hayabusa="", set="legacy", tag="t",
+                                          md=str(md)))
+            text = md.read_text(encoding="utf-8")
+        main, _, rest = text.partition("**Bảng phụ")
+        side = rest.partition("## 2.")[0]
+        qwen_main = next(l for l in main.splitlines() if l.startswith("| Qwen"))
+        db_main = next(l for l in main.splitlines() if l.startswith("| DeepBlue"))
+        self.assertIn("(1/2;", qwen_main)          # n2 vẫn được chấm dù DeepBlueCLI lỗi ở đó
+        self.assertIn("(0/2;", db_main)            # lỗi = không báo
+        self.assertIn("| 1 |", db_main)            # cột Lỗi
+        self.assertIn("(0/1;", next(l for l in side.splitlines() if l.startswith("| Qwen")))
+        self.assertIn("`x1`", main)                # ca thiếu được liệt kê
+
+    def test_complete_rejects_cut_fingerprint(self):
+        row = {k: "" for k in RCE.FIELDS} | {"tool": "qwen", "case_id": "c", "pred": "NORMAL"}
+        self.assertTrue(RCE.complete(row))
+        self.assertTrue(RCE.complete(row | {"prompt_fingerprint": "a" * 64}))
+        self.assertFalse(RCE.complete(row | {"prompt_fingerprint": "a1b2"}))  # ghi dở ngay trong cột cuối
+
+    def report_text(self, lines, md_before=None):
+        import argparse
+        with tempfile.TemporaryDirectory() as d:
+            p, md = Path(d, "r.csv"), Path(d, "r.md")
+            p.write_text(",".join(RCE.FIELDS) + "\n" + "".join(l + "\n" for l in lines), encoding="utf-8")
+            if md_before is not None:
+                md.write_text(md_before, encoding="utf-8")
+            RCE.report(argparse.Namespace(out=str(p), baseline="", deepblue="", hayabusa="", set="legacy", tag="t",
+                                          md=str(md)))
+            return md.read_text(encoding="utf-8")
+
+    def test_report_keeps_last_duplicate_row(self):
+        pad = "," * (len(RCE.FIELDS) - 5)
+        text = self.report_text([f"qwen,n1,normal_session,NORMAL,ALERT{pad}", f"qwen,n1,normal_session,NORMAL,NORMAL{pad}"])
+        self.assertIn("(0/1;", text)  # không đếm 2 lần, giữ dòng sau cùng
+
+    def test_report_keeps_manual_notes(self):
+        pad = "," * (len(RCE.FIELDS) - 5)
+        old = "# cũ\n\n## 1. bảng cũ\n\n" + RCE.MANUAL_MARKER + "\n\n## 4. Nhận xét\n- ghi tay\n"
+        text = self.report_text([f"qwen,n1,normal_session,NORMAL,NORMAL{pad}"], md_before=old)
+        self.assertNotIn("bảng cũ", text)
+        self.assertTrue(text.rstrip().endswith("- ghi tay"))
+        self.assertEqual(1, text.count(RCE.MANUAL_MARKER))
+
+    def test_report_without_rows_exits_cleanly(self):
+        with self.assertRaises(SystemExit):
+            self.report_text([])
+
+    def test_gpu_guard_aborts_if_hot_while_waiting(self):
+        temps = iter([60, 70, 76, 76])
+        with mock.patch.object(RCE, "gpu_temp", lambda: next(temps)), mock.patch.object(RCE.time, "sleep", lambda s: None):
+            with self.assertRaises(SystemExit):
+                RCE.GpuGuard(58).wait()
+
+    def test_hayabusa_seconds_split_per_case(self):
+        import run_hayabusa as RH
+        cases = [{"dir": "a"}, {"dir": "a"}, {"dir": "a"}, {"dir": "a"}, {"dir": "b"}]
+        self.assertEqual({"a": 2.0, "b": 5.0}, RH.per_case_seconds({"a": 8.0, "b": 5.0}, cases))
+
     def test_noise_only_skip_only_full_normal(self):
         with case_with("security.xml", SYSTEM_LOGON) as d:
             self.assertTrue(RCE.skip_as_noise("full", "normal_full", Path(d)))
@@ -303,6 +387,15 @@ class CompareRunsTests(unittest.TestCase):
         self.assertEqual(1, len(diffs))
         self.assertIn("llama c1", diffs[0])
         self.assertIn("'NORMAL' -> 'ALERT'", diffs[0])
+
+    def test_reports_cases_missing_from_new_run(self):
+        import compare_runs as CR
+        row = {"pred": "NORMAL"}
+        ref = {("qwen", "c1"): row, ("llama", "c1"): row, ("qwen", "c2"): row}
+        diffs = CR.compare(ref, {("qwen", "c1"): row})  # c2 ngoài lượt chạy lại (chạy 1 phần) -> không tính
+        self.assertEqual(1, len(diffs))
+        self.assertIn("llama c1", diffs[0])
+        self.assertEqual((1, 2), CR.coverage(ref, {("qwen", "c1"): row}))
 
     def test_same_reasons_oldest_vs_newest_json(self):
         import compare_runs as CR
@@ -337,7 +430,20 @@ class AnonymizeTests(unittest.TestCase):
                                             "<Data Name='TargetSid'>S-1-5-32-544</Data>")
         with case_with("security.xml", logon("nhanvien"), logon("SYSTEM", "S-1-5-18"), logon("LAB-PC02$"),
                        logon("Administrator", "S-1-5-21-111-222-333-500"), logon("DWM-1"), logon("-"), group) as d:
-            self.assertEqual({"nhanvien": "USER01"}, CP.build_name_map([Path(d)]))
+            self.assertEqual(["nhanvien"], list(CP.build_name_map([Path(d)])))
+
+    def test_name_map_uses_realistic_pseudonyms(self):
+        """USER03 trông lạ, có thể làm mô hình nghi ngờ hơn -> tên người giống thật; tài khoản dịch vụ -> svcappNN."""
+        with case_with("security.xml", logon("nhanvien"), logon("ketoan"), logon("sqlserveragent"),
+                       logon("svc_backup2024")) as d:
+            names = CP.build_name_map([Path(d)])
+        self.assertIn(names["nhanvien"], CP.PEOPLE)
+        self.assertIn(names["ketoan"], CP.PEOPLE)
+        self.assertNotEqual(names["nhanvien"], names["ketoan"])
+        self.assertTrue(names["sqlserveragent"].startswith("svcapp"))
+        self.assertTrue(names["svc_backup2024"].startswith("svcapp"))
+        self.assertEqual(len(names), len(set(names.values())))
+        self.assertFalse(set(names.values()) & set(names))
 
     def test_anonymize_everywhere_and_keep_rid(self):
         text = ("<Data Name='TargetUserName'>NhanVien</Data><Data Name='ScriptBlockText'>cd C:\\x\\nhanvien\\y</Data>"
