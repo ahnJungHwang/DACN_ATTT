@@ -20,7 +20,8 @@ param(
     [string]$LabelsPath = "$PSScriptRoot\labels.json",
     [string]$ToolDir = "",
     [string]$NormalDir = "$PSScriptRoot\normal_evtx",
-    [string]$OutCsv = "$PSScriptRoot\deepblue_results.csv"
+    [string]$OutCsv = "$PSScriptRoot\deepblue_results.csv",
+    [string]$NormalCategory = 'normal_session'
 )
 $ErrorActionPreference = 'Stop'
 $labels = Get-Content -LiteralPath $LabelsPath -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -46,7 +47,8 @@ $cases = @(
         }
         # Thu muc con = mot ca gom nhieu evtx (Security + PowerShell cua cung cua so, tao boi build_normal_cases.ps1)
         foreach ($d in Get-ChildItem -LiteralPath $NormalDir -Directory) {
-            New-Case $d.Name 'real_machine' 'normal_session' 'NORMAL' @((Get-ChildItem -LiteralPath $d.FullName -Filter *.evtx).FullName)
+            # DeepBlue.ps1 khong ho tro log "Windows PowerShell" co dien (Logic error 3) -> bo qua file do
+            New-Case $d.Name 'real_machine' $NormalCategory 'NORMAL' @((Get-ChildItem -LiteralPath $d.FullName -Filter *.evtx | Where-Object Name -ne 'Windows PowerShell.evtx').FullName)
         }
     }
 )

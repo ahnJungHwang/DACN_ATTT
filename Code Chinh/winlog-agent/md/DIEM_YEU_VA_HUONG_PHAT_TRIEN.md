@@ -78,6 +78,7 @@
 - [x] 07/11 — Đánh giá trên log thật (DeepBlueCLI + EVTX-to-MITRE), nhãn chốt trước, lặp 3 lần, KTC95%
 - [x] 07/11 — Mở rộng thu thập (1102/104/7045/4720/4728/4732/4698) + prompt động → 9/16 → 11/16
 - [x] 20/11 — (#5) Chuẩn hoá dòng lệnh trước mọi luật (bỏ đường dẫn + `.exe`: trước đây `"C:\...\net.exe" user /add` và `"C:\...\wevtutil.exe" cl` lọt luật) + chữ ký công cụ tấn công (Rubeus, LaZagne, SharpHound, winPEAS, PrintNightmare, tắt firewall/Sysmon, bcdedit, hijack registry, reverse shell, tunnel...). Riêng luật: luật mạnh bắt 49 → 77/150 ca tấn công của benchmark 600 ca, 9 → 10/21 ca log thật (Sliver C2), 0 báo nhầm trên 688 ca bình thường. Benchmark 600 ca đã dùng để tìm lỗi nên không còn là tập kiểm tra độc lập. Chạy lại Qwen (20/11, `results/benchmark600_luat_20112026/`, `eval_real/real_log_results_qwen_20112026.csv`): benchmark recall 48% → 72% (108/150; tấn công thật 51 → 79/80, ca giả lập Invoke-Stage/Invoke-Evasion 21 → 29/70), báo nhầm 3 → 0/450, UNKNOWN 15 → 5; log thật hệ thống 9 → 10/14. Test: `tests/test_signatures.py`.
+- [x] 25/11 — Thử cho Qwen / Llama thấy thêm 13 Event ID + hướng dẫn nhận biết nhiễu (chỉnh trên log trước 22/11, khoá prompt, kiểm tra trên 22–24/11, chạy trên Colab T4). Kết quả `eval_real/SO_SANH_TOAN_BO_LOG_full_test.md`: bỏ phần mô tả "hoạt động bình thường" **không làm khác kết quả** (Qwen báo nhầm 7/46 cả hai lượt; Llama 13/46 so với 11/46; đối chứng vẫn giữ điều kiện lọc trong cột dấu hiệu nên chưa đo prompt không hướng dẫn). Tính đủ 51 cửa sổ: Qwen báo nhầm 19.6%, Llama 33.3%. Thêm ID mới làm báo nhầm tăng mạnh so với 12 ID (55 cửa sổ chung: Qwen 2 → 7, Llama 1 → 12; lẫn cả khác máy và ẩn danh tên) mà không bắt thêm tấn công. Giữ agent 12 ID. Chạy lại y hệt vẫn lệch ~1/24 nhãn. Bước tiếp: fine-tune (mục Dài hạn).
 
 ## Bài học đã rút ra (giữ để không lặp lại)
 1. Dữ liệu tự sinh cho 97.5–100%, log thật chỉ 64–69%: luôn kiểm tra trên log thật.
@@ -85,3 +86,4 @@
 3. Mô hình 3B bịa sự kiện (vd "nhiều 4625" khi không có) → cần kiểm chứng kết luận với dữ liệu.
 4. Thêm kiến thức tĩnh vào prompt làm mất ca cũ → dùng prompt động.
 5. Mẫu DeepBlueCLI đều bắt đầu bằng sự kiện xoá log do người tạo mẫu → phải loại, nếu không Recall tăng ảo.
+6. Cho mô hình 3B thấy thêm loại sự kiện thì nó nghi ngờ nhiều hơn, không bắt thêm được gì; thêm mô tả "hoạt động bình thường" vào prompt không kéo lại được (25/11). Chênh 1–2 ca giữa hai lượt chạy là trong mức dao động. Khi chấm "cùng tập ca", xem công cụ khác lỗi ở ca nào: ca bị bỏ có thể chứa phần lớn báo nhầm.

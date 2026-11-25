@@ -45,7 +45,31 @@ SUPPORTED_EVENT_IDS = {
     4720, 4722, 4728, 4732, 4756,       # tạo / bật tài khoản, thêm vào nhóm global / local / universal
     4698,                               # tạo scheduled task
 }
+# Thí nghiệm "toàn bộ log" (md/THIET_KE_TEST_TOAN_BO_LOG_25112026.md): ID có giá trị ngoài 12 ID agent thu.
+# Agent hiện chưa thu các ID này -> ca cũ không bị ảnh hưởng.
+NEW_EVENT_IDS = {
+    4798, 4799,         # dò tài khoản / nhóm (T1087 / T1069)
+    4672,               # đặc quyền nhạy cảm khi đăng nhập
+    5382,               # đọc vault (T1555)
+    4797,               # dò tài khoản mật khẩu trống
+    4738,               # sửa tài khoản (T1098)
+    4647,               # người dùng chủ động đăng xuất
+    4616,               # đổi giờ hệ thống (T1070.006)
+    1100, 4719,         # dịch vụ log tắt / đổi chính sách audit (T1562.002)
+    4103,               # PowerShell module logging
+    400, 800,           # Windows PowerShell (cổ điển): engine bật (HostApplication), pipeline
+}
+SUPPORTED_EVENT_IDS |= NEW_EVENT_IDS
 MAX_FIELD_CHARS = 2000  # cắt TaskContent (file XML định nghĩa task) để vừa context
+# Trường chỉ lấy cho NEW_EVENT_IDS (4720 cũng có PrivilegeList / UAC... -> không đổi dữ liệu của ca cũ)
+NEW_FIELDS = {
+    "CallerProcessName", "PrivilegeList", "SchemaFriendlyName", "Resource", "Identity", "Workstation",
+    "HostApplication", "Payload", "ContextInfo", "OldUacValue", "NewUacValue", "UserAccountControl",
+    "SidHistory", "AllowedToDelegateTo", "PasswordLastSet", "PreviousTime", "NewTime",
+    "CategoryId", "SubcategoryGuid", "AuditPolicyChanges",
+}
+LONG_FIELDS = ("TaskContent", "HostApplication", "Payload", "ContextInfo")
+CLASSIC_PS_FIELD = re.compile(r"^\s*(HostApplication|CommandLine)=([^\r\n]*)", re.MULTILINE)
 
 FIELDS = {
     "ServiceName", "ImagePath", "ServiceType", "StartType", "AccountName",   # 7045
@@ -91,6 +115,11 @@ NOISE_PROCESSES = {
     "shellexperiencehost.exe", "startmenuexperiencehost.exe", "msedge.exe",
     "tiworker.exe", "trustedinstaller.exe", "wermgr.exe", "gamebar.exe",
     "winstore.app.exe", "mobsync.exe", "securityhealthhost.exe",
+}
+
+# Tiến trình dịch vụ Windows liệt kê thành viên nhóm (4798 / 4799) khi đăng nhập, sao lưu, tìm kiếm
+GROUP_ENUM_SERVICES = {
+    "svchost.exe", "vssvc.exe", "taskhostw.exe", "logonui.exe", "dllhost.exe", "explorer.exe", "searchindexer.exe",
 }
 
 # Ngưỡng tương quan brute force theo cửa sổ thời gian (gộp từ bản update 13/11/2026).
@@ -215,6 +244,20 @@ def is_benign_noise(event: dict) -> bool:
         )):
             return True
 
+    elif eid == 4672:
+        # Đặc quyền gán cho tài khoản dịch vụ hệ thống ở mỗi lần khởi động dịch vụ
+        if data.get("SubjectUserSid") in ("S-1-5-18", "S-1-5-19", "S-1-5-20") or data.get("SubjectUserName") in (
+            "SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE"
+        ):
+            return True
+
+    elif eid in (4798, 4799):
+        # Dịch vụ Windows kiểm tra nhóm khi đăng nhập / sao lưu. Chỉ tin khi file nằm trong C:\Windows\;
+        # net.exe / net1.exe / whoami / powershell / cmd dò nhóm = trinh sát (T1087 / T1069), không bao giờ là nhiễu.
+        caller = data.get("CallerProcessName", "").lower()
+        if caller.startswith("c:\\windows\\") and caller.split("\\")[-1] in GROUP_ENUM_SERVICES:
+            return True
+
     elif eid == 4624:
         # Lọc bỏ LogonType 5 (Dịch vụ nền khởi động dưới quyền SYSTEM/Service)
         if data.get("LogonType") == "5" and data.get("TargetUserName") in (
@@ -286,11 +329,19 @@ def read_events(case_dir: Path) -> list[dict]:
             provider = system.find("w:Provider", NS)
             execution = system.find("w:Execution", NS)
 
+            allowed = FIELDS | NEW_FIELDS if event_id in NEW_EVENT_IDS else FIELDS
+            data_items = event.findall("w:EventData/w:Data", NS)
             data = {
                 item.get("Name"): item.text or ""
-                for item in event.findall("w:EventData/w:Data", NS)
-                if item.get("Name") in FIELDS
+                for item in data_items
+                if item.get("Name") in allowed
             }
+            # Windows PowerShell cổ điển (400 / 800): <Data> không tên, chuỗi "HostApplication=..." nằm trong văn bản
+            if event_id in (400, 800):
+                text = "\n".join(item.text or "" for item in data_items if not item.get("Name"))
+                for name, value in CLASSIC_PS_FIELD.findall(text):
+                    if value.strip():
+                        data.setdefault(name, value.strip())
             # 1102 / 104 lưu dữ liệu trong <UserData><LogFileCleared>...</LogFileCleared></UserData>
             user_data = event.find("w:UserData", NS)
             if user_data is not None:
@@ -300,8 +351,9 @@ def read_events(case_dir: Path) -> list[dict]:
                         if name in FIELDS and item.text:
                             data.setdefault(name, item.text)
             # TaskContent là cả file XML định nghĩa task -> cắt bớt; ScriptBlockText giữ nguyên như trước
-            if len(data.get("TaskContent", "")) > MAX_FIELD_CHARS:
-                data["TaskContent"] = data["TaskContent"][:MAX_FIELD_CHARS] + "…[cắt bớt]"
+            for name in LONG_FIELDS:
+                if len(data.get(name, "")) > MAX_FIELD_CHARS:
+                    data[name] = data[name][:MAX_FIELD_CHARS] + "…[cắt bớt]"
 
             events.append({
                 "time": (
@@ -866,6 +918,20 @@ EVENT_MEANING = {
     4732: "Thành viên được thêm vào nhóm bảo mật local (TargetUserName = tên nhóm, MemberSid = người được thêm)",
     4756: "Thành viên được thêm vào nhóm bảo mật universal (TargetUserName = tên nhóm, MemberName = người được thêm)",
     4698: "Scheduled task mới được tạo (TaskName, TaskContent)",
+    # Nhóm ID mới (thí nghiệm toàn bộ log, 25/11/2026)
+    4798: "Danh sách nhóm của một TÀI KHOẢN bị liệt kê (TargetUserName = tài khoản, CallerProcessName = tiến trình gọi)",
+    4799: "Thành viên của một NHÓM bị liệt kê (TargetUserName = nhóm, CallerProcessName = tiến trình gọi)",
+    4672: "Đặc quyền đặc biệt được gán khi đăng nhập (SubjectUserName, PrivilegeList)",
+    5382: "Thông tin đăng nhập trong Windows Vault bị đọc (SchemaFriendlyName, Resource, Identity)",
+    4797: "Có truy vấn kiểm tra tài khoản có mật khẩu trống hay không (TargetUserName, Workstation)",
+    4738: "Tài khoản người dùng bị sửa thuộc tính (TargetUserName, UserAccountControl, SidHistory, AllowedToDelegateTo)",
+    4647: "Người dùng chủ động đăng xuất",
+    4616: "Giờ hệ thống bị thay đổi (PreviousTime, NewTime, ProcessName)",
+    1100: "Dịch vụ ghi nhật ký sự kiện bị tắt",
+    4719: "Chính sách audit của hệ thống bị thay đổi (SubcategoryGuid, AuditPolicyChanges)",
+    4103: "PowerShell module logging: lệnh đã chạy (Payload, ContextInfo)",
+    400: "PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell)",
+    800: "PowerShell pipeline chạy lệnh (HostApplication, CommandLine)",
 }
 
 
@@ -885,7 +951,55 @@ EXTENDED_SIGNS = [
     ({4698},
      "Scheduled task (4698) chạy PowerShell mã hoá, tải từ mạng hoặc file trong thư mục tạm.",
      "Scheduled task của Microsoft/phần mềm cập nhật (\\Microsoft\\Windows\\..., GoogleUpdate, OneDrive...)."),
+    # Nhóm ID mới (thí nghiệm toàn bộ log). Viết theo tài liệu Microsoft "Audit ..." + MITRE ATT&CK, không theo log cụ thể.
+    # Phần "bình thường" (cột 3) là hướng dẫn nhận biết nhiễu; NOISE_GUIDANCE=0 bỏ phần này (lượt đối chứng).
+    ({4798, 4799},
+     "Trinh sát tài khoản / nhóm (MITRE T1087 / T1069): 4798/4799 do net.exe, net1.exe, whoami, PowerShell, cmd, wmic "
+     "hoặc file lạ nằm ngoài thư mục hệ thống gọi, ĐI CÙNG dấu hiệu khác (lệnh trinh sát, tạo tài khoản, đăng nhập lạ). "
+     "4798/4799 chỉ là ĐỌC danh sách: không tạo tài khoản, không đổi quyền -> không bao giờ là Backdoor / Privilege Escalation.",
+     "Tiến trình dịch vụ của Windows, phần mềm cài trong Program Files (kể cả ứng dụng Store trong C:\\Program Files\\WindowsApps) "
+     "hoặc trình cập nhật phần mềm liệt kê nhóm / toàn bộ tài khoản cục bộ (Administrator, Guest, DefaultAccount...) khi khởi động, "
+     "đăng nhập, sao lưu. Chỉ có 4798/4799 mà không kèm lệnh trinh sát, tạo tài khoản hay đăng nhập lạ -> NORMAL."),
+    ({4672},
+     "Đặc quyền nguy hiểm (SeDebugPrivilege, SeTcbPrivilege, SeImpersonatePrivilege) gán cho tài khoản người dùng "
+     "ngay sau một đăng nhập mạng lạ hoặc sau dò mật khẩu.",
+     "Tài khoản quản trị hoặc tài khoản dịch vụ đăng nhập bình thường thì luôn sinh 4672; đứng một mình không phải tấn công. "
+     "Đăng nhập dịch vụ (LogonType 5, services.exe) và tài khoản DWM-* / UMFD-* luôn kèm SeImpersonatePrivilege / "
+     "SeAssignPrimaryTokenPrivilege."),
+    ({5382},
+     "Đánh cắp thông tin đăng nhập (MITRE T1555): đọc Windows Vault hàng loạt trong thời gian ngắn, đi cùng tiến trình hoặc lệnh đáng ngờ.",
+     "Trình duyệt hoặc ứng dụng đọc mật khẩu đã lưu của chính người dùng khi người dùng đang làm việc; tài khoản máy "
+     "(tên kết thúc bằng $) đọc vault Windows Hello (\"NGC ... Vault Resource Schema\") khi đăng nhập / mở khoá màn hình."),
+    ({4797},
+     "Dò tài khoản không có mật khẩu: nhiều truy vấn 4797 tới các tài khoản khác nhau, nhất là từ máy khác (Workstation lạ).",
+     "Windows tự kiểm tra tài khoản cục bộ khi đăng nhập, mở màn hình tài khoản hoặc chia sẻ thư mục."),
+    ({4738},
+     "Sửa tài khoản để duy trì truy cập (MITRE T1098): bỏ yêu cầu mật khẩu, đặt mật khẩu không hết hạn, thêm SidHistory "
+     "hoặc AllowedToDelegateTo, nhất là với tài khoản quản trị.",
+     "Hệ thống cập nhật thuộc tính sau khi người dùng đổi mật khẩu hoặc khi IT chỉnh thông tin tài khoản, không đổi quyền."),
+    ({4647},
+     "Tự nó không phải dấu hiệu tấn công; chỉ dùng làm mốc thời gian phiên làm việc.",
+     "Người dùng đăng xuất khỏi máy."),
+    ({4616},
+     "Che giấu dấu vết (MITRE T1070.006): đổi giờ hệ thống thủ công bằng lệnh / công cụ, đi cùng xoá log hoặc tấn công khác.",
+     "Dịch vụ thời gian của Windows tự đồng bộ giờ (chênh lệch nhỏ), đổi múi giờ, khởi động máy."),
+    ({1100, 4719},
+     "Vô hiệu hoá ghi log (MITRE T1562.002): dịch vụ log tắt hoặc chính sách audit bị đổi / tắt khi máy vẫn đang chạy, "
+     "đi cùng hoạt động đáng ngờ khác.",
+     "1100 xuất hiện ngay trước khi tắt hoặc khởi động lại máy; chính sách audit đổi khi cài bản cập nhật Windows."),
+    ({400, 800, 4103},
+     "PowerShell độc hại (MITRE T1059.001): dòng lệnh (HostApplication / Payload) có -enc / -EncodedCommand, FromBase64String, "
+     "DownloadString / Invoke-WebRequest / IEX tới URL ngoài, tắt Defender, gọi công cụ đánh cắp mật khẩu "
+     "(-w hidden / -ExecutionPolicy Bypass chỉ đáng ngờ khi đi cùng các dấu hiệu này).",
+     "PowerShell được mở từ công cụ lập trình, trình quản lý hệ thống hoặc script quản trị để chạy lệnh thông thường "
+     "(cài đặt gói, build, kiểm tra cấu hình). -NoProfile, -NonInteractive, -ExecutionPolicy Bypass / Unrestricted, "
+     "-WindowStyle Hidden do công cụ tự động gọi; không kèm mã hoá base64, tải từ mạng hay tắt bảo vệ -> NORMAL, không phải UNKNOWN."),
 ]
+
+
+def noise_guidance_enabled() -> bool:
+    """NOISE_GUIDANCE=0 -> bỏ phần 'hoạt động bình thường' của nhóm ID mới (lượt đối chứng)."""
+    return os.getenv("NOISE_GUIDANCE", "1") != "0"
 
 
 def build_system_prompt(schema: dict, correlation_hints: str = "", event_ids: set[int] | None = None) -> str:
@@ -908,7 +1022,9 @@ def build_system_prompt(schema: dict, correlation_hints: str = "", event_ids: se
     legend_ids = list(BASE_EVENT_IDS) + [eid for eid in EVENT_MEANING if eid not in BASE_EVENT_IDS and eid in present]
     legend = "\n".join(f"- {eid}: {EVENT_MEANING[eid]}" for eid in legend_ids)
 
-    ext = [(sign, normal) for ids, sign, normal in EXTENDED_SIGNS if ids & present]
+    guidance = noise_guidance_enabled()
+    ext = [(sign, normal if guidance or not ids <= NEW_EVENT_IDS else None)
+           for ids, sign, normal in EXTENDED_SIGNS if ids & present]
     ext_signs = "".join(f"{i}. {sign}\n" for i, (sign, _) in enumerate(ext, start=6))
     ext_normals = "".join(f"- {normal}\n" for _, normal in ext if normal)
     last_item = 5 + len(ext) if ext else 4
@@ -948,6 +1064,13 @@ def build_system_prompt(schema: dict, correlation_hints: str = "", event_ids: se
         "- Trả về kết quả dưới dạng JSON tuân thủ schema sau:\n"
         + json.dumps(schema, ensure_ascii=False)
     )
+
+
+def prompt_fingerprint() -> str:
+    """SHA-256 của prompt đầy đủ (mọi loại sự kiện) - ghi vào báo cáo khi khoá prompt."""
+    import hashlib
+    prompt = build_system_prompt(BatchVerdict.model_json_schema(), "", set(SUPPORTED_EVENT_IDS))
+    return hashlib.sha256(prompt.encode()).hexdigest()
 
 
 def build_batch_payload(batch: list[dict]) -> str:

@@ -18,16 +18,30 @@ param(
     [string]$Prefix = "normal_real",
     [int]$WindowMinutes = 10,
     [string]$Description = "Hoat dong binh thuong tren laptop thanh vien nhom (log xuat tu may that)",
-    [string]$OutDir = ""
+    [string]$OutDir = "",
+    # Agent = 12 ID agent thu (nhu cu). Full = them nhom ID moi (md/THIET_KE_TEST_TOAN_BO_LOG_25112026.md),
+    # doc them "Windows PowerShell.evtx", ghi split dev/test, category normal_full.
+    [ValidateSet('Agent', 'Full')][string]$IdSet = 'Agent',
+    [datetime]$SplitAt = '2026-11-22',
+    [string]$RawDirName = '_normal_evtx'
 )
 $ErrorActionPreference = 'Stop'
 if (-not $OutDir) { $OutDir = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) 'cases' }  # $PSScriptRoot rong trong param o PS 5.1
 $utf8 = New-Object System.Text.UTF8Encoding($false)
+$full = $IdSet -eq 'Full'
+$secIds = @(4624, 4625, 4648, 4688, 1102, 4720, 4728, 4732, 4698)
+$psIds = @(4104)
+if ($full) {
+    $secIds += 4798, 4799, 4672, 5382, 4797, 4738, 4647, 4616, 1100, 4719
+    $psIds += 4103
+}
 $sources = @(
-    @{ File = 'Security.evtx'; Key = 'security'; Ids = 4624, 4625, 4648, 4688, 1102, 4720, 4728, 4732, 4698 },
-    @{ File = 'Microsoft-Windows-PowerShell_Operational.evtx'; Key = 'powershell'; Ids = @(4104) },
+    @{ File = 'Security.evtx'; Key = 'security'; Ids = $secIds },
+    @{ File = 'Microsoft-Windows-PowerShell_Operational.evtx'; Key = 'powershell'; Ids = $psIds },
     @{ File = 'System.evtx'; Key = 'system'; Ids = 7045, 104 }
 )
+if ($full) { $sources += @{ File = 'Windows PowerShell.evtx'; Key = 'powershell'; Ids = 400, 800 } }
+function Get-Split([datetime]$t) { if ($t -lt $SplitAt) { 'dev' } else { 'test' } }
 
 # 1. Doc su kien agent thu tu tung file
 $events = @()
@@ -49,7 +63,8 @@ $rules['(?<=C:\\Users\\)(?!Public\b|Default\b|All Users\b)[^\\<"'' ]+'] = 'LABUS
 function Protect([string]$text) { foreach ($k in $rules.Keys) { $text = [regex]::Replace($text, "(?i)$k", $rules[$k]) }; $text }
 
 # 3. Chia cua so, ghi ca
-$day0 = $events[0].Time.Date
+$day0 = ($events | Sort-Object Time | Select-Object -First 1).Time.Date
+$windows = @{ dev = 0; test = 0 }
 $groups = $events | Group-Object { [math]::Floor(($_.Time - $day0).TotalMinutes / $WindowMinutes) } | Sort-Object { [int]$_.Name }
 $made = 0
 foreach ($g in $groups) {
@@ -63,18 +78,23 @@ foreach ($g in $groups) {
         $count[$k] = $sel.Count
         [IO.File]::WriteAllText((Join-Path $dir "$k.xml"), (Protect ('<Events>' + (($sel | ForEach-Object Xml) -join '') + '</Events>')), $utf8)
     }
+    $split = Get-Split $wStart
+    $windows[$split]++
     $manifest = [ordered]@{
-        case_id = $id; ground_truth = 'NORMAL'; category = 'normal_session'; technique = ''; dual_use = $false
+        case_id = $id; ground_truth = 'NORMAL'; category = $(if ($full) { 'normal_full' } else { 'normal_session' }); technique = ''; dual_use = $false
         actions = $Description
         label_basis = 'Phien su dung binh thuong; da quet tu khoa tan cong (mimikatz, -enc, DownloadString...) va xem tay cac ca bi bao dong'
         window_start = $wStart.ToString('yyyy-MM-dd HH:mm'); window_end = $wEnd.ToString('yyyy-MM-dd HH:mm'); window_minutes = $WindowMinutes
         security_count = $count.security; powershell_count = $count.powershell; system_count = $count.system
         built_at = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
     }
+    if ($full) { $manifest.split = $split; $manifest.id_set = 'Full' }
     [IO.File]::WriteAllText((Join-Path $dir 'manifest.json'), ($manifest | ConvertTo-Json -Depth 4), $utf8)
+    $made++
+    if ($full -and $split -ne 'test') { continue }  # DeepBlueCLI / Hayabusa chi cham tren phan kiem tra
 
     # Ban sao evtx goc cua cua so cho DeepBlueCLI (moi su kien trong cua so, giong DeepBlueCLI doc ca file)
-    $rawDir = Join-Path (Join-Path $OutDir '_normal_evtx') $id
+    $rawDir = Join-Path (Join-Path $OutDir $RawDirName) $id
     New-Item -ItemType Directory -Force -Path $rawDir | Out-Null
     $q = "*[System[TimeCreated[@SystemTime>='{0:yyyy-MM-ddTHH:mm:ss.000Z}' and @SystemTime<'{1:yyyy-MM-ddTHH:mm:ss.000Z}']]]" -f $wStart.ToUniversalTime(), $wEnd.ToUniversalTime()
     foreach ($s in $sources) {
@@ -85,6 +105,28 @@ foreach ($g in $groups) {
         wevtutil epl "$src" "$dst" /lf:true "/q:$q"
         if ($LASTEXITCODE -ne 0) { throw "wevtutil loi khi cat $($s.File) cho $id" }
     }
-    $made++
 }
-Write-Host "[OK] Tao $made ca NORMAL ($WindowMinutes phut/ca) trong $OutDir; evtx goc cho DeepBlueCLI o $OutDir\_normal_evtx"
+Write-Host "[OK] Tao $made ca NORMAL ($WindowMinutes phut/ca) trong $OutDir; evtx goc cho DeepBlueCLI o $OutDir\$RawDirName"
+
+# 4. Pheu so lieu cho bao cao (chi che do Full): tong su kien moi file, so su kien duoc doc va so cua so theo dev/test
+if ($full) {
+    $files = [ordered]@{}; $total = @{ dev = 0; test = 0 }
+    foreach ($s in $sources) {
+        $path = Join-Path $EvtxDir $s.File
+        if (-not (Test-Path -LiteralPath $path)) { continue }
+        $times = @(Get-WinEvent -Path $path -Oldest -ErrorAction SilentlyContinue | ForEach-Object { $_.TimeCreated })
+        $files[$s.File] = $times.Count
+        foreach ($t in $times) { $total[(Get-Split $t)]++ }
+    }
+    $selected = @{ dev = 0; test = 0 }
+    foreach ($e in $events) { $selected[(Get-Split $e.Time)]++ }
+    $summary = [ordered]@{
+        split_at = $SplitAt.ToString('yyyy-MM-dd HH:mm'); files = $files
+        total = [ordered]@{ dev = $total.dev; test = $total.test }
+        selected = [ordered]@{ dev = $selected.dev; test = $selected.test }
+        windows = [ordered]@{ dev = $windows.dev; test = $windows.test }
+        built_at = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
+    }
+    [IO.File]::WriteAllText((Join-Path $OutDir '_full_build_summary.json'), ($summary | ConvertTo-Json -Depth 4), $utf8)
+    Write-Host ("[OK] Pheu: tong dev {0} / test {1}; doc dev {2} / test {3}; cua so dev {4} / test {5}" -f $total.dev, $total.test, $selected.dev, $selected.test, $windows.dev, $windows.test)
+}

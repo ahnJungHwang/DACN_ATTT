@@ -34,7 +34,7 @@ def level(hit: dict) -> int:
     return LEVELS.index(s) if s in LEVELS else 0
 
 
-def case_list(labels: dict) -> list[dict]:
+def case_list(labels: dict, normal: Path, normal_category: str = "normal_session") -> list[dict]:
     def evtx(src, f):
         return (HERE / labels["sources"][src]["evtx_dir"]).resolve() / f
     cases = [{"case_id": c["case_id"], "category": c["category"], "ground_truth": c["ground_truth"],
@@ -43,9 +43,8 @@ def case_list(labels: dict) -> list[dict]:
         cases.append({"case_id": "oos_" + Path(o["file"]).stem, "category": "out_of_scope",
                       "ground_truth": "UNKNOWN" if o["technique"].startswith("(khong mo ta)") else "ALERT",
                       "dir": evtx("deepbluecli", o["file"]).parent, "key": o["file"].lower()})
-    normal = HERE / "cases" / "_normal_evtx"
     for d in sorted(p for p in normal.iterdir() if p.is_dir()) if normal.exists() else []:
-        cases.append({"case_id": d.name, "category": "normal_session", "ground_truth": "NORMAL",
+        cases.append({"case_id": d.name, "category": normal_category, "ground_truth": "NORMAL",
                       "dir": normal.resolve(), "key": d.name.lower()})
     return cases
 
@@ -56,10 +55,14 @@ def main() -> None:
     ap.add_argument("--alert-level", default="medium", choices=LEVELS)
     ap.add_argument("--threads", default="2")
     ap.add_argument("--out", default=str(HERE / "hayabusa_results.csv"))
+    ap.add_argument("--normal-dir", default=str(HERE / "cases" / "_normal_evtx"),
+                    help="mỗi thư mục con = một ca bình thường (vd eval_real/cases/_full_evtx)")
+    ap.add_argument("--normal-category", default="normal_session")
     args = ap.parse_args()
     exe = Path(args.exe)
     min_idx = LEVELS.index(args.alert_level)
-    cases = case_list(json.loads((HERE / "labels.json").read_text(encoding="utf-8")))
+    normal = Path(args.normal_dir).resolve()
+    cases = case_list(json.loads((HERE / "labels.json").read_text(encoding="utf-8")), normal, args.normal_category)
 
     hits_by_key, secs_by_dir, err_by_dir = defaultdict(list), {}, {}
     with tempfile.TemporaryDirectory() as tmp:
@@ -85,7 +88,7 @@ def main() -> None:
             if True:
                 for h in csv.DictReader(text.splitlines()):
                     f = Path(h.get("EvtxFile", ""))
-                    key = f.parent.name.lower() if f.parent.parent.name == "_normal_evtx" else f.name.lower()
+                    key = f.parent.name.lower() if f.parent.parent.name.lower() == normal.name.lower() else f.name.lower()
                     hits_by_key[(d, key)].append(h)
             print(f"[hayabusa] {d} -> {secs_by_dir[d]}s", flush=True)
 
