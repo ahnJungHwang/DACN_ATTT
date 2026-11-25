@@ -16,10 +16,11 @@
 | | Phần chỉnh (dev) | Phần kiểm tra (test) |
 |---|---:|---:|
 | Tổng sự kiện | 10,340 | 22,677 |
-| Sự kiện được đọc (bỏ ID chỉ toàn nhiễu) | 1,440 | 2,959 |
+| Sự kiện thuộc ID được đọc (trước bộ lọc nhiễu) | 1,440 | 2,959 |
+| Còn lại sau bộ lọc nhiễu (luật / AI thấy) | 659 | 1,299 |
 | Cửa sổ 10 phút (= số ca) | 98 | 62 |
 
-- Prompt khoá lúc 2026-11-25T05:16:01+00:00: SHA-256 `analyze.py` `97582d4c557fb035a53301cfecc29fcdf7b41106ab59aa2ce4cb1f7b19f75b6c`, prompt `97393994e65506db2b79787c7aaf31606ed1c8873d364b80bfe2b6d41b9d8637`, prompt đối chứng `e196f062e8286e5ec3b54547c2d472b332dfa6f1827304d90d92e3005a553636`; Ollama ollama version is 0.40.18, GPU Tesla T4.
+- Prompt khoá lúc 2026-11-25T05:16:01+00:00 (commit `e9e3c8b`, sha tính trên bản checkout Windows CRLF): SHA-256 `analyze.py` `97582d4c557fb035a53301cfecc29fcdf7b41106ab59aa2ce4cb1f7b19f75b6c`, prompt `97393994e65506db2b79787c7aaf31606ed1c8873d364b80bfe2b6d41b9d8637`, prompt đối chứng `e196f062e8286e5ec3b54547c2d472b332dfa6f1827304d90d92e3005a553636`; Ollama ollama version is 0.40.18, GPU Tesla T4.
 
 ## 1. Tổng hợp (phần kiểm tra)
 
@@ -134,6 +135,17 @@
 | `dbc_metasploit_psexec_native_system` | coverage | ALERT | ALERT | ALERT | ALERT | ALERT | ALERT | ALERT | NORMAL |
 | `dbc_new_user_admin_group` | coverage | ALERT | ALERT | ALERT | ALERT | ALERT | ALERT | ALERT | ALERT |
 
+## 3b. Ca không chấm điểm (insufficient_evidence / unlabeled)
+
+Không tính vào bảng trên: log agent thu không đủ dấu vết để gán nhãn chắc (`insufficient_evidence`) hoặc chưa gán nhãn (`unlabeled`). `–` = công cụ không có kết quả cho ca này.
+
+| Ca | Nhóm | Nhãn | Qwen 2.5 3B (luật + AI) | Llama 3.2 3B (luật + AI) | Qwen 2.5 3B — đối chứng (bỏ cột bình thường) | Llama 3.2 3B — đối chứng (bỏ cột bình thường) | Luật của nhóm (không AI) | DeepBlueCLI (công cụ thật) | Hayabusa + Sigma (công cụ thật, mức >= medium) | Sigma mô phỏng (regex) |
+|---|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| `dbc_metasploit_pwshpayload` | insufficient_evidence | ALERT | NORMAL | NORMAL | NORMAL | NORMAL | NORMAL | NORMAL | NORMAL | NORMAL |
+| `dbc_mimikatz_tokenelevate` | insufficient_evidence | ALERT | NOISE_ONLY | NOISE_ONLY | NOISE_ONLY | NOISE_ONLY | NOISE_ONLY | NORMAL | NORMAL | NOISE_ONLY |
+| `dbc_many_events_security` | unlabeled | UNKNOWN | ALERT | ALERT | ALERT | ALERT | ALERT | ALERT | ALERT | ALERT |
+| `dbc_many_events_system` | unlabeled | UNKNOWN | – | – | – | – | – | ALERT | ALERT | – |
+
 ## 4. Nhận xét (viết tay 25/11 — `--report` không sinh mục 4–6, chạy lại `--report` thì chép lại)
 
 **Bỏ cột "hoạt động bình thường" không làm kết quả khác đi.**
@@ -188,3 +200,4 @@
 - Trước khi lên Colab, ca bình thường đã đổi 22 tên tài khoản / nhóm thành `USERxx`; lượt 24/11 giữ tên thật. Tên lạ kiểu `USER03` có thể làm mô hình nghi ngờ hơn. So với 24/11 đổi cùng lúc máy, bộ ID và tên nên không tách riêng được; dao động do chạy lại (1/24) nhỏ hơn nhiều so với mức tăng báo nhầm (1 → 12 ca).
 - Bỏ 5379: không thấy được kiểu đánh cắp Credential Manager chỉ để lại 5379.
 - Mỗi cấu hình chạy một lần (xem mục 5).
+- Sau lượt này `analyze.py` đã sửa thêm 3 chỗ: bộ lọc 4798/4799 chỉ tin file ngay trong System32 / SysWOW64, ID mới chỉ đọc từ đúng kênh log, hướng dẫn coi `net localgroup administrators` đứng một mình là trinh sát. Trên 308 ca, phần luật / AI thấy không đổi; chỉ câu chữ hướng dẫn 4798/4799 khác. Số liệu ở trên là của bản khoá (commit `e9e3c8b`).

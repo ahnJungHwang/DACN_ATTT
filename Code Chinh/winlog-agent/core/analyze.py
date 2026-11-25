@@ -121,6 +121,9 @@ NOISE_PROCESSES = {
 GROUP_ENUM_SERVICES = {
     "svchost.exe", "vssvc.exe", "taskhostw.exe", "logonui.exe", "dllhost.exe", "explorer.exe", "searchindexer.exe",
 }
+TRUSTED_SYSTEM_DIRS = ("c:\\windows\\system32", "c:\\windows\\syswow64")
+# Số Event ID trùng giữa các nguồn (vd Kernel-PnP 400 ở kênh System) -> ID mới chỉ đọc từ đúng kênh của nó
+NEW_ID_CHANNEL = {400: "Windows PowerShell", 800: "Windows PowerShell", 4103: "Microsoft-Windows-PowerShell/Operational"}
 
 # Ngưỡng tương quan brute force theo cửa sổ thời gian (gộp từ bản update 13/11/2026).
 # Đăng nhập mạng (LogonType 3/10) sai liên tục nghi ngờ hơn gõ sai tại bàn phím nên ngưỡng thấp hơn.
@@ -252,10 +255,12 @@ def is_benign_noise(event: dict) -> bool:
             return True
 
     elif eid in (4798, 4799):
-        # Dịch vụ Windows kiểm tra nhóm khi đăng nhập / sao lưu. Chỉ tin khi file nằm trong C:\Windows\;
+        # Dịch vụ Windows kiểm tra nhóm khi đăng nhập / sao lưu. Chỉ tin file nằm ngay trong System32 / SysWOW64
+        # (hoặc C:\Windows\explorer.exe): Temp, Tasks, Tracing... trong C:\Windows người dùng ghi được.
         # net.exe / net1.exe / whoami / powershell / cmd dò nhóm = trinh sát (T1087 / T1069), không bao giờ là nhiễu.
         caller = data.get("CallerProcessName", "").lower()
-        if caller.startswith("c:\\windows\\") and caller.split("\\")[-1] in GROUP_ENUM_SERVICES:
+        folder, _, name = caller.rpartition("\\")
+        if name in GROUP_ENUM_SERVICES and (folder in TRUSTED_SYSTEM_DIRS or caller == "c:\\windows\\explorer.exe"):
             return True
 
     elif eid == 4624:
@@ -323,6 +328,8 @@ def read_events(case_dir: Path) -> list[dict]:
                 ) from exc
 
             if event_id not in SUPPORTED_EVENT_IDS:
+                continue
+            if event_id in NEW_EVENT_IDS and system_text("Channel") != NEW_ID_CHANNEL.get(event_id, "Security"):
                 continue
 
             timestamp = system.find("w:TimeCreated", NS)
@@ -954,12 +961,14 @@ EXTENDED_SIGNS = [
     # Nhóm ID mới (thí nghiệm toàn bộ log). Viết theo tài liệu Microsoft "Audit ..." + MITRE ATT&CK, không theo log cụ thể.
     # Phần "bình thường" (cột 3) là hướng dẫn nhận biết nhiễu; NOISE_GUIDANCE=0 bỏ phần này (lượt đối chứng).
     ({4798, 4799},
-     "Trinh sát tài khoản / nhóm (MITRE T1087 / T1069): 4798/4799 do net.exe, net1.exe, whoami, PowerShell, cmd, wmic "
-     "hoặc file lạ nằm ngoài thư mục hệ thống gọi, ĐI CÙNG dấu hiệu khác (lệnh trinh sát, tạo tài khoản, đăng nhập lạ). "
+     "Trinh sát tài khoản / nhóm (MITRE T1087 / T1069): 4798/4799 do net.exe, net1.exe, whoami, PowerShell, cmd, wmic gọi "
+     "là trinh sát, kể cả khi đứng một mình (vd net localgroup administrators). File lạ nằm ngoài thư mục hệ thống gọi "
+     "4798/4799 thì đáng ngờ khi ĐI CÙNG dấu hiệu khác (lệnh trinh sát, tạo tài khoản, đăng nhập lạ). "
      "4798/4799 chỉ là ĐỌC danh sách: không tạo tài khoản, không đổi quyền -> không bao giờ là Backdoor / Privilege Escalation.",
      "Tiến trình dịch vụ của Windows, phần mềm cài trong Program Files (kể cả ứng dụng Store trong C:\\Program Files\\WindowsApps) "
      "hoặc trình cập nhật phần mềm liệt kê nhóm / toàn bộ tài khoản cục bộ (Administrator, Guest, DefaultAccount...) khi khởi động, "
-     "đăng nhập, sao lưu. Chỉ có 4798/4799 mà không kèm lệnh trinh sát, tạo tài khoản hay đăng nhập lạ -> NORMAL."),
+     "đăng nhập, sao lưu. 4798/4799 chỉ do các tiến trình này gọi, không kèm lệnh trinh sát, tạo tài khoản hay đăng nhập lạ "
+     "-> NORMAL."),
     ({4672},
      "Đặc quyền nguy hiểm (SeDebugPrivilege, SeTcbPrivilege, SeImpersonatePrivilege) gán cho tài khoản người dùng "
      "ngay sau một đăng nhập mạng lạ hoặc sau dò mật khẩu.",

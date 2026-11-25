@@ -228,7 +228,9 @@ def funnel_section() -> list[str]:
     freeze = HERE / "prompt_freeze.json"
     if freeze.exists():
         f = json.loads(freeze.read_text(encoding="utf-8"))
-        md += [f"- Prompt khoá lúc {f.get('frozen_at', '?')}: SHA-256 `analyze.py` `{f.get('analyze_sha256', '?')}`, "
+        md += [f"- Prompt khoá lúc {f.get('frozen_at', '?')}"
+               + (f" (commit `{f['frozen_commit']}`, sha tính trên bản checkout Windows CRLF)" if f.get("frozen_commit") else "")
+               + f": SHA-256 `analyze.py` `{f.get('analyze_sha256', '?')}`, "
                f"prompt `{f.get('prompt_fingerprint', '?')}`"
                + (f", prompt đối chứng `{f['prompt_fingerprint_baseline']}`" if f.get("prompt_fingerprint_baseline") else "")
                + f"; Ollama {f.get('ollama_colab', '?')}, GPU {f.get('gpu', '?')}.", ""]

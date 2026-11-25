@@ -55,6 +55,18 @@ class FullLogReadTests(unittest.TestCase):
         self.assertEqual(1, len(events))
         self.assertNotIn("HostApplication", events[0]["data"])
 
+    def test_new_ids_only_from_their_channel(self):
+        """Kernel-PnP 400 (kênh System) trùng số với PowerShell 400 -> không được đọc thành 'PowerShell engine khởi động'."""
+        pnp = event_xml(400, "Microsoft-Windows-Kernel-PnP/Configuration", "<Data Name='DeviceInstanceId'>USB\\1</Data>")
+        group = "<Data Name='TargetUserName'>Administrators</Data>"
+        with case_with("system.xml", pnp, event_xml(4799, "System", group), SYSTEM_LOGON) as d:
+            self.assertEqual([4624], [e["event_id"] for e in read_events(Path(d))])  # ID cũ vẫn đọc như trước
+        with case_with("security.xml", event_xml(4799, "Security", group)) as d:
+            self.assertEqual(1, len(read_events(Path(d))))
+        op = event_xml(4103, "Microsoft-Windows-PowerShell/Operational", "<Data Name='Payload'>x</Data>")
+        with case_with("powershell.xml", op, event_xml(400, "Windows PowerShell", CLASSIC_400)) as d:
+            self.assertEqual([4103, 400], [e["event_id"] for e in read_events(Path(d))])
+
     def test_classic_400_enc_reaches_ai(self):
         """Luật không đọc HostApplication của 400 -> -enc phải tới được AI (không bị lọc, có trong nội dung gửi mô hình)."""
         with case_with("powershell.xml", event_xml(400, "Windows PowerShell", CLASSIC_400)) as d:
@@ -90,8 +102,16 @@ class FullLogNoiseTests(unittest.TestCase):
                          r"C:\Windows\System32\whoami.exe",
                          r"C:\Users\Public\svchost.exe"):
                 self.assertFalse(is_benign_noise(ev(eid, CallerProcessName=path)), (eid, path))
-            for path in (r"C:\Windows\System32\svchost.exe", r"C:\Windows\System32\LogonUI.exe"):
+            for path in (r"C:\Windows\System32\svchost.exe", r"C:\Windows\System32\LogonUI.exe",
+                         r"C:\Windows\SysWOW64\dllhost.exe", r"C:\Windows\explorer.exe"):
                 self.assertTrue(is_benign_noise(ev(eid, CallerProcessName=path)), (eid, path))
+
+    def test_service_name_in_writable_windows_folder_is_not_noise(self):
+        """Tên dịch vụ nhưng nằm trong thư mục người dùng ghi được (Temp, Tasks, Tracing...) -> không tin."""
+        for path in (r"C:\Windows\Temp\svchost.exe", r"C:\Windows\Tasks\svchost.exe",
+                     r"C:\Windows\Tracing\dllhost.exe", r"C:\Windows\System32\Tasks\svchost.exe",
+                     r"C:\Windows\Temp\explorer.exe"):
+            self.assertFalse(is_benign_noise(ev(4799, CallerProcessName=path)), path)
 
 
 BASE_PROMPT_HASHES = {
@@ -133,6 +153,13 @@ class FullLogPromptTests(unittest.TestCase):
         for eid in A.NEW_EVENT_IDS:
             self.assertIn(eid, A.EVENT_MEANING, eid)
             self.assertTrue(new_group(eid)[2], eid)
+
+    def test_lone_lolbin_group_enumeration_is_recon(self):
+        """net localgroup administrators đứng một mình vẫn là trinh sát; điều kiện 'đi cùng dấu hiệu khác' chỉ cho file lạ."""
+        sign, normal = next((s, n) for ids, s, n in A.EXTENDED_SIGNS if ids == {4798, 4799})
+        self.assertIn("kể cả khi đứng một mình", sign)
+        self.assertIn("net localgroup administrators", sign)
+        self.assertIn("chỉ do các tiến trình này gọi", normal)
 
     def test_guidance_has_no_app_names(self):
         text = " ".join(f"{s} {n}" for ids, s, n in A.EXTENDED_SIGNS if ids <= A.NEW_EVENT_IDS).lower()

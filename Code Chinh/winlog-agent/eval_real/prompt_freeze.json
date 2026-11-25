@@ -1,5 +1,6 @@
 {
  "frozen_at": "2026-11-25T05:16:01+00:00",
+ "frozen_commit": "e9e3c8b",
  "analyze_sha256": "97582d4c557fb035a53301cfecc29fcdf7b41106ab59aa2ce4cb1f7b19f75b6c",
  "prompt_fingerprint": "97393994e65506db2b79787c7aaf31606ed1c8873d364b80bfe2b6d41b9d8637",
  "prompt_fingerprint_baseline": "e196f062e8286e5ec3b54547c2d472b332dfa6f1827304d90d92e3005a553636",
