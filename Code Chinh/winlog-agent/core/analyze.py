@@ -237,7 +237,13 @@ def is_benign_noise(event: dict) -> bool:
         cmd = data.get("CommandLine", "").strip()
         # Chỉ tin tên tiến trình khi file nằm trong thư mục hệ thống; mã độc đặt tên dllhost.exe /
         # svchost.exe ở C:\Users\... (T1036 Masquerading) không được coi là nhiễu.
-        if not proc.startswith(("c:\\windows\\", "c:\\program files\\", "c:\\program files (x86)\\")):
+        # Ổ đĩa bất kỳ (Windows cài ở D: vẫn được tin); thư mục ai cũng ghi được (windows\temp...) thì không.
+        # Ngoại lệ: OneDrive updater cài theo từng người dùng trong AppData.
+        sys_path = re.match(r"[a-z]:\\(windows|program files|program files \(x86\))\\", proc) and not any(
+            d in proc for d in _WRITABLE_DIRS)
+        onedrive = (base_proc == "onedrivestandaloneupdater.exe" and "\\users\\" in proc
+                    and "\\appdata\\local\\microsoft\\onedrive\\" in proc)
+        if not (sys_path or onedrive):
             return False
 
         # Tiến trình telemetry / updater đã biết

@@ -1,636 +1,548 @@
-<!doctype html>
-<html lang="vi">
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WinLog SOC - Security Dashboard</title>
-<style>
-:root{
-  --bg:#181d25; --panel:rgba(40,47,59,.55); --panel2:#262d38; --line:rgba(255,255,255,.12); --text:#eef1f5; --mute:#a4adba; --chrome:rgba(22,27,35,.72); --bar:#8a9ab0;
-  --brand:#86a8cf; --ok:#3fb27f; --low:#8796ab; --med:#d9a93a; --high:#e8743b; --crit:#e5484d; --crit-bg:#c93439;
-  --mono:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;
-}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%;background:radial-gradient(900px 520px at 8% -8%,rgba(34,211,238,.16),transparent 62%),radial-gradient(800px 520px at 100% 0%,rgba(134,168,207,.16),transparent 60%),radial-gradient(900px 600px at 60% 110%,rgba(229,72,77,.07),transparent 60%),var(--bg);background-attachment:fixed;color:var(--text);font:15px/1.5 "Segoe UI",system-ui,sans-serif}
-button,input,select{font:inherit;color:inherit}
-a{color:var(--brand)}
-.app{display:grid;grid-template-columns:210px 1fr;grid-template-rows:56px 1fr;height:100vh}
-header{grid-column:1/3;display:flex;align-items:center;gap:16px;padding:0 18px;background:var(--chrome);border-bottom:1px solid var(--line);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);position:relative;z-index:5}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px}
-.logo i{width:26px;height:26px;border-radius:7px;background:var(--ai,#22d3ee);color:#03161c;display:grid;place-items:center;font-style:normal}
-.spacer{flex:1}
-.pill{display:inline-flex;align-items:center;gap:7px;padding:4px 11px;border:1px solid var(--line);border-radius:99px;background:var(--panel);font-size:13px;color:var(--mute)}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--crit)}
-.dot.on{background:var(--ok);box-shadow:0 0 0 3px #3fb27f33}
-.btn{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 11px;cursor:pointer}
-.btn:hover{border-color:var(--brand)}
-.btn.on{background:rgba(134,168,207,.16);border-color:rgba(134,168,207,.55)}
-nav{background:var(--chrome);border-right:1px solid var(--line);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);padding:14px 10px;display:flex;flex-direction:column;gap:3px}
-nav button{display:flex;align-items:center;gap:10px;background:none;border:0;border-radius:8px;padding:9px 12px;cursor:pointer;color:var(--mute);text-align:left}
-nav button:hover{background:var(--panel)}
-nav button.active{background:rgba(34,211,238,.13);color:#fff;box-shadow:inset 0 0 0 1px rgba(34,211,238,.28)}
-nav .badge{margin-left:auto;background:var(--crit-bg);color:#fff;border-radius:99px;padding:0 7px;font-size:12px;min-width:20px;text-align:center}
-nav .badge:empty,nav .badge[data-n="0"]{display:none}
-nav .sep{height:1px;background:var(--line);margin:10px 4px}
-main{overflow:auto;padding:18px 20px 40px}
-h2{margin:0 0 14px;font-size:20px}
-.view{display:none}.view.active{display:block}
-.grid{display:grid;gap:14px}
-.kpis{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:14px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 32px -14px rgba(0,0,0,.55)}
-.card h3{margin:0 0 10px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--mute)}
-.kpi .v{font-size:32px;font-weight:700;line-height:1.1}
-.kpi .s{color:var(--mute);font-size:13px;margin-top:4px}
-.kpi.crit{border-color:rgba(229,72,77,.5);background:linear-gradient(180deg,rgba(229,72,77,.22),var(--panel))}
-.kpi.crit .v{color:var(--crit)}
-.row2{grid-template-columns:2fr 1fr}
-.row3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:1100px){.row2,.row3{grid-template-columns:1fr}}
-@media(max-width:760px){.app{grid-template-columns:1fr}nav{display:none}}
-.bar{display:grid;grid-template-columns:minmax(90px,38%) 1fr 44px;gap:8px;align-items:center;margin:6px 0;font-size:13px}
-.bar .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bar .b{height:10px;background:#11151a;border-radius:5px;overflow:hidden}
-.bar .b>i{display:block;height:100%;background:var(--bar);border-radius:5px}
-.bar .n{text-align:right;color:var(--mute)}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th{position:sticky;top:0;background:var(--panel2);text-align:left;font-weight:600;color:var(--mute);padding:8px 10px;font-size:12.5px;text-transform:uppercase;letter-spacing:.4px;z-index:1;white-space:nowrap}
-td{padding:7px 10px;border-top:1px solid var(--line);vertical-align:top}
-tbody tr{cursor:pointer}
-tbody tr:hover{background:rgba(255,255,255,.05)}
-tr.fresh{animation:fresh 2.5s ease-out}
-@keyframes fresh{from{background:#2b3b4e}to{background:transparent}}
-.mono{font-family:var(--mono);font-size:13px}
-.sum{max-width:560px;word-break:break-word;color:#c4cad3}
-.lvl{display:inline-block;min-width:28px;text-align:center;border-radius:6px;padding:1px 6px;font-weight:700;font-size:13px;color:#0d1014}
-.l-low{background:var(--low)}.l-med{background:var(--med)}.l-high{background:var(--high)}.l-crit{background:var(--crit-bg);color:#fff}
-.tag{display:inline-block;border:1px solid var(--line);background:#11151a;border-radius:6px;padding:0 7px;font-size:13px;color:var(--mute);margin:0 4px 2px 0}
-.tag.alert{background:#3a1a1e;border-color:#7d2b33;color:#ffb3b8}
-.tag.ok{background:#13291f;border-color:#285c41;color:#a3e3c0}
-/* nguồn quyết định: LUẬT / AI / LUẬT + AI */
-.src{display:inline-flex;gap:2px;vertical-align:middle;margin-right:6px;font-size:13px;font-weight:700;letter-spacing:.4px;line-height:1.25;white-space:nowrap}
-.src span{padding:1px 7px;border:1.5px solid transparent}
-.src span:first-child{border-radius:6px 0 0 6px}.src span:last-child{border-radius:0 6px 6px 0}.src span:only-child{border-radius:6px}
-/* AI = khối màu đặc riêng; LUẬT = viền; AI không xác nhận = viền đứt, chữ mờ. Khác nhau cả hình lẫn màu */
-:root{--ai:#22d3ee}
-.src .a{background:var(--ai);border-color:var(--ai);color:#03161c}
-.src.lg .a{box-shadow:0 2px 12px -3px rgba(34,211,238,.6)}   /* chỉ badge lớn mới có quầng */
-.src .r{background:none;border-color:#94a3b8;color:#e2e8f0}
-.src .ax{background:none;border-color:#5d6675;border-style:dashed;color:#a7afbb;font-weight:600}
-.src.lg{font-size:15.5px}.src.lg span{padding:3px 10px}
-.src.none span{background:none;color:var(--mute);border:1px dashed var(--line);font-weight:500;letter-spacing:0}
-/* dải pipeline: VM -> server -> luật + Qwen -> kết luận */
-.pipe{margin-bottom:14px;padding:18px 20px;background:linear-gradient(135deg,rgba(34,211,238,.10),var(--panel) 55%)}
-.pipe .ttl{font-size:19px;font-weight:700;margin:0 0 4px}
-.pipe .sub{color:var(--mute);font-size:14px;max-width:70ch}
-.steps{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:st}
-.steps li{position:relative;padding:0 14px 0 0;counter-increment:st}
-.steps li::before{content:counter(st);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:var(--bg);color:var(--mute);font-weight:700;font-size:14px;position:relative;z-index:1;margin-bottom:8px}
-.steps li::after{content:"";position:absolute;top:13px;left:28px;right:0;height:2px;background:var(--line)}
-.steps li:last-child::after{display:none}
-.steps b{display:block;font-size:15px}
-.steps span{display:block;color:var(--mute);font-size:13px;margin-top:1px}
-.steps em{display:inline-block;font-style:normal;font-size:13px;font-weight:600;margin-top:6px;color:var(--mute)}
-.steps li.done::before{border-color:var(--ok);color:var(--ok)}
-.steps li.done::after{background:var(--ok)}
-.steps li.done em{color:#8fdcb2}
-.steps li.busy::before{border-color:var(--med);color:var(--med);animation:ring 1.4s ease-out infinite}
-.steps li.busy em{color:#f0c75e}
-@keyframes ring{0%{box-shadow:0 0 0 0 #d9a93a66}100%{box-shadow:0 0 0 9px #d9a93a00}}
-@media(max-width:760px){.steps{grid-template-columns:1fr 1fr;gap:16px 0}.steps li:nth-child(2)::after{display:none}}
-#v-overview.waiting .dataonly{display:none}
-/* lúc chờ: pipeline là trung tâm, chỉ còn nó và terminal */
-#v-overview.waiting .pipe{padding:28px 30px}
-#v-overview.waiting .pipe .ttl{font-size:26px}
-#v-overview.waiting .pipe .sub{font-size:15px}
-#v-overview.waiting .row2.tail{grid-template-columns:1fr}
-/* chế độ Lịch sử: pipeline (luôn là dữ liệu live) thu thành một dòng */
-.pipe.compact{padding:10px 16px}.pipe.compact .ttl{font-size:15px;margin:0;font-weight:600;color:var(--mute)}
-.pipe.compact .sub,.pipe.compact .steps{display:none}
-.chnote{color:var(--mute);font-size:13px;margin-top:6px}
-.kpi.crit.zero{border-color:var(--line);background:var(--panel);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 32px -14px rgba(0,0,0,.55)}.kpi.crit.zero .v{color:var(--text)}
-@media(prefers-reduced-motion:reduce){.steps li.busy::before,.banner{animation:none}}
-/* nguồn dữ liệu: live / lab trước đây / log thật / mô phỏng */
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--panel)}
-.seg button{background:none;border:0;padding:5px 12px;cursor:pointer;color:var(--mute)}
-.seg button+button{border-left:1px solid var(--line)}
-.seg button[aria-pressed="true"]{background:#dfe4ea;color:#101317;font-weight:600}
-.seg button:focus-visible{outline:2px solid var(--brand);outline-offset:-2px}
-.org{display:inline-block;font-size:12px;font-weight:600;border-radius:5px;padding:0 6px;margin-left:6px;vertical-align:1px;white-space:nowrap;border:1px solid}
-.org.live{color:#8fdcb2;border-color:#285c41;background:#13291f}
-.org.lab{color:#c4d6ec;border-color:#3d5675;background:#141d29}
-.org.real{color:#f0d08a;border-color:#6a5520;background:#2b2410}
-.org.sim{color:var(--mute);border-style:dashed;border-color:#56606f}
-.histnote{display:none;align-items:center;gap:10px;flex-wrap:wrap;border:1px dashed rgba(255,255,255,.22);border-radius:12px;padding:10px 14px;margin-bottom:14px;color:var(--mute);background:rgba(40,47,59,.35);font-size:14px}
-.histnote.show{display:flex}.histnote b{color:var(--text)}
-.srcbar{display:flex;gap:2px;height:6px;border-radius:3px;overflow:hidden;margin:8px 0 6px}
-.sb-a{background:var(--ai)}.sb-ra{background:rgba(34,211,238,.45)}.sb-r{background:#7f8896}.sb-n{background:#3d4653}
-.srcnums{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:13px;color:var(--mute)}.srcnums b{color:var(--text)}.srcnums b.c-ai{color:var(--ai)}
-.srclegend{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:center;font-size:13px;color:var(--mute)}
-.srclegend .src{font-size:11.5px;margin-right:6px;opacity:.9}
-#v-alerts .srclegend{flex-basis:100%;margin-top:2px}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.filters input,.filters select{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px;outline:0}
-.filters input{flex:1;min-width:220px}
-.filters input::placeholder{color:var(--mute)}
-.filters input:focus,.filters select:focus{border-color:var(--brand)}
-.tablewrap{max-height:calc(100vh - 210px);overflow:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%)}
-.alertcard{margin-bottom:12px}
-.alertcard.al{border-color:#5c2a2f}
-.alertcard.flash{animation:fresh 2s ease-out}
-.alertcard .hd{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
-.tag.unk{background:#2b2410;border-color:#6a5520;color:#f0d08a}
-.rep{font-size:13px;color:var(--mute);border:1px solid var(--line);border-radius:99px;padding:0 8px}
-/* ai nói gì / luật nói gì: mỗi bên một dòng */
-.lead{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:0;font-size:15.5px;line-height:1.5}
-.lead dt{padding-top:4px;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--mute);min-width:36px}
-.lead dt.a{color:var(--ai)}.lead dt.ax{color:#7f8896}
-.alertcard .hd{margin-bottom:2px}.alertcard .host{font-size:16px}
-.alertcard .when{color:var(--mute);font-size:13px;white-space:nowrap}
-.cardmeta{color:var(--mute);font-size:13px;margin-bottom:12px}
-.mitreline{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:10px;font-size:13px;color:var(--mute)}
-.mitreline b{font-family:var(--mono);color:var(--text);font-weight:700}
-.lead dd{margin:0;color:#c4cad3;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.lead dd.a{color:#f5f7fa;font-size:16.5px;font-weight:500}   /* nhận định của AI là dòng chính */
-.lead dd.ax{color:#a7afbb;font-style:italic}
-.lead .more{color:var(--mute);font-size:14px}
-.chips{margin-top:10px}
-.mitre{display:inline-flex;align-items:baseline;gap:6px;border:1px solid var(--line);background:#11151a;border-radius:6px;padding:1px 8px;font-size:13px;color:var(--mute);margin:0 6px 4px 0}
-.mitre b{font-family:var(--mono);color:var(--text);font-weight:700}
-.alertcard details{margin-top:8px;border-top:1px solid var(--line);padding-top:8px}
-.alertcard summary{cursor:pointer;color:var(--mute);font-size:14px;width:max-content;max-width:100%}
-.alertcard summary:hover{color:var(--text)}
-.alertcard summary:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:4px}
-.alertcard details ul{margin:8px 0 0;padding-left:20px;font-size:14px;color:#c4cad3}
-.alertcard details li{margin:3px 0}
-.alertcard .meta{margin-top:8px;font-size:13px;color:var(--mute)}
-.toast .msg{display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.term{background:rgba(9,11,15,.82);border:1px solid var(--line);border-radius:12px;font-family:var(--mono);font-size:13.5px;height:calc(100vh - 190px);overflow:auto;padding:10px 14px}
-.term.mini{height:260px}
-.term div{white-space:pre-wrap;word-break:break-word;padding:1px 0}
-.term .ts{color:#7f8896;margin-right:8px}
-.t-alert{color:#ff8b8f;font-weight:700}.t-warn{color:#e9b949}.t-ok{color:#74d39f}.t-info{color:#9cc3e6}.t-err{color:#ff9f9f}.t-dim{color:var(--mute)}
-.drawer{position:fixed;top:0;right:0;width:min(560px,100%);height:100%;background:rgba(24,29,37,.86);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);border-left:1px solid var(--line);transform:translateX(100%);transition:.2s;z-index:50;overflow:auto;padding:18px}
-.drawer.open{transform:none;box-shadow:-24px 0 60px -10px rgba(0,0,0,.6)}
-.drawer h3{margin:0 0 4px}
-.kv{display:grid;grid-template-columns:150px 1fr;gap:4px 12px;font-size:14px;margin-top:12px}
-.kv div:nth-child(odd){color:var(--mute)}
-.kv div:nth-child(even){font-family:var(--mono);font-size:13px;word-break:break-all}
-#toasts{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:10px;z-index:100;width:min(400px,calc(100% - 36px))}
-.toast{background:rgba(70,24,30,.72);border:1px solid rgba(229,72,77,.5);border-radius:12px;padding:12px 14px;backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);box-shadow:0 14px 36px -10px rgba(0,0,0,.6);animation:in .25s;cursor:pointer}
-.toast.ok{background:rgba(22,60,42,.72);border-color:rgba(63,178,127,.5)}
-.toast b{display:block;margin-bottom:3px}
-@keyframes in{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
-.banner{display:none;background:linear-gradient(100deg,rgba(229,72,77,.42),rgba(229,72,77,.14));border:1px solid rgba(229,72,77,.6);backdrop-filter:blur(16px) saturate(150%);-webkit-backdrop-filter:blur(16px) saturate(150%);box-shadow:0 16px 40px -16px rgba(229,72,77,.55);border-radius:12px;padding:16px 20px;margin-bottom:14px;align-items:flex-start;gap:16px;animation:pulse 1.6s 3}
-.bnmain{flex:1;min-width:0}
-.bnhd{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:18px;font-weight:700;margin-bottom:10px}
-.bnhd .src{margin:0}.bnhd .mitre{margin:0;background:#2a1215;border-color:#7d2b33;color:#f3c7ca}.bnhd .mitre b{color:#fff}
-.banner .lead dd{color:#f0d9db}.banner .lead dd.a{color:#fff}
-.bnact{display:flex;flex-direction:column;gap:8px}
-.bnopen{background:#fff;color:#45161b;border-color:#fff;font-weight:700}.bnopen:hover{border-color:#fff;background:#ffe6e7}
-@media(max-width:760px){.banner{flex-direction:column}.bnact{flex-direction:row}}
-.banner.show{display:flex}
-@keyframes pulse{50%{box-shadow:0 0 0 4px #e5484d55}}
-.empty{color:var(--mute);padding:26px;text-align:center}
-svg text{fill:var(--mute);font-size:12px}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--mute);margin-top:6px}
-.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WinLog SOC - Security Operations Center Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="app">
-  <header>
-    <div class="logo"><i><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.6-3 8.3-7 10-4-1.7-7-5.4-7-10V6z"/></svg></i><span>WinLog&nbsp;SOC</span></div>
-    <span class="pill"><span class="dot" id="conn"></span><span id="connTxt">Đang kết nối…</span></span>
-    <span class="pill" id="clock">--:--:--</span>
-    <div class="spacer"></div>
-    <div class="seg" role="group" aria-label="Dữ liệu hiển thị">
-      <button id="modeLive" aria-pressed="true" title="Chỉ dữ liệu client gửi lên từ khi server chạy">Live</button>
-      <button id="modeHist" aria-pressed="false" title="Thêm kết quả cũ trong results/: phiên lab trước, log thật, dữ liệu mô phỏng">Lịch sử</button>
+  <div class="app-container">
+    
+    <!-- ==================== LEFT SIDEBAR ==================== -->
+    <aside class="sidebar">
+      <!-- Brand Logo -->
+      <div class="brand-header">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>WinLog SOC</h1>
+          <span>Sentinel Guard L2</span>
+        </div>
+      </div>
+
+      <!-- Navigation Section: Menu -->
+      <div>
+        <div class="nav-group-title">Menu Quản Trị</div>
+        <ul class="nav-menu">
+          <li class="nav-item active" data-view="overview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span>Tổng quan SOC</span>
+          </li>
+          <li class="nav-item" data-view="alerts">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span>Cảnh báo an ninh</span>
+            <span class="nav-badge" id="alertsNavBadge" data-count="0"></span>
+          </li>
+          <li class="nav-item" data-view="events">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span>Sự kiện Windows</span>
+          </li>
+          <li class="nav-item" data-view="agents">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <span>Máy trạm (Endpoints)</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Navigation Section: Monitoring & Tools -->
+      <div>
+        <div class="nav-group-title">Giám Sát & Vận Hành</div>
+        <ul class="nav-menu">
+          <li class="nav-item" data-view="terminal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            <span>Terminal máy chủ</span>
+          </li>
+          <li class="nav-item" onclick="window.open('/docs', '_blank')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+            <span>API Docs (Swagger)</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Sidebar Bottom Card (DealDeck Pro Card Style) -->
+      <div class="sidebar-bottom-card">
+        <div class="soc-status-badge">
+          <span class="status-indicator-dot pulse" id="connStatusDot"></span>
+          <span id="connStatusText">Đang kết nối Server</span>
+        </div>
+        <div>
+          <div class="soc-status-title">Hệ Thống Phân Tích SOC</div>
+          <div class="soc-status-desc">Rule Engine + Local SLM (Qwen 2.5) đang hoạt động bảo vệ.</div>
+        </div>
+        <button class="btn-sidebar-action" onclick="window.location.reload()">
+          Làm Mới Trạng Thái
+        </button>
+      </div>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="main-content">
+      
+      <!-- Top App Header -->
+      <header class="top-header">
+        <div class="header-title-box">
+          <h2 id="headerTitle">Security Operations Center</h2>
+          <div class="header-date" id="currentDateDisplay">Đang tải ngày...</div>
+        </div>
+
+        <div class="header-actions">
+          <!-- Global Quick Search -->
+          <div class="search-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="globalSearchInput" placeholder="Tìm kiếm nhanh...">
+          </div>
+
+          <!-- Data Mode Switcher (Live vs Mock) -->
+          <div class="data-mode-toggle">
+            <button class="mode-btn active" id="btnModeLive">Live</button>
+            <button class="mode-btn" id="btnModeMock">Mock Data</button>
+          </div>
+
+          <!-- Theme Toggle (Light / Dark) -->
+          <button class="icon-btn" id="themeToggleBtn" title="Chuyển chế độ giao diện">
+            <!-- SVG Icon populated via JS -->
+          </button>
+
+          <!-- Admin Profile with Click-to-Edit -->
+          <div class="admin-profile-wrapper">
+            <div class="admin-profile" id="adminProfileBtn" title="Nhấp để chỉnh sửa tên & chức danh quản trị viên">
+              <div class="admin-avatar" id="adminAvatar">AD</div>
+              <div class="admin-info">
+                <div class="name">
+                  <span id="adminName">Admin SOC</span>
+                  <svg class="admin-edit-badge" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                  </svg>
+                </div>
+                <div class="role" id="adminRole">SecOps Lead</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Demo Mode Notification Banner -->
+      <div class="mode-demo-banner" id="modeDemoBanner">
+        <div class="banner-text">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <span><strong>Chế độ Mock Demo:</strong> Đang hiển thị bộ kịch bản dữ liệu mẫu (14 Alerts, 34.760 Events, 3 Endpoints) để kiểm tra giao diện. Bấm <strong>Live</strong> để quay lại kết nối máy chủ thực tế.</span>
+        </div>
+        <button class="select-pill" id="btnSwitchToLiveBanner" style="padding: 3px 10px; font-size:11.5px;">Quay lại Live</button>
+      </div>
+
+      <!-- ==================== TAB VIEW 1: OVERVIEW ==================== -->
+      <div class="tab-view active" id="view-overview">
+        <div class="overview-grid">
+          
+          <!-- Left Main Column: 4 KPI Cards + Main Bar Chart -->
+          <div class="overview-main-col">
+            
+            <!-- 2x2 Metric Cards (DealDeck Top Cards) -->
+            <div class="kpi-cards-grid">
+              
+              <!-- Card 1: Hero Primary Blue Card (Total Alerts) -->
+              <div class="card card-hero-primary">
+                <div class="kpi-header">
+                  <div class="kpi-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                      <line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                  </div>
+                  <span class="badge-trend" id="kpiBadgeAlerts" style="background: rgba(255,255,255,0.22); color:#ffffff;">
+                    +62% Chặn trùng
+                  </span>
+                </div>
+                <div class="kpi-label">Sự Cố An Ninh (Alerts)</div>
+                <div class="kpi-value" id="kpiTotalAlerts">14</div>
+                <div class="kpi-desc">Sự cố phát hiện qua MITRE ATT&CK</div>
+              </div>
+
+              <!-- Card 2: Total Events -->
+              <div class="card">
+                <div class="kpi-header">
+                  <div class="kpi-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line>
+                      <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                  </div>
+                  <span class="badge-trend positive" id="kpiBadgeEvents">+12.4%</span>
+                </div>
+                <div class="kpi-label">Tổng Sự Kiện Thu Thập</div>
+                <div class="kpi-value" id="kpiTotalEvents">34,760</div>
+                <div class="kpi-desc">Security, PowerShell, System Logs</div>
+              </div>
+
+              <!-- Card 3: Failed Logons (4625) -->
+              <div class="card">
+                <div class="kpi-header">
+                  <div class="kpi-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <span class="badge-trend negative" id="kpiBadgeFailedLogons">-2.08%</span>
+                </div>
+                <div class="kpi-label">Đăng Nhập Thất Bại (4625)</div>
+                <div class="kpi-value" id="kpiFailedLogons">28</div>
+                <div class="kpi-desc">Dấu hiệu Brute Force / Spraying</div>
+              </div>
+
+              <!-- Card 4: Endpoints Protected & Latency -->
+              <div class="card">
+                <div class="kpi-header">
+                  <div class="kpi-icon-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                  </div>
+                  <span class="badge-trend positive" id="kpiBadgeLatency">23.7s P95</span>
+                </div>
+                <div class="kpi-label">Máy Trạm & Độ Trễ Pipeline</div>
+                <div class="kpi-value" id="kpiActiveEndpoints">3 Online</div>
+                <div class="kpi-desc">Windows 10 Lab & Domain Controllers</div>
+              </div>
+
+            </div>
+
+            <!-- Main Dual Bar Chart (DealDeck Customer Habbits Chart) -->
+            <div class="card">
+              <div class="chart-card-header">
+                <div class="chart-card-title">
+                  <h3>Biểu Đồ Sự Kiện & Dấu Hiệu Tấn Công</h3>
+                  <p>Phân bố lưu lượng log bình thường và các điểm nghi vấn theo thời gian</p>
+                </div>
+                <div class="chart-filters">
+                  <select class="select-pill" id="barChartFilter">
+                    <option value="today">Hôm nay</option>
+                    <option value="week">7 ngày qua</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="chart-legend">
+                <div class="chart-legend-item">
+                  <span class="legend-dot" style="background:#cbd5e1;"></span>
+                  <span>Sự kiện bình thường</span>
+                </div>
+                <div class="chart-legend-item">
+                  <span class="legend-dot" style="background:#2563eb;"></span>
+                  <span>Dấu hiệu bất thường / Cảnh báo</span>
+                </div>
+              </div>
+
+              <div class="chart-svg-container" id="dualBarChart">
+                <!-- Injected via app.js -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Product Statistic (Concentric Ring Chart) + Endpoints List -->
+          <div class="overview-side-col">
+            
+            <!-- Concentric Ring Gauge Card (Product Statistic) -->
+            <div class="card">
+              <div class="chart-card-header" style="margin-bottom: 8px;">
+                <div class="chart-card-title">
+                  <h3>Phân Loại Sự Kiện</h3>
+                  <p>Tỷ trọng các nguồn log giám sát</p>
+                </div>
+                <span class="badge-trend positive" id="kpiBadgeCategory" style="font-size:11px;">+5.34%</span>
+              </div>
+
+              <!-- Concentric Rings Container -->
+              <div id="concentricRingChart">
+                <!-- Injected via app.js -->
+              </div>
+
+              <!-- Category breakdown list below chart -->
+              <div class="category-stats-list" id="categoryStatsList">
+                <div class="category-stat-row">
+                  <div class="category-stat-name">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline></svg>
+                    <span>Process Creation (4688)</span>
+                  </div>
+                  <div class="category-stat-value">
+                    <span id="catStat4688">2,487</span>
+                    <span class="badge-trend positive" id="catTrend4688" style="font-size:10.5px; padding:1px 6px;">+1.8%</span>
+                  </div>
+                </div>
+
+                <div class="category-stat-row">
+                  <div class="category-stat-name">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line></svg>
+                    <span>PowerShell (4104)</span>
+                  </div>
+                  <div class="category-stat-value">
+                    <span id="catStat4104">1,828</span>
+                    <span class="badge-trend positive" id="catTrend4104" style="font-size:10.5px; padding:1px 6px;">+2.3%</span>
+                  </div>
+                </div>
+
+                <div class="category-stat-row">
+                  <div class="category-stat-name">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"></rect></svg>
+                    <span>Logon / Auth (4624)</span>
+                  </div>
+                  <div class="category-stat-value">
+                    <span id="catStat4624">1,463</span>
+                    <span class="badge-trend negative" id="catTrend4624" style="font-size:10.5px; padding:1px 6px;">-1.04%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Monitored Endpoints Card (Customer Growth / Locations) -->
+            <div class="card">
+              <div class="chart-card-header" style="margin-bottom: 4px;">
+                <div class="chart-card-title">
+                  <h3>Máy Trạm Giám Sát</h3>
+                  <p>Trạng thái kết nối agent thời gian thực</p>
+                </div>
+              </div>
+
+              <div class="endpoints-list" id="overviewEndpointsList">
+                <!-- Injected via app.js -->
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Recent Incidents Table Below Overview -->
+        <div class="card data-table-card">
+          <div class="table-header-bar">
+            <div>
+              <h3 style="font-size:16px; font-weight:700;">Sự Cố Cần Xử Lý Gần Đây</h3>
+              <p style="font-size:12px; color:var(--text-muted);">Bấm vào dòng bất kỳ để mở rộng phân tích bằng chứng và chi tiết kỹ thuật</p>
+            </div>
+            <button class="select-pill" onclick="showView('alerts')">Xem tất cả sự cố →</button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="soc-table">
+              <thead>
+                <tr>
+                  <th>Thời gian</th>
+                  <th>Máy trạm</th>
+                  <th>Kỹ thuật MITRE</th>
+                  <th>Mức độ</th>
+                  <th>Dấu hiệu nhận diện</th>
+                </tr>
+              </thead>
+              <tbody id="overviewRecentIncidentsBody">
+                <!-- Injected via app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==================== TAB VIEW 2: ALERTS ==================== -->
+      <div class="tab-view" id="view-alerts">
+        <div class="card data-table-card">
+          <div class="table-header-bar">
+            <div>
+              <h3 style="font-size:18px; font-weight:700;">Danh Sách Cảnh Báo An Ninh</h3>
+              <p style="font-size:12.5px; color:var(--text-muted);">Các chuỗi hành vi tấn công được phát hiện bởi Rule Engine và Local AI</p>
+            </div>
+            <div class="table-filters">
+              <input type="text" class="filter-input" id="alertsSearchInput" placeholder="Tìm theo host, lý do, ID...">
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="soc-table">
+              <thead>
+                <tr>
+                  <th>Thời gian</th>
+                  <th>Máy trạm / IP</th>
+                  <th>Kỹ thuật MITRE</th>
+                  <th>Phán quyết</th>
+                  <th>Nguồn</th>
+                  <th>Mô tả dấu hiệu tấn công</th>
+                </tr>
+              </thead>
+              <tbody id="alertsTableBody">
+                <!-- Injected via app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== TAB VIEW 3: EVENTS EXPLORER ==================== -->
+      <div class="tab-view" id="view-events">
+        <div class="card data-table-card">
+          <div class="table-header-bar">
+            <div>
+              <h3 style="font-size:18px; font-weight:700;">Truy Vấn Sự Kiện Windows</h3>
+              <p style="font-size:12.5px; color:var(--text-muted);">Nhật ký Security, PowerShell, System thu thập từ các Windows Client</p>
+            </div>
+            <div class="table-filters">
+              <select class="filter-input" id="eventsChannelFilter">
+                <option value="">Tất cả kênh log</option>
+                <option value="Security">Security</option>
+                <option value="Microsoft-Windows-PowerShell/Operational">PowerShell</option>
+                <option value="System">System</option>
+              </select>
+              <input type="text" class="filter-input" id="eventsSearchInput" placeholder="Tìm kiếm Event ID, User, Lệnh...">
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="soc-table">
+              <thead>
+                <tr>
+                  <th>Thời gian</th>
+                  <th>Mức độ</th>
+                  <th>Event ID & Luật</th>
+                  <th>Host</th>
+                  <th>Tài khoản</th>
+                  <th>Tóm tắt sự kiện / Dòng lệnh</th>
+                </tr>
+              </thead>
+              <tbody id="eventsTableBody">
+                <!-- Injected via app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== TAB VIEW 4: AGENTS INVENTORY ==================== -->
+      <div class="tab-view" id="view-agents">
+        <div class="card data-table-card">
+          <div class="table-header-bar">
+            <div>
+              <h3 style="font-size:18px; font-weight:700;">Danh Sách Máy Trạm (Agent Inventory)</h3>
+              <p style="font-size:12.5px; color:var(--text-muted);">Trạng thái hoạt động của PowerShell Client Agent trên các endpoint</p>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="soc-table">
+              <thead>
+                <tr>
+                  <th>Trạng thái</th>
+                  <th>Địa chỉ IP</th>
+                  <th>Tên máy (Hostname)</th>
+                  <th>Tổng sự kiện</th>
+                  <th>Cảnh báo</th>
+                  <th>Phán quyết cuối</th>
+                  <th>Tín hiệu cuối</th>
+                </tr>
+              </thead>
+              <tbody id="agentsTableBody">
+                <!-- Injected via app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== TAB VIEW 5: TERMINAL ==================== -->
+      <div class="tab-view" id="view-terminal">
+        <div class="card data-table-card">
+          <div class="table-header-bar">
+            <div>
+              <h3 style="font-size:18px; font-weight:700;">Terminal Máy Chủ Realtime</h3>
+              <p style="font-size:12.5px; color:var(--text-muted);">Dòng log thực thi đầu ra của uvicorn và tiến trình phân tích</p>
+            </div>
+            <div class="table-filters">
+              <input type="text" class="filter-input" id="terminalFilter" placeholder="Lọc dòng terminal...">
+              <button class="select-pill" id="terminalClearBtn">Xóa màn hình</button>
+            </div>
+          </div>
+
+          <div class="terminal-window" id="terminalWindow">
+            <!-- Injected via app.js -->
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ==================== SLIDE-OUT DETAIL DRAWER ==================== -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="inspector-drawer" id="inspectorDrawer">
+    <div id="drawerContent">
+      <!-- Injected dynamically via app.js when clicking row -->
     </div>
-    <button class="btn on" id="soundBtn" title="Âm thanh cảnh báo">🔔 Âm thanh</button>
-  </header>
+  </aside>
 
-  <nav>
-    <button data-v="overview" class="active">📊 Tổng quan</button>
-    <button data-v="alerts">🚨 Cảnh báo <span class="badge" id="bAlerts" data-n="0"></span></button>
-    <button data-v="events">📜 Sự kiện</button>
-    <button data-v="agents">💻 Agents</button>
-    <div class="sep"></div>
-    <button data-v="terminal">⌨️ Terminal server</button>
-    <div class="sep"></div>
-    <button onclick="location.href='/docs'">📘 API Docs</button>
-  </nav>
+  <!-- ==================== PROFILE EDIT MODAL ==================== -->
+  <div class="profile-modal-backdrop" id="profileModalBackdrop">
+    <div class="profile-modal-card">
+      <div class="modal-header">
+        <h3>Chỉnh Sửa Hồ Sơ Quản Trị Viên</h3>
+        <button class="modal-close-btn" id="btnCancelProfileModal">✕</button>
+      </div>
 
-  <main>
-    <div class="banner" id="banner" role="alert">
-      <div class="bnmain"><div class="bnhd" id="bnTitle"></div><div id="bnBody"></div></div>
-      <div class="bnact"><button class="btn bnopen" id="bnOpen">Xem chi tiết</button><button class="btn" id="bnClose">Đã xem</button></div>
+      <div class="form-field">
+        <label>Tên Quản Trị Viên / Trực Ca</label>
+        <input type="text" id="inputAdminName" placeholder="Ví dụ: Nhan Huỳnh Lâm, Admin SOC...">
+      </div>
+
+      <div class="form-field">
+        <label>Chức Danh / Vai Trò</label>
+        <input type="text" id="inputAdminRole" placeholder="Ví dụ: SecOps Lead, Chuyên viên SOC L2...">
+      </div>
+
+      <div class="quick-names-section">
+        <span class="quick-names-label">Gợi ý nhanh thành viên dự án:</span>
+        <div class="chips-row">
+          <span class="quick-chip" data-name="Nhan Huỳnh Lâm" data-role="SecOps Lead">Nhan Huỳnh Lâm</span>
+          <span class="quick-chip" data-name="Trần Minh Thắng" data-role="SecOps Analyst">Trần Minh Thắng</span>
+          <span class="quick-chip" data-name="Admin SOC" data-role="System Administrator">Admin SOC</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-secondary" id="btnCancelProfile">Hủy</button>
+        <button class="btn-primary" id="btnSaveProfile">Lưu Thay Đổi</button>
+      </div>
     </div>
+  </div>
 
-    <div class="histnote" id="histNote" aria-live="polite"></div>
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
 
-    <!-- OVERVIEW -->
-    <section class="view active" id="v-overview">
-      <h2>Tổng quan an ninh</h2>
-      <div class="card pipe" aria-live="polite">
-        <p class="ttl" id="pipeTitle">Đang chờ agent trên máy ảo</p>
-        <div class="sub" id="pipeSub"></div>
-        <ol class="steps">
-          <li id="st-agent"><b>Agent trên VM Win10</b><span>client_agent.ps1 gửi log mỗi 5 giây</span><em></em></li>
-          <li id="st-ingest"><b>Server nhận log</b><span>FastAPI /ingest qua HTTPS</span><em></em></li>
-          <li id="st-analyze"><b>Luật MITRE + Qwen</b><span>mô hình 3B chạy cục bộ</span><em></em></li>
-          <li id="st-verdict"><b>Kết luận</b><span>ALERT lên web và Telegram</span><em></em></li>
-        </ol>
-      </div>
-      <div class="grid kpis dataonly">
-        <div class="card kpi"><h3>Tổng sự kiện</h3><div class="v" id="kEvents">0</div><div class="s" id="kEventsS"></div></div>
-        <div class="card kpi crit"><h3>Cảnh báo (ALERT)</h3><div class="v" id="kAlerts">0</div><div class="s" id="kAlertsS"></div></div>
-        <div class="card kpi"><h3>Đăng nhập thất bại</h3><div class="v" id="kFail">0</div><div class="s">Event 4625</div></div>
-        <div class="card kpi"><h3>Nghiêm trọng (≥ 12)</h3><div class="v" id="kCrit">0</div><div class="s">theo luật phát hiện</div></div>
-        <div class="card kpi"><h3>Agents hoạt động</h3><div class="v" id="kAgents">0</div><div class="s" id="kAgentsS"></div></div>
-      </div>
-      <div class="grid row2 dataonly" style="margin-bottom:14px">
-        <div class="card"><h3>Sự kiện theo thời gian</h3><div id="chTime"></div><div class="chnote" id="chTimeNote"></div>
-          <div class="legend"><span><i style="background:var(--low)"></i>Thấp</span><span><i style="background:var(--med)"></i>Trung bình</span><span><i style="background:var(--high)"></i>Cao</span><span><i style="background:var(--crit)"></i>Nghiêm trọng</span></div></div>
-        <div class="card"><h3>Phân bố mức độ</h3><div id="chSev"></div></div>
-      </div>
-      <div class="grid row3 dataonly" style="margin-bottom:14px">
-        <div class="card"><h3>Top Event ID</h3><div id="topEid"></div></div>
-        <div class="card"><h3>Top người dùng</h3><div id="topUser"></div></div>
-        <div class="card"><h3>Top IP nguồn</h3><div id="topIp"></div></div>
-      </div>
-      <div class="grid row2 tail">
-        <div class="card dataonly"><h3>Cảnh báo gần nhất</h3><div class="srclegend" data-legend style="margin-bottom:12px"></div><div id="recentAlerts"></div></div>
-        <div class="card"><h3>Terminal server (trực tiếp) <span style="text-transform:none;letter-spacing:0;font-weight:400">· ẩn request của chính dashboard</span></h3><div class="term mini" id="termMini"></div></div>
-      </div>
-    </section>
-
-    <!-- ALERTS -->
-    <section class="view" id="v-alerts">
-      <h2>Kết quả phân tích: luật MITRE + AI cục bộ</h2>
-      <div class="filters">
-        <select id="aFilter"><option value="">Tất cả kết luận</option><option value="ALERT" selected>Chỉ ALERT</option><option value="NORMAL">Chỉ NORMAL</option><option value="UNKNOWN">Chỉ UNKNOWN</option></select>
-        <select id="sFilter"><option value="">Mọi nguồn quyết định</option><option value="ai">Chỉ AI</option><option value="rule+ai">Luật + AI</option><option value="rule">Chỉ luật</option></select>
-        <div class="srclegend" data-legend></div>
-      </div>
-      <div id="alertList"></div>
-    </section>
-
-    <!-- EVENTS -->
-    <section class="view" id="v-events">
-      <h2>Sự kiện Windows</h2>
-      <div class="filters">
-        <input id="fText" placeholder="Tìm kiếm: user, IP, command line, Event ID, host…">
-        <select id="fLevel"><option value="0">Mọi mức độ</option><option value="12">≥ 12 Nghiêm trọng</option><option value="8">≥ 8 Cao</option><option value="5">≥ 5 Trung bình</option></select>
-        <select id="fChan"><option value="">Mọi channel</option></select>
-        <select id="fAgent"><option value="">Mọi agent</option></select>
-        <span class="pill" id="fCount"></span>
-      </div>
-      <div class="tablewrap"><table><thead><tr><th>Thời gian</th><th>Mức</th><th>Event</th><th>Host</th><th>Người dùng</th><th>Mô tả</th></tr></thead><tbody id="evBody"></tbody></table></div>
-    </section>
-
-    <!-- AGENTS -->
-    <section class="view" id="v-agents">
-      <h2 id="agTitle">Agents (Windows client)</h2>
-      <div class="tablewrap"><table><thead><tr><th>Trạng thái</th><th>Client ID</th><th>Hostname</th><th>Sự kiện</th><th>Cảnh báo</th><th>Kết luận gần nhất</th><th>Tín hiệu cuối</th></tr></thead><tbody id="agBody"></tbody></table></div>
-    </section>
-
-    <!-- TERMINAL -->
-    <section class="view" id="v-terminal">
-      <h2>Terminal server <span class="pill" style="font-size:13px;vertical-align:middle">giống hệt output của cửa sổ run_server.bat</span></h2>
-      <div class="filters">
-        <input id="tFilter" placeholder="Lọc dòng terminal…">
-        <button class="btn on" id="tScroll">Tự cuộn</button>
-        <button class="btn" id="tClear">Xoá màn hình</button>
-      </div>
-      <div class="term" id="term"></div>
-    </section>
-  </main>
-</div>
-
-<aside class="drawer" id="drawer"></aside>
-<div id="toasts"></div>
-
-<script>
-"use strict";
-const S={events:[],analyses:[],agents:[],terminal:[],totals:{events:0,alerts:0,analyses:0},liveOnly:true,sound:true,seq:-1,fresh:new Set()};
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const lvlCls=l=>l>=12?"crit":l>=8?"high":l>=5?"med":"low";
-const lvlCol=c=>({crit:"var(--crit)",high:"var(--high)",med:"var(--med)",low:"var(--low)"}[c]);
-const fmtT=iso=>{const d=new Date(iso);return isNaN(d)?esc(iso):d.toLocaleString("vi-VN",{hour12:false,day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit"})};
-const fmtHM=ms=>new Date(ms).toLocaleTimeString("vi-VN",{hour12:false,hour:"2-digit",minute:"2-digit"});
-// mỗi phần: [class, chữ ở cỡ nhỏ, chữ ở cỡ lớn]
-const SRC={ai:[["a","AI"]],"rule+ai":[["r","LUẬT"],["a","AI"]],rule:[["r","LUẬT"],["ax","AI ✗","AI không xác nhận"]]};
-const SRC_TIP={ai:"Chỉ AI: AI quyết định, luật không có dấu hiệu chắc chắn","rule+ai":"Luật + AI: luật mạnh và AI cùng kết luận",rule:"Chỉ luật: luật mạnh phát hiện, AI không xác nhận nhưng vẫn cảnh báo"};
-const SRC_TXT={ai:"AI","rule+ai":"LUẬT + AI",rule:"LUẬT, AI không xác nhận"};
-const srcTxt=a=>SRC_TXT[a.source]||"?";
-function srcBadge(a,lg){
-  const p=SRC[a.source];
-  if(!p)return`<span class="src none" title="Kết quả cũ, chưa lưu nguồn quyết định"><span>${a.source==="error"?"lỗi phân tích":"chưa ghi nguồn"}</span></span>`;
-  return`<span class="src${lg?" lg":""}" title="${SRC_TIP[a.source]}" aria-label="Nguồn quyết định: ${srcTxt(a)}">${p.map(([c,t,tl])=>`<span class="${c}">${lg&&tl?tl:t}</span>`).join("")}</span>`;
-}
-// nói "ai quyết định", đúng cho cả ALERT lẫn NORMAL/UNKNOWN (NORMAL luôn do AI quyết)
-const legendHTML=()=>[["ai","AI quyết định"],["rule+ai","luật và AI cùng kết luận"],["rule","luật bắt, AI không xác nhận"]]
-  .map(([k,t])=>`<span>${srcBadge({source:k},false)}${t}</span>`).join("");
-$$("[data-legend]").forEach(el=>el.innerHTML=legendHTML());
-/* tách reason của analyze.py: "- ..." = dấu hiệu từ luật, "Nhận định của AI: ..." = phần của AI */
-function parseReason(r){
-  const o={rules:[],ai:"",rest:""},rest=[];
-  for(const raw of String(r||"").split("\n")){const l=raw.trim();if(!l)continue;let m;
-    if(l.startsWith("- "))o.rules.push(l.slice(2));
-    else if((m=l.match(/^Nhận định (?:chuyên sâu )?của AI[^:]*:\s*(.*)$/)))o.ai=m[1];
-    else if(!/^(Bộ luật tương quan ghi nhận|Phát hiện chuỗi hành vi tấn công):?$/.test(l))rest.push(l)}
-  o.rest=rest.join(" ");return o;
-}
-const noEvid=s=>s.replace(/\s*Bằng chứng:[^.]*\.?\s*$/,"").trim();
-const leadText=a=>{const p=parseReason(a.reason);return p.ai||(p.rules[0]&&noEvid(p.rules[0]))||p.rest||""};
-function parseStage(s){s=typeof s==="string"?s:JSON.stringify(s);const m=s.match(/^(.*?)\s*\(MITRE\s+([^)]+)\)\s*$/);return m?{name:m[1],ids:m[2].split(/\s*\/\s*/)}:{name:s,ids:[]}}
-const mitreChip=s=>{const p=parseStage(s);return p.ids.length?`<span class="mitre"><b>${esc(p.ids.join(" · "))}</b>${esc(p.name)}</span>`:`<span class="tag">${esc(p.name)}</span>`};
-const fmtSec=s=>s==null||isNaN(+s)?"":+s<60?`${(+s).toFixed(1).replace(".",",")} giây`:`${Math.floor(+s/60)} phút ${Math.round(+s%60)} giây`;
-const lblCls=l=>l==="ALERT"?"alert":l==="UNKNOWN"?"unk":"ok";
-/* nguồn dữ liệu, suy từ tên ca trong results/ (agent của dữ liệu lịch sử = tên thư mục ca) */
-const ORG={live:["live","Client đang gửi lên trong phiên này"],lab:["lab trước đây","Phiên lab VM cũ, lưu trong results/client_*_live"],
-  real:["log thật","Log tấn công thật từ mẫu công khai DeepBlueCLI / EVTX-to-MITRE (eval_real)"],
-  bench:["mô phỏng","Benchmark 600 ca, log sinh tự động (data_benchmark)"],gen:["mô phỏng","Log tự sinh để phát triển (data/, data01)"]};
-function origin(x){const id=String(x.agent??x.client_id??"");
-  if(x.live)return"live";if(/^client_.*_live$/.test(id))return"lab";if(/^(dbc|e2m)_/.test(id))return"real";if(/^case_b\d_/.test(id))return"bench";return"gen"}
-const orgTag=(x,always)=>{if(S.liveOnly&&!always)return"";const o=origin(x),[t,tip]=ORG[o];return`<span class="org ${o==="bench"||o==="gen"?"sim":o}" title="${tip}">${t}</span>`};
-function renderHistNote(){
-  const n=$("#histNote");if(S.liveOnly){n.classList.remove("show");return}
-  const c={live:0,lab:0,real:0,sim:0};for(const a of S.analyses){const o=origin(a);c[o==="bench"||o==="gen"?"sim":o]++}
-  n.innerHTML=`<b>Đang xem lịch sử.</b><span>${S.analyses.length} kết luận gần nhất: ${c.live} live · ${c.lab} lab trước đây · ${c.real} log thật · ${c.sim} mô phỏng.</span><span>Đây chỉ là một phần kết quả các lần chạy trước, không phải số liệu đánh giá. Độ chính xác xem trong báo cáo, kèm tập dữ liệu và cỡ mẫu.</span>`;
-  n.classList.add("show");
-}
-const ago=iso=>{const s=(Date.now()-new Date(iso))/1000;if(s<5)return"vừa xong";if(s<60)return Math.floor(s)+" giây trước";if(s<3600)return Math.floor(s/60)+" phút trước";if(s<86400)return Math.floor(s/3600)+" giờ trước";return Math.floor(s/86400)+" ngày trước"};
-
-/* ---------- views ---------- */
-$$("nav button[data-v]").forEach(b=>b.onclick=()=>showView(b.dataset.v));
-function showView(v){
-  $$("nav button[data-v]").forEach(b=>b.classList.toggle("active",b.dataset.v===v));
-  $$(".view").forEach(s=>s.classList.toggle("active",s.id==="v-"+v));
-  S.view=v; dirty(); if(v==="terminal")scrollTerm(true);
-}
-S.view="overview";
-function setMode(live){S.liveOnly=live;$("#modeLive").setAttribute("aria-pressed",live);$("#modeHist").setAttribute("aria-pressed",!live);S.alertHtml=null;dirty()}
-$("#modeLive").onclick=()=>setMode(true);$("#modeHist").onclick=()=>setMode(false);
-$("#soundBtn").onclick=e=>{S.sound=!S.sound;e.currentTarget.classList.toggle("on",S.sound)};
-$("#bnClose").onclick=()=>$("#banner").classList.remove("show");
-// mở đúng thẻ của cảnh báo trên banner, bung sẵn phần chi tiết
-$("#bnOpen").onclick=()=>{
-  const id=S.bannerId;$("#banner").classList.remove("show");
-  setMode(true);$("#aFilter").value="ALERT";$("#sFilter").value="";S.openCards.add(id);S.alertHtml=null;showView("alerts");render();
-  const c=[...document.querySelectorAll("[data-card]")].find(x=>x.dataset.card===id);
-  if(c){c.scrollIntoView({block:"center"});c.classList.add("flash");setTimeout(()=>c.classList.remove("flash"),2000)}
-};
-setInterval(()=>$("#clock").textContent=new Date().toLocaleString("vi-VN",{hour12:false}),1000);
-
-/* ---------- data helpers ---------- */
-const evs=()=>S.liveOnly?S.events.filter(e=>e.live):S.events;
-const ans=()=>S.liveOnly?S.analyses.filter(a=>a.live):S.analyses;
-function topN(arr,key,n=6){const m=new Map();for(const e of arr){const k=key(e);if(!k)continue;m.set(k,(m.get(k)||0)+1)}return[...m].sort((a,b)=>b[1]-a[1]).slice(0,n)}
-function bars(el,rows,color){
-  if(!rows.length){el.innerHTML='<div class="empty">Chưa có dữ liệu</div>';return}
-  const max=rows[0][1];
-  el.innerHTML=rows.map(([k,v])=>`<div class="bar"><div class="t" title="${esc(k)}">${esc(k)}</div><div class="b"><i style="width:${v/max*100}%;${color?`background:${color}`:""}"></i></div><div class="n">${v}</div></div>`).join("");
-}
-
-/* ---------- charts ---------- */
-function timeChart(list){
-  const el=$("#chTime");
-  if(!list.length){el.innerHTML='<div class="empty">Chưa có sự kiện</div>';return}
-  const ts=list.map(e=>+new Date(e.ts)).filter(x=>!isNaN(x));
-  let min=Math.min(...ts),max=Math.max(...ts); if(max-min<60000){min=max-60000}
-  // khoảng thời gian dài hơn 1 ngày thì nhãn trục phải có ngày, không chỉ HH:MM
-  const ax=ms=>max-min>=365*864e5?new Date(ms).toLocaleDateString("vi-VN",{day:"2-digit",month:"2-digit",year:"numeric"})
-    :max-min>=864e5?new Date(ms).toLocaleString("vi-VN",{hour12:false,day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):fmtHM(ms);
-  const N=36,w=(max-min)/N||1,bk=Array.from({length:N},()=>({low:0,med:0,high:0,crit:0}));
-  for(const e of list){const t=+new Date(e.ts);if(isNaN(t))continue;const i=Math.min(N-1,Math.floor((t-min)/w));bk[i][lvlCls(e.level)]++}
-  const mx=Math.max(1,...bk.map(b=>b.low+b.med+b.high+b.crit));
-  const W=760,H=210,L=34,B=24,T=8,bw=(W-L)/N;
-  let g="";
-  for(let i=0;i<=4;i++){const y=T+(H-T-B)*i/4;g+=`<line x1="${L}" x2="${W}" y1="${y}" y2="${y}" stroke="#3d4653" stroke-dasharray="3 4"/><text x="${L-6}" y="${y+4}" text-anchor="end">${Math.round(mx*(1-i/4))}</text>`}
-  bk.forEach((b,i)=>{let y=H-B;for(const c of["low","med","high","crit"]){const h=(H-T-B)*b[c]/mx;if(!h)continue;y-=h;g+=`<rect x="${L+i*bw+1.5}" y="${y}" width="${bw-3}" height="${h}" rx="2" fill="${lvlCol(c)}"><title>${ax(min+i*w)} · ${c}: ${b[c]}</title></rect>`}});
-  for(let i=0;i<=5;i++){const x=L+(W-L)*i/5;g+=`<text x="${x}" y="${H-6}" text-anchor="${i==0?"start":i==5?"end":"middle"}">${ax(min+(max-min)*i/5)}</text>`}
-  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%">${g}</svg>`;
-}
-function donut(list){
-  const el=$("#chSev"),c={low:0,med:0,high:0,crit:0};list.forEach(e=>c[lvlCls(e.level)]++);
-  const tot=list.length;if(!tot){el.innerHTML='<div class="empty">Chưa có dữ liệu</div>';return}
-  const names={crit:"Nghiêm trọng (12+)",high:"Cao (8-11)",med:"Trung bình (5-7)",low:"Thấp (0-4)"};
-  let a=-Math.PI/2,paths="";const R=70,r=46,cx=90,cy=90;
-  for(const k of["crit","high","med","low"]){if(!c[k])continue;const f=c[k]/tot,b=a+f*2*Math.PI-(f===1?.0001:0);
-    const p=(ang,rad)=>[cx+rad*Math.cos(ang),cy+rad*Math.sin(ang)],lg=f>.5?1:0;
-    const[x1,y1]=p(a,R),[x2,y2]=p(b,R),[x3,y3]=p(b,r),[x4,y4]=p(a,r);
-    paths+=`<path d="M${x1} ${y1}A${R} ${R} 0 ${lg} 1 ${x2} ${y2}L${x3} ${y3}A${r} ${r} 0 ${lg} 0 ${x4} ${y4}Z" fill="${lvlCol(k)}"><title>${names[k]}: ${c[k]}</title></path>`;a=b}
-  el.innerHTML=`<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><svg viewBox="0 0 180 180" width="170">${paths}<text x="90" y="88" text-anchor="middle" style="fill:var(--text);font-size:24px;font-weight:700">${tot}</text><text x="90" y="106" text-anchor="middle">sự kiện</text></svg>
-  <div style="flex:1;min-width:130px">${["crit","high","med","low"].map(k=>`<div class="bar" style="grid-template-columns:12px 1fr 36px"><i style="width:10px;height:10px;border-radius:3px;background:${lvlCol(k)}"></i><div class="t">${names[k]}</div><div class="n">${c[k]}</div></div>`).join("")}</div></div>`;
-}
-
-/* ---------- renders ---------- */
-function renderOverview(){
-  const E=evs(),A=ans(),ag=S.agents.filter(a=>!S.liveOnly||a.live);
-  const alerts=A.filter(a=>a.label==="ALERT"),act=ag.filter(a=>a.status==="active");
-  $("#kEvents").textContent=E.length.toLocaleString();
-  // lịch sử: tách số theo nguồn để không cộng chung log thật với mô phỏng
-  const byOrg=L=>{const c={live:0,lab:0,real:0,sim:0};for(const x of L){const o=origin(x);c[o==="bench"||o==="gen"?"sim":o]++}
-    return[["real","log thật"],["sim","mô phỏng"],["lab","lab trước đây"],["live","live"]].filter(([k])=>c[k]).map(([k,t])=>`${c[k].toLocaleString()} ${t}`).join(" · ")};
-  $("#kEventsS").textContent=S.liveOnly?`${S.totals.events} nhận từ khi server chạy`:byOrg(E);
-  $("#kAlerts").textContent=alerts.length;$("#kAlerts").parentElement.classList.toggle("zero",!alerts.length);
-  $("#v-overview").classList.toggle("waiting",!E.length);
-  const by=k=>alerts.filter(a=>a.source===k).length,noSrc=alerts.filter(a=>!SRC[a.source]).length;
-  // một thanh tỉ lệ + một dòng số, thay cho 3 badge (đỡ rối trong ô nhỏ)
-  const segs=[["a",by("ai")],["ra",by("rule+ai")],["r",by("rule")],["n",noSrc]];
-  $("#kAlertsS").innerHTML=alerts.length?`<div class="srcbar" aria-hidden="true">${segs.map(([c,v])=>v?`<i class="sb-${c}" style="flex:${v}"></i>`:"").join("")}</div>
-    <div class="srcnums"><span><b class="c-ai">${by("ai")}</b> AI</span><span><b>${by("rule+ai")}</b> luật + AI</span><span><b>${by("rule")}</b> chỉ luật</span>${noSrc?`<span><b>${noSrc}</b> chưa ghi</span>`:""}</div>${S.liveOnly?"":`<div style="margin-top:4px">${byOrg(alerts)}</div>`}`
-    :A.length?`${A.length} lượt phân tích, chưa có ALERT`:"chưa có phân tích";
-  $("#kFail").textContent=E.filter(e=>e.event_id===4625).length;
-  $("#kCrit").textContent=E.filter(e=>e.level>=12).length;
-  $("#kAgents").textContent=act.length;
-  const liveAg=ag.filter(a=>a.live).length;
-  $("#kAgentsS").textContent=S.liveOnly?`${ag.length} agent đã đăng ký`:`${liveAg} agent live · ${ag.length-liveAg} ca dữ liệu lịch sử`;
-  timeChart(E);donut(E);
-  // log mẫu công khai giữ giờ gốc (có ca từ 2013) nên trục thời gian lịch sử kéo dài nhiều năm
-  const yrs=E.map(e=>new Date(e.ts).getFullYear()).filter(y=>!isNaN(y)),y0=yrs.length?Math.min(...yrs):0;
-  $("#chTimeNote").textContent=!S.liveOnly&&y0&&y0<new Date().getFullYear()?`Theo thời điểm gốc ghi trong log, không phải lúc hệ thống nhận. Log mẫu công khai có từ năm ${y0} nên trục kéo dài nhiều năm.`:"";
-  bars($("#topEid"),topN(E,e=>`${e.event_id} · ${e.title}`));
-  bars($("#topUser"),topN(E,e=>e.user));
-  bars($("#topIp"),topN(E,e=>e.ip));
-  const seen=new Set(),ra=[...A].reverse().filter(a=>{const k=a.host+"|"+a.reason;if(a.label!=="ALERT"||seen.has(k))return false;seen.add(k);return true}).slice(0,4);
-  $("#recentAlerts").innerHTML=ra.length?ra.map(a=>`<div style="margin-bottom:14px">${srcBadge(a)}<b>${esc(a.host)}</b>${orgTag(a)} <span style="color:var(--mute)">· ${ago(a.ts)}</span><div class="msg" style="font-size:14px;margin-top:4px;color:#d2d7de;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${esc(leadText(a))}</div>${(a.stages||[]).filter(s=>parseStage(s).ids.length).length?`<div class="mitreline" style="margin-top:4px">${mitreIds(a).map(p=>`<span><b>${esc(p.ids.join(" · "))}</b></span>`).join("")}</div>`:""}</div>`).join(""):`<div class="empty">${A.length?"Chưa phát hiện tấn công trong các lượt phân tích":"Chưa có cảnh báo. Kết luận đầu tiên sẽ hiện ở đây."}</div>`;
-  renderPipe();
-  // terminal nhỏ bỏ log truy cập của chính trang này (uvicorn in "INFO:" và dòng request thành 2 dòng)
-  const own=/"(GET|HEAD) \/(\s|(api\/(state|stream)|dashboard|favicon\.ico|docs|openapi\.json)\b)/;
-  const mini=$("#termMini");mini.innerHTML=S.terminal.filter(t=>!own.test(t.line)&&t.line.trim()!=="INFO:").slice(-60).map(termLine).join("");mini.scrollTop=mini.scrollHeight;
-  $("#bAlerts").textContent=alerts.length;$("#bAlerts").dataset.n=alerts.length;
-}
-/* dải pipeline: luôn phản ánh dữ liệu live, kể cả khi đang xem lịch sử */
-function renderPipe(){
-  const E=S.events.filter(e=>e.live),A=S.analyses.filter(a=>a.live),alerts=A.filter(a=>a.label==="ALERT");
-  const agents=S.agents.filter(a=>a.live),act=agents.filter(a=>a.status==="active");
-  const lastEv=E.reduce((m,e)=>e.recv>m?e.recv:m,""),lastAn=A.reduce((m,a)=>a.ts>m?a.ts:m,"");
-  // server lưu sự kiện ngay trước khi phân tích, lưu kết luận ngay sau -> có sự kiện mới hơn kết luận = đang phân tích
-  const busy=lastEv&&lastEv>lastAn&&Date.now()-new Date(lastEv)<15*60e3;
-  const st=(id,cls,txt)=>{const li=$("#st-"+id);li.className=cls;li.querySelector("em").textContent=txt};
-  st("agent",act.length?"done":"",act.length?`${act.length} agent đang gửi`:agents.length?"agent mất tín hiệu":"chưa kết nối");
-  st("ingest",E.length?"done":"",E.length?`${E.length.toLocaleString()} sự kiện · ${ago(lastEv)}`:"chưa có sự kiện");
-  st("analyze",busy?"busy":A.length?"done":"",busy?`đang phân tích · ${ago(lastEv)}`:A.length?`${A.length} lượt phân tích`:"chờ lô đầu tiên");
-  st("verdict",alerts.length?"done":A.length?"done":"",alerts.length?`${alerts.length} ALERT · mới nhất ${ago(alerts[alerts.length-1].ts)}`:A.length?"chưa có ALERT":"chưa có kết luận");
-  const [t,s]=busy?["Qwen đang phân tích lô sự kiện mới…","Bộ luật MITRE chạy trước, sau đó mô hình kiểm tra lại. Một lô thường mất từ vài giây đến vài phút."]
-    :alerts.length?[`Đang giám sát · ${alerts.length} cảnh báo trong phiên này`,"Mỗi cảnh báo ghi rõ nguồn quyết định: AI, LUẬT + AI hoặc LUẬT."]
-    :A.length?["Đang giám sát · chưa phát hiện tấn công","Các lô đã phân tích đều được kết luận NORMAL hoặc UNKNOWN."]
-    :E.length?["Đã nhận log, chờ lô đầu tiên được phân tích",""]
-    :act.length?["Agent đã kết nối, đang chờ sự kiện mới","Thực hiện thao tác trên VM để sinh log. Agent quét Security, PowerShell và System mỗi 5 giây."]
-    :["Đang chờ agent trên máy ảo","Chạy client_agent.ps1 trên VM Win10. Sự kiện đầu tiên sẽ hiện ở đây sau vài giây."];
-  $(".pipe").classList.toggle("compact",!S.liveOnly);
-  $("#pipeTitle").textContent=S.liveOnly?t:`Live (không tính lịch sử): ${t.charAt(0).toLowerCase()+t.slice(1)}`;$("#pipeSub").textContent=s;$("#pipeSub").hidden=!s;
-}
-function renderAlerts(){
-  const f=$("#aFilter").value,sf=$("#sFilter").value;let A=[...ans()].reverse();if(f)A=A.filter(a=>a.label===f);if(sf)A=A.filter(a=>a.source===sf);
-  // gộp các kết luận giống hệt nhau liền kề (cùng host, nhãn, nguồn, lý do)
-  const G=[];for(const a of A){const k=[a.host,a.label,a.source,a.reason].join("|"),g=G[G.length-1];if(g&&g.k===k){g.n++;g.first=a}else G.push({k,a,first:a,n:1})}
-  const html=G.length?G.slice(0,200).map(alertCard).join("")+(G.length>200?`<div class="empty">Chỉ hiện 200 nhóm mới nhất trên tổng ${G.length}.</div>`:""):'<div class="empty card">Chưa có kết quả phân tích nào.</div>';
-  if(html!==S.alertHtml){S.alertHtml=html;$("#alertList").innerHTML=html}  // tránh vẽ lại khi không đổi
-}
-S.openCards=new Set();
-$("#alertList").addEventListener("toggle",e=>{const d=e.target;if(d.dataset.id)S.openCards[d.open?"add":"delete"](d.dataset.id)},true);
-/* dòng AI + dòng LUẬT: dùng chung cho thẻ cảnh báo và banner */
-function proofRows(a){
-  const p=parseReason(a.reason),rules=p.rules.map(noEvid),rows=[];
-  if(p.ai)rows.push(["a","AI",esc(p.ai)]);
-  else if(a.source==="rule"&&a.label==="ALERT")rows.push(["ax","AI ✗","Không xác nhận. Vẫn cảnh báo vì luật phát hiện dấu hiệu chắc chắn."]);
-  if(rules.length)rows.push(["r","LUẬT",esc(rules[0])+(rules.length>1?` <span class="more">+${rules.length-1} dấu hiệu khác</span>`:"")]);
-  if(!rows.length)rows.push(["","",esc(p.rest||"(không có mô tả)")]);
-  // nhãn dòng là chữ có màu, không đóng khung: badge lớn trên đầu thẻ đã đủ
-  return`<dl class="lead">${rows.map(([c,k,v])=>k?`<dt class="${c}">${k}</dt><dd class="${c}">${v}</dd>`:`<dd style="grid-column:1/-1">${v}</dd>`).join("")}</dl>`;
-}
-const mitreIds=a=>(a.stages||[]).map(parseStage).filter(s=>s.ids.length);
-function alertCard({a,first,n}){
-  const p=parseReason(a.reason),rules=p.rules.map(noEvid);
-  const evid=[...new Set(a.evidence||[])],hasMore=p.rules.length>1||evid.length||(p.ai&&p.ai.length>180)||(rules[0]||"").length>160;
-  const t0=fmtHM(+new Date(first.ts)),t1=fmtHM(+new Date(a.ts));
-  const when=n>1&&t0!==t1?`${t0}–${t1} · ${ago(a.ts)}`:`${fmtT(a.ts)} · ${ago(a.ts)}`;
-  return`<div class="card alertcard ${a.label==="ALERT"?"al":""}" data-card="${esc(a.id)}">
-  <div class="hd">${srcBadge(a,true)}${a.label!=="ALERT"?`<span class="tag ${lblCls(a.label)}">${esc(a.label)}</span>`:""}<b class="host">${esc(a.host)}</b><span class="spacer"></span><span class="when">${when}</span></div>
-  <div class="cardmeta">${esc(a.agent)}${orgTag(a)}${n>1?`<span title="Cùng kết luận và lý do, liền nhau"> · lặp lại ${n} lần</span>`:""}</div>
-  ${proofRows(a)}
-  ${mitreIds(a).length?`<div class="mitreline">${mitreIds(a).map(s=>`<span><b>${esc(s.ids.join(" · "))}</b> ${esc(s.name)}</span>`).join("")}</div>`:""}
-  ${hasMore?`<details data-id="${esc(a.id)}"${S.openCards.has(a.id)?" open":""}><summary>Xem đầy đủ${p.rules.length?` · ${p.rules.length} dấu hiệu từ luật`:""}${evid.length?` · ${evid.length} sự kiện bằng chứng`:""}</summary>
-    ${p.ai?`<p style="margin:8px 0 0;font-size:14px;color:#c4cad3"><b>AI:</b> ${esc(p.ai)}</p>`:""}
-    ${p.rules.length?`<ul>${p.rules.map(r=>`<li>${esc(r)}</li>`).join("")}</ul>`:""}
-    ${(a.stages||[]).map(parseStage).filter(s=>!s.ids.length).length?`<div class="meta">Giai đoạn: ${esc((a.stages||[]).map(parseStage).filter(s=>!s.ids.length).map(s=>s.name).join(", "))}</div>`:""}
-    ${evid.length?`<div class="meta">Mã sự kiện trong lô phân tích: <span class="mono">${esc(evid.join(", "))}</span></div>`:""}</details>`:""}
-  <div class="meta">${[a.model&&`mô hình ${esc(a.model)}`,fmtSec(a.elapsed)&&`phân tích mất ${fmtSec(a.elapsed)}`,a.status&&a.status!=="OK"&&esc(a.status)].filter(Boolean).join(" · ")}</div>
-</div>`;
-}
-function renderEvents(){
-  const q=$("#fText").value.trim().toLowerCase(),lv=+$("#fLevel").value,ch=$("#fChan").value,ag=$("#fAgent").value;
-  const all=evs();
-  fillSel($("#fChan"),[...new Set(all.map(e=>e.channel))].filter(Boolean));
-  fillSel($("#fAgent"),[...new Set(all.map(e=>e.agent))]);
-  let L=all.filter(e=>e.level>=lv&&(!ch||e.channel===ch)&&(!ag||e.agent===ag)&&(!q||(e.event_id+" "+e.title+" "+e.rule+" "+e.host+" "+e.user+" "+e.ip+" "+e.summary).toLowerCase().includes(q)));
-  L=L.sort((a,b)=>b.ts<a.ts?-1:b.ts>a.ts?1:0);
-  $("#fCount").textContent=L.length>400?`Hiện 400 mới nhất / ${L.length} khớp lọc · ${all.length} sự kiện`:`${L.length} / ${all.length} sự kiện`;
-  $("#evBody").innerHTML=L.slice(0,400).map(e=>`<tr data-id="${esc(e.id)}" class="${S.fresh.has(e.id)?"fresh":""}"><td class="mono" style="white-space:nowrap">${fmtT(e.ts)}</td><td><span class="lvl l-${lvlCls(e.level)}">${e.level}</span></td><td><b>${e.event_id}</b><div style="color:var(--mute);font-size:13px">${esc(e.rule)}</div></td><td>${esc(e.host)}${orgTag(e)}</td><td>${esc(e.user)}${e.ip?`<div class="mono" style="color:var(--mute)">${esc(e.ip)}</div>`:""}</td><td class="sum mono">${esc(e.summary)}</td></tr>`).join("")||'<tr><td colspan="6" class="empty">Không có sự kiện phù hợp</td></tr>';
-  S.fresh.clear();
-}
-function fillSel(sel,vals){const cur=sel.value,first=sel.options[0].outerHTML;const h=first+vals.map(v=>`<option ${v===cur?"selected":""}>${esc(v)}</option>`).join("");if(sel.dataset.h!==h){sel.innerHTML=h;sel.dataset.h=h;sel.value=cur}}
-function renderAgents(){
-  const ag=S.agents.filter(a=>!S.liveOnly||a.live);
-  $("#agTitle").textContent=S.liveOnly?"Agents (Windows client)":"Agents và ca dữ liệu lịch sử";
-  // đếm trên đúng dữ liệu đang hiển thị (server chỉ đếm live nên agent lịch sử luôn ra 0)
-  const nE={},nA={};for(const e of evs())nE[e.agent]=(nE[e.agent]||0)+1;for(const x of ans())if(x.label==="ALERT")nA[x.agent]=(nA[x.agent]||0)+1;
-  $("#agBody").innerHTML=ag.map(a=>({...a,events:nE[a.client_id]||0,alerts:nA[a.client_id]||0})).map(a=>`<tr style="cursor:default"><td style="white-space:nowrap">${a.live?`<span class="dot ${a.status==="active"?"on":""}" style="display:inline-block"></span> ${a.status==="active"?"Active":"Disconnected"}`:`<span style="color:var(--mute)">Lịch sử</span>`}</td><td class="mono">${esc(a.client_id)}${orgTag(a)}</td><td>${esc(a.hostname)}</td><td>${a.events}</td><td>${a.alerts?`<span class="tag alert">${a.alerts}</span>`:0}</td><td>${a.last_verdict?`<span class="tag ${lblCls(a.last_verdict)}">${esc(a.last_verdict)}</span>`:"-"}</td><td style="white-space:nowrap">${a.live?ago(a.last_seen):"—"}</td></tr>`).join("")||'<tr><td colspan="7" class="empty">Chưa có agent nào kết nối</td></tr>';
-}
-/* terminal */
-function termLine(t){
-  const l=t.line;let c="t-dim";
-  if(/PHAT HIEN TAN CONG|ALERT/.test(l))c="t-alert";
-  else if(/\[x\]|Loi|Error|Traceback|\b(5\d\d|4\d\d)\b.*(HTTP|")/i.test(l)&&!/ 200 /.test(l))c="t-err";
-  else if(/\[!\]/.test(l))c="t-warn";
-  else if(/\[(OK|✓)\]|NORMAL/.test(l))c="t-ok";
-  else if(/\[\+\]|\[\*\]|\[-\]|--->|->/.test(l))c="t-info";
-  return`<div class="${c}"><span class="ts">${new Date(t.ts).toLocaleTimeString("vi-VN",{hour12:false})}</span>${esc(l)}</div>`;
-}
-let tAuto=true;
-$("#tScroll").onclick=e=>{tAuto=!tAuto;e.currentTarget.classList.toggle("on",tAuto)};
-$("#tClear").onclick=()=>{S.terminal=[];dirty()};
-$("#tFilter").oninput=()=>renderTerminal();
-function renderTerminal(){
-  const f=$("#tFilter").value.toLowerCase(),el=$("#term");
-  el.innerHTML=S.terminal.filter(t=>!f||t.line.toLowerCase().includes(f)).slice(-800).map(termLine).join("");
-  if(tAuto)el.scrollTop=el.scrollHeight;
-}
-function scrollTerm(){const el=$("#term");el.scrollTop=el.scrollHeight}
-
-let pending=false;
-function dirty(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;render()})}
-function render(){
-  renderOverview(); // cập nhật badge + KPI luôn
-  renderHistNote();
-  if(S.view==="alerts")renderAlerts();
-  if(S.view==="events")renderEvents();
-  if(S.view==="agents")renderAgents();
-  if(S.view==="terminal")renderTerminal();
-}
-["#fText","#fLevel","#fChan","#fAgent","#aFilter","#sFilter"].forEach(s=>$(s).addEventListener("input",dirty));
-setInterval(()=>{if(S.view==="agents"||S.view==="overview")dirty()},15000); // cập nhật "x giây trước"
-
-/* detail drawer */
-$("#evBody").addEventListener("click",e=>{const tr=e.target.closest("tr[data-id]");if(!tr)return;const ev=S.events.find(x=>x.id===tr.dataset.id);if(ev)openDrawer(ev)});
-function openDrawer(e){
-  $("#drawer").innerHTML=`<button class="btn" onclick="closeDrawer()" style="float:right">✕ Đóng</button><h3>Event ${e.event_id} · ${esc(e.title)}</h3><span class="lvl l-${lvlCls(e.level)}">level ${e.level}</span> <span class="tag">${esc(e.rule)}</span>${orgTag(e,true)}
-  <div class="kv"><div>Thời gian</div><div>${esc(e.ts)}</div><div>Host</div><div>${esc(e.host)}</div><div>Agent</div><div>${esc(e.agent)}</div><div>Channel</div><div>${esc(e.channel)}</div><div>User</div><div>${esc(e.user||"-")}</div><div>IP</div><div>${esc(e.ip||"-")}</div></div>
-  <h3 style="margin-top:18px;font-size:14px;color:var(--mute)">DỮ LIỆU GỐC (EventData)</h3><div class="kv">${Object.entries(e.data).map(([k,v])=>`<div>${esc(k)}</div><div>${esc(v)}</div>`).join("")}</div>`;
-  $("#drawer").classList.add("open");
-}
-function closeDrawer(){$("#drawer").classList.remove("open")}
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
-
-/* ---------- alerts: toast / sound / notification ---------- */
-let actx;
-function beep(){if(!S.sound)return;try{actx=actx||new AudioContext();[0,.22,.44].forEach(t=>{const o=actx.createOscillator(),g=actx.createGain();o.type="square";o.frequency.value=t===.22?660:880;g.gain.value=.05;o.connect(g);g.connect(actx.destination);o.start(actx.currentTime+t);o.stop(actx.currentTime+t+.15)})}catch(e){}}
-function toast(a){
-  const d=document.createElement("div"),al=a.label==="ALERT";d.className="toast"+(al?"":" ok");
-  d.innerHTML=`<b>${srcBadge(a)}${al?"🚨 PHÁT HIỆN TẤN CÔNG":"✅ Phân tích hoàn tất: NORMAL"} — ${esc(a.host)}</b><div class="msg" style="font-size:14px">${esc(leadText(a))}</div>`;
-  d.onclick=()=>{d.remove();showView(al?"alerts":"overview")};
-  $("#toasts").appendChild(d);setTimeout(()=>d.remove(),al?15000:5000);
-}
-function onAnalysis(a){
-  S.analyses.push(a);if(S.analyses.length>500)S.analyses.shift();
-  if(!a.live)return;S.totals.analyses++;
-  if(a.label==="ALERT"){
-    // banner là chỗ duy nhất báo ALERT (không thêm toast trùng): nguồn, host, MITRE, dòng AI + dòng luật
-    S.totals.alerts++;beep();S.bannerId=a.id;
-    $("#bnTitle").innerHTML=`${srcBadge(a,true)}<span>ALERT · ${esc(a.host)}</span>${mitreIds(a).map(s=>`<span class="mitre"><b>${esc(s.ids.join(" · "))}</b>${esc(s.name)}</span>`).join("")}`;
-    $("#bnBody").innerHTML=proofRows(a);
-    const bn=$("#banner");bn.classList.remove("show");void bn.offsetWidth;bn.classList.add("show"); // chạy lại 3 nhịp cho cảnh báo mới
-    document.title="🚨 (ALERT) WinLog SOC";
-    try{if(Notification.permission==="granted")new Notification(`WinLog SOC — ALERT [${srcTxt(a)}]: ${a.host}`,{body:a.reason})}catch(e){}
-  }else if(a.status!=="SKIPPED_BENIGN")toast(a);
-}
-window.addEventListener("focus",()=>{document.title="WinLog SOC - Security Dashboard"});
-// chỉ xin quyền thông báo sau lần bấm đầu tiên, tránh hộp thoại bật lên giữa buổi demo
-document.addEventListener("pointerdown",()=>{try{if("Notification" in window&&Notification.permission==="default")Notification.requestPermission()}catch(e){}},{once:true});
-
-/* ---------- connect ---------- */
-function setConn(ok){$("#conn").classList.toggle("on",ok);$("#connTxt").textContent=ok?"Đã kết nối server":"Mất kết nối — đang thử lại…"}
-async function load(){
-  const r=await fetch("/api/state");const d=await r.json();
-  Object.assign(S,{events:d.events,analyses:d.analyses,agents:d.agents,terminal:d.terminal,totals:d.totals,seq:d.seq});
-  dirty();
-}
-function connect(){
-  const es=new EventSource("/api/stream?since="+S.seq);
-  es.onopen=()=>setConn(true);
-  es.onerror=()=>{setConn(false);es.close();setTimeout(async()=>{try{await load()}catch(e){}connect()},2000)};
-  const upd=m=>{if(m.lastEventId)S.seq=+m.lastEventId};
-  es.addEventListener("term",m=>{upd(m);S.terminal.push(JSON.parse(m.data));if(S.terminal.length>1500)S.terminal.shift();dirty()});
-  es.addEventListener("event",m=>{upd(m);const e=JSON.parse(m.data);S.events.push(e);S.fresh.add(e.id);S.totals.events++;if(S.events.length>5000)S.events.shift();dirty()});
-  es.addEventListener("analysis",m=>{upd(m);onAnalysis(JSON.parse(m.data));dirty()});
-  es.addEventListener("agent",m=>{upd(m);S.agents=JSON.parse(m.data);dirty()});
-}
-load().then(connect).catch(()=>{setConn(false);setTimeout(()=>location.reload(),3000)});
-</script>
+  <!-- Scripts -->
+  <script src="js/mock-data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

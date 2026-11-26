@@ -1,0 +1,3 @@
+﻿Lô (Batch),Số sự kiện,Thời gian sự kiện,Sự kiện đầu,Sự kiện cuối,Kết luận AI,Độ tin cậy (%),Kỹ thuật MITRE ATT&CK,Mã bằng chứng,Lập luận chi tiết của AI,Thời gian xử lý (giây)
+1,7,2026-11-12 12:59:29 AM -> 2026-11-12 1:00:07 AM,E00001,E00007,NORMAL,0,,E00001; E00002; E00003; E00004; E00005; E00006; E00007,"Dữ liệu chỉ chứa hoạt động bình thường, không có dấu hiệu tấn công.",2.11
+2,3,2026-11-12 1:00:07 AM -> 2026-11-12 1:00:07 AM,E00008,E00010,NORMAL,0,,E00008; E00009; E00010,"Dữ liệu chỉ bao gồm các sự kiện 600 từ PowerShell, không có dấu hiệu của bất kỳ hành vi nguy hiểm nào.",5.23

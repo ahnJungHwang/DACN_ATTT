@@ -490,6 +490,13 @@ def install(app: FastAPI):
 
         loop.set_exception_handler(handler)
 
+    from fastapi.staticfiles import StaticFiles
+    if (WEB_DIR / "css").exists():
+        app.mount("/css", StaticFiles(directory=str(WEB_DIR / "css")), name="css")
+    if (WEB_DIR / "js").exists():
+        app.mount("/js", StaticFiles(directory=str(WEB_DIR / "js")), name="js")
+    app.mount("/static", StaticFiles(directory=str(WEB_DIR)), name="static")
+
     @app.get("/dashboard", include_in_schema=False)
     def dashboard():
         f = WEB_DIR / "index.html"

@@ -1,0 +1,41 @@
+{
+  "scan_time": "2026-11-26T07:23:43.212998+00:00",
+  "model": "llama3.2:3b-instruct-q4_K_M",
+  "source_file": "H:\\Nam 4\\DACN\\Demo\\Code Chinh\\winlog-agent\\Windows Log\\NHAN-LAM-LAPTOP_20261124_193235\\Key_Events.csv",
+  "total_events_scanned": 10,
+  "total_batches_processed": 2,
+  "total_alerts": 0,
+  "elapsed_seconds": 24.01,
+  "batches": [
+    {
+      "batch": 1,
+      "event_count": 7,
+      "first_ref": "E00001",
+      "last_ref": "E00007",
+      "time_range": "2026-11-12 12:59:29 AM -> 2026-11-12 1:00:07 AM",
+      "elapsed": 15.41,
+      "verdict": {
+        "detected_stages": [],
+        "evidence_refs": [],
+        "reason": "Không có dấu hiệu tấn công nào trong dữ liệu.",
+        "label": "UNKNOWN",
+        "limitations": []
+      }
+    },
+    {
+      "batch": 2,
+      "event_count": 3,
+      "first_ref": "E00008",
+      "last_ref": "E00010",
+      "time_range": "2026-11-12 1:00:07 AM -> 2026-11-12 1:00:07 AM",
+      "elapsed": 8.6,
+      "verdict": {
+        "detected_stages": [],
+        "evidence_refs": [],
+        "reason": "Không có dấu hiệu tấn công nào trong dữ liệu",
+        "label": "UNKNOWN",
+        "limitations": []
+      }
+    }
+  ]
+}

@@ -52,3 +52,10 @@ client_agent.pid
 
 # Công cụ + dữ liệu EVTX bên thứ ba (DeepBlueCLI, EVTX-ATTACK-SAMPLES, evtx-baseline; ~1,8GB, GPL-3.0)
 tools_rule_baseline/
+
+# File zip và scratch tạm
+*.zip
+scratch/
+
+# Bản sao dataset trong Windows Log (đã có ở data/, data100/, dataset/)
+Windows Log/Dataset_*/

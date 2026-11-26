@@ -1,0 +1,56 @@
+{
+  "scan_time": "2026-11-26T07:41:40.185246+00:00",
+  "model": "qwen2.5:3b-instruct-q4_K_M",
+  "source_file": "H:\\Nam 4\\DACN\\Demo\\Code Chinh\\winlog-agent\\Windows Log\\NHAN-LAM-LAPTOP_20261124_193235\\Key_Events.csv",
+  "total_events_scanned": 10,
+  "total_batches_processed": 2,
+  "total_alerts": 0,
+  "elapsed_seconds": 7.34,
+  "batches": [
+    {
+      "batch": 1,
+      "event_count": 7,
+      "first_ref": "E00001",
+      "last_ref": "E00007",
+      "time_range": "2026-11-12 12:59:29 AM -> 2026-11-12 1:00:07 AM",
+      "elapsed": 2.11,
+      "verdict": {
+        "detected_stages": [],
+        "evidence_refs": [
+          "E00001",
+          "E00002",
+          "E00003",
+          "E00004",
+          "E00005",
+          "E00006",
+          "E00007"
+        ],
+        "reason": "Dữ liệu chỉ chứa hoạt động bình thường, không có dấu hiệu tấn công.",
+        "label": "NORMAL",
+        "limitations": []
+      }
+    },
+    {
+      "batch": 2,
+      "event_count": 3,
+      "first_ref": "E00008",
+      "last_ref": "E00010",
+      "time_range": "2026-11-12 1:00:07 AM -> 2026-11-12 1:00:07 AM",
+      "elapsed": 5.23,
+      "verdict": {
+        "detected_stages": [],
+        "evidence_refs": [
+          "E00008",
+          "E00009",
+          "E00010"
+        ],
+        "reason": "Dữ liệu chỉ bao gồm các sự kiện 600 từ PowerShell, không có dấu hiệu của bất kỳ hành vi nguy hiểm nào.",
+        "label": "NORMAL",
+        "limitations": [
+          "Không có hành vi nguy hiểm được phát hiện trong dữ liệu.",
+          "Không có dấu hiệu của việc sử dụng PowerShell để thực hiện các tác vụ nguy hiểm."
+        ]
+      }
+    }
+  ]
+}
