@@ -1,0 +1,1407 @@
+﻿Lô (Batch),Số sự kiện,Thời gian sự kiện,Sự kiện đầu,Sự kiện cuối,Kết luận AI,Độ tin cậy (%),Kỹ thuật MITRE ATT&CK,Mã bằng chứng,Lập luận chi tiết của AI,Thời gian xử lý (giây)
+1,7, -> ,E00001,E00007,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,121.22
+2,4, -> ,E00008,E00011,NORMAL,0,Windows 10; Windows 10 Pro; Windows 10 Enterprise; Windows 10 Home; Windows 10 IoT; Windows 10 IoT Enterprise,,The detected stages are based on the Windows 10 operating system version and edition. The evidence references are used to identify the specific Windows 10 version and edition that was used to create the event log data. The reason for this detection is to provide a more accurate understanding of the Windows 10 operating system version and edition that was used to create the event log data.,5.84
+3,8, -> ,E00012,E00019,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.23
+4,5, -> ,E00020,E00024,UNKNOWN,0,Windows 10; Windows 10 Pro; Windows 10 Enterprise; Windows 10 Home; Windows 10 IoT; Windows 10 IoT Enterprise,,"The detected stages are based on the Windows 10 operating system versions. The evidence references are related to the Windows 10 operating system versions. The reason for the detection is that the Windows 10 operating system versions are detected based on the evidence references. The detected stages are Windows 10, Windows 10 Pro, Windows 10 Enterprise, Windows 10 Home, Windows 10 IoT, and Windows 10 IoT Enterprise. The evidence references are E00001, E00002, E00003, E00004, E00005, and E00006. The reason for the detection is that the Windows 10 operating system versions are detected based on the evidence references.",7.24
+5,4, -> ,E00025,E00028,NORMAL,0,PowerShell,E00027; E00028,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),3.95
+6,13, -> ,E00029,E00041,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.02
+7,24, -> ,E00042,E00065,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+8,17, -> ,E00066,E00082,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.15
+9,17, -> ,E00083,E00099,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.11
+10,29, -> ,E00100,E00128,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.67
+11,33, -> ,E00129,E00161,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+12,32, -> ,E00162,E00193,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.71
+13,27, -> ,E00194,E00220,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+14,20, -> ,E00221,E00240,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+15,25, -> ,E00241,E00265,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.14
+16,24, -> ,E00266,E00289,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.16
+17,20, -> ,E00290,E00309,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.17
+18,24, -> ,E00310,E00333,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+19,26, -> ,E00334,E00359,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.19
+20,26, -> ,E00360,E00385,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.11
+21,24, -> ,E00386,E00409,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+22,14, -> ,E00410,E00423,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.64
+23,7, -> ,E00424,E00430,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu cung cấp.,3.67
+24,7, -> ,E00431,E00437,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.59
+25,7, -> ,E00438,E00444,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.63
+26,7, -> ,E00445,E00451,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.61
+27,7, -> ,E00452,E00458,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu cung cấp.,3.79
+28,7, -> ,E00459,E00465,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.75
+29,7, -> ,E00466,E00472,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.71
+30,7, -> ,E00473,E00479,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.7
+31,19, -> ,E00480,E00498,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.14
+32,27, -> ,E00499,E00525,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+33,22, -> ,E00526,E00547,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+34,4, -> ,E00548,E00551,NORMAL,0,Started; Running; Completed,E00550; E00551,The system is running normally.,3.94
+35,3, -> ,E00552,E00554,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu,5.09
+36,13, -> ,E00555,E00567,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu,4.61
+37,25, -> ,E00568,E00592,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.26
+38,25, -> ,E00593,E00617,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.17
+39,15, -> ,E00618,E00632,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.91
+40,24, -> ,E00633,E00656,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.14
+41,24, -> ,E00657,E00680,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.16
+42,19, -> ,E00681,E00699,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+43,8, -> ,E00700,E00707,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.62
+44,7, -> ,E00708,E00714,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.64
+45,7, -> ,E00715,E00721,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.65
+46,7, -> ,E00722,E00728,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.55
+47,7, -> ,E00729,E00735,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.75
+48,7, -> ,E00736,E00742,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.55
+49,7, -> ,E00743,E00749,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.94
+50,7, -> ,E00750,E00756,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.6
+51,8, -> ,E00757,E00764,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.02
+52,13, -> ,E00765,E00777,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.22
+53,14, -> ,E00778,E00791,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+54,17, -> ,E00792,E00808,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.19
+55,14, -> ,E00809,E00822,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hoạt động tấn công.,4.17
+56,17, -> ,E00823,E00839,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.25
+57,17, -> ,E00840,E00856,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.1
+58,16, -> ,E00857,E00872,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.01
+59,16, -> ,E00873,E00888,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.91
+60,15, -> ,E00889,E00903,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.97
+61,14, -> ,E00904,E00917,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.05
+62,13, -> ,E00918,E00930,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.87
+63,13, -> ,E00931,E00943,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.01
+64,12, -> ,E00944,E00955,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.91
+65,16, -> ,E00956,E00971,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.18
+66,16, -> ,E00972,E00987,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.09
+67,17, -> ,E00988,E01004,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.23
+68,17, -> ,E01005,E01021,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.99
+69,16, -> ,E01022,E01037,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.99
+70,15, -> ,E01038,E01052,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.23
+71,14, -> ,E01053,E01066,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.0
+72,12, -> ,E01067,E01078,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.94
+73,13, -> ,E01079,E01091,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.89
+74,17, -> ,E01092,E01108,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.23
+75,20, -> ,E01109,E01128,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.13
+76,26, -> ,E01129,E01154,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.23
+77,24, -> ,E01155,E01178,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.21
+78,19, -> ,E01179,E01197,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.21
+79,26, -> ,E01198,E01223,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.7
+80,21, -> ,E01224,E01244,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.21
+81,26, -> ,E01245,E01270,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+82,21, -> ,E01271,E01291,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.07
+83,22, -> ,E01292,E01313,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.09
+84,22, -> ,E01314,E01335,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.2
+85,23, -> ,E01336,E01358,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.21
+86,21, -> ,E01359,E01379,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+87,27, -> ,E01380,E01406,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+88,26, -> ,E01407,E01432,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+89,21, -> ,E01433,E01453,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+90,21, -> ,E01454,E01474,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.28
+91,27, -> ,E01475,E01501,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+92,18, -> ,E01502,E01519,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.93
+93,15, -> ,E01520,E01534,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.86
+94,15, -> ,E01535,E01549,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.91
+95,18, -> ,E01550,E01567,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.13
+96,26, -> ,E01568,E01593,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.15
+97,24, -> ,E01594,E01617,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+98,19, -> ,E01618,E01636,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.21
+99,25, -> ,E01637,E01661,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.24
+100,25, -> ,E01662,E01686,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.22
+101,20, -> ,E01687,E01706,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+102,20, -> ,E01707,E01726,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.14
+103,16, -> ,E01727,E01742,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.08
+104,17, -> ,E01743,E01759,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.15
+105,16, -> ,E01760,E01775,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hoạt động tấn công.,4.19
+106,18, -> ,E01776,E01793,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+107,15, -> ,E01794,E01808,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.98
+108,20, -> ,E01809,E01828,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.07
+109,21, -> ,E01829,E01849,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.28
+110,21, -> ,E01850,E01870,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.15
+111,15, -> ,E01871,E01885,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.05
+112,17, -> ,E01886,E01902,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.0
+113,26, -> ,E01903,E01928,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+114,28, -> ,E01929,E01956,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+115,28, -> ,E01957,E01984,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+116,24, -> ,E01985,E02008,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+117,17, -> ,E02009,E02025,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.24
+118,17, -> ,E02026,E02042,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.14
+119,26, -> ,E02043,E02068,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+120,24, -> ,E02069,E02092,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.71
+121,17, -> ,E02093,E02109,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+122,17, -> ,E02110,E02126,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+123,17, -> ,E02127,E02143,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.34
+124,17, -> ,E02144,E02160,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+125,17, -> ,E02161,E02177,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+126,17, -> ,E02178,E02194,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+127,17, -> ,E02195,E02211,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.34
+128,17, -> ,E02212,E02228,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+129,16, -> ,E02229,E02244,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.25
+130,17, -> ,E02245,E02261,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+131,17, -> ,E02262,E02278,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+132,17, -> ,E02279,E02295,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+133,17, -> ,E02296,E02312,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+134,16, -> ,E02313,E02328,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+135,16, -> ,E02329,E02344,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.17
+136,17, -> ,E02345,E02361,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+137,16, -> ,E02362,E02377,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+138,19, -> ,E02378,E02396,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.21
+139,20, -> ,E02397,E02416,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+140,22, -> ,E02417,E02438,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+141,20, -> ,E02439,E02458,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+142,20, -> ,E02459,E02478,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.28
+143,27, -> ,E02479,E02505,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+144,25, -> ,E02506,E02530,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.98
+145,28, -> ,E02531,E02558,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+146,23, -> ,E02559,E02581,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+147,28, -> ,E02582,E02609,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.85
+148,24, -> ,E02610,E02633,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+149,24, -> ,E02634,E02657,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+150,31, -> ,E02658,E02688,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+151,34, -> ,E02689,E02722,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+152,26, -> ,E02723,E02748,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+153,27, -> ,E02749,E02775,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.77
+154,34, -> ,E02776,E02809,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+155,33, -> ,E02810,E02842,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.8
+156,34, -> ,E02843,E02876,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+157,34, -> ,E02877,E02910,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.97
+158,22, -> ,E02911,E02932,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+159,28, -> ,E02933,E02960,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+160,34, -> ,E02961,E02994,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+161,30, -> ,E02995,E03024,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+162,33, -> ,E03025,E03057,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các dấu hiệu tấn công hoặc hoạt động bình thường.,4.9
+163,21, -> ,E03058,E03078,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+164,20, -> ,E03079,E03098,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+165,20, -> ,E03099,E03118,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+166,28, -> ,E03119,E03146,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+167,34, -> ,E03147,E03180,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.72
+168,32, -> ,E03181,E03212,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+169,25, -> ,E03213,E03237,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+170,25, -> ,E03238,E03262,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+171,32, -> ,E03263,E03294,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+172,34, -> ,E03295,E03328,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+173,24, -> ,E03329,E03352,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+174,25, -> ,E03353,E03377,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+175,20, -> ,E03378,E03397,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+176,21, -> ,E03398,E03418,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.54
+177,22, -> ,E03419,E03440,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+178,24, -> ,E03441,E03464,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+179,22, -> ,E03465,E03486,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+180,20, -> ,E03487,E03506,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+181,20, -> ,E03507,E03526,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+182,26, -> ,E03527,E03552,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.78
+183,30, -> ,E03553,E03582,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.98
+184,25, -> ,E03583,E03607,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+185,22, -> ,E03608,E03629,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+186,20, -> ,E03630,E03649,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+187,21, -> ,E03650,E03670,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+188,20, -> ,E03671,E03690,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+189,20, -> ,E03691,E03710,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.23
+190,20, -> ,E03711,E03730,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+191,29, -> ,E03731,E03759,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+192,20, -> ,E03760,E03779,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+193,20, -> ,E03780,E03799,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+194,27, -> ,E03800,E03826,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+195,24, -> ,E03827,E03850,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+196,34, -> ,E03851,E03884,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+197,32, -> ,E03885,E03916,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+198,24, -> ,E03917,E03940,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+199,20, -> ,E03941,E03960,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+200,21, -> ,E03961,E03981,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+201,20, -> ,E03982,E04001,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+202,25, -> ,E04002,E04026,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+203,34, -> ,E04027,E04060,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+204,33, -> ,E04061,E04093,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+205,34, -> ,E04094,E04127,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+206,34, -> ,E04128,E04161,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+207,34, -> ,E04162,E04195,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+208,35, -> ,E04196,E04230,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+209,34, -> ,E04231,E04264,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+210,34, -> ,E04265,E04298,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+211,34, -> ,E04299,E04332,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+212,24, -> ,E04333,E04356,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.87
+213,20, -> ,E04357,E04376,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+214,29, -> ,E04377,E04405,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+215,34, -> ,E04406,E04439,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+216,34, -> ,E04440,E04473,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+217,34, -> ,E04474,E04507,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+218,30, -> ,E04508,E04537,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.91
+219,20, -> ,E04538,E04557,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+220,21, -> ,E04558,E04578,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+221,35, -> ,E04579,E04613,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+222,34, -> ,E04614,E04647,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+223,34, -> ,E04648,E04681,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+224,31, -> ,E04682,E04712,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+225,31, -> ,E04713,E04743,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+226,34, -> ,E04744,E04777,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+227,21, -> ,E04778,E04798,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+228,20, -> ,E04799,E04818,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+229,20, -> ,E04819,E04838,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.23
+230,22, -> ,E04839,E04860,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+231,27, -> ,E04861,E04887,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+232,20, -> ,E04888,E04907,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+233,26, -> ,E04908,E04933,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.78
+234,25, -> ,E04934,E04958,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.57
+235,24, -> ,E04959,E04982,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.71
+236,25, -> ,E04983,E05007,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.77
+237,34, -> ,E05008,E05041,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+238,34, -> ,E05042,E05075,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+239,34, -> ,E05076,E05109,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+240,26, -> ,E05110,E05135,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+241,28, -> ,E05136,E05163,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+242,34, -> ,E05164,E05197,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.73
+243,24, -> ,E05198,E05221,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+244,22, -> ,E05222,E05243,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+245,29, -> ,E05244,E05272,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+246,33, -> ,E05273,E05305,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+247,31, -> ,E05306,E05336,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+248,22, -> ,E05337,E05358,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+249,29, -> ,E05359,E05387,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+250,34, -> ,E05388,E05421,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+251,27, -> ,E05422,E05448,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+252,26, -> ,E05449,E05474,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+253,26, -> ,E05475,E05500,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+254,29, -> ,E05501,E05529,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+255,24, -> ,E05530,E05553,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+256,33, -> ,E05554,E05586,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+257,34, -> ,E05587,E05620,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+258,34, -> ,E05621,E05654,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.73
+259,31, -> ,E05655,E05685,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+260,34, -> ,E05686,E05719,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+261,31, -> ,E05720,E05750,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+262,21, -> ,E05751,E05771,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.58
+263,25, -> ,E05772,E05796,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+264,20, -> ,E05797,E05816,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+265,22, -> ,E05817,E05838,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.79
+266,25, -> ,E05839,E05863,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+267,25, -> ,E05864,E05888,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.83
+268,20, -> ,E05889,E05908,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+269,20, -> ,E05909,E05928,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.34
+270,20, -> ,E05929,E05948,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+271,20, -> ,E05949,E05968,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+272,21, -> ,E05969,E05989,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+273,30, -> ,E05990,E06019,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.81
+274,25, -> ,E06020,E06044,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.95
+275,34, -> ,E06045,E06078,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+276,34, -> ,E06079,E06112,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+277,34, -> ,E06113,E06146,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+278,31, -> ,E06147,E06177,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+279,34, -> ,E06178,E06211,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+280,30, -> ,E06212,E06241,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+281,25, -> ,E06242,E06266,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+282,34, -> ,E06267,E06300,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.71
+283,31, -> ,E06301,E06331,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+284,26, -> ,E06332,E06357,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+285,34, -> ,E06358,E06391,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+286,30, -> ,E06392,E06421,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+287,20, -> ,E06422,E06441,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.36
+288,20, -> ,E06442,E06461,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+289,20, -> ,E06462,E06481,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+290,25, -> ,E06482,E06506,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+291,20, -> ,E06507,E06526,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+292,20, -> ,E06527,E06546,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+293,25, -> ,E06547,E06571,UNKNOWN,0,,,"Dựa trên dữ liệu, không có dấu hiệu tấn công nào được phát hiện trong chuỗi các sự kiện.",4.82
+294,31, -> ,E06572,E06602,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+295,34, -> ,E06603,E06636,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+296,34, -> ,E06637,E06670,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+297,34, -> ,E06671,E06704,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+298,34, -> ,E06705,E06738,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+299,34, -> ,E06739,E06772,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+300,34, -> ,E06773,E06806,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+301,34, -> ,E06807,E06840,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+302,34, -> ,E06841,E06874,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+303,25, -> ,E06875,E06899,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+304,20, -> ,E06900,E06919,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+305,26, -> ,E06920,E06945,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+306,24, -> ,E06946,E06969,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+307,24, -> ,E06970,E06993,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.96
+308,27, -> ,E06994,E07020,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.73
+309,30, -> ,E07021,E07050,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.73
+310,34, -> ,E07051,E07084,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.73
+311,34, -> ,E07085,E07118,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+312,34, -> ,E07119,E07152,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+313,22, -> ,E07153,E07174,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+314,32, -> ,E07175,E07206,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+315,34, -> ,E07207,E07240,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+316,23, -> ,E07241,E07263,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+317,29, -> ,E07264,E07292,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+318,34, -> ,E07293,E07326,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+319,27, -> ,E07327,E07353,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+320,20, -> ,E07354,E07373,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+321,20, -> ,E07374,E07393,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+322,20, -> ,E07394,E07413,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+323,29, -> ,E07414,E07442,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.67
+324,34, -> ,E07443,E07476,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+325,32, -> ,E07477,E07508,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+326,34, -> ,E07509,E07542,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+327,32, -> ,E07543,E07574,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.92
+328,29, -> ,E07575,E07603,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+329,11, -> ,E07604,E07614,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.68
+330,6, -> ,E07615,E07620,NORMAL,0,,,Không có dấu hiệu tấn công nào trong danh sách sự kiện.,3.27
+331,6, -> ,E07621,E07626,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong danh sách sự kiện.,3.2
+332,13, -> ,E07627,E07639,NORMAL,0,,,Không có dấu hiệu tấn công nào trong danh sách sự kiện.,3.81
+333,20, -> ,E07640,E07659,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+334,20, -> ,E07660,E07679,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+335,19, -> ,E07680,E07698,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+336,33, -> ,E07699,E07731,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+337,34, -> ,E07732,E07765,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+338,24, -> ,E07766,E07789,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+339,23, -> ,E07790,E07812,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hoạt động tấn công.,4.59
+340,21, -> ,E07813,E07833,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.74
+341,27, -> ,E07834,E07860,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu,4.77
+342,28, -> ,E07861,E07888,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+343,18, -> ,E07889,E07906,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.14
+344,18, -> ,E07907,E07924,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.22
+345,30, -> ,E07925,E07954,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.83
+346,12, -> ,E07955,E07966,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.11
+347,13, -> ,E07967,E07979,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.89
+348,18, -> ,E07980,E07997,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.93
+349,34, -> ,E07998,E08031,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+350,32, -> ,E08032,E08063,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+351,19, -> ,E08064,E08082,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.18
+352,23, -> ,E08083,E08105,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,21.92
+353,20, -> ,E08106,E08125,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.02
+354,27, -> ,E08126,E08152,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+355,24, -> ,E08153,E08176,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+356,24, -> ,E08177,E08200,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+357,24, -> ,E08201,E08224,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.77
+358,23, -> ,E08225,E08247,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+359,24, -> ,E08248,E08271,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.82
+360,23, -> ,E08272,E08294,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.8
+361,28, -> ,E08295,E08322,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.79
+362,22, -> ,E08323,E08344,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+363,21, -> ,E08345,E08365,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+364,15, -> ,E08366,E08380,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.06
+365,22, -> ,E08381,E08402,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+366,34, -> ,E08403,E08436,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+367,32, -> ,E08437,E08468,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+368,36, -> ,E08469,E08504,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+369,34, -> ,E08505,E08538,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+370,34, -> ,E08539,E08572,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+371,34, -> ,E08573,E08606,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+372,28, -> ,E08607,E08634,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.36
+373,23, -> ,E08635,E08657,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.05
+374,15, -> ,E08658,E08672,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+375,15, -> ,E08673,E08687,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.26
+376,33, -> ,E08688,E08720,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+377,34, -> ,E08721,E08754,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+378,33, -> ,E08755,E08787,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+379,30, -> ,E08788,E08817,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+380,24, -> ,E08818,E08841,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.12
+381,26, -> ,E08842,E08867,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+382,34, -> ,E08868,E08901,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+383,31, -> ,E08902,E08932,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+384,21, -> ,E08933,E08953,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.2
+385,23, -> ,E08954,E08976,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các dấu hiệu tấn công.,4.47
+386,18, -> ,E08977,E08994,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.18
+387,20, -> ,E08995,E09014,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.15
+388,24, -> ,E09015,E09038,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+389,30, -> ,E09039,E09068,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+390,34, -> ,E09069,E09102,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+391,26, -> ,E09103,E09128,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+392,26, -> ,E09129,E09154,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+393,22, -> ,E09155,E09176,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+394,32, -> ,E09177,E09208,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+395,34, -> ,E09209,E09242,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+396,29, -> ,E09243,E09271,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.86
+397,23, -> ,E09272,E09294,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+398,28, -> ,E09295,E09322,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+399,23, -> ,E09323,E09345,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+400,31, -> ,E09346,E09376,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+401,34, -> ,E09377,E09410,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+402,22, -> ,E09411,E09432,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+403,20, -> ,E09433,E09452,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.36
+404,22, -> ,E09453,E09474,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.94
+405,28, -> ,E09475,E09502,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+406,34, -> ,E09503,E09536,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.71
+407,28, -> ,E09537,E09564,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+408,28, -> ,E09565,E09592,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+409,14, -> ,E09593,E09606,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.74
+410,7, -> ,E09607,E09613,UNKNOWN,0,,E09607; E09608; E09609; E09610; E09611; E09612; E09613,"Có 7 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công khác.",4.59
+411,7, -> ,E09614,E09620,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.28
+412,6, -> ,E09621,E09626,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.14
+413,6, -> ,E09627,E09632,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,2.93
+414,6, -> ,E09633,E09638,UNKNOWN,0,,E09633; E09634; E09635; E09636; E09637; E09638,"Có một số sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công cụ thể nào được tìm thấy.",4.08
+415,6, -> ,E09639,E09644,UNKNOWN,0,,E09639; E09640; E09641; E09642; E09643; E09644,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác trong danh sách.",4.27
+416,6, -> ,E09645,E09650,NORMAL,0,,E09645; E09646; E09647; E09648; E09649; E09650,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác trong danh sách.",4.09
+417,6, -> ,E09651,E09656,NORMAL,0,,,Không có dấu hiệu tấn công nào trong danh sách sự kiện.,3.02
+418,6, -> ,E09657,E09662,NORMAL,0,,E09657; E09658; E09659; E09660; E09661; E09662,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác trong danh sách.",4.17
+419,6, -> ,E09663,E09668,UNKNOWN,0,,E09663; E09664; E09665; E09666; E09667; E09668,"Có một số sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công cụ thể nào.",4.02
+420,7, -> ,E09669,E09675,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.35
+421,6, -> ,E09676,E09681,NORMAL,0,,E09676; E09677; E09678; E09679; E09680,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác trong danh sách.",4.11
+422,6, -> ,E09682,E09687,UNKNOWN,0,,E09682; E09683; E09684; E09685; E09686; E09687,"Có một số sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công cụ thể nào được tìm thấy.",4.09
+423,6, -> ,E09688,E09693,NORMAL,0,,E09688; E09689; E09690; E09691; E09692; E09693,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác trong danh sách.",4.15
+424,6, -> ,E09694,E09699,NORMAL,0,,E09694; E09695; E09696; E09697; E09698; E09699,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",4.09
+425,6, -> ,E09700,E09705,NORMAL,0,,E09700; E09701; E09702; E09703; E09704; E09705,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",4.07
+426,12, -> ,E09706,E09717,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.78
+427,31, -> ,E09718,E09748,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+428,34, -> ,E09749,E09782,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+429,22, -> ,E09783,E09804,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+430,31, -> ,E09805,E09835,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+431,34, -> ,E09836,E09869,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.73
+432,25, -> ,E09870,E09894,NORMAL,0,,,"Dựa trên thống kê, không có sự kiện nào có dấu hiệu tấn công. Tất cả các sự kiện đều là đăng nhập thành công.",4.94
+433,20, -> ,E09895,E09914,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+434,33, -> ,E09915,E09947,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+435,34, -> ,E09948,E09981,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.73
+436,34, -> ,E09982,E10015,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+437,34, -> ,E10016,E10049,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+438,22, -> ,E10050,E10071,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+439,26, -> ,E10072,E10097,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+440,34, -> ,E10098,E10131,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.73
+441,31, -> ,E10132,E10162,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+442,34, -> ,E10163,E10196,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.78
+443,32, -> ,E10197,E10228,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+444,21, -> ,E10229,E10249,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+445,21, -> ,E10250,E10270,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.34
+446,33, -> ,E10271,E10303,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+447,29, -> ,E10304,E10332,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,5.01
+448,25, -> ,E10333,E10357,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.7
+449,22, -> ,E10358,E10379,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+450,32, -> ,E10380,E10411,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.87
+451,35, -> ,E10412,E10446,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+452,36, -> ,E10447,E10482,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+453,34, -> ,E10483,E10516,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+454,33, -> ,E10517,E10549,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+455,34, -> ,E10550,E10583,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+456,34, -> ,E10584,E10617,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+457,34, -> ,E10618,E10651,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+458,34, -> ,E10652,E10685,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+459,34, -> ,E10686,E10719,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+460,34, -> ,E10720,E10753,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+461,34, -> ,E10754,E10787,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+462,34, -> ,E10788,E10821,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+463,34, -> ,E10822,E10855,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+464,34, -> ,E10856,E10889,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.82
+465,23, -> ,E10890,E10912,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+466,31, -> ,E10913,E10943,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+467,34, -> ,E10944,E10977,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+468,31, -> ,E10978,E11008,UNKNOWN,0,,,"Dựa trên thống kê, không có dấu hiệu tấn công nào trong danh sách các sự kiện được cung cấp.",4.92
+469,20, -> ,E11009,E11028,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+470,31, -> ,E11029,E11059,UNKNOWN,0,,,"Dựa trên thống kê, không có dấu hiệu tấn công nào trong danh sách sự kiện.",5.04
+471,34, -> ,E11060,E11093,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+472,35, -> ,E11094,E11128,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+473,34, -> ,E11129,E11162,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+474,25, -> ,E11163,E11187,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+475,25, -> ,E11188,E11212,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+476,31, -> ,E11213,E11243,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+477,25, -> ,E11244,E11268,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.14
+478,25, -> ,E11269,E11293,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+479,23, -> ,E11294,E11316,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.21
+480,29, -> ,E11317,E11345,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+481,34, -> ,E11346,E11379,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.79
+482,31, -> ,E11380,E11410,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+483,29, -> ,E11411,E11439,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.26
+484,26, -> ,E11440,E11465,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu,4.23
+485,20, -> ,E11466,E11485,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.13
+486,31, -> ,E11486,E11516,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+487,34, -> ,E11517,E11550,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+488,34, -> ,E11551,E11584,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+489,34, -> ,E11585,E11618,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+490,34, -> ,E11619,E11652,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+491,34, -> ,E11653,E11686,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+492,34, -> ,E11687,E11720,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+493,34, -> ,E11721,E11754,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+494,34, -> ,E11755,E11788,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+495,30, -> ,E11789,E11818,UNKNOWN,0,,,"Dựa trên thống kê, không có dấu hiệu tấn công nào trong danh sách sự kiện.",4.9
+496,27, -> ,E11819,E11845,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+497,34, -> ,E11846,E11879,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.77
+498,29, -> ,E11880,E11908,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+499,33, -> ,E11909,E11941,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+500,33, -> ,E11942,E11974,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+501,29, -> ,E11975,E12003,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+502,34, -> ,E12004,E12037,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+503,35, -> ,E12038,E12072,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.83
+504,32, -> ,E12073,E12104,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+505,35, -> ,E12105,E12139,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.97
+506,34, -> ,E12140,E12173,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+507,34, -> ,E12174,E12207,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+508,34, -> ,E12208,E12241,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+509,34, -> ,E12242,E12275,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+510,34, -> ,E12276,E12309,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+511,34, -> ,E12310,E12343,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+512,34, -> ,E12344,E12377,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+513,34, -> ,E12378,E12411,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+514,34, -> ,E12412,E12445,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+515,34, -> ,E12446,E12479,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+516,34, -> ,E12480,E12513,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+517,29, -> ,E12514,E12542,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+518,24, -> ,E12543,E12566,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+519,34, -> ,E12567,E12600,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+520,33, -> ,E12601,E12633,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.79
+521,33, -> ,E12634,E12666,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,5.04
+522,19, -> ,E12667,E12685,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+523,18, -> ,E12686,E12703,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+524,18, -> ,E12704,E12721,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.17
+525,18, -> ,E12722,E12739,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.21
+526,19, -> ,E12740,E12758,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+527,17, -> ,E12759,E12775,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.34
+528,17, -> ,E12776,E12792,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+529,19, -> ,E12793,E12811,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.8
+530,19, -> ,E12812,E12830,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+531,18, -> ,E12831,E12848,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+532,18, -> ,E12849,E12866,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+533,17, -> ,E12867,E12883,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+534,17, -> ,E12884,E12900,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+535,17, -> ,E12901,E12917,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+536,17, -> ,E12918,E12934,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+537,17, -> ,E12935,E12951,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+538,17, -> ,E12952,E12968,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+539,17, -> ,E12969,E12985,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+540,17, -> ,E12986,E13002,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+541,17, -> ,E13003,E13019,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+542,17, -> ,E13020,E13036,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+543,17, -> ,E13037,E13053,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+544,17, -> ,E13054,E13070,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+545,17, -> ,E13071,E13087,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+546,17, -> ,E13088,E13104,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+547,17, -> ,E13105,E13121,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+548,17, -> ,E13122,E13138,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+549,17, -> ,E13139,E13155,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+550,17, -> ,E13156,E13172,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+551,17, -> ,E13173,E13189,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+552,17, -> ,E13190,E13206,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+553,17, -> ,E13207,E13223,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+554,17, -> ,E13224,E13240,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+555,17, -> ,E13241,E13257,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+556,17, -> ,E13258,E13274,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+557,17, -> ,E13275,E13291,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+558,17, -> ,E13292,E13308,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+559,17, -> ,E13309,E13325,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+560,17, -> ,E13326,E13342,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+561,17, -> ,E13343,E13359,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+562,17, -> ,E13360,E13376,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+563,17, -> ,E13377,E13393,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+564,18, -> ,E13394,E13411,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+565,17, -> ,E13412,E13428,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+566,18, -> ,E13429,E13446,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+567,18, -> ,E13447,E13464,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+568,18, -> ,E13465,E13482,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+569,17, -> ,E13483,E13499,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+570,18, -> ,E13500,E13517,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+571,18, -> ,E13518,E13535,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+572,18, -> ,E13536,E13553,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+573,17, -> ,E13554,E13570,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+574,18, -> ,E13571,E13588,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+575,18, -> ,E13589,E13606,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+576,17, -> ,E13607,E13623,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+577,17, -> ,E13624,E13640,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+578,17, -> ,E13641,E13657,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.34
+579,17, -> ,E13658,E13674,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+580,17, -> ,E13675,E13691,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+581,17, -> ,E13692,E13708,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+582,18, -> ,E13709,E13726,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.67
+583,18, -> ,E13727,E13744,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+584,18, -> ,E13745,E13762,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+585,18, -> ,E13763,E13780,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+586,18, -> ,E13781,E13798,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+587,18, -> ,E13799,E13816,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+588,18, -> ,E13817,E13834,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+589,18, -> ,E13835,E13852,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+590,18, -> ,E13853,E13870,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+591,17, -> ,E13871,E13887,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+592,17, -> ,E13888,E13904,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.25
+593,18, -> ,E13905,E13922,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.67
+594,18, -> ,E13923,E13940,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+595,18, -> ,E13941,E13958,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+596,17, -> ,E13959,E13975,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+597,18, -> ,E13976,E13993,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+598,19, -> ,E13994,E14012,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+599,19, -> ,E14013,E14031,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+600,19, -> ,E14032,E14050,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+601,19, -> ,E14051,E14069,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+602,19, -> ,E14070,E14088,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+603,19, -> ,E14089,E14107,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+604,19, -> ,E14108,E14126,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+605,19, -> ,E14127,E14145,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+606,19, -> ,E14146,E14164,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+607,19, -> ,E14165,E14183,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+608,18, -> ,E14184,E14201,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+609,19, -> ,E14202,E14220,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+610,18, -> ,E14221,E14238,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+611,18, -> ,E14239,E14256,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.21
+612,19, -> ,E14257,E14275,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+613,18, -> ,E14276,E14293,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+614,18, -> ,E14294,E14311,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.24
+615,18, -> ,E14312,E14329,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+616,18, -> ,E14330,E14347,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+617,17, -> ,E14348,E14364,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.23
+618,17, -> ,E14365,E14381,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.18
+619,17, -> ,E14382,E14398,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.19
+620,17, -> ,E14399,E14415,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.2
+621,17, -> ,E14416,E14432,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.24
+622,17, -> ,E14433,E14449,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.24
+623,17, -> ,E14450,E14466,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+624,17, -> ,E14467,E14483,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+625,18, -> ,E14484,E14501,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+626,18, -> ,E14502,E14519,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.21
+627,18, -> ,E14520,E14537,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.25
+628,18, -> ,E14538,E14555,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.25
+629,19, -> ,E14556,E14574,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+630,18, -> ,E14575,E14592,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+631,18, -> ,E14593,E14610,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.11
+632,19, -> ,E14611,E14629,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+633,18, -> ,E14630,E14647,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+634,18, -> ,E14648,E14665,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.07
+635,19, -> ,E14666,E14684,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+636,18, -> ,E14685,E14702,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+637,19, -> ,E14703,E14721,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+638,18, -> ,E14722,E14739,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+639,18, -> ,E14740,E14757,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.13
+640,19, -> ,E14758,E14776,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+641,19, -> ,E14777,E14795,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+642,19, -> ,E14796,E14814,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+643,19, -> ,E14815,E14833,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+644,19, -> ,E14834,E14852,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.36
+645,18, -> ,E14853,E14870,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+646,19, -> ,E14871,E14889,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+647,19, -> ,E14890,E14908,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+648,19, -> ,E14909,E14927,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+649,19, -> ,E14928,E14946,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+650,18, -> ,E14947,E14964,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+651,19, -> ,E14965,E14983,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+652,18, -> ,E14984,E15001,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+653,18, -> ,E15002,E15019,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.17
+654,19, -> ,E15020,E15038,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+655,19, -> ,E15039,E15057,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.34
+656,19, -> ,E15058,E15076,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+657,19, -> ,E15077,E15095,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+658,19, -> ,E15096,E15114,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+659,19, -> ,E15115,E15133,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+660,19, -> ,E15134,E15152,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.36
+661,18, -> ,E15153,E15170,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+662,19, -> ,E15171,E15189,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+663,19, -> ,E15190,E15208,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+664,18, -> ,E15209,E15226,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+665,19, -> ,E15227,E15245,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+666,18, -> ,E15246,E15263,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+667,18, -> ,E15264,E15281,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.1
+668,18, -> ,E15282,E15299,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.16
+669,18, -> ,E15300,E15317,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.15
+670,19, -> ,E15318,E15336,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+671,18, -> ,E15337,E15354,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+672,18, -> ,E15355,E15372,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.1
+673,19, -> ,E15373,E15391,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+674,19, -> ,E15392,E15410,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.28
+675,19, -> ,E15411,E15429,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+676,19, -> ,E15430,E15448,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+677,19, -> ,E15449,E15467,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.36
+678,19, -> ,E15468,E15486,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+679,19, -> ,E15487,E15505,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.36
+680,18, -> ,E15506,E15523,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+681,18, -> ,E15524,E15541,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.15
+682,18, -> ,E15542,E15559,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.2
+683,18, -> ,E15560,E15577,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.19
+684,18, -> ,E15578,E15595,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.17
+685,19, -> ,E15596,E15614,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+686,19, -> ,E15615,E15633,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+687,19, -> ,E15634,E15652,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+688,18, -> ,E15653,E15670,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+689,18, -> ,E15671,E15688,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.24
+690,18, -> ,E15689,E15706,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.34
+691,18, -> ,E15707,E15724,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+692,18, -> ,E15725,E15742,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+693,18, -> ,E15743,E15760,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+694,18, -> ,E15761,E15778,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+695,18, -> ,E15779,E15796,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+696,18, -> ,E15797,E15814,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+697,18, -> ,E15815,E15832,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+698,18, -> ,E15833,E15850,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+699,18, -> ,E15851,E15868,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+700,18, -> ,E15869,E15886,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+701,18, -> ,E15887,E15904,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+702,18, -> ,E15905,E15922,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+703,18, -> ,E15923,E15940,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+704,18, -> ,E15941,E15958,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+705,18, -> ,E15959,E15976,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+706,18, -> ,E15977,E15994,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+707,18, -> ,E15995,E16012,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+708,18, -> ,E16013,E16030,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+709,18, -> ,E16031,E16048,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.21
+710,18, -> ,E16049,E16066,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.2
+711,18, -> ,E16067,E16084,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.17
+712,18, -> ,E16085,E16102,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.19
+713,18, -> ,E16103,E16120,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.23
+714,18, -> ,E16121,E16138,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.26
+715,18, -> ,E16139,E16156,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.25
+716,18, -> ,E16157,E16174,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.25
+717,18, -> ,E16175,E16192,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.25
+718,18, -> ,E16193,E16210,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+719,18, -> ,E16211,E16228,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+720,16, -> ,E16229,E16244,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.19
+721,17, -> ,E16245,E16261,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.24
+722,18, -> ,E16262,E16279,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+723,17, -> ,E16280,E16296,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+724,17, -> ,E16297,E16313,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.16
+725,17, -> ,E16314,E16330,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.2
+726,17, -> ,E16331,E16347,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.17
+727,17, -> ,E16348,E16364,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.14
+728,17, -> ,E16365,E16381,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.17
+729,17, -> ,E16382,E16398,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.2
+730,17, -> ,E16399,E16415,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.28
+731,17, -> ,E16416,E16432,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+732,17, -> ,E16433,E16449,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.18
+733,17, -> ,E16450,E16466,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.17
+734,17, -> ,E16467,E16483,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.2
+735,17, -> ,E16484,E16500,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.19
+736,16, -> ,E16501,E16516,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.22
+737,16, -> ,E16517,E16532,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.08
+738,17, -> ,E16533,E16549,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+739,18, -> ,E16550,E16567,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+740,17, -> ,E16568,E16584,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+741,15, -> ,E16585,E16599,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.18
+742,15, -> ,E16600,E16614,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.25
+743,16, -> ,E16615,E16630,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+744,18, -> ,E16631,E16648,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+745,18, -> ,E16649,E16666,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.12
+746,17, -> ,E16667,E16683,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.28
+747,18, -> ,E16684,E16701,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+748,19, -> ,E16702,E16720,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+749,19, -> ,E16721,E16739,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+750,18, -> ,E16740,E16757,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+751,19, -> ,E16758,E16776,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+752,19, -> ,E16777,E16795,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+753,19, -> ,E16796,E16814,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+754,19, -> ,E16815,E16833,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+755,19, -> ,E16834,E16852,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+756,19, -> ,E16853,E16871,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+757,19, -> ,E16872,E16890,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+758,19, -> ,E16891,E16909,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+759,19, -> ,E16910,E16928,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+760,19, -> ,E16929,E16947,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+761,19, -> ,E16948,E16966,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+762,19, -> ,E16967,E16985,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+763,19, -> ,E16986,E17004,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+764,19, -> ,E17005,E17023,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+765,19, -> ,E17024,E17042,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+766,19, -> ,E17043,E17061,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+767,19, -> ,E17062,E17080,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+768,19, -> ,E17081,E17099,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+769,18, -> ,E17100,E17117,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+770,18, -> ,E17118,E17135,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.24
+771,18, -> ,E17136,E17153,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.2
+772,19, -> ,E17154,E17172,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+773,19, -> ,E17173,E17191,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.34
+774,18, -> ,E17192,E17209,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+775,18, -> ,E17210,E17227,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.23
+776,17, -> ,E17228,E17244,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+777,17, -> ,E17245,E17261,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+778,18, -> ,E17262,E17279,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+779,18, -> ,E17280,E17297,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.18
+780,18, -> ,E17298,E17315,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.24
+781,19, -> ,E17316,E17334,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.7
+782,19, -> ,E17335,E17353,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+783,18, -> ,E17354,E17371,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+784,12, -> ,E17372,E17383,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.56
+785,15, -> ,E17384,E17398,NORMAL,0,ALERT; ALERT; ALERT; ALERT; ALERT; ALERT,E17384; E17385; E17386; E17387; E17388; E17389; E17390; E17391; E17392; E17393; E17394; E17395; E17396; E17397; E17398,[Thẩm định vòng 2 xác nhận bình thường]: Không có đủ bằng chứng để kết luận chắc chắn về việc tấn công.,11.12
+786,21, -> ,E17399,E17419,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.24
+787,22, -> ,E17420,E17441,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.28
+788,22, -> ,E17442,E17463,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.25
+789,22, -> ,E17464,E17485,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+790,22, -> ,E17486,E17507,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi các sự kiện này.,4.45
+791,24, -> ,E17508,E17531,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+792,25, -> ,E17532,E17556,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+793,26, -> ,E17557,E17582,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+794,26, -> ,E17583,E17608,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+795,24, -> ,E17609,E17632,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+796,25, -> ,E17633,E17657,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+797,20, -> ,E17658,E17677,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+798,14, -> ,E17678,E17691,UNKNOWN,0,,,"Dịch vụ ghi nhật ký sự kiện bị tắt (1100) và tạo tiến trình mới (4688) là các sự kiện quan trọng trong hệ thống. Tuy nhiên, không có dấu hiệu tấn công nào khác trong danh sách sự kiện.",4.41
+799,12, -> ,E17692,E17703,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.5
+800,21, -> ,E17704,E17724,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+801,22, -> ,E17725,E17746,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+802,22, -> ,E17747,E17768,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.28
+803,23, -> ,E17769,E17791,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+804,24, -> ,E17792,E17815,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+805,22, -> ,E17816,E17837,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+806,27, -> ,E17838,E17864,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+807,22, -> ,E17865,E17886,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+808,25, -> ,E17887,E17911,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+809,26, -> ,E17912,E17937,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+810,21, -> ,E17938,E17958,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.57
+811,25, -> ,E17959,E17983,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+812,24, -> ,E17984,E18007,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+813,24, -> ,E18008,E18031,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+814,27, -> ,E18032,E18058,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+815,35, -> ,E18059,E18093,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.7
+816,34, -> ,E18094,E18127,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+817,35, -> ,E18128,E18162,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+818,35, -> ,E18163,E18197,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+819,35, -> ,E18198,E18232,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+820,23, -> ,E18233,E18255,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+821,22, -> ,E18256,E18277,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+822,35, -> ,E18278,E18312,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.7
+823,33, -> ,E18313,E18345,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+824,35, -> ,E18346,E18380,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.67
+825,35, -> ,E18381,E18415,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+826,35, -> ,E18416,E18450,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+827,31, -> ,E18451,E18481,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+828,21, -> ,E18482,E18502,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+829,29, -> ,E18503,E18531,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+830,30, -> ,E18532,E18561,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.24
+831,26, -> ,E18562,E18587,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+832,28, -> ,E18588,E18615,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+833,19, -> ,E18616,E18634,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.16
+834,20, -> ,E18635,E18654,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+835,21, -> ,E18655,E18675,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+836,20, -> ,E18676,E18695,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+837,22, -> ,E18696,E18717,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.19
+838,21, -> ,E18718,E18738,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+839,31, -> ,E18739,E18769,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+840,29, -> ,E18770,E18798,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+841,31, -> ,E18799,E18829,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+842,35, -> ,E18830,E18864,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+843,26, -> ,E18865,E18890,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.87
+844,24, -> ,E18891,E18914,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+845,34, -> ,E18915,E18948,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+846,34, -> ,E18949,E18982,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+847,28, -> ,E18983,E19010,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,5.03
+848,24, -> ,E19011,E19034,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các dấu hiệu tấn công hoặc hoạt động bình thường.,4.99
+849,29, -> ,E19035,E19063,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+850,35, -> ,E19064,E19098,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+851,25, -> ,E19099,E19123,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+852,31, -> ,E19124,E19154,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+853,35, -> ,E19155,E19189,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.67
+854,26, -> ,E19190,E19215,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu,4.76
+855,35, -> ,E19216,E19250,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+856,31, -> ,E19251,E19281,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+857,21, -> ,E19282,E19302,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+858,23, -> ,E19303,E19325,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.9
+859,32, -> ,E19326,E19357,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.95
+860,35, -> ,E19358,E19392,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.82
+861,26, -> ,E19393,E19418,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+862,24, -> ,E19419,E19442,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+863,20, -> ,E19443,E19462,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+864,25, -> ,E19463,E19487,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.83
+865,23, -> ,E19488,E19510,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+866,23, -> ,E19511,E19533,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+867,20, -> ,E19534,E19553,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+868,21, -> ,E19554,E19574,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+869,22, -> ,E19575,E19596,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong danh sách sự kiện.,4.54
+870,20, -> ,E19597,E19616,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+871,29, -> ,E19617,E19645,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+872,31, -> ,E19646,E19676,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+873,35, -> ,E19677,E19711,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.67
+874,35, -> ,E19712,E19746,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+875,35, -> ,E19747,E19781,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+876,35, -> ,E19782,E19816,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+877,35, -> ,E19817,E19851,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+878,35, -> ,E19852,E19886,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+879,35, -> ,E19887,E19921,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+880,35, -> ,E19922,E19956,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+881,35, -> ,E19957,E19991,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+882,35, -> ,E19992,E20026,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+883,21, -> ,E20027,E20047,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+884,23, -> ,E20048,E20070,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.8
+885,20, -> ,E20071,E20090,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.36
+886,24, -> ,E20091,E20114,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+887,20, -> ,E20115,E20134,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.3
+888,20, -> ,E20135,E20154,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+889,21, -> ,E20155,E20175,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+890,20, -> ,E20176,E20195,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+891,20, -> ,E20196,E20215,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.64
+892,34, -> ,E20216,E20249,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+893,35, -> ,E20250,E20284,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+894,22, -> ,E20285,E20306,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+895,24, -> ,E20307,E20330,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+896,21, -> ,E20331,E20351,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+897,22, -> ,E20352,E20373,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+898,27, -> ,E20374,E20400,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+899,35, -> ,E20401,E20435,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+900,28, -> ,E20436,E20463,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+901,35, -> ,E20464,E20498,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+902,31, -> ,E20499,E20529,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+903,21, -> ,E20530,E20550,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+904,28, -> ,E20551,E20578,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+905,35, -> ,E20579,E20613,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+906,27, -> ,E20614,E20640,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.6
+907,21, -> ,E20641,E20661,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.67
+908,22, -> ,E20662,E20683,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+909,27, -> ,E20684,E20710,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+910,21, -> ,E20711,E20731,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+911,24, -> ,E20732,E20755,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.59
+912,20, -> ,E20756,E20775,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.36
+913,29, -> ,E20776,E20804,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+914,35, -> ,E20805,E20839,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+915,27, -> ,E20840,E20866,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+916,21, -> ,E20867,E20887,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+917,23, -> ,E20888,E20910,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.36
+918,23, -> ,E20911,E20933,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+919,23, -> ,E20934,E20956,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+920,24, -> ,E20957,E20980,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+921,33, -> ,E20981,E21013,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+922,33, -> ,E21014,E21046,UNKNOWN,0,,,"Dựa trên thống kê, không có dấu hiệu tấn công nào được phát hiện trong dữ liệu.",4.7
+923,34, -> ,E21047,E21080,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.81
+924,20, -> ,E21081,E21100,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+925,24, -> ,E21101,E21124,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.9
+926,21, -> ,E21125,E21145,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+927,27, -> ,E21146,E21172,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+928,34, -> ,E21173,E21206,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+929,32, -> ,E21207,E21238,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.78
+930,20, -> ,E21239,E21258,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+931,25, -> ,E21259,E21283,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+932,32, -> ,E21284,E21315,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+933,23, -> ,E21316,E21338,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+934,25, -> ,E21339,E21363,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+935,18, -> ,E21364,E21381,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.22
+936,32, -> ,E21382,E21413,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+937,34, -> ,E21414,E21447,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.82
+938,34, -> ,E21448,E21481,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+939,34, -> ,E21482,E21515,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+940,34, -> ,E21516,E21549,NORMAL,0,,,"Dựa trên thống kê, không có dấu hiệu tấn công nào trong danh sách sự kiện. Tất cả các sự kiện đều có cùng thông tin về tài khoản người dùng ASUS và không có dấu hiệu bất thường nào.",5.14
+941,33, -> ,E21550,E21582,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+942,20, -> ,E21583,E21602,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+943,27, -> ,E21603,E21629,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+944,21, -> ,E21630,E21650,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.27
+945,23, -> ,E21651,E21673,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+946,27, -> ,E21674,E21700,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+947,22, -> ,E21701,E21722,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+948,21, -> ,E21723,E21743,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.59
+949,21, -> ,E21744,E21764,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+950,20, -> ,E21765,E21784,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+951,20, -> ,E21785,E21804,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+952,20, -> ,E21805,E21824,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+953,20, -> ,E21825,E21844,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.45
+954,20, -> ,E21845,E21864,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+955,26, -> ,E21865,E21890,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+956,34, -> ,E21891,E21924,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+957,30, -> ,E21925,E21954,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+958,20, -> ,E21955,E21974,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+959,32, -> ,E21975,E22006,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+960,34, -> ,E22007,E22040,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+961,24, -> ,E22041,E22064,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+962,20, -> ,E22065,E22084,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+963,35, -> ,E22085,E22119,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.67
+964,34, -> ,E22120,E22153,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+965,21, -> ,E22154,E22174,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+966,27, -> ,E22175,E22201,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+967,24, -> ,E22202,E22225,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.71
+968,27, -> ,E22226,E22252,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.45
+969,21, -> ,E22253,E22273,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+970,34, -> ,E22274,E22307,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+971,34, -> ,E22308,E22341,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+972,23, -> ,E22342,E22364,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.52
+973,27, -> ,E22365,E22391,NORMAL,0,,,"Dựa trên thống kê, không có dấu hiệu tấn công nào trong danh sách sự kiện. Các sự kiện chỉ cho thấy hoạt động đăng nhập bình thường của người dùng.",5.07
+974,34, -> ,E22392,E22425,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+975,34, -> ,E22426,E22459,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+976,34, -> ,E22460,E22493,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+977,34, -> ,E22494,E22527,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+978,34, -> ,E22528,E22561,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+979,33, -> ,E22562,E22594,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+980,34, -> ,E22595,E22628,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+981,34, -> ,E22629,E22662,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+982,34, -> ,E22663,E22696,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+983,34, -> ,E22697,E22730,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+984,33, -> ,E22731,E22763,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+985,24, -> ,E22764,E22787,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+986,24, -> ,E22788,E22811,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+987,23, -> ,E22812,E22834,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+988,24, -> ,E22835,E22858,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+989,34, -> ,E22859,E22892,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.03
+990,33, -> ,E22893,E22925,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+991,34, -> ,E22926,E22959,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+992,34, -> ,E22960,E22993,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+993,34, -> ,E22994,E23027,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+994,33, -> ,E23028,E23060,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+995,22, -> ,E23061,E23082,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+996,33, -> ,E23083,E23115,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+997,26, -> ,E23116,E23141,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+998,20, -> ,E23142,E23161,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+999,29, -> ,E23162,E23190,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+1000,25, -> ,E23191,E23215,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+1001,34, -> ,E23216,E23249,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+1002,34, -> ,E23250,E23283,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+1003,34, -> ,E23284,E23317,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+1004,27, -> ,E23318,E23344,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+1005,29, -> ,E23345,E23373,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+1006,34, -> ,E23374,E23407,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.67
+1007,28, -> ,E23408,E23435,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+1008,34, -> ,E23436,E23469,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+1009,34, -> ,E23470,E23503,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+1010,34, -> ,E23504,E23537,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+1011,34, -> ,E23538,E23571,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+1012,34, -> ,E23572,E23605,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+1013,34, -> ,E23606,E23639,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+1014,34, -> ,E23640,E23673,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+1015,31, -> ,E23674,E23704,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1016,29, -> ,E23705,E23733,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+1017,34, -> ,E23734,E23767,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+1018,27, -> ,E23768,E23794,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+1019,25, -> ,E23795,E23819,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+1020,24, -> ,E23820,E23843,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+1021,22, -> ,E23844,E23865,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1022,25, -> ,E23866,E23890,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+1023,23, -> ,E23891,E23913,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+1024,27, -> ,E23914,E23940,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+1025,34, -> ,E23941,E23974,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.7
+1026,31, -> ,E23975,E24005,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.67
+1027,31, -> ,E24006,E24036,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+1028,20, -> ,E24037,E24056,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.49
+1029,24, -> ,E24057,E24080,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+1030,22, -> ,E24081,E24102,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+1031,30, -> ,E24103,E24132,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.7
+1032,34, -> ,E24133,E24166,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.71
+1033,34, -> ,E24167,E24200,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+1034,34, -> ,E24201,E24234,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+1035,25, -> ,E24235,E24259,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+1036,20, -> ,E24260,E24279,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1037,23, -> ,E24280,E24302,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.91
+1038,25, -> ,E24303,E24327,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+1039,32, -> ,E24328,E24359,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.22
+1040,29, -> ,E24360,E24388,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.29
+1041,24, -> ,E24389,E24412,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+1042,32, -> ,E24413,E24444,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+1043,28, -> ,E24445,E24472,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.31
+1044,28, -> ,E24473,E24500,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.22
+1045,23, -> ,E24501,E24523,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.22
+1046,20, -> ,E24524,E24543,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+1047,12, -> ,E24544,E24555,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.08
+1048,4, -> ,E24556,E24559,UNKNOWN,0,Running; Started,E24558; E24559,The system is running the PowerShell script.,4.1
+1049,8, -> ,E24560,E24567,ERROR,0,,,Unterminated string starting at: line 1 column 150 (char 149),12.54
+1050,10, -> ,E24568,E24577,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.06
+1051,7, -> ,E24578,E24584,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.41
+1052,7, -> ,E24585,E24591,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong danh sách sự kiện.,3.41
+1053,7, -> ,E24592,E24598,UNKNOWN,0,,E24592; E24593; E24594; E24595; E24596; E24597,"Có 7 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác trong danh sách.",4.37
+1054,6, -> ,E24599,E24604,NORMAL,0,,E24599; E24600; E24601; E24602; E24603; E24604,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",6.9
+1055,6, -> ,E24605,E24610,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.03
+1056,18, -> ,E24611,E24628,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.13
+1057,29, -> ,E24629,E24657,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1058,34, -> ,E24658,E24691,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+1059,26, -> ,E24692,E24717,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.23
+1060,4, -> ,E24718,E24721,ERROR,0,,,Unterminated string starting at: line 1 column 54 (char 53),12.87
+1061,5, -> ,E24722,E24726,NORMAL,0,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),E24724; E24725; E24726,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),4.24
+1062,12, -> ,E24727,E24738,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+1063,6, -> ,E24739,E24744,ERROR,0,,,Unterminated string starting at: line 1 column 54 (char 53),12.88
+1064,4, -> ,E24745,E24748,NORMAL,0,Available,E24747; E24748,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),4.33
+1065,10, -> ,E24749,E24758,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+1066,19, -> ,E24759,E24777,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+1067,6, -> ,E24778,E24783,NORMAL,0,Environment,E24782; E24783,The system is starting up.,4.25
+1068,4, -> ,E24784,E24787,NORMAL,0,Started; Available,E24786; E24787,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),4.35
+1069,10, -> ,E24788,E24797,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+1070,11, -> ,E24798,E24808,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.51
+1071,7, -> ,E24809,E24815,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.35
+1072,7, -> ,E24816,E24822,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.3
+1073,6, -> ,E24823,E24828,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.16
+1074,6, -> ,E24829,E24834,NORMAL,0,,E24829; E24830; E24831; E24832; E24833; E24834,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",4.0
+1075,6, -> ,E24835,E24840,UNKNOWN,0,,E24835; E24836; E24837; E24838; E24839; E24840,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",3.99
+1076,6, -> ,E24841,E24846,UNKNOWN,0,,E24841; E24842; E24843; E24844; E24845; E24846,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",4.2
+1077,6, -> ,E24847,E24852,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.12
+1078,6, -> ,E24853,E24858,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong danh sách sự kiện.,3.2
+1079,6, -> ,E24859,E24864,NORMAL,0,,E24859; E24860; E24861; E24862; E24863; E24864,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",4.11
+1080,6, -> ,E24865,E24870,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.08
+1081,6, -> ,E24871,E24876,NORMAL,0,,,Không có dấu hiệu tấn công nào trong danh sách sự kiện.,3.14
+1082,6, -> ,E24877,E24882,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.02
+1083,6, -> ,E24883,E24888,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.06
+1084,6, -> ,E24889,E24894,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.02
+1085,6, -> ,E24895,E24900,NORMAL,0,,E24895; E24896; E24897; E24898; E24900,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác trong danh sách.",4.01
+1086,6, -> ,E24901,E24906,UNKNOWN,0,,E24901; E24902; E24903; E24904; E24905; E24906,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",4.11
+1087,8, -> ,E24907,E24914,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.4
+1088,6, -> ,E24915,E24920,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.22
+1089,6, -> ,E24921,E24926,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,2.96
+1090,6, -> ,E24927,E24932,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,2.96
+1091,7, -> ,E24933,E24939,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.31
+1092,7, -> ,E24940,E24946,UNKNOWN,0,,E24940; E24941; E24942; E24943; E24944; E24945; E24946,"Có 7 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác trong danh sách.",4.41
+1093,7, -> ,E24947,E24953,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.31
+1094,7, -> ,E24954,E24960,UNKNOWN,0,,E24954; E24955; E24956; E24957; E24958; E24959; E24960,"Có 7 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",4.39
+1095,7, -> ,E24961,E24967,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong danh sách sự kiện.,3.38
+1096,6, -> ,E24968,E24973,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong danh sách sự kiện.,3.26
+1097,6, -> ,E24974,E24979,NORMAL,0,,E24974; E24975; E24976; E24977; E24978; E24979,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác trong danh sách.",4.11
+1098,6, -> ,E24980,E24985,NORMAL,0,,E24980; E24981; E24982; E24983; E24984; E24985,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác trong danh sách.",4.08
+1099,6, -> ,E24986,E24991,NORMAL,0,,E24986; E24987; E24988; E24989; E24990,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác. Điều này có thể là một hành vi bình thường.",4.13
+1100,6, -> ,E24992,E24997,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,2.98
+1101,6, -> ,E24998,E25003,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.03
+1102,7, -> ,E25004,E25010,UNKNOWN,0,,E25004; E25005; E25006; E25007; E25008; E25009; E25010,"Có 7 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",4.48
+1103,6, -> ,E25011,E25016,NORMAL,0,,E25011; E25012; E25013; E25014; E25015,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",4.13
+1104,6, -> ,E25017,E25022,NORMAL,0,,E25017; E25018; E25019; E25020; E25021; E25022,"Có 6 sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác.",3.95
+1105,6, -> ,E25023,E25028,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.02
+1106,24, -> ,E25029,E25052,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.51
+1107,30, -> ,E25053,E25082,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+1108,34, -> ,E25083,E25116,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.55
+1109,25, -> ,E25117,E25141,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+1110,23, -> ,E25142,E25164,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.86
+1111,23, -> ,E25165,E25187,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+1112,21, -> ,E25188,E25208,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các dấu hiệu tấn công.,4.58
+1113,25, -> ,E25209,E25233,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+1114,34, -> ,E25234,E25267,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.76
+1115,34, -> ,E25268,E25301,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+1116,34, -> ,E25302,E25335,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+1117,30, -> ,E25336,E25365,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+1118,22, -> ,E25366,E25387,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+1119,29, -> ,E25388,E25416,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi các sự kiện này.,5.02
+1120,30, -> ,E25417,E25446,NORMAL,0,,,"Dựa trên thống kê, không có dấu hiệu tấn công nào trong danh sách các sự kiện. Tất cả các sự kiện đều là thành viên của nhóm Administrators được liệt kê.",5.71
+1121,30, -> ,E25447,E25476,NORMAL,0,,,"Dựa trên thống kê, không có dấu hiệu tấn công nào trong danh sách các sự kiện. Tất cả các sự kiện đều liên quan đến việc liệt kê thành viên của nhóm Administrators.",5.52
+1122,30, -> ,E25477,E25506,UNKNOWN,0,,,"Danh sách các sự kiện 4799 liên tục xuất hiện trong thời gian ngắn, có thể là dấu hiệu của việc tạo hoặc thêm người dùng vào nhóm Administrators.",5.5
+1123,29, -> ,E25507,E25535,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+1124,22, -> ,E25536,E25557,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.61
+1125,24, -> ,E25558,E25581,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+1126,26, -> ,E25582,E25607,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.89
+1127,22, -> ,E25608,E25629,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.59
+1128,25, -> ,E25630,E25654,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+1129,34, -> ,E25655,E25688,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.68
+1130,31, -> ,E25689,E25719,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+1131,25, -> ,E25720,E25744,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.97
+1132,24, -> ,E25745,E25768,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các dấu hiệu tấn công hoặc hoạt động bình thường.,4.96
+1133,22, -> ,E25769,E25790,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+1134,29, -> ,E25791,E25819,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+1135,34, -> ,E25820,E25853,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.67
+1136,34, -> ,E25854,E25887,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+1137,34, -> ,E25888,E25921,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+1138,25, -> ,E25922,E25946,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+1139,22, -> ,E25947,E25968,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1140,24, -> ,E25969,E25992,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.93
+1141,22, -> ,E25993,E26014,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+1142,29, -> ,E26015,E26043,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.8
+1143,21, -> ,E26044,E26064,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+1144,22, -> ,E26065,E26086,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+1145,21, -> ,E26087,E26107,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1146,22, -> ,E26108,E26129,NORMAL,0,,,"Dựa trên thống kê và phân tích các sự kiện trong danh sách Windows Event Logs, không có dấu hiệu tấn công nào được phát hiện. Các sự kiện chỉ cho thấy hoạt động đăng nhập và sử dụng hệ thống bình thường.",5.27
+1147,23, -> ,E26130,E26152,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.91
+1148,21, -> ,E26153,E26173,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+1149,20, -> ,E26174,E26193,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.38
+1150,20, -> ,E26194,E26213,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+1151,22, -> ,E26214,E26235,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1152,24, -> ,E26236,E26259,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+1153,26, -> ,E26260,E26285,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.81
+1154,21, -> ,E26286,E26306,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.66
+1155,24, -> ,E26307,E26330,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,5.06
+1156,20, -> ,E26331,E26350,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hoạt động tấn công.,4.57
+1157,20, -> ,E26351,E26370,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+1158,20, -> ,E26371,E26390,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+1159,20, -> ,E26391,E26410,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các dấu hiệu tấn công hoặc hoạt động bình thường.,4.78
+1160,20, -> ,E26411,E26430,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+1161,30, -> ,E26431,E26460,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.91
+1162,20, -> ,E26461,E26480,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.67
+1163,21, -> ,E26481,E26501,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.7
+1164,20, -> ,E26502,E26521,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.54
+1165,20, -> ,E26522,E26541,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+1166,20, -> ,E26542,E26561,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.34
+1167,20, -> ,E26562,E26581,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.34
+1168,29, -> ,E26582,E26610,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.88
+1169,21, -> ,E26611,E26631,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1170,23, -> ,E26632,E26654,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công mạng.,4.84
+1171,24, -> ,E26655,E26678,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.92
+1172,26, -> ,E26679,E26704,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+1173,9, -> ,E26705,E26713,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+1174,4, -> ,E26714,E26717,ERROR,0,,,Unterminated string starting at: line 1 column 54 (char 53),12.91
+1175,8, -> ,E26718,E26725,UNKNOWN,0,Initialization; Initialization; Initialization; Initialization; Initialization; Initialization,E26721; E26722; E26723; E26724; E26725,PowerShell ScriptBlock (xem ScriptBlockText),4.52
+1176,19, -> ,E26726,E26744,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.03
+1177,7, -> ,E26745,E26751,NORMAL,0,Running,E26750; E26751,"[Thẩm định vòng 2 xác nhận bình thường]: Sự kiện này là một sự kiện đăng nhập thành công thông thường, không có dấu hiệu của một tấn công độc hại.",7.54
+1178,4, -> ,E26752,E26755,NORMAL,0,Started; Available,E26754; E26755,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),4.49
+1179,11, -> ,E26756,E26766,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.02
+1180,18, -> ,E26767,E26784,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+1181,28, -> ,E26785,E26812,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+1182,34, -> ,E26813,E26846,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+1183,28, -> ,E26847,E26874,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+1184,21, -> ,E26875,E26895,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.6
+1185,34, -> ,E26896,E26929,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.19
+1186,29, -> ,E26930,E26958,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.07
+1187,32, -> ,E26959,E26990,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.04
+1188,34, -> ,E26991,E27024,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.73
+1189,34, -> ,E27025,E27058,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+1190,34, -> ,E27059,E27092,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+1191,32, -> ,E27093,E27124,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.04
+1192,32, -> ,E27125,E27156,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.16
+1193,34, -> ,E27157,E27190,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+1194,33, -> ,E27191,E27223,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.88
+1195,32, -> ,E27224,E27255,NORMAL,0,"Danh sách nhóm của một TÀI KHOẢN bị liệt kê (TargetUserName = tài khoản, CallerProcessName = tiến trình gọi)",E27240; E27241; E27242; E27243; E27244; E27245; E27246; E27247; E27248; E27249; E27250; E27251; E27252; E27253; E27254; E27255,"Danh sách nhóm của một TÀI KHOẢN bị liệt kê (TargetUserName = tài khoản, CallerProcessName = tiến trình gọi)",7.65
+1196,26, -> ,E27256,E27281,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.3
+1197,33, -> ,E27282,E27314,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.21
+1198,29, -> ,E27315,E27343,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+1199,24, -> ,E27344,E27367,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+1200,26, -> ,E27368,E27393,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+1201,28, -> ,E27394,E27421,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi các sự kiện này.,5.09
+1202,34, -> ,E27422,E27455,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+1203,34, -> ,E27456,E27489,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+1204,35, -> ,E27490,E27524,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+1205,33, -> ,E27525,E27557,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+1206,33, -> ,E27558,E27590,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+1207,34, -> ,E27591,E27624,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1208,34, -> ,E27625,E27658,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+1209,34, -> ,E27659,E27692,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1210,31, -> ,E27693,E27723,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+1211,34, -> ,E27724,E27757,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+1212,34, -> ,E27758,E27791,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+1213,34, -> ,E27792,E27825,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+1214,34, -> ,E27826,E27859,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+1215,33, -> ,E27860,E27892,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.82
+1216,34, -> ,E27893,E27926,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+1217,28, -> ,E27927,E27954,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+1218,20, -> ,E27955,E27974,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+1219,32, -> ,E27975,E28006,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+1220,34, -> ,E28007,E28040,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+1221,22, -> ,E28041,E28062,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+1222,32, -> ,E28063,E28094,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+1223,35, -> ,E28095,E28129,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.78
+1224,30, -> ,E28130,E28159,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+1225,27, -> ,E28160,E28186,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.26
+1226,26, -> ,E28187,E28212,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.2
+1227,28, -> ,E28213,E28240,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.35
+1228,25, -> ,E28241,E28265,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+1229,34, -> ,E28266,E28299,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.79
+1230,34, -> ,E28300,E28333,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+1231,34, -> ,E28334,E28367,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+1232,33, -> ,E28368,E28400,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+1233,34, -> ,E28401,E28434,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+1234,34, -> ,E28435,E28468,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+1235,34, -> ,E28469,E28502,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1236,34, -> ,E28503,E28536,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1237,34, -> ,E28537,E28570,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1238,34, -> ,E28571,E28604,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1239,34, -> ,E28605,E28638,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1240,34, -> ,E28639,E28672,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.54
+1241,29, -> ,E28673,E28701,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+1242,27, -> ,E28702,E28728,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+1243,34, -> ,E28729,E28762,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+1244,30, -> ,E28763,E28792,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+1245,31, -> ,E28793,E28823,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+1246,34, -> ,E28824,E28857,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.73
+1247,24, -> ,E28858,E28881,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.32
+1248,34, -> ,E28882,E28915,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+1249,34, -> ,E28916,E28949,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+1250,34, -> ,E28950,E28983,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+1251,34, -> ,E28984,E29017,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1252,34, -> ,E29018,E29051,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1253,30, -> ,E29052,E29081,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+1254,28, -> ,E29082,E29109,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+1255,24, -> ,E29110,E29133,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+1256,21, -> ,E29134,E29154,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong chuỗi sự kiện này.,4.56
+1257,29, -> ,E29155,E29183,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+1258,34, -> ,E29184,E29217,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+1259,28, -> ,E29218,E29245,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1260,25, -> ,E29246,E29270,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+1261,33, -> ,E29271,E29303,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.64
+1262,34, -> ,E29304,E29337,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.7
+1263,31, -> ,E29338,E29368,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1264,34, -> ,E29369,E29402,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+1265,33, -> ,E29403,E29435,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+1266,34, -> ,E29436,E29469,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+1267,30, -> ,E29470,E29499,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.56
+1268,8, -> ,E29500,E29507,ERROR,0,,,Unterminated string starting at: line 1 column 54 (char 53),12.91
+1269,4, -> ,E29508,E29511,NORMAL,0,Available,E29511,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),4.27
+1270,11, -> ,E29512,E29522,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.2
+1271,21, -> ,E29523,E29543,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu,4.72
+1272,34, -> ,E29544,E29577,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+1273,33, -> ,E29578,E29610,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1274,4, -> ,E29611,E29614,UNKNOWN,0,Started; Running; Completed,E29613; E29614,The detected stages are not related to the event meaning.,4.25
+1275,5, -> ,E29615,E29619,NORMAL,0,PowerShell engine khởi động; PowerShell console is ready for user input; PowerShell ScriptBlock (xem ScriptBlockText),E29617; E29618; E29619,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),4.51
+1276,10, -> ,E29620,E29629,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu,5.71
+1277,4, -> ,E29630,E29633,UNKNOWN,0,Running; Started; Stopped,E29632; E29633,The system is running the Windows PowerShell process.,4.39
+1278,9, -> ,E29634,E29642,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.65
+1279,21, -> ,E29643,E29663,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1280,4, -> ,E29664,E29667,ERROR,0,,,Unterminated string starting at: line 1 column 54 (char 53),12.87
+1281,5, -> ,E29668,E29672,NORMAL,0,PowerShell engine khởi động; PowerShell console is ready for user input; PowerShell ScriptBlock (xem ScriptBlockText),E29670; E29671; E29672,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),4.58
+1282,7, -> ,E29673,E29679,NORMAL,0,Running,E29678; E29679,The system is running.,3.89
+1283,4, -> ,E29680,E29683,NORMAL,0,Available,E29682; E29683,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),4.06
+1284,12, -> ,E29684,E29695,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.18
+1285,16, -> ,E29696,E29711,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+1286,4, -> ,E29712,E29715,ERROR,0,,,Unterminated string starting at: line 1 column 54 (char 53),12.88
+1287,7, -> ,E29716,E29722,NORMAL,0,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),E29718; E29719; E29720; E29721; E29722,PowerShell ScriptBlock (xem ScriptBlockText),4.76
+1288,8, -> ,E29723,E29730,NORMAL,0,Running,E29729; E29730,The system is running.,3.87
+1289,4, -> ,E29731,E29734,NORMAL,0,PowerShell,E29733; E29734,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),4.14
+1290,12, -> ,E29735,E29746,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+1291,15, -> ,E29747,E29761,ERROR,0,,,Unterminated string starting at: line 1 column 54 (char 53),12.83
+1292,4, -> ,E29762,E29765,ERROR,0,,,Unterminated string starting at: line 1 column 54 (char 53),12.64
+1293,9, -> ,E29766,E29774,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+1294,4, -> ,E29775,E29778,NORMAL,0,Started; Running; Completed,E29777; E29778,The system is running the command line.,4.02
+1295,5, -> ,E29779,E29783,NORMAL,0,PowerShell; PowerShell ScriptBlock; PowerShell Engine; PowerShell Console,E29781; E29782; E29783,PowerShell ScriptBlock (xem ScriptBlockText) detected,4.36
+1296,14, -> ,E29784,E29797,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu,4.7
+1297,15, -> ,E29798,E29812,UNKNOWN,0,,,No matching events found in the log data.,3.67
+1298,4, -> ,E29813,E29816,ERROR,0,,,Unterminated string starting at: line 1 column 54 (char 53),12.7
+1299,8, -> ,E29817,E29824,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu,6.49
+1300,4, -> ,E29825,E29828,UNKNOWN,0,Running; Started,E29827; E29828,The system is running the Windows PowerShell process.,3.84
+1301,7, -> ,E29829,E29835,NORMAL,0,PowerShell console is ready for user input; PowerShell console is starting up; PowerShell ScriptBlock (xem ScriptBlockText),E29831; E29832; E29833; E29834; E29835,PowerShell engine khởi động (HostApplication = dòng lệnh mở PowerShell),4.91
+1302,20, -> ,E29836,E29855,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,5.05
+1303,22, -> ,E29856,E29877,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.39
+1304,22, -> ,E29878,E29899,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+1305,28, -> ,E29900,E29927,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.66
+1306,34, -> ,E29928,E29961,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+1307,32, -> ,E29962,E29993,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+1308,27, -> ,E29994,E30020,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.7
+1309,34, -> ,E30021,E30054,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+1310,26, -> ,E30055,E30080,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+1311,20, -> ,E30081,E30100,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.36
+1312,26, -> ,E30101,E30126,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1313,34, -> ,E30127,E30160,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.71
+1314,30, -> ,E30161,E30190,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1315,24, -> ,E30191,E30214,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+1316,30, -> ,E30215,E30244,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.59
+1317,27, -> ,E30245,E30271,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.26
+1318,27, -> ,E30272,E30298,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.26
+1319,23, -> ,E30299,E30321,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.17
+1320,21, -> ,E30322,E30342,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.37
+1321,28, -> ,E30343,E30370,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+1322,29, -> ,E30371,E30399,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.61
+1323,23, -> ,E30400,E30422,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+1324,26, -> ,E30423,E30448,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.79
+1325,34, -> ,E30449,E30482,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.63
+1326,35, -> ,E30483,E30517,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+1327,34, -> ,E30518,E30551,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.71
+1328,32, -> ,E30552,E30583,NORMAL,0,,,"Dựa trên thống kê, không có dấu hiệu tấn công nào trong danh sách sự kiện. Các sự kiện chỉ cho thấy đăng nhập thành công và hoạt động bình thường.",5.15
+1329,33, -> ,E30584,E30616,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+1330,33, -> ,E30617,E30649,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.47
+1331,33, -> ,E30650,E30682,NORMAL,0,,,"Chuỗi sự kiện 4625 > 0, nhưng không có thông tin cụ thể về mật khẩu sai. Do đó, không thể kết luận dò mật khẩu.",5.05
+1332,34, -> ,E30683,E30716,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.71
+1333,34, -> ,E30717,E30750,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.4
+1334,34, -> ,E30751,E30784,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1335,33, -> ,E30785,E30817,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.75
+1336,34, -> ,E30818,E30851,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.68
+1337,23, -> ,E30852,E30874,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1338,31, -> ,E30875,E30905,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+1339,34, -> ,E30906,E30939,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+1340,34, -> ,E30940,E30973,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+1341,34, -> ,E30974,E31007,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1342,34, -> ,E31008,E31041,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+1343,34, -> ,E31042,E31075,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+1344,34, -> ,E31076,E31109,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1345,34, -> ,E31110,E31143,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+1346,33, -> ,E31144,E31176,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+1347,34, -> ,E31177,E31210,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+1348,34, -> ,E31211,E31244,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+1349,34, -> ,E31245,E31278,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.76
+1350,34, -> ,E31279,E31312,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+1351,35, -> ,E31313,E31347,NORMAL,0,,,"Dựa trên thống kê, không có dấu hiệu tấn công nào trong danh sách sự kiện. Các sự kiện chỉ cho thấy hoạt động đăng nhập bình thường.",5.17
+1352,20, -> ,E31348,E31367,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+1353,24, -> ,E31368,E31391,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+1354,34, -> ,E31392,E31425,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+1355,34, -> ,E31426,E31459,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+1356,34, -> ,E31460,E31493,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+1357,31, -> ,E31494,E31524,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.65
+1358,34, -> ,E31525,E31558,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+1359,34, -> ,E31559,E31592,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.44
+1360,34, -> ,E31593,E31626,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+1361,34, -> ,E31627,E31660,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+1362,31, -> ,E31661,E31691,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+1363,34, -> ,E31692,E31725,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+1364,33, -> ,E31726,E31758,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1365,27, -> ,E31759,E31785,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.62
+1366,32, -> ,E31786,E31817,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+1367,34, -> ,E31818,E31851,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+1368,34, -> ,E31852,E31885,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+1369,34, -> ,E31886,E31919,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+1370,34, -> ,E31920,E31953,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.45
+1371,34, -> ,E31954,E31987,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1372,34, -> ,E31988,E32021,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+1373,28, -> ,E32022,E32049,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.59
+1374,25, -> ,E32050,E32074,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.6
+1375,34, -> ,E32075,E32108,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.73
+1376,29, -> ,E32109,E32137,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.41
+1377,31, -> ,E32138,E32168,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.58
+1378,34, -> ,E32169,E32202,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.72
+1379,31, -> ,E32203,E32233,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+1380,24, -> ,E32234,E32257,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.33
+1381,27, -> ,E32258,E32284,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.51
+1382,34, -> ,E32285,E32318,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.71
+1383,34, -> ,E32319,E32352,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.43
+1384,34, -> ,E32353,E32386,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.49
+1385,34, -> ,E32387,E32420,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+1386,34, -> ,E32421,E32454,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.57
+1387,34, -> ,E32455,E32488,UNKNOWN,0,,,Dữ liệu không đủ căn cứ để kết luận về các hành vi tấn công.,4.8
+1388,31, -> ,E32489,E32519,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.53
+1389,23, -> ,E32520,E32542,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+1390,31, -> ,E32543,E32573,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.69
+1391,34, -> ,E32574,E32607,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.74
+1392,34, -> ,E32608,E32641,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.42
+1393,34, -> ,E32642,E32675,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.48
+1394,34, -> ,E32676,E32709,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+1395,34, -> ,E32710,E32743,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1396,34, -> ,E32744,E32777,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.52
+1397,31, -> ,E32778,E32808,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.5
+1398,34, -> ,E32809,E32842,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.7
+1399,32, -> ,E32843,E32874,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.46
+1400,20, -> ,E32875,E32894,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.06
+1401,19, -> ,E32895,E32913,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.1
+1402,16, -> ,E32914,E32929,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,4.03
+1403,7, -> ,E32930,E32936,UNKNOWN,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.37
+1404,7, -> ,E32937,E32943,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.04
+1405,15, -> ,E32944,E32958,NORMAL,0,,,Không có dấu hiệu tấn công nào trong dữ liệu.,3.59
+1406,1, -> ,E32959,E32959,UNKNOWN,0,,E32959,"Có sự kiện PowerShell ScriptBlock được tạo, nhưng không có dấu hiệu tấn công nào khác trong chuỗi sự kiện này.",1.97
