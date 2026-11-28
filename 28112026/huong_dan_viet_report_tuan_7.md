@@ -136,6 +136,30 @@ Hệ thống chia 32,959 sự kiện thành các lô ngữ cảnh (batches) dự
 
 ---
 
+### 3.1. TỔNG KẾT QUYẾT ĐỊNH LỰA CHỌN MÔ HÌNH CHÍNH CỦA ĐỀ TÀI VÀ 4 LÝ DO CỐT LÕI
+
+> **🏆 MÔ HÌNH CHÍNH ĐƯỢC CHỌN:** **`Qwen 2.5 (3B-Instruct)` đặt trong kiến trúc `Kịch bản 2 (Hybrid: Luật tương quan MITRE ATT&CK + AI + Tự thẩm định vòng 2)`**
+
+#### 4 Lý do khoa học tại sao chọn Qwen 2.5 (3B) làm mô hình chính (mà không chọn LLaMA 3.2):
+
+1. **Khả năng phát hiện tấn công (Recall & F1-Score) cao vượt trội, tránh bỏ lọt tấn công (False Negative):**
+   - Trong vận hành An toàn thông tin (SOC), **bỏ lọt tấn công (False Negative) nguy hiểm hơn nhiều so với báo động giả (False Positive)**.
+   - Trên bộ Benchmark 600 ca, **Qwen 2.5** đạt **Accuracy 86.3% – 95.8%**, đặc biệt ở *Bài 2 (Tấn công chuỗi đa bước liên hoàn)* Qwen bắt đúng tấn công cao gần **gấp đôi** LLaMA 3.2 (F1-Score của Qwen đạt `0.718 – 0.980`, trong khi LLaMA chỉ đạt `0.485 – 0.500`).
+
+2. **LLaMA 3.2 gặp hiện tượng "Né tránh kết luận" (Đẩy gần 90% log vào `UNKNOWN`):**
+   - Nhìn bề ngoài trên 32,959 log máy thật, LLaMA 3.2 có `0 ALERT` (0 báo động giả). Nhưng thực chất khi kiểm tra chi tiết từng lô trong file CSV, LLaMA đẩy tới **1,257 / 1,406 lô (89.4%) vào trạng thái `UNKNOWN` (không biết / không dám kết luận)** và chỉ dám khẳng định được `139 lô (9.9%)` là bình thường (`NORMAL`).
+   - Ngược lại, **Qwen 2.5 (Hybrid)** phân loại cực kỳ dứt khoát và rõ ràng: Khẳng định chắc chắn **867 / 1,406 lô (61.7%) là `NORMAL` (an toàn)**, giảm `UNKNOWN` xuống chỉ còn `368 lô`, và khoanh vùng `87 lô` có hành vi nhạy cảm để cảnh báo.
+
+3. **Kiến trúc Kịch bản 2 (Hybrid) đã khắc phục triệt để điểm yếu báo động giả của Qwen 2.5:**
+   - Khi chạy Thuần AI (Kịch bản 3), Qwen hơi quá nhạy (98 cảnh báo, chỉ nhận ra 358 lô `NORMAL`).
+   - Nhưng khi đưa vào **Kịch bản 2 (Hybrid: kết hợp gợi ý từ Rule + Thẩm định vòng 2)**, Qwen đã tăng số lô nhận diện đúng bình thường (`NORMAL`) lên **gấp 2.4 lần** (từ 358 lên **867 lô**) và lớp thẩm định vòng 2 đã tự động chặn đứng 9 lô báo động giả, kéo tỷ lệ báo động giả (FPR) trên log máy thật xuống chỉ còn **6.19%**.
+
+4. **Khả năng đọc hiểu cấu trúc Log Windows và giải thích Tiếng Việt vượt trội:**
+   - Qwen 2.5 trích xuất chính xác mã bằng chứng (`EventRef: E02639...`), ánh xạ đúng kỹ thuật MITRE ATT&CK và viết lập luận giải thích nguyên nhân cảnh báo bằng **tiếng Việt chuyên ngành SOC rất mạch lạc**, giúp nhân viên trực SOC đọc hiểu ngay lập tức trên Telegram và Web Dashboard.
+   - *(Còn **LLaMA 3.2 (3B)** vẫn được giữ lại đóng vai trò là **Mô hình phụ / Quét nhanh (Fast-Triage)** nhờ tốc độ nhanh 4.62s/lô để đối chứng chéo khi cần).*
+
+---
+
 ## 4. HOÀN THIỆN GIAO DIỆN WEB SOC DASHBOARD (FRONTEND & BACKEND)
 
 Song song với việc chạy thực nghiệm dữ liệu lớn, nhóm đã nâng cấp hoàn chỉnh giao diện điều hành trung tâm **WinLog AI SOC Dashboard**:
